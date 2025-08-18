@@ -1,0 +1,17 @@
+{
+  "short_name": "TUWA TXs Tracking App",
+  "name": "TUWA Transaction Tracking App",
+  "description": "Track and manage your multisig transactions with a seamless UX.",
+  "iconPath": "icon0.svg",
+  "icons": [
+    {
+      "iconPath": "icon0.svg",
+      "sizes": "32x32",
+      "type": "image/svg"
+    }
+  ],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

@@ -1,0 +1,87 @@
+{
+  "name": "tuwa-vite-rainbowkit-example",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Example React app demonstrating TUWA Web3 Transaction Tracking Suite with Vite + RainbowKit",
+  "keywords": [
+    "web3",
+    "transaction-tracking",
+    "react",
+    "vite",
+    "rainbowkit",
+    "wagmi",
+    "ethereum",
+    "example",
+    "demo"
+  ],
+  "type": "module",
+  "author": "Oleksandr Tkach",
+  "license": "Apache-2.0",
+  "packageManager": "pnpm@9.6.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TuwaIO/web3-transactions-tracking.git",
+    "directory": "examples/vite-rainbowkit"
+  },
+  "homepage": "https://github.com/TuwaIO/web3-transactions-tracking/tree/main/examples/vite-rainbowkit",
+  "bugs": {
+    "url": "https://github.com/TuwaIO/web3-transactions-tracking/issues"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@bgd-labs/react-web3-icons": "^1.34.0",
+    "@heroicons/react": "^2.2.0",
+    "@radix-ui/react-dialog": "^1.1.15",
+    "@rainbow-me/rainbowkit": "^2.2.8",
+    "@tanstack/react-query": "^5.85.0",
+    "@tuwaio/evm-transactions-tracking": "latest",
+    "@tuwaio/transactions-tracking-ui": "latest",
+    "@tuwaio/web3-transactions-tracking-core": "latest",
+    "@wagmi/core": "^2.19.0",
+    "clsx": "^2.1.1",
+    "dayjs": "^1.11.13",
+    "immer": "^10.1.1",
+    "ethereum-blockies-base64": "^1.0.2",
+    "framer-motion": "^12.23.12",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-toastify": "^11.0.5",
+    "tailwind-merge": "^3.3.1",
+    "viem": "^2.33.3",
+    "wagmi": "^2.16.3",
+    "zustand": "^5.0.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.11",
+    "@tailwindcss/vite": "^4.1.11",
+    "@types/react": "^19.1.10",
+    "@types/react-dom": "^19.1.7",
+    "@vitejs/plugin-react": "^5.0.0",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.11",
+    "typescript": "~5.9.2",
+    "vite": "^7.1.2"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
