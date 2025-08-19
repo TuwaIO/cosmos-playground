@@ -1,17 +1,17 @@
 'use client';
 
-import { createTxTrackingStore } from '@tuwaio/evm-transactions-tracking';
-import { createBoundedUseStore } from '@tuwaio/web3-transactions-tracking-core';
+import { createBoundedUseStore, createPulsarStore } from '@tuwaio/pulsar-core';
+import { ActionTxKey, evmAdapter, TransactionTracker } from '@tuwaio/pulsar-evm';
 
-import { appChains } from '@/configs/wagmiConfig';
+import { appChains, config } from '@/configs/wagmiConfig';
 import { onSucceedCallbacks, TransactionUnion } from '@/transactions/onSucceedCallbacks';
 
 const storageName = 'transactions-tracking-storage';
 
-export const useTxTrackingStore = createBoundedUseStore(
-  createTxTrackingStore<TransactionUnion>({
+export const usePulsarStore = createBoundedUseStore(
+  createPulsarStore<TransactionTracker, TransactionUnion, ActionTxKey>({
     name: storageName,
-    appChains,
     onSucceedCallbacks,
+    adapters: [evmAdapter(config, appChains)],
   }),
 );

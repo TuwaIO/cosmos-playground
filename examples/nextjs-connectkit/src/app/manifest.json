@@ -1,6 +1,6 @@
 {
-  "name": "TUWA Web3 Transaction Tracking Suite Demo NextJS + ConnectKit",
-  "short_name": "TUWA Web3 TXs Tracking Suite",
+  "name": "Pulsar & Cosmos SDK: Next.js + ConnectKit Example",
+  "short_name": "Pulsar & Cosmos SDK",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",

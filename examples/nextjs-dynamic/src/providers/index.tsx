@@ -9,7 +9,7 @@ import { WagmiProvider } from 'wagmi';
 
 import { config } from '@/configs/wagmiConfig';
 
-import { TxWidgetProvider } from './TxWidgetProvider';
+import { NovaProvider } from './NovaProvider';
 
 const queryClient = new QueryClient();
 
@@ -24,7 +24,7 @@ export function Providers({ children }: { children: ReactNode }) {
           }}
         >
           <DynamicWagmiConnector>
-            <TxWidgetProvider />
+            <NovaProvider />
             {children}
           </DynamicWagmiConnector>
         </DynamicContextProvider>

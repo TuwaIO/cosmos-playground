@@ -1,8 +1,8 @@
 {
-  "name": "tuwa-nextjs-connectkit-example",
+  "name": "nextjs-connectkit-example",
   "version": "1.0.0",
   "private": true,
-  "description": "Example React app demonstrating TUWA Web3 Transaction Tracking Suite with NextJS + ConnectKit",
+  "description": "An example demonstrating the integration of Pulsar transaction tracking with a Next.js application using ConnectKit.",
   "keywords": [
     "web3",
     "transaction-tracking",
@@ -17,15 +17,6 @@
   "author": "Oleksandr Tkach",
   "license": "Apache-2.0",
   "packageManager": "pnpm@9.6.0",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/TuwaIO/web3-transactions-tracking.git",
-    "directory": "examples/nextjs-connectkit"
-  },
-  "homepage": "https://github.com/TuwaIO/web3-transactions-tracking/tree/main/examples/nextjs-connectkit",
-  "bugs": {
-    "url": "https://github.com/TuwaIO/web3-transactions-tracking/issues"
-  },
   "engines": {
     "node": ">=20.0.0",
     "pnpm": ">=9.0.0"
@@ -40,11 +31,11 @@
     "@heroicons/react": "^2.2.0",
     "@radix-ui/react-dialog": "^1.1.15",
     "@tanstack/react-query": "^5.85.0",
-    "@tuwaio/pulsar-core": "latest",
-    "@tuwaio/pulsar-evm": "0.0.6",
-    "@tuwaio/pulsar-react": "latest",
-    "@tuwaio/nova-core": "latest",
-    "@tuwaio/nova-transactions": "0.0.2",
+    "@tuwaio/pulsar-core": "0.0.3",
+    "@tuwaio/pulsar-evm": "0.0.7",
+    "@tuwaio/pulsar-react": "0.0.2",
+    "@tuwaio/nova-core": "0.0.4",
+    "@tuwaio/nova-transactions": "0.0.7",
     "@wagmi/core": "^2.19.0",
     "connectkit": "^1.9.1",
     "clsx": "^2.1.1",
