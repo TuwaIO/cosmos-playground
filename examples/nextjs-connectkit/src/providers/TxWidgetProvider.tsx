@@ -1,17 +1,17 @@
-import { useInitializeTransactionsPool } from '@tuwaio/evm-transactions-tracking';
-import { TransactionsWidget } from '@tuwaio/transactions-tracking-ui/dist/providers';
+import { TransactionsWidget } from '@tuwaio/nova-transactions/dist/providers';
+import { useInitializeTransactionsPool } from '@tuwaio/pulsar-react';
 import { useAccount } from 'wagmi';
 
 import { appChains, config } from '@/configs/wagmiConfig';
-import { useTxTrackingStore } from '@/hooks/txTrackingHooks';
+import { usePulsarStore } from '@/hooks/txTrackingHooks';
 import { txActions } from '@/transactions/actions';
 
 export function TxWidgetProvider() {
-  const transactionsPool = useTxTrackingStore((state) => state.transactionsPool);
-  const initialTx = useTxTrackingStore((state) => state.initialTx);
-  const closeTxTrackedModal = useTxTrackingStore((state) => state.closeTxTrackedModal);
-  const handleTransaction = useTxTrackingStore((state) => state.handleTransaction);
-  const initializeTransactionsPool = useTxTrackingStore((state) => state.initializeTransactionsPool);
+  const transactionsPool = usePulsarStore((state) => state.transactionsPool);
+  const initialTx = usePulsarStore((state) => state.initialTx);
+  const closeTxTrackedModal = usePulsarStore((state) => state.closeTxTrackedModal);
+  const handleTransaction = usePulsarStore((state) => state.handleTransaction);
+  const initializeTransactionsPool = usePulsarStore((state) => state.initializeTransactionsPool);
 
   useInitializeTransactionsPool(initializeTransactionsPool);
 
