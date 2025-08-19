@@ -1,3 +1,4 @@
 @import "tailwindcss";
 @import "@rainbow-me/rainbowkit/styles.css";
-@import "@tuwaio/transactions-tracking-ui/dist/index.css";
+@import "@tuwaio/nova-core/dist/index.css";
+@import "@tuwaio/nova-transactions/dist/index.css";

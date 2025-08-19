@@ -1,144 +1,111 @@
-# TUWA Web3 Transaction Tracking Suite + Vite + RainbowKit Example
+# Pulsar & Cosmos SDK: Vite + RainbowKit Example
 
-A minimal example demonstrating how to integrate the **TUWA Web3 Transaction Tracking Suite** into a React application using Vite and RainbowKit.
+A minimal example demonstrating how to integrate the **Pulsar Transaction Tracking Engine** and **Nova UI Kit** into a React application using Vite and RainbowKit.
+
+This example is part of the [Cosmos Playground](https://github.com/TuwaIO/cosmos-playground) monorepo.
 
 ## 🚀 Quick Start
 
 ```bash
 # Install dependencies
 pnpm install
-
 # Start development server
 pnpm dev
-
 # Open http://localhost:5173 in your browser
-```
+````
 
 ## 📦 What's Included
+
 - **React 19** with TypeScript
-- **Vite** for fast development and building
+- **Vite** for a blazing-fast development experience
 - **RainbowKit** for wallet connection
-- **TUWA Transaction Tracking** components and providers
+- **Pulsar Engine** for core tracking logic
+- **Nova UI Kit** for pre-built React components
 - **TailwindCSS** for styling
 - **Wagmi** for Web3 interactions
 
 ## 🎯 Features Demonstrated
-- ✅ Wallet connection with RainbowKit
-- ✅ Real-time transaction tracking
-- ✅ Transaction history modal
-- ✅ Toast notifications for tx status
-- ✅ Support for multiple EVM chains
-- ✅ Gelato meta-transactions tracking
-- ✅ Safe multi-sig transactions tracking
 
-## 🛠 Available Scripts
-``` bash
+- ✅ Wallet connection with RainbowKit
+- ✅ Real-time, multi-chain transaction tracking
+- ✅ Comprehensive transaction history modal
+- ✅ Automatic toast notifications for transaction status
+- ✅ Support for standard EVM, Gelato, and Safe transactions
+
+## 🛠️ Available Scripts
+
+```bash
 pnpm dev        # Start development server
 pnpm build      # Build for production
 pnpm preview    # Preview production build
 pnpm type-check # Run TypeScript checks
 ```
+
 ## 📁 Project Structure
-``` 
-src/
-├── abis/          # Contracts abis
-├── components/    # React components
-├── hooks/         # Custom React hooks
-├── providers/     # Context providers
-├── styles/        # CSS and Tailwind styles
-├── utils/         # Utility functions
-├── configs/       # Wagmi config and other
-├── transactions/  # Transactions actions, types and callbacks
-└── App.tsx        # Main application component
+
 ```
-## 🔧 Key Configuration Files
-- - Vite configuration `vite.config.ts`
-- - TypeScript configuration `tsconfig.json`
+src/
+├── abis/          # Smart contract ABIs
+├── components/    # Application-specific React components
+├── configs/       # Wagmi and chain configurations
+├── constants.ts   # Shared constants
+├── hooks/         # Custom React hooks
+├── providers/     # React Context providers, including NovaProvider setup
+├── styles/        # Global CSS and Tailwind styles
+└── transactions/  # Logic for defining transaction actions and callbacks
+```
 
-## 🌐 Supported Networks
-- Ethereum Mainnet
-- Polygon
-- Arbitrum
-- Optimism
-- Base
-- And other EVM-compatible chains
+## 📚 Core Packages Used
 
-## 📚 TUWA Packages Used
-- - Core tracking logic `@tuwaio/web3-transactions-tracking-core`
-- - EVM chain support `@tuwaio/evm-transactions-tracking`
-- - Pre-built UI components `@tuwaio/transactions-tracking-ui`
+- `@tuwaio/pulsar-core`: The core, chain-agnostic tracking engine.
+- `@tuwaio/pulsar-evm`: Adapter for EVM-compatible chains, including trackers for Gelato and Safe.
+- `@tuwaio/pulsar-react`: React hooks for integrating your app with the Pulsar engine.
+- `@tuwaio/nova-transactions`: Pre-built UI components (Modals, Toasts, Buttons, etc.).
 
 ## ⚡ Prerequisites
+
 Make sure you have the following installed:
-- >= 20.0.0 **Node.js**
-- **pnpm** >= 9.0.0
-``` bash
+
+- **Node.js** \>= 20.0.0
+- **pnpm** \>= 9.0.0
+
+<!-- end list -->
+
+```bash
 # Install pnpm globally if you haven't already
 npm install -g pnpm
-
-# Or use corepack (recommended)
-corepack enable
-corepack prepare pnpm@latest --activate
 ```
-## 🎨 Customization
-This example shows basic integration. You can customize:
-- **UI Components**: Replace default components with your own
-- **Styling**: Modify TailwindCSS classes or add custom CSS
-- **Chains**: Add/remove supported blockchain networks
-- **Wallet Connectors**: Configure different wallet options
 
-## 🔄 Development Workflow
-``` bash
-# Install dependencies
-pnpm install
+## 🔧 Environment Variables
 
-# Start development with hot reload
-pnpm dev
+Create a `.env.local` file in the project root:
 
-# Type checking in watch mode
-pnpm type-check --watch
+```env
+# Required: Get a Project ID from [https://cloud.walletconnect.com](https://cloud.walletconnect.com)
+VITE_WALLET_PROJECT_ID=your_project_id
 
-# Build for production
-pnpm build
-
-# Preview production build locally
-pnpm preview
+# Optional: Gelato API key for sponsoring transactions
+VITE_GELATO_API_KEY=your_project_key
 ```
-## 📖 Documentation
+
+*Note: Vite requires environment variables to be prefixed with `VITE_`.*
+
+## 📖 Learn More
+
 For detailed documentation and advanced usage:
-- [TUWA Documentation](https://docs.tuwa.io/)
-- [RainbowKit Docs](https://rainbowkit.com/)
-- [Wagmi Docs](https://wagmi.sh/)
-- [Vite Docs](https://vitejs.dev/)
+
+- [Pulsar & Nova Documentation](https://docs.tuwa.io/)
+- [Vite Documentation](https://vitejs.dev/)
+- [RainbowKit Documentation](https://www.rainbowkit.com/docs)
+- [Wagmi Documentation](https://wagmi.sh/)
 
 ## 🤝 Contributing
-Found an issue or want to improve this example?
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/amazing-feature`
-3. Install dependencies: `pnpm install`
-4. Make your changes
-5. Run tests: `pnpm type-check`
-6. Commit your changes: `git commit -m 'Add amazing feature'`
-7. Push to the branch: `git push origin feature/amazing-feature`
-8. Submit a pull request
 
-## 🙋‍♂️ Need Help?
-- [GitHub Issues](https://github.com/TuwaIO/web3-transactions-tracking/issues)
-- [Discussions](https://github.com/TuwaIO/web3-transactions-tracking/discussions)
+Found an issue or want to improve this example? Contributions are welcome\! Please visit the main [Cosmos Playground repository](https://github.com/TuwaIO/cosmos-playground) to submit issues or pull requests.
 
-## 🚀 Next Steps
-After running this example, you might want to:
-1. **Customize the UI** - Modify components to match your brand
-2. **Add more chains** - Configure additional blockchain networks
-3. **Integrate with your dApp** - Copy patterns into your existing application
-4. **Explore advanced features** - Check out the full documentation for more options
-5. **Happy coding** - Added any actions from contracts and don't think about tracking, TUWA make this for you
+-----
 
-Built with ❤️ using [TUWA Web3 Transaction Tracking Suite](https://github.com/TuwaIO/web3-transactions-tracking)
-
-## Copyright
-
-2025 TUWA
+Built with ❤️ using the **Pulsar & Nova** ecosystem.
 
 ## License
 

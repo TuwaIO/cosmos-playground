@@ -1,5 +1,5 @@
-import { TransactionTracker } from '@tuwaio/evm-transactions-tracking';
-import { Transaction } from '@tuwaio/web3-transactions-tracking-core';
+import { Transaction } from '@tuwaio/pulsar-core';
+import { TransactionTracker } from '@tuwaio/pulsar-evm';
 
 export enum TxType {
   increment = 'increment',

@@ -6,6 +6,6 @@ export const appChains = [mainnet, sepolia] as [Chain, ...Chain[]];
 
 export const config = getDefaultConfig({
   appName: 'My RainbowKit App',
-  projectId: 'YOUR_PROJECT_ID',
+  projectId: '9077e559e63e099f496b921a027d0f04', // TODO: need change for personal
   chains: appChains,
 });

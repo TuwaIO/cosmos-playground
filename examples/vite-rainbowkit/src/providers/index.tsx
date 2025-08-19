@@ -1,10 +1,12 @@
+'use client';
+
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactNode } from 'react';
 import { WagmiProvider } from 'wagmi';
 
 import { config } from '../configs/wagmiConfig';
-import { TxWidgetProvider } from './TxWidgetProvider';
+import { NovaProvider } from './NovaProvider';
 
 const queryClient = new QueryClient();
 
@@ -13,7 +15,7 @@ export function Providers({ children }: { children: ReactNode }) {
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider>
-          <TxWidgetProvider />
+          <NovaProvider />
           {children}
         </RainbowKitProvider>
       </QueryClientProvider>

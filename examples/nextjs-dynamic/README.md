@@ -18,7 +18,7 @@ pnpm dev
 
 - **React 19** with TypeScript
 - **Next.js 15** with App Directory
-- **ConnectKit** for wallet connection
+- **Dynamic** for wallet connection
 - **Pulsar Engine** for core tracking logic
 - **Nova UI Kit** for pre-built React components
 - **TailwindCSS** for styling
@@ -26,7 +26,7 @@ pnpm dev
 
 ## 🎯 Features Demonstrated
 
-- ✅ Wallet connection with ConnectKit
+- ✅ Wallet connection with Dynamic
 - ✅ Real-time, multi-chain transaction tracking
 - ✅ Comprehensive transaction history modal
 - ✅ Automatic toast notifications for transaction status

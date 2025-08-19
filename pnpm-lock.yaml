@@ -63,17 +63,17 @@ importers:
         specifier: 0.0.4
         version: 0.0.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.12)
       '@tuwaio/nova-transactions':
-        specifier: 0.0.7
-        version: 0.0.7(@bgd-labs/react-web3-icons@1.34.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@heroicons/react@2.2.0(react@19.1.1))(@radix-ui/react-dialog@1.1.15(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@wagmi/core@2.19.0(@tanstack/query-core@5.85.3)(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(typescript@5.9.2)(use-sync-external-store@1.4.0(react@19.1.1))(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4)))(framer-motion@12.23.12(@emotion/is-prop-valid@1.3.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(immer@10.1.1)(react-dom@19.1.1(react@19.1.1))(react-toastify@11.0.5(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.12)(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4))(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
+        specifier: 0.0.8
+        version: 0.0.8(@bgd-labs/react-web3-icons@1.34.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@heroicons/react@2.2.0(react@19.1.1))(@radix-ui/react-dialog@1.1.15(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@wagmi/core@2.19.0(@tanstack/query-core@5.85.3)(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(typescript@5.9.2)(use-sync-external-store@1.4.0(react@19.1.1))(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4)))(framer-motion@12.23.12(@emotion/is-prop-valid@1.3.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(immer@10.1.1)(react-dom@19.1.1(react@19.1.1))(react-toastify@11.0.5(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.12)(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4))(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
       '@tuwaio/pulsar-core':
-        specifier: 0.0.3
-        version: 0.0.3(dayjs@1.11.13)(immer@10.1.1)(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
+        specifier: 0.0.4
+        version: 0.0.4(dayjs@1.11.13)(immer@10.1.1)(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
       '@tuwaio/pulsar-evm':
-        specifier: 0.0.7
-        version: 0.0.7(@wagmi/core@2.19.0(@tanstack/query-core@5.85.3)(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(typescript@5.9.2)(use-sync-external-store@1.4.0(react@19.1.1))(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4)))(dayjs@1.11.13)(immer@10.1.1)(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4))(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
+        specifier: 0.0.8
+        version: 0.0.8(@wagmi/core@2.19.0(@tanstack/query-core@5.85.3)(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(typescript@5.9.2)(use-sync-external-store@1.4.0(react@19.1.1))(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4)))(dayjs@1.11.13)(immer@10.1.1)(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4))(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
       '@tuwaio/pulsar-react':
-        specifier: 0.0.2
-        version: 0.0.2(react@19.1.1)
+        specifier: 0.0.3
+        version: 0.0.3(react@19.1.1)
       '@wagmi/core':
         specifier: ^2.19.0
         version: 2.19.0(@tanstack/query-core@5.85.3)(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(typescript@5.9.2)(use-sync-external-store@1.4.0(react@19.1.1))(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4))
@@ -175,17 +175,17 @@ importers:
         specifier: 0.0.4
         version: 0.0.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.12)
       '@tuwaio/nova-transactions':
-        specifier: 0.0.7
-        version: 0.0.7(@bgd-labs/react-web3-icons@1.34.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@heroicons/react@2.2.0(react@19.1.1))(@radix-ui/react-dialog@1.1.15(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@wagmi/core@2.19.0(@tanstack/query-core@5.85.3)(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(typescript@5.9.2)(use-sync-external-store@1.4.0(react@19.1.1))(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4)))(framer-motion@12.23.12(@emotion/is-prop-valid@1.3.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(immer@10.1.1)(react-dom@19.1.1(react@19.1.1))(react-toastify@11.0.5(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.12)(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4))(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
+        specifier: 0.0.8
+        version: 0.0.8(@bgd-labs/react-web3-icons@1.34.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@heroicons/react@2.2.0(react@19.1.1))(@radix-ui/react-dialog@1.1.15(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@wagmi/core@2.19.0(@tanstack/query-core@5.85.3)(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(typescript@5.9.2)(use-sync-external-store@1.4.0(react@19.1.1))(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4)))(framer-motion@12.23.12(@emotion/is-prop-valid@1.3.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(immer@10.1.1)(react-dom@19.1.1(react@19.1.1))(react-toastify@11.0.5(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.12)(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4))(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
       '@tuwaio/pulsar-core':
-        specifier: 0.0.3
-        version: 0.0.3(dayjs@1.11.13)(immer@10.1.1)(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
+        specifier: 0.0.4
+        version: 0.0.4(dayjs@1.11.13)(immer@10.1.1)(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
       '@tuwaio/pulsar-evm':
-        specifier: 0.0.7
-        version: 0.0.7(@wagmi/core@2.19.0(@tanstack/query-core@5.85.3)(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(typescript@5.9.2)(use-sync-external-store@1.4.0(react@19.1.1))(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4)))(dayjs@1.11.13)(immer@10.1.1)(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4))(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
+        specifier: 0.0.8
+        version: 0.0.8(@wagmi/core@2.19.0(@tanstack/query-core@5.85.3)(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(typescript@5.9.2)(use-sync-external-store@1.4.0(react@19.1.1))(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4)))(dayjs@1.11.13)(immer@10.1.1)(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4))(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
       '@tuwaio/pulsar-react':
-        specifier: 0.0.2
-        version: 0.0.2(react@19.1.1)
+        specifier: 0.0.3
+        version: 0.0.3(react@19.1.1)
       '@wagmi/core':
         specifier: ^2.19.0
         version: 2.19.0(@tanstack/query-core@5.85.3)(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(typescript@5.9.2)(use-sync-external-store@1.4.0(react@19.1.1))(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4))
@@ -271,15 +271,21 @@ importers:
       '@tanstack/react-query':
         specifier: ^5.85.0
         version: 5.85.3(react@19.1.1)
-      '@tuwaio/evm-transactions-tracking':
-        specifier: latest
-        version: 0.0.2(@wagmi/core@2.19.0(@tanstack/query-core@5.85.3)(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(typescript@5.9.2)(use-sync-external-store@1.4.0(react@19.1.1))(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4)))(dayjs@1.11.13)(immer@10.1.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4))(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
-      '@tuwaio/transactions-tracking-ui':
-        specifier: latest
-        version: 0.0.3(@bgd-labs/react-web3-icons@1.34.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@heroicons/react@2.2.0(react@19.1.1))(@radix-ui/react-dialog@1.1.15(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@wagmi/core@2.19.0(@tanstack/query-core@5.85.3)(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(typescript@5.9.2)(use-sync-external-store@1.4.0(react@19.1.1))(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4)))(clsx@2.1.1)(dayjs@1.11.13)(framer-motion@12.23.12(@emotion/is-prop-valid@1.3.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(immer@10.1.1)(react-dom@19.1.1(react@19.1.1))(react-toastify@11.0.5(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react@19.1.1)(tailwind-merge@3.3.1)(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4))(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
-      '@tuwaio/web3-transactions-tracking-core':
-        specifier: latest
-        version: 0.0.2(immer@10.1.1)(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
+      '@tuwaio/nova-core':
+        specifier: 0.0.4
+        version: 0.0.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.12)
+      '@tuwaio/nova-transactions':
+        specifier: 0.0.8
+        version: 0.0.8(@bgd-labs/react-web3-icons@1.34.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@heroicons/react@2.2.0(react@19.1.1))(@radix-ui/react-dialog@1.1.15(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@wagmi/core@2.19.0(@tanstack/query-core@5.85.3)(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(typescript@5.9.2)(use-sync-external-store@1.4.0(react@19.1.1))(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4)))(framer-motion@12.23.12(@emotion/is-prop-valid@1.3.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(immer@10.1.1)(react-dom@19.1.1(react@19.1.1))(react-toastify@11.0.5(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.12)(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4))(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
+      '@tuwaio/pulsar-core':
+        specifier: 0.0.4
+        version: 0.0.4(dayjs@1.11.13)(immer@10.1.1)(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
+      '@tuwaio/pulsar-evm':
+        specifier: 0.0.8
+        version: 0.0.8(@wagmi/core@2.19.0(@tanstack/query-core@5.85.3)(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(typescript@5.9.2)(use-sync-external-store@1.4.0(react@19.1.1))(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4)))(dayjs@1.11.13)(immer@10.1.1)(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4))(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
+      '@tuwaio/pulsar-react':
+        specifier: 0.0.3
+        version: 0.0.3(react@19.1.1)
       '@wagmi/core':
         specifier: ^2.19.0
         version: 2.19.0(@tanstack/query-core@5.85.3)(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(typescript@5.9.2)(use-sync-external-store@1.4.0(react@19.1.1))(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4))
@@ -556,15 +562,21 @@ importers:
       '@tanstack/react-query':
         specifier: ^5.85.0
         version: 5.85.3(react@19.1.1)
-      '@tuwaio/evm-transactions-tracking':
-        specifier: latest
-        version: 0.0.2(@wagmi/core@2.19.0(@tanstack/query-core@5.85.3)(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(typescript@5.9.2)(use-sync-external-store@1.4.0(react@19.1.1))(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4)))(dayjs@1.11.13)(immer@10.1.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4))(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
-      '@tuwaio/transactions-tracking-ui':
-        specifier: latest
-        version: 0.0.3(@bgd-labs/react-web3-icons@1.34.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@heroicons/react@2.2.0(react@19.1.1))(@radix-ui/react-dialog@1.1.15(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@wagmi/core@2.19.0(@tanstack/query-core@5.85.3)(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(typescript@5.9.2)(use-sync-external-store@1.4.0(react@19.1.1))(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4)))(clsx@2.1.1)(dayjs@1.11.13)(framer-motion@12.23.12(@emotion/is-prop-valid@1.3.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(immer@10.1.1)(react-dom@19.1.1(react@19.1.1))(react-toastify@11.0.5(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react@19.1.1)(tailwind-merge@3.3.1)(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4))(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
-      '@tuwaio/web3-transactions-tracking-core':
-        specifier: latest
-        version: 0.0.2(immer@10.1.1)(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
+      '@tuwaio/nova-core':
+        specifier: 0.0.4
+        version: 0.0.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.12)
+      '@tuwaio/nova-transactions':
+        specifier: 0.0.8
+        version: 0.0.8(@bgd-labs/react-web3-icons@1.34.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@heroicons/react@2.2.0(react@19.1.1))(@radix-ui/react-dialog@1.1.15(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@wagmi/core@2.19.0(@tanstack/query-core@5.85.3)(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(typescript@5.9.2)(use-sync-external-store@1.4.0(react@19.1.1))(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4)))(framer-motion@12.23.12(@emotion/is-prop-valid@1.3.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(immer@10.1.1)(react-dom@19.1.1(react@19.1.1))(react-toastify@11.0.5(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.12)(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4))(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
+      '@tuwaio/pulsar-core':
+        specifier: 0.0.4
+        version: 0.0.4(dayjs@1.11.13)(immer@10.1.1)(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
+      '@tuwaio/pulsar-evm':
+        specifier: 0.0.8
+        version: 0.0.8(@wagmi/core@2.19.0(@tanstack/query-core@5.85.3)(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(typescript@5.9.2)(use-sync-external-store@1.4.0(react@19.1.1))(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4)))(dayjs@1.11.13)(immer@10.1.1)(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4))(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
+      '@tuwaio/pulsar-react':
+        specifier: 0.0.3
+        version: 0.0.3(react@19.1.1)
       '@wagmi/core':
         specifier: ^2.19.0
         version: 2.19.0(@tanstack/query-core@5.85.3)(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(typescript@5.9.2)(use-sync-external-store@1.4.0(react@19.1.1))(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4))
@@ -3345,8 +3357,8 @@ packages:
       react-dom: '>=19'
       tailwindcss: '>=4'
 
-  '@tuwaio/nova-transactions@0.0.7':
-    resolution: {integrity: sha512-XvILWAc44gOq92gBMpv+2uchQBaoUXqscf5gnmcY9XjMHtes+ZkykzIbrp32Uze2efGnSxv1FLrf0vNJ89xAAw==}
+  '@tuwaio/nova-transactions@0.0.8':
+    resolution: {integrity: sha512-npDOesrz47MgHHoIEkTgbhmmvDNgi7pJljZcTFRgJ5iIAMSU7EOOiMIZqcHlycWFZKcXP5bdIlb7qWI0TqVOeA==}
     peerDependencies:
       '@bgd-labs/react-web3-icons': '>=1'
       '@heroicons/react': '>=2'
@@ -3361,15 +3373,15 @@ packages:
       viem: '>=2'
       zustand: '>=5'
 
-  '@tuwaio/pulsar-core@0.0.3':
-    resolution: {integrity: sha512-H8Z2QvcTEWD+y773yL9ujVSvgXI2ZsZmICTQv7o5/Mp65HpYbExmCdWyVFupJ5bCLCrizOZ1x6rX4zsm9/cGUA==}
+  '@tuwaio/pulsar-core@0.0.4':
+    resolution: {integrity: sha512-o54/H2hyd9KaBU6/YebRDxs0f32hwt6Eh0kgCGges99yKNRWXV0qzpRmwC98BHF+PG/nDg3Nqc5BZFPogKbmkQ==}
     peerDependencies:
       dayjs: '>=1'
       immer: '>=10'
       zustand: '>=5'
 
-  '@tuwaio/pulsar-evm@0.0.7':
-    resolution: {integrity: sha512-Y2hw5hRGNgemNvqZ7mzKGM8OBcYZAAqmxs8ZA2yU4rwnOm7ugL24lYvqvXk7eKpQv5TG/VpHsMVSLChy58Te9w==}
+  '@tuwaio/pulsar-evm@0.0.8':
+    resolution: {integrity: sha512-nLweDoCY6DIiIjhNsqVM9XlBGyUjxzQO+LUy+icGSGPQPFIEStAlUh/iFDfM7ealLQAGz/nw2NOnyTiDNhQsGw==}
     peerDependencies:
       '@wagmi/core': '>=2'
       dayjs: '>=1'
@@ -3377,8 +3389,8 @@ packages:
       viem: '>=2'
       zustand: '>=5'
 
-  '@tuwaio/pulsar-react@0.0.2':
-    resolution: {integrity: sha512-lqCe/voyDH3PjZMwNXA/1mUN3CPvqyXQmMTQx1jd2bs7TtgEjuMV0h2kfwqlQE8OF5XvOd8IHRZqWCQ40RNy4A==}
+  '@tuwaio/pulsar-react@0.0.3':
+    resolution: {integrity: sha512-FLbWbxuXlW1chgH5RoUfv9xUdUAW6J+ibhvgd3dZX/3+LqAFuo7G+7vZ1mOClYBOBb5LDUYdtcHi2G+khv8sZA==}
     peerDependencies:
       react: '>=19'
 
@@ -11736,14 +11748,14 @@ snapshots:
       tailwind-merge: 3.3.1
       tailwindcss: 4.1.12
 
-  '@tuwaio/nova-transactions@0.0.7(@bgd-labs/react-web3-icons@1.34.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@heroicons/react@2.2.0(react@19.1.1))(@radix-ui/react-dialog@1.1.15(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@wagmi/core@2.19.0(@tanstack/query-core@5.85.3)(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(typescript@5.9.2)(use-sync-external-store@1.4.0(react@19.1.1))(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4)))(framer-motion@12.23.12(@emotion/is-prop-valid@1.3.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(immer@10.1.1)(react-dom@19.1.1(react@19.1.1))(react-toastify@11.0.5(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.12)(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4))(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))':
+  '@tuwaio/nova-transactions@0.0.8(@bgd-labs/react-web3-icons@1.34.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@heroicons/react@2.2.0(react@19.1.1))(@radix-ui/react-dialog@1.1.15(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@wagmi/core@2.19.0(@tanstack/query-core@5.85.3)(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(typescript@5.9.2)(use-sync-external-store@1.4.0(react@19.1.1))(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4)))(framer-motion@12.23.12(@emotion/is-prop-valid@1.3.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(immer@10.1.1)(react-dom@19.1.1(react@19.1.1))(react-toastify@11.0.5(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.12)(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4))(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))':
     dependencies:
       '@bgd-labs/react-web3-icons': 1.34.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@heroicons/react': 2.2.0(react@19.1.1)
       '@radix-ui/react-dialog': 1.1.15(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@tuwaio/nova-core': 0.0.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.12)
-      '@tuwaio/pulsar-core': 0.0.3(dayjs@1.11.13)(immer@10.1.1)(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
-      '@tuwaio/pulsar-evm': 0.0.7(@wagmi/core@2.19.0(@tanstack/query-core@5.85.3)(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(typescript@5.9.2)(use-sync-external-store@1.4.0(react@19.1.1))(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4)))(dayjs@1.11.13)(immer@10.1.1)(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4))(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
+      '@tuwaio/pulsar-core': 0.0.4(dayjs@1.11.13)(immer@10.1.1)(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
+      '@tuwaio/pulsar-evm': 0.0.8(@wagmi/core@2.19.0(@tanstack/query-core@5.85.3)(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(typescript@5.9.2)(use-sync-external-store@1.4.0(react@19.1.1))(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4)))(dayjs@1.11.13)(immer@10.1.1)(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4))(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
       '@wagmi/core': 2.19.0(@tanstack/query-core@5.85.3)(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(typescript@5.9.2)(use-sync-external-store@1.4.0(react@19.1.1))(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4))
       dayjs: 1.11.13
       ethereum-blockies-base64: 1.0.2
@@ -11756,22 +11768,22 @@ snapshots:
       viem: 2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4)
       zustand: 5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1))
 
-  '@tuwaio/pulsar-core@0.0.3(dayjs@1.11.13)(immer@10.1.1)(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))':
+  '@tuwaio/pulsar-core@0.0.4(dayjs@1.11.13)(immer@10.1.1)(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))':
     dependencies:
       dayjs: 1.11.13
       immer: 10.1.1
       zustand: 5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1))
 
-  '@tuwaio/pulsar-evm@0.0.7(@wagmi/core@2.19.0(@tanstack/query-core@5.85.3)(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(typescript@5.9.2)(use-sync-external-store@1.4.0(react@19.1.1))(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4)))(dayjs@1.11.13)(immer@10.1.1)(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4))(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))':
+  '@tuwaio/pulsar-evm@0.0.8(@wagmi/core@2.19.0(@tanstack/query-core@5.85.3)(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(typescript@5.9.2)(use-sync-external-store@1.4.0(react@19.1.1))(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4)))(dayjs@1.11.13)(immer@10.1.1)(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4))(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))':
     dependencies:
-      '@tuwaio/pulsar-core': 0.0.3(dayjs@1.11.13)(immer@10.1.1)(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
+      '@tuwaio/pulsar-core': 0.0.4(dayjs@1.11.13)(immer@10.1.1)(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
       '@wagmi/core': 2.19.0(@tanstack/query-core@5.85.3)(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(typescript@5.9.2)(use-sync-external-store@1.4.0(react@19.1.1))(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4))
       dayjs: 1.11.13
       immer: 10.1.1
       viem: 2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4)
       zustand: 5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1))
 
-  '@tuwaio/pulsar-react@0.0.2(react@19.1.1)':
+  '@tuwaio/pulsar-react@0.0.3(react@19.1.1)':
     dependencies:
       react: 19.1.1
 

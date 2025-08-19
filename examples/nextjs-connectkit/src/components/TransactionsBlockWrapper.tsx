@@ -5,22 +5,19 @@
 import { TxActionButton } from '@tuwaio/nova-transactions';
 import { TransactionAdapter } from '@tuwaio/pulsar-core';
 import { createViemClient } from '@tuwaio/pulsar-evm';
-import { getAccount } from '@wagmi/core';
 import { ReactNode, useEffect, useState } from 'react';
-import { Client, zeroAddress } from 'viem';
+import { Client } from 'viem';
 import { readContract } from 'viem/actions';
 import { sepolia } from 'viem/chains';
 
 import { CounterAbi } from '@/abis/CounterAbi';
-import { appChains, config } from '@/configs/wagmiConfig';
+import { appChains } from '@/configs/wagmiConfig';
 import { COUNTER_ADDRESS } from '@/constants';
 import { usePulsarStore } from '@/hooks/txTrackingHooks';
 import { TxAction, txActions } from '@/transactions/actions';
 import { TxType } from '@/transactions/onSucceedCallbacks';
 
 export const TransactionsBlockWrapper = ({ connectWidget }: { connectWidget: ReactNode }) => {
-  const activeWallet = getAccount(config);
-
   const handleTransaction = usePulsarStore((state) => state.handleTransaction);
   const transactionsPool = usePulsarStore((state) => state.transactionsPool);
   const getLastTxKey = usePulsarStore((state) => state.getLastTxKey);
@@ -59,8 +56,6 @@ export const TransactionsBlockWrapper = ({ connectWidget }: { connectWidget: Rea
       params: {
         type: TxType.increment,
         adapter: TransactionAdapter.EVM,
-        from: activeWallet.address ?? zeroAddress,
-        walletType: activeWallet.connector?.type ?? '',
         desiredChainID: sepolia.id,
         actionKey: TxAction.increment,
         title: ['Incrementing', 'Incremented', 'Error when increment', 'Increment tx replaced'],

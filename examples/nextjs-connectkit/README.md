@@ -83,7 +83,7 @@ Create a `.env.local` file in the project root:
 
 ```env
 # Required: Get a Project ID from [https://cloud.walletconnect.com](https://cloud.walletconnect.com)
-NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID=your_project_id
+NEXT_PUBLIC_WALLET_PROJECT_ID=your_project_id
 
 # Optional: Gelato API key for sponsoring transactions
 NEXT_PUBLIC_GELATO_API_KEY=your_project_key

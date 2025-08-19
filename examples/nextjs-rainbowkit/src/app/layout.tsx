@@ -18,8 +18,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'TUWA Web3 Txs Tracking Suite Demo',
-  description: 'TUWA Web3 Transaction Tracking Suite Demo NextJS + RainbowKit',
+  title: 'Pulsar & Cosmos SDK: Next.js + RainbowKit Example',
+  description:
+    'An example demonstrating the integration of Pulsar transaction tracking with a Next.js application using RainbowKit.',
 };
 
 export default function RootLayout({
@@ -30,10 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <Head>
-        <meta
-          name="apple-mobile-web-app-title"
-          content="TUWA Web3 Transaction Tracking Suite Demo NextJS + RainbowKit"
-        />
+        <meta name="apple-mobile-web-app-title" content="Pulsar & Cosmos SDK: Next.js + RainbowKit Example" />
       </Head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Providers>{children}</Providers>

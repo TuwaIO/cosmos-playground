@@ -1,8 +1,8 @@
 {
-  "name": "tuwa-vite-rainbowkit-example",
+  "name": "vite-rainbowkit-example",
   "version": "1.0.0",
   "private": true,
-  "description": "Example React app demonstrating TUWA Web3 Transaction Tracking Suite with Vite + RainbowKit",
+  "description": "An example demonstrating the integration of Pulsar transaction tracking with a Vite application using RainbowKit.",
   "keywords": [
     "web3",
     "transaction-tracking",
@@ -14,19 +14,9 @@
     "example",
     "demo"
   ],
-  "type": "module",
   "author": "Oleksandr Tkach",
   "license": "Apache-2.0",
-  "packageManager": "pnpm@9.6.0",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/TuwaIO/web3-transactions-tracking.git",
-    "directory": "examples/vite-rainbowkit"
-  },
-  "homepage": "https://github.com/TuwaIO/web3-transactions-tracking/tree/main/examples/vite-rainbowkit",
-  "bugs": {
-    "url": "https://github.com/TuwaIO/web3-transactions-tracking/issues"
-  },
+  "type": "module",
   "engines": {
     "node": ">=20.0.0",
     "pnpm": ">=9.0.0"
@@ -43,9 +33,11 @@
     "@radix-ui/react-dialog": "^1.1.15",
     "@rainbow-me/rainbowkit": "^2.2.8",
     "@tanstack/react-query": "^5.85.0",
-    "@tuwaio/evm-transactions-tracking": "latest",
-    "@tuwaio/transactions-tracking-ui": "latest",
-    "@tuwaio/web3-transactions-tracking-core": "latest",
+    "@tuwaio/pulsar-core": "0.0.4",
+    "@tuwaio/pulsar-evm": "0.0.8",
+    "@tuwaio/pulsar-react": "0.0.3",
+    "@tuwaio/nova-core": "0.0.4",
+    "@tuwaio/nova-transactions": "0.0.8",
     "@wagmi/core": "^2.19.0",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.13",

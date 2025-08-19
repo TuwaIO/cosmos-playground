@@ -18,13 +18,13 @@ Think of this as your interactive launchpad: clone any example, see it run, and 
 
 This table showcases various integrations, highlighting how TUWA's tools fit into modern frontend stacks.
 
-| Demo | Key Technologies Demonstrated | Status |
-|---|---|---|
-| **[Next.js App](./examples/nextjs-rainbowkit/)** | **`nova-uikit`**, **`pulsar-core`**, RainbowKit, Next.js |  🚧 In Progress |
-| **[Vite App](./examples/vite-rainbowkit/)** | **`nova-uikit`**, **`pulsar-core`**, RainbowKit, Vite |  🚧 In Progress|
-| **[ConnectKit Demo](./examples/nextjs-connectkit/)** | Using **`nova-uikit`** components with ConnectKit | ✅ Ready |
-| **[Dynamic.xyz Demo](./examples/nextjs-dynamic/)** | Integrating the TUWA stack with Dynamic.xyz wallets | ✅ Ready |
-| **[Reown AppKit Demo](./examples/nextjs-reown/)** | Integrating the TUWA stack with Reown AppKit |  🚧 In Progress |
+| Demo | Key Technologies Demonstrated | Status         |
+|---|---|----------------|
+| **[Next.js App](./examples/nextjs-rainbowkit/)** | **`nova-uikit`**, **`pulsar-core`**, RainbowKit, Next.js | ✅ Ready        |
+| **[Vite App](./examples/vite-rainbowkit/)** | **`nova-uikit`**, **`pulsar-core`**, RainbowKit, Vite | ✅ Ready        |
+| **[ConnectKit Demo](./examples/nextjs-connectkit/)** | Using **`nova-uikit`** components with ConnectKit | ✅ Ready        |
+| **[Dynamic.xyz Demo](./examples/nextjs-dynamic/)** | Integrating the TUWA stack with Dynamic.xyz wallets | ✅ Ready        |
+| **[Reown AppKit Demo](./examples/nextjs-reown/)** | Integrating the TUWA stack with Reown AppKit | 🚧 In Progress |
 | **[Web3Auth Demo](./examples/nextjs-web3auth/)** | An example showing social logins via Web3Auth | 🚧 In Progress |
 
 ## ✨ Core Concepts Demonstrated
