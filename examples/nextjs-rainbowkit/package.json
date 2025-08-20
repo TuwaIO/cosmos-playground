@@ -36,7 +36,7 @@
     "@tuwaio/pulsar-evm": "0.0.8",
     "@tuwaio/pulsar-react": "0.0.3",
     "@tuwaio/nova-core": "0.0.4",
-    "@tuwaio/nova-transactions": "0.0.8",
+    "@tuwaio/nova-transactions": "0.0.9",
     "@wagmi/core": "^2.19.0",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.13",
