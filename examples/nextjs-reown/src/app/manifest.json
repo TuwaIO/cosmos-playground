@@ -1,6 +1,6 @@
 {
-  "name": "TUWA Web3 Transaction Tracking Suite Demo NextJS + Reown AppKit",
-  "short_name": "TUWA Web3 TXs Tracking Suite Demo",
+  "short_name": "Pulsar & Cosmos SDK",
+  "name": "Pulsar & Cosmos SDK: Next.js + Reown AppKit Example",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",

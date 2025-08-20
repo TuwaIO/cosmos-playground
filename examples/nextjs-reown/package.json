@@ -1,8 +1,8 @@
 {
-  "name": "tuwa-nextjs-reown-example",
+  "name": "nextjs-reown-example",
   "version": "1.0.0",
   "private": true,
-  "description": "Example React app demonstrating TUWA Web3 Transaction Tracking Suite with NextJS + Reown AppKit",
+  "description": "An example demonstrating the integration of Pulsar transaction tracking with a Next.js application using Reown AppKit.",
   "keywords": [
     "web3",
     "transaction-tracking",
@@ -17,15 +17,6 @@
   "author": "Oleksandr Tkach",
   "license": "Apache-2.0",
   "packageManager": "pnpm@9.6.0",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/TuwaIO/web3-transactions-tracking.git",
-    "directory": "examples/nextjs-reown"
-  },
-  "homepage": "https://github.com/TuwaIO/web3-transactions-tracking/tree/main/examples/nextjs-reown",
-  "bugs": {
-    "url": "https://github.com/TuwaIO/web3-transactions-tracking/issues"
-  },
   "engines": {
     "node": ">=20.0.0",
     "pnpm": ">=9.0.0"
@@ -42,9 +33,11 @@
     "@reown/appkit": "^1.7.19",
     "@reown/appkit-adapter-wagmi": "^1.7.19",
     "@tanstack/react-query": "^5.85.0",
-    "@tuwaio/evm-transactions-tracking": "latest",
-    "@tuwaio/transactions-tracking-ui": "latest",
-    "@tuwaio/web3-transactions-tracking-core": "latest",
+    "@tuwaio/pulsar-core": "0.0.4",
+    "@tuwaio/pulsar-evm": "0.0.8",
+    "@tuwaio/pulsar-react": "0.0.3",
+    "@tuwaio/nova-core": "0.0.4",
+    "@tuwaio/nova-transactions": "0.0.8",
     "@wagmi/core": "^2.19.0",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.13",

@@ -1,4 +1,4 @@
-import { Config } from '@wagmi/core';
+import { Config } from 'wagmi';
 
 import { increment } from './increment';
 

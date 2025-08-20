@@ -19,8 +19,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'TUWA Web3 TXs Tracking Suite Demo',
-  description: 'TUWA Web3 Transaction Tracking Suite Demo NextJS + Reown AppKit',
+  title: 'Pulsar & Cosmos SDK: Next.js + Reown AppKit Example',
+  description:
+    'An example demonstrating the integration of Pulsar transaction tracking with a Next.js application using Reown AppKit.',
 };
 
 export default async function RootLayout({
@@ -34,10 +35,7 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <Head>
-        <meta
-          name="apple-mobile-web-app-title"
-          content="TUWA Web3 Transaction Tracking Suite Demo NextJS + Reown AppKit"
-        />
+        <meta name="apple-mobile-web-app-title" content="Pulsar & Cosmos SDK: Next.js + Reown AppKit Example" />
       </Head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Providers cookies={cookies}>{children}</Providers>

@@ -7,7 +7,7 @@ import { Config, cookieToInitialState, WagmiProvider } from 'wagmi';
 
 import { appChains, wagmiAdapter } from '@/configs/wagmiConfig';
 
-import { TxWidgetProvider } from './TxWidgetProvider';
+import { NovaProvider } from './NovaProvider';
 
 const queryClient = new QueryClient();
 
@@ -39,7 +39,7 @@ export function Providers({ children, cookies }: { children: ReactNode; cookies:
   return (
     <WagmiProvider config={wagmiAdapter.wagmiConfig as Config} initialState={initialState}>
       <QueryClientProvider client={queryClient}>
-        <TxWidgetProvider />
+        <NovaProvider />
         {children}
       </QueryClientProvider>
     </WagmiProvider>

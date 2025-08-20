@@ -24,7 +24,7 @@ This table showcases various integrations, highlighting how TUWA's tools fit int
 | **[Vite App](./examples/vite-rainbowkit/)** | **`nova-uikit`**, **`pulsar-core`**, RainbowKit, Vite | ✅ Ready        |
 | **[ConnectKit Demo](./examples/nextjs-connectkit/)** | Using **`nova-uikit`** components with ConnectKit | ✅ Ready        |
 | **[Dynamic.xyz Demo](./examples/nextjs-dynamic/)** | Integrating the TUWA stack with Dynamic.xyz wallets | ✅ Ready        |
-| **[Reown AppKit Demo](./examples/nextjs-reown/)** | Integrating the TUWA stack with Reown AppKit | 🚧 In Progress |
+| **[Reown AppKit Demo](./examples/nextjs-reown/)** | Integrating the TUWA stack with Reown AppKit | ✅ Ready  |
 | **[Web3Auth Demo](./examples/nextjs-web3auth/)** | An example showing social logins via Web3Auth | 🚧 In Progress |
 
 ## ✨ Core Concepts Demonstrated
