@@ -6,7 +6,7 @@ import { Web3AuthContextConfig, Web3AuthProvider } from '@web3auth/modal/react';
 import { WagmiProvider } from '@web3auth/modal/react/wagmi';
 import { ReactNode } from 'react';
 
-import { TxWidgetProvider } from '@/providers/TxWidgetProvider';
+import { NovaProvider } from '@/providers/NovaProvider';
 
 const queryClient = new QueryClient();
 
@@ -39,7 +39,7 @@ export function Providers({
     <Web3AuthProvider config={web3AuthContextConfig} initialState={web3authInitialState}>
       <QueryClientProvider client={queryClient}>
         <WagmiProvider>
-          <TxWidgetProvider />
+          <NovaProvider />
           {children}
         </WagmiProvider>
       </QueryClientProvider>

@@ -20,8 +20,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'TUWA Web3 TXs Tracking Suite Demo',
-  description: 'TUWA Web3 Transaction Tracking Suite Demo NextJS + Web3Auth',
+  title: 'Pulsar & Cosmos SDK: Next.js + Web3Auth Example',
+  description:
+    'An example demonstrating the integration of Pulsar transaction tracking with a Next.js application using Web3Auth.',
 };
 
 export default async function RootLayout({
@@ -35,7 +36,7 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <Head>
-        <meta name="apple-mobile-web-app-title" content="TUWA Web3 Transaction Tracking Suite Demo NextJS + Web3Auth" />
+        <meta name="apple-mobile-web-app-title" content="Pulsar & Cosmos SDK: Next.js + Web3Auth Example" />
       </Head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Providers web3authInitialState={web3authInitialState}>{children}</Providers>

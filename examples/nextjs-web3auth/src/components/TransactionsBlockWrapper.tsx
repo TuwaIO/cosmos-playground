@@ -2,8 +2,9 @@
 
 'use client';
 
-import { createViemClient } from '@tuwaio/evm-transactions-tracking';
-import { TxActionButton } from '@tuwaio/transactions-tracking-ui';
+import { TxActionButton } from '@tuwaio/nova-transactions';
+import { TransactionAdapter } from '@tuwaio/pulsar-core';
+import { createViemClient } from '@tuwaio/pulsar-evm';
 import { ReactNode, useEffect, useState } from 'react';
 import { Client } from 'viem';
 import { readContract } from 'viem/actions';
@@ -12,14 +13,14 @@ import { useConfig } from 'wagmi';
 
 import { CounterAbi } from '@/abis/CounterAbi';
 import { appChains, COUNTER_ADDRESS } from '@/constants';
-import { useTxTrackingStore } from '@/hooks/txTrackingHooks';
+import { usePulsarStore } from '@/hooks/txTrackingHooks';
 import { TxAction, txActions } from '@/transactions/actions';
 import { TxType } from '@/transactions/onSucceedCallbacks';
 
 export const TransactionsBlockWrapper = ({ connectWidget }: { connectWidget: ReactNode }) => {
-  const handleTransaction = useTxTrackingStore((state) => state.handleTransaction);
-  const transactionsPool = useTxTrackingStore((state) => state.transactionsPool);
-  const getLastTxKey = useTxTrackingStore((state) => state.getLastTxKey);
+  const handleTransaction = usePulsarStore((state) => state.handleTransaction);
+  const transactionsPool = usePulsarStore((state) => state.transactionsPool);
+  const getLastTxKey = usePulsarStore((state) => state.getLastTxKey);
 
   const [currentCount, setCurrentCount] = useState<number | null>(null);
   const [isLoadingCount, setIsLoadingCount] = useState(true);
@@ -53,10 +54,10 @@ export const TransactionsBlockWrapper = ({ connectWidget }: { connectWidget: Rea
     if (currentCount === null) return;
 
     await handleTransaction({
-      config,
       actionFunction: () => txActions.increment({ config }),
       params: {
         type: TxType.increment,
+        adapter: TransactionAdapter.EVM,
         desiredChainID: sepolia.id,
         actionKey: TxAction.increment,
         title: ['Incrementing', 'Incremented', 'Error when increment', 'Increment tx replaced'],
