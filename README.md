@@ -25,7 +25,7 @@ This table showcases various integrations, highlighting how TUWA's tools fit int
 | **[ConnectKit Demo](./examples/nextjs-connectkit/)** | Using **`nova-uikit`** components with ConnectKit | ✅ Ready        |
 | **[Dynamic.xyz Demo](./examples/nextjs-dynamic/)** | Integrating the TUWA stack with Dynamic.xyz wallets | ✅ Ready        |
 | **[Reown AppKit Demo](./examples/nextjs-reown/)** | Integrating the TUWA stack with Reown AppKit | ✅ Ready  |
-| **[Web3Auth Demo](./examples/nextjs-web3auth/)** | An example showing social logins via Web3Auth | 🚧 In Progress |
+| **[Web3Auth Demo](./examples/nextjs-web3auth/)** | An example showing social logins via Web3Auth | ✅ Ready  |
 
 ## ✨ Core Concepts Demonstrated
 

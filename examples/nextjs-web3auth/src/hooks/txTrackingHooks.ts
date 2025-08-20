@@ -1,16 +1,20 @@
 'use client';
 
-import { createBoundedUseStore, createPulsarStore } from '@tuwaio/pulsar-core';
+import { ITxTrackingStore } from '@tuwaio/pulsar-core';
 import { ActionTxKey, TransactionTracker } from '@tuwaio/pulsar-evm';
+import { createContext, useContext } from 'react';
+import { StoreApi, useStore } from 'zustand';
 
-import { onSucceedCallbacks, TransactionUnion } from '@/transactions/onSucceedCallbacks';
+import { TransactionUnion } from '@/transactions/onSucceedCallbacks';
 
-const storageName = 'transactions-tracking-storage';
+type PulsarStore = ITxTrackingStore<TransactionTracker, TransactionUnion, ActionTxKey>;
 
-export const usePulsarStore = createBoundedUseStore(
-  createPulsarStore<TransactionTracker, TransactionUnion, ActionTxKey>({
-    name: storageName,
-    onSucceedCallbacks,
-    adapters: [],
-  }),
-);
+export const PulsarStoreContext = createContext<StoreApi<PulsarStore> | null>(null);
+
+export const usePulsarStore = <T>(selector: (state: PulsarStore) => T): T => {
+  const store = useContext(PulsarStoreContext);
+  if (!store) {
+    throw new Error('usePulsarStore must be used within a PulsarProvider');
+  }
+  return useStore(store, selector);
+};

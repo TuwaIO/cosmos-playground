@@ -7,19 +7,18 @@ import { WagmiProvider } from '@web3auth/modal/react/wagmi';
 import { ReactNode } from 'react';
 
 import { NovaProvider } from '@/providers/NovaProvider';
+import { PulsarProvider } from '@/providers/PulsarProvider';
 
 const queryClient = new QueryClient();
 
 const web3AuthContextConfig: Web3AuthContextConfig = {
   web3AuthOptions: {
-    clientId:
-      process.env.NEXT_PUBLIC_WEB3AUTH_CLIENT_ID ??
-      'BHgArYmWwSeq21czpcarYh0EVq2WWOzflX-NTK-tY1-1pauPzHKRRLgpABkmYiIV_og9jAvoIxQ8L3Smrwe04Lw',
+    clientId: process.env.NEXT_PUBLIC_WEB3AUTH_CLIENT_ID ?? '',
     web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_DEVNET,
     ssr: true,
     uiConfig: {
-      logoLight: '',
-      logoDark: '',
+      logoLight: 'https://raw.githubusercontent.com/TuwaIO/workflows/refs/heads/main/preview/preview-logo.png',
+      logoDark: 'https://raw.githubusercontent.com/TuwaIO/workflows/refs/heads/main/preview/preview-logo.png',
       theme: {
         primary: '#6366f1',
       },
@@ -39,8 +38,10 @@ export function Providers({
     <Web3AuthProvider config={web3AuthContextConfig} initialState={web3authInitialState}>
       <QueryClientProvider client={queryClient}>
         <WagmiProvider>
-          <NovaProvider />
-          {children}
+          <PulsarProvider>
+            <NovaProvider />
+            {children}
+          </PulsarProvider>
         </WagmiProvider>
       </QueryClientProvider>
     </Web3AuthProvider>
