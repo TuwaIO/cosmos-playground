@@ -1,7 +1,7 @@
 {
-  "name": "Pulsar & Cosmos SDK: Next.js + Web3Auth Example",
   "short_name": "Pulsar & Cosmos SDK",
-  "description": "An example demonstrating the integration of Pulsar transaction tracking with a Next.js application using Web3Auth.",
+  "name": "Pulsar & Cosmos SDK: Next.js + Web3Auth Example",
+  "description": "Pulsar & Cosmos SDK: Next.js + Web3Auth Example",
   "iconPath": "icon0.svg",
   "icons": [
     {
@@ -10,7 +10,7 @@
       "type": "image/svg"
     }
   ],
-  "start_url": "./index.html",
+  "start_url": "/",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"

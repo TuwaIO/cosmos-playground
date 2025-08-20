@@ -22,6 +22,10 @@ export const metadata: Metadata = {
   title: 'Pulsar & Cosmos SDK: Next.js + Reown AppKit Example',
   description:
     'An example demonstrating the integration of Pulsar transaction tracking with a Next.js application using Reown AppKit.',
+  manifest: '/manifest.json',
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export default async function RootLayout({

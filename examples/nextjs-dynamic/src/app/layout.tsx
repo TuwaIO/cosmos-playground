@@ -21,6 +21,10 @@ export const metadata: Metadata = {
   title: 'Pulsar & Cosmos SDK: Next.js + Dynamic Example',
   description:
     'An example demonstrating the integration of Pulsar transaction tracking with a Next.js application using Dynamic.',
+  manifest: '/manifest.json',
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({

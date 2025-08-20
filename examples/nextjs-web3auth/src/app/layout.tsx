@@ -23,6 +23,10 @@ export const metadata: Metadata = {
   title: 'Pulsar & Cosmos SDK: Next.js + Web3Auth Example',
   description:
     'An example demonstrating the integration of Pulsar transaction tracking with a Next.js application using Web3Auth.',
+  manifest: '/manifest.json',
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export default async function RootLayout({

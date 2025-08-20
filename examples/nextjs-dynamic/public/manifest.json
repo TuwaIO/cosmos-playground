@@ -1,7 +1,7 @@
 {
   "short_name": "Pulsar & Cosmos SDK",
   "name": "Pulsar & Cosmos SDK: Next.js + Dynamic Example",
-  "description": "An example demonstrating the integration of Pulsar transaction tracking with a Next.js application using Dynamic.xyz.",
+  "description": "Pulsar & Cosmos SDK: Next.js + Dynamic Example",
   "iconPath": "icon0.svg",
   "icons": [
     {
@@ -10,7 +10,7 @@
       "type": "image/svg"
     }
   ],
-  "start_url": "./index.html",
+  "start_url": "/",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"
