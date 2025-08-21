@@ -5,14 +5,14 @@
 import { TxActionButton } from '@tuwaio/nova-transactions';
 import { TransactionAdapter } from '@tuwaio/pulsar-core';
 import { createViemClient } from '@tuwaio/pulsar-evm';
-import { getAccount } from '@wagmi/core';
 import { ReactNode, useEffect, useState } from 'react';
 import { Client } from 'viem';
 import { readContract } from 'viem/actions';
 import { sepolia } from 'viem/chains';
+import { useAccount } from 'wagmi';
 
 import { CounterAbi } from '@/abis/CounterAbi';
-import { appChains, config } from '@/configs/wagmiConfig';
+import { appChains } from '@/configs/wagmiConfig';
 import { COUNTER_ADDRESS } from '@/constants';
 import { usePulsarStore } from '@/hooks/txTrackingHooks';
 import { TxAction, txActions } from '@/transactions/actions';
@@ -25,6 +25,8 @@ export const TransactionsBlockWrapper = ({ connectWidget }: { connectWidget: Rea
 
   const [currentCount, setCurrentCount] = useState<number | null>(null);
   const [isLoadingCount, setIsLoadingCount] = useState(true);
+
+  const { address } = useAccount();
 
   const fetchCurrentCount = async () => {
     try {
@@ -157,7 +159,7 @@ export const TransactionsBlockWrapper = ({ connectWidget }: { connectWidget: Rea
                   getLastTxKey={getLastTxKey}
                   className="w-full h-full bg-gradient-to-r from-[var(--tuwa-button-gradient-from)] to-[var(--tuwa-button-gradient-to)] hover:from-[var(--tuwa-button-gradient-from-hover)] hover:to-[var(--tuwa-button-gradient-to-hover)] text-[var(--tuwa-text-on-accent)] font-semibold rounded-xl transition-all duration-200 ease-in-out hover:shadow-lg flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] select-none"
                   disabled={currentCount === null}
-                  walletAddress={getAccount(config)?.address}
+                  walletAddress={address}
                 >
                   <span className="text-xl leading-none contents text-[var(--tuwa-text-on-accent)]">+</span>
                   <span className="leading-none">Increment Counter</span>

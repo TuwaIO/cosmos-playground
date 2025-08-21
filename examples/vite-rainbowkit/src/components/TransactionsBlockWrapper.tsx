@@ -9,6 +9,7 @@ import { ReactNode, useEffect, useState } from 'react';
 import { Client } from 'viem';
 import { readContract } from 'viem/actions';
 import { sepolia } from 'viem/chains';
+import { useAccount } from 'wagmi';
 
 import { CounterAbi } from '../abis/CounterAbi';
 import { appChains } from '../configs/wagmiConfig';
@@ -24,6 +25,8 @@ export const TransactionsBlockWrapper = ({ connectWidget }: { connectWidget: Rea
 
   const [currentCount, setCurrentCount] = useState<number | null>(null);
   const [isLoadingCount, setIsLoadingCount] = useState(true);
+
+  const { address } = useAccount();
 
   const fetchCurrentCount = async () => {
     try {
@@ -156,6 +159,7 @@ export const TransactionsBlockWrapper = ({ connectWidget }: { connectWidget: Rea
                   getLastTxKey={getLastTxKey}
                   className="w-full h-full bg-gradient-to-r from-[var(--tuwa-button-gradient-from)] to-[var(--tuwa-button-gradient-to)] hover:from-[var(--tuwa-button-gradient-from-hover)] hover:to-[var(--tuwa-button-gradient-to-hover)] text-[var(--tuwa-text-on-accent)] font-semibold rounded-xl transition-all duration-200 ease-in-out hover:shadow-lg flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] select-none"
                   disabled={currentCount === null}
+                  walletAddress={address}
                 >
                   <span className="text-xl leading-none contents text-[var(--tuwa-text-on-accent)]">+</span>
                   <span className="leading-none">Increment Counter</span>

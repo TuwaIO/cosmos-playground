@@ -44,7 +44,7 @@
     "@tuwaio/pulsar-evm": "0.0.10",
     "@tuwaio/pulsar-react": "0.0.3",
     "@tuwaio/nova-core": "0.0.6",
-    "@tuwaio/nova-transactions": "0.0.12",
+    "@tuwaio/nova-transactions": "0.0.13",
     "@web3auth/modal": "^10.2.0",
     "@wagmi/core": "^2.19.0",
     "clsx": "^2.1.1",
