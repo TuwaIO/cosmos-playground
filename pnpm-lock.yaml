@@ -60,11 +60,11 @@ importers:
         specifier: ^5.85.0
         version: 5.85.3(react@19.1.1)
       '@tuwaio/nova-core':
-        specifier: 0.0.6
-        version: 0.0.6(clsx@2.1.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwind-merge@3.3.1)(tailwindcss@4.1.12)
+        specifier: 0.0.7
+        version: 0.0.7(clsx@2.1.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwind-merge@3.3.1)(tailwindcss@4.1.12)
       '@tuwaio/nova-transactions':
-        specifier: 0.0.13
-        version: 0.0.13(zmnhgki537gupurb6qfxw5r66i)
+        specifier: 0.0.14
+        version: 0.0.14(zn3jieq3stilggwtrzvshwxphu)
       '@tuwaio/pulsar-core':
         specifier: 0.0.4
         version: 0.0.4(dayjs@1.11.13)(immer@10.1.1)(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
@@ -172,11 +172,11 @@ importers:
         specifier: ^5.85.0
         version: 5.85.3(react@19.1.1)
       '@tuwaio/nova-core':
-        specifier: 0.0.6
-        version: 0.0.6(clsx@2.1.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwind-merge@3.3.1)(tailwindcss@4.1.12)
+        specifier: 0.0.7
+        version: 0.0.7(clsx@2.1.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwind-merge@3.3.1)(tailwindcss@4.1.12)
       '@tuwaio/nova-transactions':
-        specifier: 0.0.13
-        version: 0.0.13(zmnhgki537gupurb6qfxw5r66i)
+        specifier: 0.0.14
+        version: 0.0.14(zn3jieq3stilggwtrzvshwxphu)
       '@tuwaio/pulsar-core':
         specifier: 0.0.4
         version: 0.0.4(dayjs@1.11.13)(immer@10.1.1)(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
@@ -272,11 +272,11 @@ importers:
         specifier: ^5.85.0
         version: 5.85.3(react@19.1.1)
       '@tuwaio/nova-core':
-        specifier: 0.0.6
-        version: 0.0.6(clsx@2.1.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwind-merge@3.3.1)(tailwindcss@4.1.12)
+        specifier: 0.0.7
+        version: 0.0.7(clsx@2.1.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwind-merge@3.3.1)(tailwindcss@4.1.12)
       '@tuwaio/nova-transactions':
-        specifier: 0.0.13
-        version: 0.0.13(zmnhgki537gupurb6qfxw5r66i)
+        specifier: 0.0.14
+        version: 0.0.14(zn3jieq3stilggwtrzvshwxphu)
       '@tuwaio/pulsar-core':
         specifier: 0.0.4
         version: 0.0.4(dayjs@1.11.13)(immer@10.1.1)(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
@@ -375,11 +375,11 @@ importers:
         specifier: ^5.85.0
         version: 5.85.3(react@19.1.1)
       '@tuwaio/nova-core':
-        specifier: 0.0.6
-        version: 0.0.6(clsx@2.1.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwind-merge@3.3.1)(tailwindcss@4.1.12)
+        specifier: 0.0.7
+        version: 0.0.7(clsx@2.1.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwind-merge@3.3.1)(tailwindcss@4.1.12)
       '@tuwaio/nova-transactions':
-        specifier: 0.0.13
-        version: 0.0.13(zmnhgki537gupurb6qfxw5r66i)
+        specifier: 0.0.14
+        version: 0.0.14(zn3jieq3stilggwtrzvshwxphu)
       '@tuwaio/pulsar-core':
         specifier: 0.0.4
         version: 0.0.4(dayjs@1.11.13)(immer@10.1.1)(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
@@ -472,11 +472,11 @@ importers:
         specifier: ^5.85.0
         version: 5.85.3(react@19.1.1)
       '@tuwaio/nova-core':
-        specifier: 0.0.6
-        version: 0.0.6(clsx@2.1.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwind-merge@3.3.1)(tailwindcss@4.1.12)
+        specifier: 0.0.7
+        version: 0.0.7(clsx@2.1.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwind-merge@3.3.1)(tailwindcss@4.1.12)
       '@tuwaio/nova-transactions':
-        specifier: 0.0.13
-        version: 0.0.13(zmnhgki537gupurb6qfxw5r66i)
+        specifier: 0.0.14
+        version: 0.0.14(zn3jieq3stilggwtrzvshwxphu)
       '@tuwaio/pulsar-core':
         specifier: 0.0.4
         version: 0.0.4(dayjs@1.11.13)(immer@10.1.1)(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
@@ -575,11 +575,11 @@ importers:
         specifier: ^5.85.0
         version: 5.85.3(react@19.1.1)
       '@tuwaio/nova-core':
-        specifier: 0.0.6
-        version: 0.0.6(clsx@2.1.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwind-merge@3.3.1)(tailwindcss@4.1.12)
+        specifier: 0.0.7
+        version: 0.0.7(clsx@2.1.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwind-merge@3.3.1)(tailwindcss@4.1.12)
       '@tuwaio/nova-transactions':
-        specifier: 0.0.13
-        version: 0.0.13(zmnhgki537gupurb6qfxw5r66i)
+        specifier: 0.0.14
+        version: 0.0.14(zn3jieq3stilggwtrzvshwxphu)
       '@tuwaio/pulsar-core':
         specifier: 0.0.4
         version: 0.0.4(dayjs@1.11.13)(immer@10.1.1)(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
@@ -3351,8 +3351,8 @@ packages:
     resolution: {integrity: sha512-iUbTUwD4f4ibdLy5PWWb7ITEz4S4VAP9/mNjFhoRY3cKVVTDfmykrVTKjPOIHWzDgAmLtgrLvySIIC9ZBVENBw==}
     engines: {node: '>=18.0.0'}
 
-  '@tuwaio/nova-core@0.0.6':
-    resolution: {integrity: sha512-5oUOpptPNexqPFrj+p66ImZDAzy6u/4Fi3l2D5WjSeehMvp0MfVfm2y8ntZBN5LlVqC7lhsmFNcU0kClqn9o4Q==}
+  '@tuwaio/nova-core@0.0.7':
+    resolution: {integrity: sha512-dYz12VjVNa//XgE+h9GiNFh23n8oDxjd1kIErDAF0+kW/JXxq9zxqUvM+AjsI2YapzL0vWiUNEQFlpZv3kbFGg==}
     peerDependencies:
       clsx: '>=2'
       react: '>=19'
@@ -3360,8 +3360,8 @@ packages:
       tailwind-merge: '>=3'
       tailwindcss: '>=4'
 
-  '@tuwaio/nova-transactions@0.0.13':
-    resolution: {integrity: sha512-okCSo7CX27xy3Lr1U6LAKZ162RWpZdbUvwBqJ7KhocqCQ7TWrx9tdaX8VPFUp1WCCrFJYvW4XnpqpUKe0+Q/aQ==}
+  '@tuwaio/nova-transactions@0.0.14':
+    resolution: {integrity: sha512-G2cehO7xW1GkfrEb0/RFgsEVn2nTTFydu5syRtyOXVVXjHEHdGPv/gW3oeAG4oos6CRSz4sr9+fHq4EKRQG5Gg==}
     peerDependencies:
       '@bgd-labs/react-web3-icons': '>=1'
       '@heroicons/react': '>=2'
@@ -11714,7 +11714,7 @@ snapshots:
     dependencies:
       sha256-uint8array: 0.10.7
 
-  '@tuwaio/nova-core@0.0.6(clsx@2.1.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwind-merge@3.3.1)(tailwindcss@4.1.12)':
+  '@tuwaio/nova-core@0.0.7(clsx@2.1.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwind-merge@3.3.1)(tailwindcss@4.1.12)':
     dependencies:
       clsx: 2.1.1
       react: 19.1.1
@@ -11722,12 +11722,12 @@ snapshots:
       tailwind-merge: 3.3.1
       tailwindcss: 4.1.12
 
-  '@tuwaio/nova-transactions@0.0.13(zmnhgki537gupurb6qfxw5r66i)':
+  '@tuwaio/nova-transactions@0.0.14(zn3jieq3stilggwtrzvshwxphu)':
     dependencies:
       '@bgd-labs/react-web3-icons': 1.34.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@heroicons/react': 2.2.0(react@19.1.1)
       '@radix-ui/react-dialog': 1.1.15(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
-      '@tuwaio/nova-core': 0.0.6(clsx@2.1.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwind-merge@3.3.1)(tailwindcss@4.1.12)
+      '@tuwaio/nova-core': 0.0.7(clsx@2.1.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwind-merge@3.3.1)(tailwindcss@4.1.12)
       '@tuwaio/pulsar-core': 0.0.4(dayjs@1.11.13)(immer@10.1.1)(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
       '@tuwaio/pulsar-evm': 0.0.10(@tuwaio/pulsar-core@0.0.4(dayjs@1.11.13)(immer@10.1.1)(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1))))(@wagmi/core@2.19.0(@tanstack/query-core@5.85.3)(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(typescript@5.9.2)(use-sync-external-store@1.4.0(react@19.1.1))(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4)))(dayjs@1.11.13)(immer@10.1.1)(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4))(zustand@5.0.7(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(use-sync-external-store@1.4.0(react@19.1.1)))
       '@wagmi/core': 2.19.0(@tanstack/query-core@5.85.3)(@types/react@19.1.10)(immer@10.1.1)(react@19.1.1)(typescript@5.9.2)(use-sync-external-store@1.4.0(react@19.1.1))(viem@2.34.0(bufferutil@4.0.9)(typescript@5.9.2)(utf-8-validate@5.0.10)(zod@3.22.4))
