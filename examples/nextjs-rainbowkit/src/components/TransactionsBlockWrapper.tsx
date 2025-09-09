@@ -80,6 +80,35 @@ export const TransactionsBlockWrapper = ({ connectWidget }: { connectWidget: Rea
     }, 2000);
   };
 
+  const handleIncrementGelato = async () => {
+    if (currentCount === null) return;
+
+    await handleTransaction({
+      actionFunction: txActions.incrementGelato,
+      params: {
+        type: TxType.increment,
+        adapter: TransactionAdapter.EVM,
+        desiredChainID: sepolia.id,
+        actionKey: TxAction.incrementGelato,
+        title: ['Incrementing', 'Incremented', 'Error when increment', 'Increment tx replaced'],
+        description: [
+          `Value after incrementing ${currentCount + 1}`,
+          `Success. Current value is ${currentCount + 1}`,
+          'Something went wrong when increment.',
+          'Transaction replaced. Please take a look details in your wallet.',
+        ],
+        payload: {
+          value: currentCount,
+        },
+        withTrackedModal: true,
+      },
+    });
+
+    setTimeout(() => {
+      fetchCurrentCount();
+    }, 2000);
+  };
+
   const openEtherscan = () => {
     window.open(`https://sepolia.etherscan.io/address/${COUNTER_ADDRESS}`, '_blank', 'noopener,noreferrer');
   };
@@ -163,6 +192,20 @@ export const TransactionsBlockWrapper = ({ connectWidget }: { connectWidget: Rea
                 >
                   <span className="text-xl leading-none contents text-[var(--tuwa-text-on-accent)]">+</span>
                   <span className="leading-none">Increment Counter</span>
+                </TxActionButton>
+              </div>
+
+              <div className="h-14">
+                <TxActionButton
+                  action={handleIncrementGelato}
+                  transactionsPool={transactionsPool}
+                  getLastTxKey={getLastTxKey}
+                  className="w-full h-full bg-gradient-to-r from-[var(--tuwa-button-gradient-from)] to-[var(--tuwa-button-gradient-to)] hover:from-[var(--tuwa-button-gradient-from-hover)] hover:to-[var(--tuwa-button-gradient-to-hover)] text-[var(--tuwa-text-on-accent)] font-semibold rounded-xl transition-all duration-200 ease-in-out hover:shadow-lg flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] select-none"
+                  disabled={currentCount === null}
+                  walletAddress={address}
+                >
+                  <span className="text-xl leading-none contents text-[var(--tuwa-text-on-accent)]">+</span>
+                  <span className="leading-none">Increment Gelato Counter</span>
                 </TxActionButton>
               </div>
 
