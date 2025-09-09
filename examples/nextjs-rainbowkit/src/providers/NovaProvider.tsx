@@ -15,7 +15,7 @@ export function NovaProvider() {
   const handleTransaction = usePulsarStore((state) => state.handleTransaction);
   const initializeTransactionsPool = usePulsarStore((state) => state.initializeTransactionsPool);
 
-  useInitializeTransactionsPool(initializeTransactionsPool);
+  useInitializeTransactionsPool({ initializeTransactionsPool });
 
   const { address } = useAccount();
 

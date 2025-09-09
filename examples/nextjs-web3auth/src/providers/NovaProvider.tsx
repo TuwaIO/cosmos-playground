@@ -1,4 +1,6 @@
 import { NovaProvider as NP } from '@tuwaio/nova-transactions/providers';
+import { TransactionAdapter } from '@tuwaio/pulsar-core';
+import { evmAdapter } from '@tuwaio/pulsar-evm';
 import { useInitializeTransactionsPool } from '@tuwaio/pulsar-react';
 import { useAccount, useConfig } from 'wagmi';
 
@@ -13,22 +15,21 @@ export function NovaProvider() {
   const handleTransaction = usePulsarStore((state) => state.handleTransaction);
   const initializeTransactionsPool = usePulsarStore((state) => state.initializeTransactionsPool);
 
-  useInitializeTransactionsPool(initializeTransactionsPool);
+  useInitializeTransactionsPool({ initializeTransactionsPool });
 
   const config = useConfig();
-  const { address, chain } = useAccount();
+  const { address } = useAccount();
 
   return (
     <NP
-      appChains={appChains}
       transactionsPool={transactionsPool}
       initialTx={initialTx}
       closeTxTrackedModal={closeTxTrackedModal}
-      config={config}
       handleTransaction={handleTransaction}
       actions={txActions}
-      chain={chain}
-      walletAddress={address}
+      connectedWalletAddress={address}
+      connectedAdapterType={TransactionAdapter.EVM}
+      adapters={[evmAdapter(config, appChains)]}
     />
   );
 }
