@@ -69,11 +69,15 @@ The application should now be running on `localhost:3000`.
 * Node.js >= 20.0.0
 * pnpm >= 9.0.0
 
-## 🤝 Contributing
+## 🤝 Contributing & Support
 
 We welcome contributions! If you've built something cool with TUWA or want to add a new example (e.g., using a different framework or wallet connector), we'd love to see it.
 
-Please read our main **[Contribution Guidelines](https://github.com/TuwaIO/workflows/blob/main/CONTRIBUTING.md)** before starting, which covers our standards for commit messages and pull requests.
+Please read our main **[Contribution Guidelines](https://github.com/TuwaIO/workflows/blob/main/CONTRIBUTING.md)**.
+
+If you find this library useful, please consider supporting its development. Every contribution helps!
+
+[**➡️ View Support Options**](https://github.com/TuwaIO/workflows/blob/main/Donation.md)
 
 ## 🌐 Ecosystem Links
 

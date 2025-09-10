@@ -99,9 +99,13 @@ For detailed documentation and advanced usage:
 - [RainbowKit Documentation](https://www.rainbowkit.com/docs)
 - [Wagmi Documentation](https://wagmi.sh/)
 
-## 🤝 Contributing
+## 🤝 Contributing & Support
 
-Found an issue or want to improve this example? Contributions are welcome\! Please visit the main [Cosmos Playground repository](https://github.com/TuwaIO/cosmos-playground) to submit issues or pull requests.
+Contributions are welcome! Please read our main **[Contribution Guidelines](https://github.com/TuwaIO/workflows/blob/main/CONTRIBUTING.md)**.
+
+If you find this library useful, please consider supporting its development. Every contribution helps!
+
+[**➡️ View Support Options**](https://github.com/TuwaIO/workflows/blob/main/Donation.md)
 
 -----
 

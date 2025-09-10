@@ -113,9 +113,13 @@ For detailed documentation and advanced usage:
 - [Reown Documentation](https://docs.reown.com/overview)
 - [Wagmi Documentation](https://wagmi.sh/)
 
-## 🤝 Contributing
+## 🤝 Contributing & Support
 
-Found an issue or want to improve this example? Contributions are welcome\! Please visit the main [Cosmos Playground repository](https://www.google.com/url?sa=E&source=gmail&q=https://github.com/TuwaIO/cosmos-playground) to submit issues or pull requests.
+Contributions are welcome! Please read our main **[Contribution Guidelines](https://github.com/TuwaIO/workflows/blob/main/CONTRIBUTING.md)**.
+
+If you find this library useful, please consider supporting its development. Every contribution helps!
+
+[**➡️ View Support Options**](https://github.com/TuwaIO/workflows/blob/main/Donation.md)
 
 -----
 
