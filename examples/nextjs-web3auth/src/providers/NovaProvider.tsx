@@ -6,7 +6,6 @@ import { useAccount, useConfig } from 'wagmi';
 
 import { appChains } from '@/constants';
 import { usePulsarStore } from '@/hooks/txTrackingHooks';
-import { txActions } from '@/transactions/actions';
 
 export function NovaProvider() {
   const transactionsPool = usePulsarStore((state) => state.transactionsPool);
@@ -26,7 +25,6 @@ export function NovaProvider() {
       initialTx={initialTx}
       closeTxTrackedModal={closeTxTrackedModal}
       handleTransaction={handleTransaction}
-      actions={txActions}
       connectedWalletAddress={address}
       connectedAdapterType={TransactionAdapter.EVM}
       adapters={[evmAdapter(config, appChains)]}

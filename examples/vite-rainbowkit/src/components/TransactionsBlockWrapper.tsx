@@ -15,7 +15,7 @@ import { CounterAbi } from '../abis/CounterAbi';
 import { appChains } from '../configs/wagmiConfig';
 import { COUNTER_ADDRESS } from '../constants';
 import { usePulsarStore } from '../hooks/txTrackingHooks';
-import { TxAction, txActions } from '../transactions/actions';
+import { txActions } from '../transactions/actions';
 import { TxType } from '../transactions/onSucceedCallbacks';
 
 export const TransactionsBlockWrapper = ({ connectWidget }: { connectWidget: ReactNode }) => {
@@ -60,7 +60,6 @@ export const TransactionsBlockWrapper = ({ connectWidget }: { connectWidget: Rea
         type: TxType.increment,
         adapter: TransactionAdapter.EVM,
         desiredChainID: sepolia.id,
-        actionKey: TxAction.increment,
         title: ['Incrementing', 'Incremented', 'Error when increment', 'Increment tx replaced'],
         description: [
           `Value after incrementing ${currentCount + 1}`,
