@@ -1,7 +1,7 @@
 'use client';
 
 import { createPulsarStore } from '@tuwaio/pulsar-core';
-import { SolanaActionTxKey, solanaAdapter, SolanaTransactionTracker } from '@tuwaio/pulsar-solana';
+import { solanaAdapter } from '@tuwaio/pulsar-solana';
 import { useWalletUi } from '@wallet-ui/react';
 import { PropsWithChildren, useMemo } from 'react';
 
@@ -15,10 +15,10 @@ export function PulsarProvider({ children }: PropsWithChildren) {
   const wallet = useWalletUi();
 
   const store = useMemo(() => {
-    return createPulsarStore<SolanaTransactionTracker, TransactionUnion, SolanaActionTxKey>({
+    return createPulsarStore<TransactionUnion>({
       name: storageName,
       onSucceedCallbacks,
-      adapters: [solanaAdapter({ ...createSolanaAdapterParams({ wallet }) })],
+      adapter: solanaAdapter({ ...createSolanaAdapterParams({ wallet }) }),
     });
   }, [wallet]);
 

@@ -1,7 +1,7 @@
 'use client';
 
 import { createBoundedUseStore, createPulsarStore } from '@tuwaio/pulsar-core';
-import { ActionTxKey, evmAdapter, TransactionTracker } from '@tuwaio/pulsar-evm';
+import { evmAdapter } from '@tuwaio/pulsar-evm';
 
 import { appChains, config } from '@/configs/wagmiConfig';
 import { onSucceedCallbacks, TransactionUnion } from '@/transactions/onSucceedCallbacks';
@@ -9,9 +9,9 @@ import { onSucceedCallbacks, TransactionUnion } from '@/transactions/onSucceedCa
 const storageName = 'transactions-tracking-storage';
 
 export const usePulsarStore = createBoundedUseStore(
-  createPulsarStore<TransactionTracker, TransactionUnion, ActionTxKey>({
+  createPulsarStore<TransactionUnion>({
     name: storageName,
     onSucceedCallbacks,
-    adapters: [evmAdapter(config, appChains)],
+    adapter: evmAdapter(config, appChains),
   }),
 );

@@ -27,7 +27,7 @@ export function NovaProvider() {
       handleTransaction={handleTransaction}
       connectedWalletAddress={address}
       connectedAdapterType={TransactionAdapter.EVM}
-      adapters={[evmAdapter(config, appChains)]}
+      adapter={evmAdapter(config, appChains)}
     />
   );
 }

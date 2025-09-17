@@ -1,7 +1,7 @@
 'use client';
 
 import { createPulsarStore } from '@tuwaio/pulsar-core';
-import { ActionTxKey, evmAdapter, TransactionTracker } from '@tuwaio/pulsar-evm';
+import { evmAdapter } from '@tuwaio/pulsar-evm';
 import { PropsWithChildren, useMemo } from 'react';
 import { useConfig } from 'wagmi';
 
@@ -15,10 +15,10 @@ export function PulsarProvider({ children }: PropsWithChildren) {
   const config = useConfig();
 
   const store = useMemo(() => {
-    return createPulsarStore<TransactionTracker, TransactionUnion, ActionTxKey>({
+    return createPulsarStore<TransactionUnion>({
       name: storageName,
       onSucceedCallbacks,
-      adapters: [evmAdapter(config, appChains)],
+      adapter: evmAdapter(config, appChains),
     });
   }, [config]);
 

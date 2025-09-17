@@ -1,19 +1,18 @@
 import { Transaction } from '@tuwaio/pulsar-core';
-import { SolanaTransactionTracker } from '@tuwaio/pulsar-solana';
 
 export enum TxType {
   initialize = 'initialize',
   increment = 'increment',
 }
 
-type InitializeTx = Transaction<SolanaTransactionTracker> & {
+type InitializeTx = Transaction & {
   type: TxType.initialize;
   payload: {
     account: string;
   };
 };
 
-type IncrementTx = Transaction<SolanaTransactionTracker> & {
+type IncrementTx = Transaction & {
   type: TxType.increment;
   payload: {
     value: number;

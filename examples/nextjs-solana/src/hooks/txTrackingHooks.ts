@@ -1,13 +1,12 @@
 'use client';
 
 import { ITxTrackingStore } from '@tuwaio/pulsar-core';
-import { SolanaActionTxKey, SolanaTransactionTracker } from '@tuwaio/pulsar-solana';
 import { createContext, useContext } from 'react';
 import { StoreApi, useStore } from 'zustand';
 
 import { TransactionUnion } from '@/transactions/onSucceedCallbacks';
 
-type PulsarStore = ITxTrackingStore<SolanaTransactionTracker, TransactionUnion, SolanaActionTxKey>;
+type PulsarStore = ITxTrackingStore<TransactionUnion>;
 
 export const PulsarStoreContext = createContext<StoreApi<PulsarStore> | null>(null);
 

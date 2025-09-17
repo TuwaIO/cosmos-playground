@@ -26,7 +26,7 @@ export function NovaProvider() {
       handleTransaction={handleTransaction}
       connectedWalletAddress={wallet?.account?.address.toString()}
       connectedAdapterType={TransactionAdapter.SOLANA}
-      adapters={[solanaAdapter({ ...createSolanaAdapterParams({ wallet }) })]}
+      adapter={solanaAdapter({ ...createSolanaAdapterParams({ wallet }) })}
     />
   );
 }
