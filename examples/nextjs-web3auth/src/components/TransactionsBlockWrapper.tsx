@@ -14,8 +14,7 @@ import { useAccount, useConfig } from 'wagmi';
 import { CounterAbi } from '@/abis/CounterAbi';
 import { appChains, COUNTER_ADDRESS } from '@/constants';
 import { usePulsarStore } from '@/hooks/txTrackingHooks';
-import { txActions } from '@/transactions/actions';
-import { TxType } from '@/transactions/onSucceedCallbacks';
+import { txActions, TxType } from '@/transactions/actions';
 
 export const TransactionsBlockWrapper = ({ connectWidget }: { connectWidget: ReactNode }) => {
   const handleTransaction = usePulsarStore((state) => state.handleTransaction);
@@ -56,6 +55,9 @@ export const TransactionsBlockWrapper = ({ connectWidget }: { connectWidget: Rea
 
     await handleTransaction({
       actionFunction: () => txActions.increment({ config }),
+      onSucceedCallback: (tx) => {
+        console.log(`Increment tx succeed, ${tx.payload.value}`);
+      },
       params: {
         type: TxType.increment,
         adapter: TransactionAdapter.EVM,

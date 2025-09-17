@@ -7,7 +7,7 @@ import { useConfig } from 'wagmi';
 
 import { appChains } from '@/constants';
 import { PulsarStoreContext } from '@/hooks/txTrackingHooks';
-import { onSucceedCallbacks, TransactionUnion } from '@/transactions/onSucceedCallbacks';
+import { TransactionUnion } from '@/transactions/actions';
 
 const storageName = 'transactions-tracking-storage';
 
@@ -17,7 +17,6 @@ export function PulsarProvider({ children }: PropsWithChildren) {
   const store = useMemo(() => {
     return createPulsarStore<TransactionUnion>({
       name: storageName,
-      onSucceedCallbacks,
       adapter: evmAdapter(config, appChains),
     });
   }, [config]);
