@@ -6,6 +6,7 @@ import { ReactNode } from 'react';
 import { PulsarProvider } from '@/providers/PulsarProvider';
 
 import { NovaProvider } from './NovaProvider';
+import { StoreProvider } from './StoreProvider';
 
 const config = createWalletUiConfig({
   clusters: [
@@ -18,10 +19,12 @@ const config = createWalletUiConfig({
 export function Providers({ children }: { children: ReactNode }) {
   return (
     <WalletUi config={config}>
-      <PulsarProvider>
-        <NovaProvider />
-        {children}
-      </PulsarProvider>
+      <StoreProvider>
+        <PulsarProvider>
+          <NovaProvider />
+          {children}
+        </PulsarProvider>
+      </StoreProvider>
     </WalletUi>
   );
 }

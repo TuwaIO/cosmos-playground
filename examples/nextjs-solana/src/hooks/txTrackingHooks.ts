@@ -4,7 +4,7 @@ import { ITxTrackingStore } from '@tuwaio/pulsar-core';
 import { createContext, useContext } from 'react';
 import { StoreApi, useStore } from 'zustand';
 
-import { TransactionUnion } from '@/transactions/onSucceedCallbacks';
+import { TransactionUnion } from '@/transactions';
 
 type PulsarStore = ITxTrackingStore<TransactionUnion>;
 

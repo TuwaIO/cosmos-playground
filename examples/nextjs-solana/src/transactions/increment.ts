@@ -3,7 +3,7 @@ import { Address } from 'gill';
 
 import { PROGRAM_ID } from '@/constants';
 import { getIncrementInstruction } from '@/programs';
-import { BaseTxParams } from '@/transactions/actions/index';
+import { BaseTxParams } from '@/transactions/index';
 
 export type IncrementTxParams = BaseTxParams & { solanatest: Address };
 

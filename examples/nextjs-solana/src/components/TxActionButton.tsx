@@ -6,18 +6,15 @@ import { UiWalletAccount, useWalletAccountTransactionSendingSigner, WalletUiCont
 import { Address } from 'gill';
 
 import { usePulsarStore } from '@/hooks/txTrackingHooks';
-import { txActions } from '@/transactions/actions';
-import { TxType } from '@/transactions/onSucceedCallbacks';
+import { txActions, TxType } from '@/transactions';
 
 export const TxActionButtonIncrement = ({
   walletUi,
   currentCount,
-  fetchCurrentCount,
   solanatest,
 }: {
   walletUi: WalletUiContextValue;
   currentCount: number;
-  fetchCurrentCount: () => Promise<void>;
   solanatest: Address;
 }) => {
   // Pulsar store hooks
@@ -28,8 +25,6 @@ export const TxActionButtonIncrement = ({
   const signer = useWalletAccountTransactionSendingSigner(walletUi.account as UiWalletAccount, walletUi.cluster.id);
 
   const handleIncrement = async () => {
-    if (currentCount === null) return;
-
     await handleTransaction({
       actionFunction: () => txActions.increment({ client: walletUi.client, signer, solanatest }),
       params: {
@@ -51,11 +46,6 @@ export const TxActionButtonIncrement = ({
         withTrackedModal: true,
       },
     });
-
-    // Optimistically wait a bit for the transaction to be sent before refetching
-    setTimeout(() => {
-      fetchCurrentCount();
-    }, 2000);
   };
 
   return (

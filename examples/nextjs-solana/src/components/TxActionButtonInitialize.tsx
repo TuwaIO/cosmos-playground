@@ -5,8 +5,7 @@ import { TransactionAdapter } from '@tuwaio/pulsar-core';
 import { UiWalletAccount, useWalletAccountTransactionSendingSigner, WalletUiContextValue } from '@wallet-ui/react';
 
 import { usePulsarStore } from '@/hooks/txTrackingHooks';
-import { txActions } from '@/transactions/actions';
-import { TxType } from '@/transactions/onSucceedCallbacks';
+import { txActions, TxType } from '@/transactions';
 
 export const TxActionButtonInitialize = ({ walletUi }: { walletUi: WalletUiContextValue }) => {
   // Pulsar store hooks
@@ -45,7 +44,7 @@ export const TxActionButtonInitialize = ({ walletUi }: { walletUi: WalletUiConte
       walletAddress={walletUi.account?.publicKey.toString()}
     >
       <span className="text-xl leading-none contents text-[var(--tuwa-text-on-accent)]">+</span>
-      <span className="leading-none">Initialize Counter</span>
+      <span className="leading-none">Initialize New Counter</span>
     </TAB>
   );
 };
