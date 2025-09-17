@@ -12,7 +12,7 @@ pnpm install
 # Start development server
 pnpm dev
 # Open http://localhost:3000 in your browser
-````
+```
 
 ## 📦 What's Included
 
@@ -121,7 +121,7 @@ If you find this library useful, please consider supporting its development. Eve
 
 [**➡️ View Support Options**](https://github.com/TuwaIO/workflows/blob/main/Donation.md)
 
------
+---
 
 Built with ❤️ using the **Pulsar & Nova** ecosystem.
 

@@ -12,7 +12,7 @@ pnpm install
 # Start development server
 pnpm dev
 # Open http://localhost:5173 in your browser
-````
+```
 
 ## 📦 What's Included
 
@@ -88,7 +88,7 @@ VITE_WALLET_PROJECT_ID=your_project_id
 VITE_GELATO_API_KEY=your_project_key
 ```
 
-*Note: Vite requires environment variables to be prefixed with `VITE_`.*
+_Note: Vite requires environment variables to be prefixed with `VITE_`.\_
 
 ## 📖 Learn More
 
@@ -107,7 +107,7 @@ If you find this library useful, please consider supporting its development. Eve
 
 [**➡️ View Support Options**](https://github.com/TuwaIO/workflows/blob/main/Donation.md)
 
------
+---
 
 Built with ❤️ using the **Pulsar & Nova** ecosystem.
 

@@ -12,7 +12,7 @@ pnpm install
 # Start development server
 pnpm dev
 # Open http://localhost:3000 in your browser
-````
+```
 
 ## 📦 What's Included
 
@@ -87,7 +87,7 @@ NEXT_PUBLIC_WEB3AUTH_CLIENT_ID=your_web3auth_client_id
 
 # Optional: Gelato project API key
 NEXT_PUBLIC_GELATO_API_KEY=your_project_key
-``` 
+```
 
 ## 🚀 Deployment
 
@@ -121,7 +121,7 @@ If you find this library useful, please consider supporting its development. Eve
 
 [**➡️ View Support Options**](https://github.com/TuwaIO/workflows/blob/main/Donation.md)
 
------
+---
 
 Built with ❤️ using the **Pulsar & Nova** ecosystem.
 

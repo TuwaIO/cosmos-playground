@@ -2,6 +2,7 @@
 
 import { EthereumWalletConnectors } from '@dynamic-labs/ethereum';
 import { DynamicContextProvider } from '@dynamic-labs/sdk-react-core';
+import { SolanaWalletConnectors } from '@dynamic-labs/solana';
 import { DynamicWagmiConnector } from '@dynamic-labs/wagmi-connector';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactNode } from 'react';
@@ -20,7 +21,7 @@ export function Providers({ children }: { children: ReactNode }) {
         <DynamicContextProvider
           settings={{
             environmentId: process.env.NEXT_PUBLIC_DYNAMIC_ENV_ID ?? '',
-            walletConnectors: [EthereumWalletConnectors],
+            walletConnectors: [EthereumWalletConnectors, SolanaWalletConnectors],
           }}
         >
           <DynamicWagmiConnector>
