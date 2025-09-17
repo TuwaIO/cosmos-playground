@@ -10,7 +10,7 @@ import { getSolanatestProgramAccounts } from '@/programs';
 
 export function StoreProvider({ children }: PropsWithChildren) {
   const store = useMemo(() => {
-    return createStore<Store>()((set, get) => ({
+    return createStore<Store>()((set) => ({
       accounts: {},
       getAccounts: async (walletUi) => {
         const accountsInfo = (await getSolanatestProgramAccounts(walletUi.client.rpc, PROGRAM_ID)) as never as {
