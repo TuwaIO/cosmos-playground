@@ -1,13 +1,12 @@
 import { NovaProvider as NP } from '@tuwaio/nova-transactions/providers';
 import { TransactionAdapter } from '@tuwaio/pulsar-core';
 import { useInitializeTransactionsPool } from '@tuwaio/pulsar-react';
-import { solanaAdapter } from '@tuwaio/pulsar-solana';
 import { useWalletUi } from '@wallet-ui/react';
 
-import { createSolanaAdapterParams } from '@/configs/solanaAdapter';
 import { usePulsarStore } from '@/hooks/txTrackingHooks';
 
 export function NovaProvider() {
+  const getAdapter = usePulsarStore((state) => state.getAdapter);
   const initialTx = usePulsarStore((state) => state.initialTx);
   const closeTxTrackedModal = usePulsarStore((state) => state.closeTxTrackedModal);
   const transactionsPool = usePulsarStore((state) => state.transactionsPool);
@@ -26,7 +25,7 @@ export function NovaProvider() {
       handleTransaction={handleTransaction}
       connectedWalletAddress={wallet?.account?.address.toString()}
       connectedAdapterType={TransactionAdapter.SOLANA}
-      adapter={solanaAdapter({ ...createSolanaAdapterParams({ wallet }) })}
+      adapter={getAdapter()}
     />
   );
 }

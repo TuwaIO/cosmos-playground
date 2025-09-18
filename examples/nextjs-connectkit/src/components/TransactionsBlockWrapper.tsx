@@ -176,14 +176,16 @@ export const TransactionsBlockWrapper = ({ connectWidget }: { connectWidget: Rea
           </div>
         </div>
 
-        <div className="bg-[var(--tuwa-bg-secondary)] px-8 py-4 border-t border-[var(--tuwa-border-primary)] flex-shrink-0 h-16 flex items-center justify-center">
+        <footer className="bg-[var(--tuwa-bg-secondary)] px-8 py-4 border-t border-[var(--tuwa-border-primary)] flex-shrink-0 h-16 flex items-center justify-center">
           <div className="flex items-center space-x-2 text-xs text-[var(--tuwa-text-tertiary)]">
             <span className="leading-none">Powered by</span>
-            <span className="font-semibold text-[var(--tuwa-text-accent)] leading-none">TUWA</span>
+            <a href="https://github.com/TuwaIO" target="_blank">
+              <span className="font-semibold text-[var(--tuwa-text-accent)] leading-none">TUWA</span>
+            </a>
             <span className="leading-none">•</span>
             <span className="leading-none">Web3 Transaction Tracking</span>
           </div>
-        </div>
+        </footer>
       </div>
     </div>
   );

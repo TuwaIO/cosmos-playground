@@ -4,51 +4,47 @@ import { TxActionButton as TAB } from '@tuwaio/nova-transactions';
 import { TransactionAdapter } from '@tuwaio/pulsar-core';
 import { UiWalletAccount, useWalletAccountTransactionSendingSigner, WalletUiContextValue } from '@wallet-ui/react';
 import { Address } from 'gill';
+import React from 'react';
 
 import { useStore } from '@/hooks/storeHook';
 import { usePulsarStore } from '@/hooks/txTrackingHooks';
 import { txActions, TxType } from '@/transactions';
 
-export const TxActionButtonIncrement = ({
+export const TxActionButtonClose = ({
   walletUi,
-  currentCount,
   solanatest,
 }: {
   walletUi: WalletUiContextValue;
-  currentCount: number;
   solanatest: Address;
 }) => {
-  // Pulsar store hooks
   const handleTransaction = usePulsarStore((state) => state.handleTransaction);
   const transactionsPool = usePulsarStore((state) => state.transactionsPool);
   const getLastTxKey = usePulsarStore((state) => state.getLastTxKey);
   const getAccounts = useStore((state) => state.getAccounts);
+  const removeAccFromStore = useStore((state) => state.removeAccFromStore);
 
   const signer = useWalletAccountTransactionSendingSigner(walletUi.account as UiWalletAccount, walletUi.cluster.id);
 
-  const handleIncrement = async () => {
+  const handleClose = async () => {
     await handleTransaction({
-      actionFunction: () => txActions.increment({ client: walletUi.client, signer, solanatest }),
+      actionFunction: () => txActions.close({ client: walletUi.client, signer, solanatest }),
       onSuccessCallback: async () => {
-        console.log('Increment succeed');
         await getAccounts(walletUi);
+        removeAccFromStore(solanatest.toString());
       },
       params: {
-        type: TxType.increment,
+        type: TxType.close,
         adapter: TransactionAdapter.SOLANA,
         // The RPC URL must be provided for the tracker to work after a page reload
         rpcUrl: walletUi.cluster.urlOrMoniker,
         desiredChainID: 'devnet', // The cluster name for the pre-flight check
-        title: ['Incrementing', 'Incremented', 'Error', 'Replaced'],
+        title: ['Closing', 'Closed', 'Error', 'Replaced'],
         description: [
-          `New value will be ${currentCount + 1}`,
-          `Success! New value is ${currentCount + 1}`,
-          'An error occurred during increment.',
+          `The counter will be closed.`,
+          `Success! The counter is closed.`,
+          'An error occurred during closing.',
           'Transaction was replaced.',
         ],
-        payload: {
-          previousCount: currentCount,
-        },
         withTrackedModal: true,
       },
     });
@@ -56,15 +52,21 @@ export const TxActionButtonIncrement = ({
 
   return (
     <TAB
-      action={handleIncrement}
+      action={handleClose}
       transactionsPool={transactionsPool}
       getLastTxKey={getLastTxKey}
-      className="w-full h-full bg-gradient-to-r from-[var(--tuwa-button-gradient-from)] to-[var(--tuwa-button-gradient-to)] hover:from-[var(--tuwa-button-gradient-from-hover)] hover:to-[var(--tuwa-button-gradient-to-hover)] text-[var(--tuwa-text-on-accent)] font-semibold rounded-xl transition-all duration-200 ease-in-out hover:shadow-lg flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] select-none"
       disabled={!walletUi.connected}
       walletAddress={walletUi.account?.publicKey.toString()}
+      className={`
+        w-full p-2.5 rounded-xl border border-transparent
+        text-gray-800 font-semibold shadow-sm transition-all duration-200
+        focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400
+        bg-gradient-to-r from-neutral-200 to-neutral-300
+        hover:from-neutral-300 hover:to-neutral-400 hover:shadow-lg
+        disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] select-none
+      `}
     >
-      <span className="text-xl leading-none contents text-[var(--tuwa-text-on-accent)]">+</span>
-      <span className="leading-none">Increment Counter</span>
+      <span className="text-sm leading-none">Close</span>
     </TAB>
   );
 };

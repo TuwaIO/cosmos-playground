@@ -5,7 +5,6 @@ import { solanaAdapter } from '@tuwaio/pulsar-solana';
 import { useWalletUi } from '@wallet-ui/react';
 import { PropsWithChildren, useMemo } from 'react';
 
-import { createSolanaAdapterParams } from '@/configs/solanaAdapter';
 import { PulsarStoreContext } from '@/hooks/txTrackingHooks';
 import { TransactionUnion } from '@/transactions';
 
@@ -17,7 +16,16 @@ export function PulsarProvider({ children }: PropsWithChildren) {
   const store = useMemo(() => {
     return createPulsarStore<TransactionUnion>({
       name: storageName,
-      adapter: solanaAdapter({ ...createSolanaAdapterParams({ wallet }) }),
+      adapter: solanaAdapter({
+        wallet: {
+          walletAddress: wallet?.account?.address.toString() ?? '',
+          walletType: wallet?.account?.label ?? 'solana',
+          walletActiveChain: wallet?.cluster.cluster ?? 'mainnet',
+        },
+        rpcUrls: {
+          devnet: 'https://api.devnet.solana.com',
+        },
+      }),
     });
   }, [wallet]);
 

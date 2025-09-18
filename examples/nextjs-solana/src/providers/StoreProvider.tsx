@@ -12,6 +12,7 @@ export function StoreProvider({ children }: PropsWithChildren) {
   const store = useMemo(() => {
     return createStore<Store>()((set) => ({
       accounts: {},
+      accountsLoading: true,
       getAccounts: async (walletUi) => {
         const accountsInfo = (await getSolanatestProgramAccounts(walletUi.client.rpc, PROGRAM_ID)) as never as {
           address: string;
@@ -28,6 +29,14 @@ export function StoreProvider({ children }: PropsWithChildren) {
             accountsInfo.forEach((account) => {
               draft.accounts[account.address] = account.data.count;
             });
+            draft.accountsLoading = false;
+          }),
+        );
+      },
+      removeAccFromStore: (address) => {
+        set((state) =>
+          produce(state, (draft) => {
+            delete draft.accounts[address];
           }),
         );
       },
