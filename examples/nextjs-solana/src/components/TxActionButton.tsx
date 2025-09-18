@@ -29,7 +29,7 @@ export const TxActionButtonIncrement = ({
   const handleIncrement = async () => {
     await handleTransaction({
       actionFunction: () => txActions.increment({ client: walletUi.client, signer, solanatest }),
-      onSucceedCallback: async () => {
+      onSuccessCallback: async () => {
         console.log('Increment succeed');
         await getAccounts(walletUi);
       },

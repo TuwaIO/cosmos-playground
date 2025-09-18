@@ -20,7 +20,7 @@ export const TxActionButtonInitialize = ({ walletUi }: { walletUi: WalletUiConte
   const handleInitialize = async () => {
     await handleTransaction({
       actionFunction: () => txActions.initialize({ client: walletUi.client, signer }),
-      onSucceedCallback: async () => await getAccounts(walletUi),
+      onSuccessCallback: async () => await getAccounts(walletUi),
       params: {
         type: TxType.initialize,
         adapter: TransactionAdapter.SOLANA,
