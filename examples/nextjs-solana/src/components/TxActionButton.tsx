@@ -5,33 +5,34 @@ import { TransactionAdapter } from '@tuwaio/pulsar-core';
 import { UiWalletAccount, useWalletAccountTransactionSendingSigner, WalletUiContextValue } from '@wallet-ui/react';
 import { Address } from 'gill';
 
+import { useStore } from '@/hooks/storeHook';
 import { usePulsarStore } from '@/hooks/txTrackingHooks';
-import { txActions } from '@/transactions/actions';
-import { TxType } from '@/transactions/onSucceedCallbacks';
+import { txActions, TxType } from '@/transactions';
 
 export const TxActionButtonIncrement = ({
   walletUi,
   currentCount,
-  fetchCurrentCount,
   solanatest,
 }: {
   walletUi: WalletUiContextValue;
   currentCount: number;
-  fetchCurrentCount: () => Promise<void>;
   solanatest: Address;
 }) => {
   // Pulsar store hooks
   const handleTransaction = usePulsarStore((state) => state.handleTransaction);
   const transactionsPool = usePulsarStore((state) => state.transactionsPool);
   const getLastTxKey = usePulsarStore((state) => state.getLastTxKey);
+  const getAccounts = useStore((state) => state.getAccounts);
 
   const signer = useWalletAccountTransactionSendingSigner(walletUi.account as UiWalletAccount, walletUi.cluster.id);
 
   const handleIncrement = async () => {
-    if (currentCount === null) return;
-
     await handleTransaction({
       actionFunction: () => txActions.increment({ client: walletUi.client, signer, solanatest }),
+      onSuccessCallback: async () => {
+        console.log('Increment succeed');
+        await getAccounts(walletUi);
+      },
       params: {
         type: TxType.increment,
         adapter: TransactionAdapter.SOLANA,
@@ -51,11 +52,6 @@ export const TxActionButtonIncrement = ({
         withTrackedModal: true,
       },
     });
-
-    // Optimistically wait a bit for the transaction to be sent before refetching
-    setTimeout(() => {
-      fetchCurrentCount();
-    }, 2000);
   };
 
   return (

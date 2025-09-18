@@ -55,7 +55,7 @@ export const TransactionsBlockWrapper = ({ connectWidget }: { connectWidget: Rea
 
     await handleTransaction({
       actionFunction: txActions.increment,
-      onSucceedCallback: (tx) => {
+      onSuccessCallback: (tx) => {
         console.log(`Increment tx succeed, ${tx.payload.value}`);
       },
       params: {
@@ -86,7 +86,7 @@ export const TransactionsBlockWrapper = ({ connectWidget }: { connectWidget: Rea
 
     await handleTransaction({
       actionFunction: txActions.incrementGelato,
-      onSucceedCallback: (tx) => {
+      onSuccessCallback: (tx) => {
         console.log(`Increment tx succeed, ${tx.payload.value}`);
       },
       params: {

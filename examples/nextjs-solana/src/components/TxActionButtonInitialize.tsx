@@ -4,21 +4,23 @@ import { TxActionButton as TAB } from '@tuwaio/nova-transactions';
 import { TransactionAdapter } from '@tuwaio/pulsar-core';
 import { UiWalletAccount, useWalletAccountTransactionSendingSigner, WalletUiContextValue } from '@wallet-ui/react';
 
+import { useStore } from '@/hooks/storeHook';
 import { usePulsarStore } from '@/hooks/txTrackingHooks';
-import { txActions } from '@/transactions/actions';
-import { TxType } from '@/transactions/onSucceedCallbacks';
+import { txActions, TxType } from '@/transactions';
 
 export const TxActionButtonInitialize = ({ walletUi }: { walletUi: WalletUiContextValue }) => {
   // Pulsar store hooks
   const handleTransaction = usePulsarStore((state) => state.handleTransaction);
   const transactionsPool = usePulsarStore((state) => state.transactionsPool);
   const getLastTxKey = usePulsarStore((state) => state.getLastTxKey);
+  const getAccounts = useStore((state) => state.getAccounts);
 
   const signer = useWalletAccountTransactionSendingSigner(walletUi.account as UiWalletAccount, walletUi.cluster.id);
 
   const handleInitialize = async () => {
     await handleTransaction({
       actionFunction: () => txActions.initialize({ client: walletUi.client, signer }),
+      onSuccessCallback: async () => await getAccounts(walletUi),
       params: {
         type: TxType.initialize,
         adapter: TransactionAdapter.SOLANA,
@@ -45,7 +47,7 @@ export const TxActionButtonInitialize = ({ walletUi }: { walletUi: WalletUiConte
       walletAddress={walletUi.account?.publicKey.toString()}
     >
       <span className="text-xl leading-none contents text-[var(--tuwa-text-on-accent)]">+</span>
-      <span className="leading-none">Initialize Counter</span>
+      <span className="leading-none">Initialize New Counter</span>
     </TAB>
   );
 };

@@ -7,7 +7,7 @@ import { PropsWithChildren, useMemo } from 'react';
 
 import { createSolanaAdapterParams } from '@/configs/solanaAdapter';
 import { PulsarStoreContext } from '@/hooks/txTrackingHooks';
-import { onSucceedCallbacks, TransactionUnion } from '@/transactions/onSucceedCallbacks';
+import { TransactionUnion } from '@/transactions';
 
 const storageName = 'transactions-tracking-storage';
 
@@ -17,7 +17,6 @@ export function PulsarProvider({ children }: PropsWithChildren) {
   const store = useMemo(() => {
     return createPulsarStore<TransactionUnion>({
       name: storageName,
-      onSucceedCallbacks,
       adapter: solanaAdapter({ ...createSolanaAdapterParams({ wallet }) }),
     });
   }, [wallet]);

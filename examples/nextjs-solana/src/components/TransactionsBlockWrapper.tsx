@@ -2,41 +2,21 @@
 
 import { useWalletUi } from '@wallet-ui/react';
 import { address } from 'gill';
-import { ReactNode, useCallback, useEffect, useState } from 'react';
+import { ReactNode, useEffect } from 'react';
 
 import { TxActionButtonIncrement } from '@/components/TxActionButton';
 import { TxActionButtonInitialize } from '@/components/TxActionButtonInitialize';
 import { PROGRAM_ID } from '@/constants';
-import { getSolanatestProgramAccounts } from '@/programs';
+import { useStore } from '@/hooks/storeHook';
 
 export const TransactionsBlockWrapper = ({ connectWidget }: { connectWidget: ReactNode }) => {
-  // Solana hooks
   const walletUi = useWalletUi();
-
-  // Component state
-  const [currentCount, setCurrentCount] = useState<number | null>(null);
-  const [isLoadingCount, setIsLoadingCount] = useState(true);
-
-  // Function to read the counter's current value from the Solana devnet
-  const fetchCurrentCount = useCallback(async () => {
-    try {
-      setIsLoadingCount(true);
-      const accountInfo = await getSolanatestProgramAccounts(walletUi.client.rpc, PROGRAM_ID);
-
-      console.log(accountInfo);
-
-      setCurrentCount(0);
-    } catch (error) {
-      console.error('Error fetching current count:', error);
-      setCurrentCount(null);
-    } finally {
-      setIsLoadingCount(false);
-    }
-  }, [walletUi.client]);
+  const accounts = useStore((state) => state.accounts);
+  const getAccounts = useStore((state) => state.getAccounts);
 
   useEffect(() => {
-    fetchCurrentCount();
-  }, [fetchCurrentCount]);
+    getAccounts(walletUi);
+  }, [walletUi.client]);
 
   const openSolscan = () => {
     window.open(`https://solscan.io/account/${PROGRAM_ID}?cluster=devnet`, '_blank', 'noopener,noreferrer');
@@ -92,41 +72,24 @@ export const TransactionsBlockWrapper = ({ connectWidget }: { connectWidget: Rea
                   </button>
                 </div>
               </div>
-
-              <div className="flex items-center justify-center pt-2 border-t border-[var(--tuwa-border-secondary)]">
-                <div className="text-center">
-                  <div className="text-xs text-[var(--tuwa-text-tertiary)] mb-1">Current Value</div>
-                  <div className="text-2xl font-bold text-[var(--tuwa-text-accent)]">
-                    {isLoadingCount ? (
-                      <div className="animate-pulse">...</div>
-                    ) : currentCount !== null ? (
-                      currentCount
-                    ) : (
-                      <span className="text-[var(--tuwa-error-text)] text-sm">Error</span>
-                    )}
-                  </div>
-                </div>
-              </div>
             </div>
 
             <div className="space-y-4">
               <div className="h-14">{walletUi.connected && <TxActionButtonInitialize walletUi={walletUi} />}</div>
-              <div className="h-14">
-                {walletUi.connected && (
-                  <TxActionButtonIncrement
-                    walletUi={walletUi}
-                    fetchCurrentCount={fetchCurrentCount}
-                    currentCount={currentCount ?? 0}
-                    solanatest={address('9ZP7sicxMz99LwbTfngJcwziYmfZ3e77Z2B8r88d7GXJ')}
-                  />
-                )}
-              </div>
+            </div>
 
-              <div className="h-8 flex items-center justify-center">
-                <p className="text-center text-xs text-[var(--tuwa-text-tertiary)] leading-tight">
-                  This will increment the counter by 1 and track the transaction
-                </p>
-              </div>
+            <div className="space-y-4">
+              {Object.entries(accounts).map(([key, value]) => {
+                return (
+                  <div key={key}>
+                    <p>{key}</p>
+                    <p>Current count: {value}</p>
+                    {walletUi.connected && (
+                      <TxActionButtonIncrement walletUi={walletUi} currentCount={value} solanatest={address(key)} />
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
