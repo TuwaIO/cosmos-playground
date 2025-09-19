@@ -20,7 +20,7 @@ This command will:
 4.  Install all necessary dependencies using `pnpm`.
 5.  Provide instructions on how to run your new application.
 
-The entire setup process is streamlined, bringing the world of blockchain development closer to you than ever before\!
+The entire setup process is streamlined, bringing the world of blockchain development closer to you than ever before!
 
 -----
 
@@ -28,6 +28,7 @@ The entire setup process is streamlined, bringing the world of blockchain develo
 
 All examples are built with **Pulsar** for seamless transaction tracking and **Nova** for a polished UI.
 
+- **nextjs-all**: A Next.js example showcasing dynamic switching between Solana and EVM adapters with animated transitions.
 - **nextjs-connectkit**: An example demonstrating integration with Next.js and ConnectKit.
 - **nextjs-dynamic**: An example for integrating with Next.js and the Dynamic wallet.
 - **nextjs-rainbowkit**: A Next.js project featuring the popular RainbowKit library.
@@ -48,7 +49,7 @@ If you find this library useful, please consider supporting its development. Eve
 
 ---
 
-Built with ❤️ from **TUWA**.
+Built with ❤️ using the **Pulsar & Nova** ecosystem.
 
 ## License
 

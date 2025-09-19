@@ -11,6 +11,7 @@ async function main() {
   console.log('✨ Creating a new Cosmos Playground project...');
 
   const availableTemplates = [
+    'nextjs-all',
     'nextjs-connectkit',
     'nextjs-dynamic',
     'nextjs-reown',

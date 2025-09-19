@@ -1,6 +1,6 @@
-# Pulsar & Cosmos SDK: Next.js + Solana Example
+# Pulsar & Nova: Next.js + Solana Example
 
-A minimal example demonstrating how to integrate the **Pulsar Transaction Tracking Engine** and **Nova UI Kit** into a Next.js application using the App Directory and Solana.
+A minimal example demonstrating how to integrate the **Pulsar Transaction Tracking Engine** and **Nova UI Kit** into a Next.js application using the App Directory and Solana. Wallet connections are handled by **@wallet-ui/core**.
 
 This example is part of the [Cosmos Playground](https://github.com/TuwaIO/cosmos-playground) monorepo.
 
@@ -12,7 +12,7 @@ pnpm install
 # Start development server
 pnpm dev
 # Open http://localhost:3000 in your browser
-```
+````
 
 ## 📦 What's Included
 
@@ -22,15 +22,14 @@ pnpm dev
 - **Pulsar Engine** for core tracking logic
 - **Nova UI Kit** for pre-built React components
 - **TailwindCSS** for styling
-- **Wagmi** for Web3 interactions
+- **@wallet-ui/core** for Web3 interactions
 
 ## 🎯 Features Demonstrated
 
 - ✅ Wallet connection with Solana
-- ✅ Real-time, multi-chain transaction tracking
+- ✅ Real-time transaction tracking
 - ✅ Comprehensive transaction history modal
 - ✅ Automatic toast notifications for transaction status
-- ✅ Support for standard EVM, Gelato, and Safe transactions
 - ✅ Server-side rendering compatibility
 
 ## 🛠️ Available Scripts
@@ -45,13 +44,12 @@ pnpm start # Start production server
 
 ```
 src/
-├── abis/          # Smart contract ABIs
 ├── app/           # Next.js App Directory (pages and layouts)
 ├── components/    # Application-specific React components
-├── configs/       # Wagmi and chain configurations
 ├── constants.ts   # Shared constants
 ├── hooks/         # Custom React hooks
 ├── providers/     # React Context providers, including NovaProvider setup
+├── programs/      # Solana Program IDL and generated client
 ├── styles/        # Global CSS and Tailwind styles
 └── transactions/  # Logic for defining transaction actions and callbacks
 ```
@@ -59,9 +57,10 @@ src/
 ## 📚 Core Packages Used
 
 - `@tuwaio/pulsar-core`: The core, chain-agnostic tracking engine.
-- `@tuwaio/pulsar-solana`: Adapter for Solana-compatible chains
+- `@tuwaio/pulsar-solana`: Adapter for Solana-compatible chains.
 - `@tuwaio/pulsar-react`: React hooks for integrating your app with the Pulsar engine.
 - `@tuwaio/nova-transactions`: Pre-built UI components (Modals, Toasts, Buttons, etc.).
+- `@wallet-ui/core`: Solana wallet connection management.
 
 ## ⚡ Prerequisites
 
@@ -69,8 +68,6 @@ Make sure you have the following installed:
 
 - **Node.js** \>= 20.0.0
 - **pnpm** \>= 9.0.0
-
-<!-- end list -->
 
 ```bash
 # Install pnpm globally if you haven't already
@@ -98,7 +95,6 @@ For detailed documentation and advanced usage:
 
 - [Pulsar & Nova Documentation](https://docs.tuwa.io/)
 - [Next.js Documentation](https://nextjs.org/docs)
-- [Wagmi Documentation](https://wagmi.sh/)
 
 ## 🤝 Contributing & Support
 
