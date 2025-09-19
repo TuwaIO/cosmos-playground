@@ -15,7 +15,7 @@ export const config = createConfig(
     },
 
     // Required API Keys
-    walletConnectProjectId: process.env.NEXT_PUBLIC_WALLET_PROJECT_ID ?? '',
+    walletConnectProjectId: process.env.NEXT_PUBLIC_WALLET_PROJECT_ID ?? '9077e559e63e099f496b921a027d0f04',
 
     // Required App Info
     appName: 'Your App Name',

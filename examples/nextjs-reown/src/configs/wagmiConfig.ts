@@ -7,7 +7,7 @@ export const appChains = [mainnet, sepolia] as [Chain, ...Chain[]];
 
 export const wagmiAdapter = new WagmiAdapter({
   ssr: true,
-  projectId: process.env.NEXT_PUBLIC_REOWN_PROJECT_ID ?? '',
+  projectId: process.env.NEXT_PUBLIC_REOWN_PROJECT_ID ?? '9077e559e63e099f496b921a027d0f04',
   networks: appChains,
 });
 
