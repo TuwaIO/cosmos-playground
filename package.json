@@ -7,6 +7,8 @@
   "packageManager": "pnpm@9.6.0",
   "description": "This repository contains a collection of practical examples for tracking Web3 transactions. Here you will find ready-to-use code snippets for monitoring on-chain activity and connecting wallets using various packages.",
   "scripts": {
+    "build": "pnpm --filter \"./packages/**\" build",
+    "postinstall": "pnpm build",
     "lint": "eslint . --ext .ts,.tsx",
     "format": "prettier --write ."
   },

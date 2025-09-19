@@ -1,0 +1,10 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "packages": {
+    "packages/create-cosmos-playground": {
+      "package-name": "@tuwaio/create-cosmos-playground",
+      "release-type": "node"
+    }
+  },
+  "initial-version": "0.0.1"
+}

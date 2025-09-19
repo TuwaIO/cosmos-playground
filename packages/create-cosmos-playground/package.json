@@ -1,0 +1,37 @@
+{
+  "name": "@tuwaio/create-cosmos-playground",
+  "version": "0.0.1",
+  "description": "A CLI tool to scaffold new Cosmos Playground examples.",
+  "keywords": [
+    "cli",
+    "scaffolding",
+    "web3",
+    "cosmos",
+    "playground",
+    "web3 transactions tracking"
+  ],
+  "author": "Oleksandr Tkach",
+  "license": "Apache-2.0",
+  "bin": {
+    "create-cosmos-playground": "dist/index.js"
+  },
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/prompts": "^2.4.9",
+    "@types/node": "^20.14.12",
+    "typescript": "~5.9.2"
+  },
+  "dependencies": {
+    "prompts": "^2.4.2",
+    "fs-extra": "^11.2.0",
+    "degit": "^2.8.4",
+    "execa": "^9.3.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
