@@ -18,9 +18,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Pulsar & Cosmos SDK: Next.js + Dynamic Example',
-  description:
-    'An example demonstrating the integration of Pulsar transaction tracking with a Next.js application using Dynamic.',
+  title: 'Pulsar & Cosmos SDK: Next.js',
+  description: 'An example demonstrating the integration of Pulsar transaction tracking with a Next.js.',
   manifest: '/manifest.json',
   icons: {
     icon: '/favicon.ico',
@@ -35,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <Head>
-        <meta name="apple-mobile-web-app-title" content="Pulsar & Cosmos SDK: Next.js + Dynamic" />
+        <meta name="apple-mobile-web-app-title" content="Pulsar & Cosmos SDK: Next.js" />
       </Head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Providers>{children}</Providers>
