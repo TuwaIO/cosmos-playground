@@ -73,7 +73,7 @@ async function main() {
     await execa('pnpm', ['install'], { cwd: projectPath, stdio: 'inherit' });
 
     console.log(`\nDone! Next steps:`);
-    console.log(`cd ${projectName}`);
+    console.log(`cd ./${projectName}`);
     console.log(`pnpm dev`);
   } catch (error) {
     console.error(`\n❌ An error occurred: ${error}`);

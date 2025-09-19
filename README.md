@@ -1,90 +1,55 @@
-# Welcome to the TUWA Cosmos Playground
+# 🪐 Cosmos Playground
 
-<div align="center">
-  <img src="https://raw.githubusercontent.com/TuwaIO/workflows/main/preview/tuwa_preview.gif" alt="TUWA Ecosystem Preview" width="100%" max-width="800px" />
-</div>
-
-<p align="center">
-  <strong>Live demos, code examples, and practical recipes for the entire TUWA ecosystem.</strong>
-</p>
+Welcome to **Cosmos Playground**, a collection of practical and ready-to-use examples for modern Web3 frontend development. Our mission is to make the blockchain world more accessible and enjoyable for developers. With our new CLI tool, getting started has never been easier!
 
 ---
 
-This repository is the central hub for developers looking to integrate TUWA technologies into their applications. Here you'll find ready-to-use examples demonstrating how our core libraries, **`pulsar-core`** and **`nova-uikit`**, work together to create powerful Web3 user experiences.
+## 🚀 The Easiest Way to Get Started
 
-Think of this as your interactive launchpad: clone any example, see it run, and borrow patterns for your own projects.
+Say goodbye to manual setup. Use the `@tuwaio/create-cosmos-playground` CLI to scaffold a new project with your chosen template in seconds. Just one command, and you're ready to go!
 
-## 🚀 Demos & Examples
+```bash
+npx @tuwaio/create-cosmos-playground
+````
 
-This table showcases various integrations, highlighting how TUWA's tools fit into modern frontend stacks.
+This command will:
 
-| Demo                                                 | Key Technologies Demonstrated                            | Status   |
-| ---------------------------------------------------- | -------------------------------------------------------- | -------- |
-| **[Next.js App](./examples/nextjs-rainbowkit/)**     | **`nova-uikit`**, **`pulsar-core`**, RainbowKit, Next.js | ✅ Ready |
-| **[Vite App](./examples/vite-rainbowkit/)**          | **`nova-uikit`**, **`pulsar-core`**, RainbowKit, Vite    | ✅ Ready |
-| **[ConnectKit Demo](./examples/nextjs-connectkit/)** | Using **`nova-uikit`** components with ConnectKit        | ✅ Ready |
-| **[Dynamic.xyz Demo](./examples/nextjs-dynamic/)**   | Integrating the TUWA stack with Dynamic.xyz wallets      | ✅ Ready |
-| **[Reown AppKit Demo](./examples/nextjs-reown/)**    | Integrating the TUWA stack with Reown AppKit             | ✅ Ready |
-| **[Web3Auth Demo](./examples/nextjs-web3auth/)**     | An example showing social logins via Web3Auth            | ✅ Ready |
+1.  Prompt you to select one of the templates listed below.
+2.  Ask for a name for your new project.
+3.  Automatically download the template from GitHub.
+4.  Install all necessary dependencies using `pnpm`.
+5.  Provide instructions on how to run your new application.
 
-## ✨ Core Concepts Demonstrated
+The entire setup process is streamlined, bringing the world of blockchain development closer to you than ever before\!
 
-These examples are designed to teach you the key features of our core libraries:
+-----
 
-### 🚀 Core Engine: `pulsar-core`
+## Demos & Examples
 
-- **State Management:** Centralized, reactive state for user transactions data.
-- **Transaction Tracking:** Real-time monitoring of transaction lifecycles (pending, success, error).
-- **Multi-chain Logic:** Handling provider and network switching behind the scenes.
-- **Extensible Trackers:** Custom logic that can be attached to wallet or transaction events.
+All examples are built with **Pulsar** for seamless transaction tracking and **Nova** for a polished UI.
 
-### 🎨 UI Layer: `nova-uikit`
+- **nextjs-connectkit**: An example demonstrating integration with Next.js and ConnectKit.
+- **nextjs-dynamic**: An example for integrating with Next.js and the Dynamic wallet.
+- **nextjs-rainbowkit**: A Next.js project featuring the popular RainbowKit library.
+- **nextjs-reown**: Integration with Next.js and the Reown wallet.
+- **nextjs-solana**: A Next.js example demonstrating transaction tracking on the Solana network.
+- **nextjs-web3auth**: A Next.js project using Web3Auth for social logins and wallet integration.
+- **vite-rainbowkit**: A simple Vite-based example with RainbowKit.
 
-- **Component Suite:** A rich set of unstyled, accessible React components (`<TxActionButton>`, `<TxModal>`, etc.).
-- **Wallet Integration:** Pre-built adapters for popular wallet connectors.
-- **Easy Theming:** Full compatibility with TailwindCSS for rapid and deep customization.
-
-## 🏃‍♂️ Getting Started
-
-Running any example on your local machine is simple:
-
-1.  **Clone the repository:**
-    ```bash
-    git clone [https://github.com/TuwaIO/cosmos-playground.git](https://github.com/TuwaIO/cosmos-playground.git)
-    cd cosmos-playground
-    ```
-2.  **Navigate to an example folder:**
-    ```bash
-    cd examples/nextjs-rainbowkit
-    ```
-3.  **Install dependencies:**
-    ```bash
-    pnpm install
-    ```
-4.  **Start the development server:**
-    `bash
-pnpm dev
-`
-    The application should now be running on `localhost:3000`.
-
-## 🛠 Prerequisites
-
-- Node.js >= 20.0.0
-- pnpm >= 9.0.0
+-----
 
 ## 🤝 Contributing & Support
 
-We welcome contributions! If you've built something cool with TUWA or want to add a new example (e.g., using a different framework or wallet connector), we'd love to see it.
-
-Please read our main **[Contribution Guidelines](https://github.com/TuwaIO/workflows/blob/main/CONTRIBUTING.md)**.
+Contributions are welcome! Please read our main **[Contribution Guidelines](https://github.com/TuwaIO/workflows/blob/main/CONTRIBUTING.md)**.
 
 If you find this library useful, please consider supporting its development. Every contribution helps!
 
 [**➡️ View Support Options**](https://github.com/TuwaIO/workflows/blob/main/Donation.md)
 
-## 🌐 Ecosystem Links
+---
 
-- **[TUWA GitHub Organization](https://github.com/TuwaIO)** - See all our projects.
-- **[pulsar-core](https://github.com/TuwaIO/pulsar-core)** - The core logic engine.
-- **[nova-uikit](https://github.com/TuwaIO/nova-uikit)** - The UI component library.
-- **[workflows](https://github.com/TuwaIO/workflows)** - Our contribution standards and reusable actions.
+Built with ❤️ from **TUWA**.
+
+## License
+
+[Apache License 2.0](./LICENSE)

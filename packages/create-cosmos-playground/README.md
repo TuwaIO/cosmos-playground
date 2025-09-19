@@ -4,42 +4,41 @@ A CLI tool to scaffold new Cosmos Playground examples quickly and easily. This t
 
 ---
 
-## Features
+## ✨ Features
 
 - **Intuitive prompts:** Easily select from available project templates and name your new project.
-- **Automated setup:** The tool automatically downloads the selected template from the GitHub repository.
-- **Dependency installation:** Dependencies are automatically installed using `pnpm` after scaffolding.
+- **Automated setup:** The tool automatically downloads your chosen project template from the GitHub repository.
+- **Seamless dependencies:** Dependencies are automatically installed using `pnpm` after scaffolding.
 - **Multiple templates:** Supports a variety of templates for different web3 frameworks and chains.
 
 ---
 
-## Requirements
+## 🛠 Prerequisites
 
-- **Node.js** v14+ installed on your machine.
-- An internet connection for downloading templates and dependencies.
+- Node.js >= 20.0.0
+- An internet connection is required to download templates and dependencies.
 
 ---
 
-## Usage
+## 🚀 Usage
 
-To use the tool, simply run the `npx` command:
+To use this tool, simply run the `npx` command in your terminal:
 
 ```bash
 npx @tuwaio/create-cosmos-playground
 ```
 
-The CLI will guide you through the process:
+### The CLI will then guide you through the process:
 
-It will prompt you to select a project template.
+- You'll be prompted to select a project template from a list of available options.
+- You will be asked to enter a name for your new project.
+- The tool will download the selected template, install dependencies with pnpm, and provide you with final instructions to start your application.
 
-You will be asked to enter a name for your new project.
-
-It will automatically download the chosen template and install its dependencies.
-
-Example
+### Example
 Here is a typical workflow:
+
 ```bash
-# Execute the CLI tool
+# Run the CLI tool
 npx @tuwaio/create-cosmos-playground
 
 # Example prompts and output:
@@ -53,7 +52,7 @@ npx @tuwaio/create-cosmos-playground
 # ... (pnpm install output) ...
 
 # Done! Now run:
-# cd my-new-app
+# cd ./my-new-app
 # pnpm dev
 ```
 
