@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.5](https://github.com/TuwaIO/cosmos-playground/compare/create-cosmos-playground-v0.0.4...create-cosmos-playground-v0.0.5) (2025-09-19)
+
+
+### Bug Fixes
+
+* added nextjs-all example ([bd75204](https://github.com/TuwaIO/cosmos-playground/commit/bd752041ca1619087b23dc9042bddc6c8e1d4720))
+
 ## [0.0.4](https://github.com/TuwaIO/cosmos-playground/compare/create-cosmos-playground-v0.0.3...create-cosmos-playground-v0.0.4) (2025-09-19)
 
 
