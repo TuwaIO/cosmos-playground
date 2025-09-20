@@ -38,7 +38,7 @@ export const TransactionsBlockWrapper = ({ connectWidget }: { connectWidget: Rea
   const sortedAccounts = Object.entries(accounts).sort(([, countA], [, countB]) => countB - countA);
 
   return (
-    <div className="w-full bg-gradient-to-br from-[var(--tuwa-bg-secondary)] to-[var(--tuwa-bg-muted)] p-4 h-[100dvh] flex items-center justify-center">
+    <div className="p-4 relative">
       <div className="m-auto w-full max-w-md h-auto min-h-[680px] bg-[var(--tuwa-bg-primary)] rounded-2xl shadow-2xl border border-[var(--tuwa-border-primary)] overflow-hidden flex flex-col">
         <header className="bg-gradient-to-r from-[var(--tuwa-button-gradient-from)] to-[var(--tuwa-button-gradient-to)] p-6 flex items-start justify-between">
           <div className="flex-1 pr-4">

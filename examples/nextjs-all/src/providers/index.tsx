@@ -2,25 +2,21 @@
 
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { createSolanaDevnet, createWalletUiConfig, WalletUi } from '@wallet-ui/react';
+import { WalletUi } from '@wallet-ui/react';
 import { ReactNode } from 'react';
 import { WagmiProvider } from 'wagmi';
 
 import { config } from '@/configs/wagmiConfig';
+import { configSolana } from '@/configs/walletUiConfig';
 import { PulsarProvider } from '@/providers/PulsarProvider';
+import { solanaMobileWalletAdapter } from '@/utils/solana-mobile-wallet-adapter';
 
 import { NovaProvider } from './NovaProvider';
 import { StoreProvider } from './StoreProvider';
 
-const configSolana = createWalletUiConfig({
-  clusters: [
-    // You can add mainnet when you're ready
-    // createSolanaMainnet('https://mainnet.your-rpc.com?api-key=secret'),
-    createSolanaDevnet(),
-  ],
-});
-
 const queryClient = new QueryClient();
+
+solanaMobileWalletAdapter({ clusters: configSolana.clusters });
 
 export function Providers({ children }: { children: ReactNode }) {
   return (

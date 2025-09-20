@@ -47,7 +47,7 @@ export const TxActionButtonDecrement = ({
           'Transaction was replaced.',
         ],
         payload: {
-          previousCount: currentCount,
+          value: currentCount,
         },
         withTrackedModal: true,
       },

@@ -1,24 +1,20 @@
 'use client';
 
-import { createSolanaDevnet, createWalletUiConfig, WalletUi } from '@wallet-ui/react';
+import { WalletUi } from '@wallet-ui/react';
 import { ReactNode } from 'react';
 
+import { configSolana } from '@/configs/walletUiConfig';
 import { PulsarProvider } from '@/providers/PulsarProvider';
+import { solanaMobileWalletAdapter } from '@/utils/solana-mobile-wallet-adapter';
 
 import { NovaProvider } from './NovaProvider';
 import { StoreProvider } from './StoreProvider';
 
-const config = createWalletUiConfig({
-  clusters: [
-    // You can add mainnet when you're ready
-    // createSolanaMainnet('https://mainnet.your-rpc.com?api-key=secret'),
-    createSolanaDevnet(),
-  ],
-});
+solanaMobileWalletAdapter({ clusters: configSolana.clusters });
 
 export function Providers({ children }: { children: ReactNode }) {
   return (
-    <WalletUi config={config}>
+    <WalletUi config={configSolana}>
       <StoreProvider>
         <PulsarProvider>
           <NovaProvider />

@@ -44,7 +44,7 @@ export const TransactionsBlockWrapper = ({
   const sortedAccounts = Object.entries(accounts).sort(([, countA], [, countB]) => countB - countA);
 
   return (
-    <div className="w-full p-4 h-[100dvh] flex items-center justify-center relative">
+    <div className="p-4 relative">
       <div className="m-auto w-full max-w-md h-auto min-h-[680px] bg-[var(--tuwa-bg-primary)] rounded-2xl shadow-2xl border border-[var(--tuwa-border-primary)] overflow-hidden flex flex-col relative">
         {toggleButton}
         <header className="bg-gradient-to-r from-[var(--tuwa-button-gradient-from)] to-[var(--tuwa-button-gradient-to)] p-6 pt-12 flex items-start justify-between">

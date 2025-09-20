@@ -47,7 +47,7 @@ export const TxActionButtonIncrement = ({
           'Transaction was replaced.',
         ],
         payload: {
-          previousCount: currentCount,
+          value: currentCount,
         },
         withTrackedModal: true,
       },

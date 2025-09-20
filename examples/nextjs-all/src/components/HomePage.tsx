@@ -59,38 +59,34 @@ export default function HomePage() {
   };
 
   return (
-    <div className="h-screen w-screen flex justify-center items-center overflow-hidden">
-      <div className="w-full flex justify-center items-center bg-gradient-to-br from-[var(--tuwa-bg-secondary)] to-[var(--tuwa-bg-muted)] gap-4 relative">
-        <AnimatePresence mode="wait" custom={direction}>
-          {activeAdapter === TransactionAdapter.SOLANA ? (
-            <motion.div
-              key="solana-block"
-              variants={variants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
-              custom={direction}
-              className="w-full h-full absolute left-0 top-0 flex justify-center items-center"
-            >
-              <TransactionsBlockSolana toggleButton={<ToggleButton />} />
-            </motion.div>
-          ) : (
-            <motion.div
-              key="evm-block"
-              variants={variants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
-              custom={direction}
-              className="w-full h-full absolute left-0 top-0 flex justify-center items-center"
-            >
-              <TransactionsBlockRainbowKit toggleButton={<ToggleButton />} />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+    <div className="w-full flex justify-center items-center bg-gradient-to-br from-[var(--tuwa-bg-secondary)] to-[var(--tuwa-bg-muted)] gap-4 relative min-h-[100dvh]">
+      <AnimatePresence mode="wait" custom={direction}>
+        {activeAdapter === TransactionAdapter.SOLANA ? (
+          <motion.div
+            key="solana-block"
+            variants={variants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            custom={direction}
+          >
+            <TransactionsBlockSolana toggleButton={<ToggleButton />} />
+          </motion.div>
+        ) : (
+          <motion.div
+            key="evm-block"
+            variants={variants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            custom={direction}
+          >
+            <TransactionsBlockRainbowKit toggleButton={<ToggleButton />} />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
