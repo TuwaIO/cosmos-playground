@@ -49,9 +49,11 @@ src/
 ├── constants.ts   # Shared constants
 ├── hooks/         # Custom React hooks
 ├── providers/     # React Context providers, including NovaProvider setup
-├── programs/      # Solana Program IDL and generated client
+├── programs/      # Solana Program generated client
 ├── styles/        # Global CSS and Tailwind styles
+├── targets/       # Solana Program IDL
 └── transactions/  # Logic for defining transaction actions and callbacks
+└── utils/         # Helpers functions
 ```
 
 ## 📚 Core Packages Used
@@ -95,6 +97,8 @@ For detailed documentation and advanced usage:
 
 - [Pulsar & Nova Documentation](https://docs.tuwa.io/)
 - [Next.js Documentation](https://nextjs.org/docs)
+- [Gill Documentation](https://www.gillsdk.com/)
+- [@wallet/ui Documentation](https://wallet-ui.dev/)
 
 ## 🤝 Contributing & Support
 
