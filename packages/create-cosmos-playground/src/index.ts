@@ -14,10 +14,8 @@ async function main() {
     'nextjs-all',
     'nextjs-connectkit',
     'nextjs-dynamic',
-    'nextjs-reown',
     'nextjs-rainbowkit',
     'nextjs-solana',
-    'nextjs-web3auth',
     'vite-rainbowkit',
   ];
 
