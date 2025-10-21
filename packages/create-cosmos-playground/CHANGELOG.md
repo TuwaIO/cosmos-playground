@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.6](https://github.com/TuwaIO/cosmos-playground/compare/create-cosmos-playground-v0.0.5...create-cosmos-playground-v0.0.6) (2025-10-21)
+
+
+### Bug Fixes
+
+* nova connect initial ([#6](https://github.com/TuwaIO/cosmos-playground/issues/6)) ([cf86b90](https://github.com/TuwaIO/cosmos-playground/commit/cf86b908f23f6436af391945e1aad4c8500eb7b1))
+
 ## [0.0.5](https://github.com/TuwaIO/cosmos-playground/compare/create-cosmos-playground-v0.0.4...create-cosmos-playground-v0.0.5) (2025-09-19)
 
 
