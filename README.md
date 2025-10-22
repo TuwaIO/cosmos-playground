@@ -32,9 +32,7 @@ All examples are built with **Pulsar** for seamless transaction tracking and **N
 - **nextjs-connectkit**: An example demonstrating integration with Next.js and ConnectKit.
 - **nextjs-dynamic**: An example for integrating with Next.js and the Dynamic wallet.
 - **nextjs-rainbowkit**: A Next.js project featuring the popular RainbowKit library.
-- **nextjs-reown**: Integration with Next.js and the Reown wallet.
 - **nextjs-solana**: A Next.js example demonstrating transaction tracking on the Solana network.
-- **nextjs-web3auth**: A Next.js project using Web3Auth for social logins and wallet integration.
 - **vite-rainbowkit**: A simple Vite-based example with RainbowKit.
 
 -----
