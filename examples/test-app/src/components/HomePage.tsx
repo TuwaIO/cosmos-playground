@@ -1,9 +1,9 @@
 'use client';
 
 import { WalletIcon } from '@heroicons/react/24/outline';
+import { useSatelliteConnectStore } from '@tuwaio/nova-connect';
 import { cn } from '@tuwaio/nova-core';
 import { getAdapterFromWalletType, OrbitAdapter } from '@tuwaio/orbit-core';
-import { useSatelliteConnectStore } from '@tuwaio/satellite-react';
 import { motion } from 'framer-motion';
 
 import { TransactionsBlockWrapper as TransactionsBlockRainbowKit } from '@/components/evm/TransactionsBlockWrapper';

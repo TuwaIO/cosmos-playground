@@ -781,8 +781,8 @@ importers:
         specifier: ^5.90.5
         version: 5.90.5(react@19.2.0)
       '@tuwaio/nova-connect':
-        specifier: ^0.1.0
-        version: 0.1.0(tciiqaei2w4krxdfnp6pdgyfm4)
+        specifier: ^0.1.1
+        version: 0.1.1(7djiflf2g47cdopaymbvxbjiny)
       '@tuwaio/nova-core':
         specifier: ^0.1.0
         version: 0.1.0(@radix-ui/react-dialog@1.1.15(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(clsx@2.1.1)(framer-motion@12.23.24(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react@19.2.0)(tailwind-merge@3.3.1)
@@ -816,9 +816,6 @@ importers:
       '@tuwaio/satellite-evm':
         specifier: ^0.1.0
         version: 0.1.0(3surot5dglfb5j7sq3gda2duhy)
-      '@tuwaio/satellite-react':
-        specifier: ^0.1.0
-        version: 0.1.0(dtvi7b7plpugqjv7kvcw3z7vf4)
       '@tuwaio/satellite-siwe-next-auth':
         specifier: ^0.1.0
         version: 0.1.0(@wagmi/core@2.22.1(@tanstack/query-core@5.90.5)(@types/react@19.2.2)(immer@10.1.3)(react@19.2.0)(typescript@5.9.3)(use-sync-external-store@1.4.0(react@19.2.0))(viem@2.38.3(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.22.4)))(iron-session@8.0.4)(next@15.5.6(@babel/core@7.28.4)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react@19.2.0)(siwe@3.0.0(ethers@6.15.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)))(viem@2.38.3(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.22.4))(wagmi@2.18.1(@react-native-async-storage/async-storage@1.24.0(react-native@0.81.1(@babel/core@7.28.4)(@types/react@19.2.2)(bufferutil@4.0.9)(react@19.2.0)(utf-8-validate@5.0.10)))(@tanstack/query-core@5.90.5)(@tanstack/react-query@5.90.5(react@19.2.0))(@types/react@19.2.2)(bufferutil@4.0.9)(immer@10.1.3)(react@19.2.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(viem@2.38.3(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.22.4))(zod@3.22.4))
@@ -901,30 +898,63 @@ importers:
         specifier: ^5.0.8
         version: 5.0.8(@types/react@19.2.2)(immer@10.1.3)(react@19.2.0)(use-sync-external-store@1.4.0(react@19.2.0))
     devDependencies:
+      '@eslint/js':
+        specifier: ^9.36.0
+        version: 9.36.0
       '@tailwindcss/postcss':
-        specifier: ^4.1.15
+        specifier: ^4.1.13
         version: 4.1.15
       '@tailwindcss/vite':
-        specifier: ^4.1.15
+        specifier: ^4.1.13
         version: 4.1.15(vite@7.1.7(@types/node@24.3.0)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.43.1)(yaml@2.8.1))
       '@types/react':
-        specifier: ^19.2.2
+        specifier: ^19.1.13
         version: 19.2.2
       '@types/react-dom':
-        specifier: ^19.2.2
+        specifier: ^19.1.9
         version: 19.2.2(@types/react@19.2.2)
       autoprefixer:
         specifier: ^10.4.21
         version: 10.4.21(postcss@8.5.6)
+      eslint:
+        specifier: ^9.36.0
+        version: 9.36.0(jiti@2.6.1)
+      eslint-config-prettier:
+        specifier: ^10.1.8
+        version: 10.1.8(eslint@9.36.0(jiti@2.6.1))
+      eslint-plugin-prettier:
+        specifier: ^5.5.4
+        version: 5.5.4(eslint-config-prettier@10.1.8(eslint@9.36.0(jiti@2.6.1)))(eslint@9.36.0(jiti@2.6.1))(prettier@3.6.2)
+      eslint-plugin-react-hooks:
+        specifier: ^5.2.0
+        version: 5.2.0(eslint@9.36.0(jiti@2.6.1))
+      eslint-plugin-react-refresh:
+        specifier: ^0.4.21
+        version: 0.4.21(eslint@9.36.0(jiti@2.6.1))
+      eslint-plugin-simple-import-sort:
+        specifier: ^12.1.1
+        version: 12.1.1(eslint@9.36.0(jiti@2.6.1))
+      globals:
+        specifier: ^16.4.0
+        version: 16.4.0
       postcss:
         specifier: ^8.5.6
         version: 8.5.6
+      prettier:
+        specifier: ^3.6.2
+        version: 3.6.2
+      prettier-plugin-tailwindcss:
+        specifier: ^0.6.14
+        version: 0.6.14(prettier@3.6.2)
       tailwindcss:
-        specifier: ^4.1.15
+        specifier: ^4.1.13
         version: 4.1.15
       typescript:
-        specifier: ~5.9.3
+        specifier: ~5.9.2
         version: 5.9.3
+      typescript-eslint:
+        specifier: ^8.44.1
+        version: 8.44.1(eslint@9.36.0(jiti@2.6.1))(typescript@5.9.3)
 
   examples/vite-rainbowkit:
     dependencies:
@@ -3988,8 +4018,8 @@ packages:
     resolution: {integrity: sha512-eBwceTStSSettBQsLo3X5eJEarcK9f20cGUdi6jOesXOP86iYEIgR4+aH2qyCQ3eaovj+Hl44UGngXueIm/tKg==}
     engines: {node: '>=18.0.0'}
 
-  '@tuwaio/nova-connect@0.1.0':
-    resolution: {integrity: sha512-p2oCNV7oW+7BmCVGhs+qMQ1lW4Zn9LkKXWSD91vm4eN3F+pR95do9e2Bqneq9SB8ZMtyYom2drg4eBD2n1QhAw==}
+  '@tuwaio/nova-connect@0.1.1':
+    resolution: {integrity: sha512-5fILH6cx/OAA3WPpQESTzxVFDe3Fo8D3inVstSo1t9Xczflfqi3updJ0QJ3W75r2FxY3X2s/X2EUIQF7IF7u4A==}
     peerDependencies:
       '@bgd-labs/react-web3-icons': '>=1.5'
       '@emotion/is-prop-valid': 1.x.x
@@ -4004,7 +4034,6 @@ packages:
       '@tuwaio/pulsar-core': '>=0.2'
       '@tuwaio/satellite-core': '>=0.1'
       '@tuwaio/satellite-evm': '>=0.1'
-      '@tuwaio/satellite-react': '>=0.1'
       '@tuwaio/satellite-solana': '>=0.1'
       '@wagmi/connectors': 6.x.x
       '@wagmi/core': 2.x.x
@@ -4195,8 +4224,8 @@ packages:
       viem: 2.x.x
       zustand: 5.x.x
 
-  '@tuwaio/satellite-react@0.1.0':
-    resolution: {integrity: sha512-tSjzl85i1XiH0c9lxt+p7cvjhw5Ek6AoPAk3tQh1YiBslCiNlf1t17+1Q4XU6cKSXKNIa2Li3kGPrjVZ47HH/A==}
+  '@tuwaio/satellite-react@0.1.1':
+    resolution: {integrity: sha512-LcrrPhcXsImQZ8ESSM46i37CIW91h7ehLXcibDTxBhsKaHD6kSHsScimpdYkQX+o/aiCNhD3bXd55W0XDnlGWg==}
     peerDependencies:
       '@tuwaio/orbit-core': '>=0.1'
       '@tuwaio/orbit-evm': '>=0.1'
@@ -13272,7 +13301,7 @@ snapshots:
     dependencies:
       sha256-uint8array: 0.10.7
 
-  '@tuwaio/nova-connect@0.1.0(tciiqaei2w4krxdfnp6pdgyfm4)':
+  '@tuwaio/nova-connect@0.1.1(7djiflf2g47cdopaymbvxbjiny)':
     dependencies:
       '@bgd-labs/react-web3-icons': 1.51.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@emotion/is-prop-valid': 1.4.0
@@ -13283,7 +13312,7 @@ snapshots:
       '@tuwaio/orbit-core': 0.1.0
       '@tuwaio/pulsar-core': 0.2.0(@tuwaio/orbit-core@0.1.0)(dayjs@1.11.18)(immer@10.1.3)(zustand@5.0.8(@types/react@19.2.2)(immer@10.1.3)(react@19.2.0)(use-sync-external-store@1.4.0(react@19.2.0)))
       '@tuwaio/satellite-core': 0.1.0(@tuwaio/orbit-core@0.1.0)(immer@10.1.3)(zustand@5.0.8(@types/react@19.2.2)(immer@10.1.3)(react@19.2.0)(use-sync-external-store@1.4.0(react@19.2.0)))
-      '@tuwaio/satellite-react': 0.1.0(dtvi7b7plpugqjv7kvcw3z7vf4)
+      '@tuwaio/satellite-react': 0.1.1(dtvi7b7plpugqjv7kvcw3z7vf4)
       ethereum-blockies-base64: 1.0.2
       framer-motion: 12.23.24(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       immer: 10.1.3
@@ -13451,7 +13480,7 @@ snapshots:
     transitivePeerDependencies:
       - react-native
 
-  '@tuwaio/satellite-react@0.1.0(dtvi7b7plpugqjv7kvcw3z7vf4)':
+  '@tuwaio/satellite-react@0.1.1(dtvi7b7plpugqjv7kvcw3z7vf4)':
     dependencies:
       '@tuwaio/orbit-core': 0.1.0
       '@tuwaio/satellite-core': 0.1.0(@tuwaio/orbit-core@0.1.0)(immer@10.1.3)(zustand@5.0.8(@types/react@19.2.2)(immer@10.1.3)(react@19.2.0)(use-sync-external-store@1.4.0(react@19.2.0)))
@@ -13629,6 +13658,23 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@typescript-eslint/eslint-plugin@8.44.1(@typescript-eslint/parser@8.44.1(eslint@9.36.0(jiti@2.6.1))(typescript@5.9.3))(eslint@9.36.0(jiti@2.6.1))(typescript@5.9.3)':
+    dependencies:
+      '@eslint-community/regexpp': 4.12.1
+      '@typescript-eslint/parser': 8.44.1(eslint@9.36.0(jiti@2.6.1))(typescript@5.9.3)
+      '@typescript-eslint/scope-manager': 8.44.1
+      '@typescript-eslint/type-utils': 8.44.1(eslint@9.36.0(jiti@2.6.1))(typescript@5.9.3)
+      '@typescript-eslint/utils': 8.44.1(eslint@9.36.0(jiti@2.6.1))(typescript@5.9.3)
+      '@typescript-eslint/visitor-keys': 8.44.1
+      eslint: 9.36.0(jiti@2.6.1)
+      graphemer: 1.4.0
+      ignore: 7.0.5
+      natural-compare: 1.4.0
+      ts-api-utils: 2.1.0(typescript@5.9.3)
+      typescript: 5.9.3
+    transitivePeerDependencies:
+      - supports-color
+
   '@typescript-eslint/parser@8.44.1(eslint@9.36.0(jiti@2.6.1))(typescript@5.9.2)':
     dependencies:
       '@typescript-eslint/scope-manager': 8.44.1
@@ -13641,12 +13687,33 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@typescript-eslint/parser@8.44.1(eslint@9.36.0(jiti@2.6.1))(typescript@5.9.3)':
+    dependencies:
+      '@typescript-eslint/scope-manager': 8.44.1
+      '@typescript-eslint/types': 8.44.1
+      '@typescript-eslint/typescript-estree': 8.44.1(typescript@5.9.3)
+      '@typescript-eslint/visitor-keys': 8.44.1
+      debug: 4.4.1(supports-color@5.5.0)
+      eslint: 9.36.0(jiti@2.6.1)
+      typescript: 5.9.3
+    transitivePeerDependencies:
+      - supports-color
+
   '@typescript-eslint/project-service@8.44.1(typescript@5.9.2)':
     dependencies:
       '@typescript-eslint/tsconfig-utils': 8.44.1(typescript@5.9.2)
       '@typescript-eslint/types': 8.44.1
       debug: 4.4.1(supports-color@5.5.0)
       typescript: 5.9.2
+    transitivePeerDependencies:
+      - supports-color
+
+  '@typescript-eslint/project-service@8.44.1(typescript@5.9.3)':
+    dependencies:
+      '@typescript-eslint/tsconfig-utils': 8.44.1(typescript@5.9.3)
+      '@typescript-eslint/types': 8.44.1
+      debug: 4.4.1(supports-color@5.5.0)
+      typescript: 5.9.3
     transitivePeerDependencies:
       - supports-color
 
@@ -13659,6 +13726,10 @@ snapshots:
     dependencies:
       typescript: 5.9.2
 
+  '@typescript-eslint/tsconfig-utils@8.44.1(typescript@5.9.3)':
+    dependencies:
+      typescript: 5.9.3
+
   '@typescript-eslint/type-utils@8.44.1(eslint@9.36.0(jiti@2.6.1))(typescript@5.9.2)':
     dependencies:
       '@typescript-eslint/types': 8.44.1
@@ -13668,6 +13739,18 @@ snapshots:
       eslint: 9.36.0(jiti@2.6.1)
       ts-api-utils: 2.1.0(typescript@5.9.2)
       typescript: 5.9.2
+    transitivePeerDependencies:
+      - supports-color
+
+  '@typescript-eslint/type-utils@8.44.1(eslint@9.36.0(jiti@2.6.1))(typescript@5.9.3)':
+    dependencies:
+      '@typescript-eslint/types': 8.44.1
+      '@typescript-eslint/typescript-estree': 8.44.1(typescript@5.9.3)
+      '@typescript-eslint/utils': 8.44.1(eslint@9.36.0(jiti@2.6.1))(typescript@5.9.3)
+      debug: 4.4.1(supports-color@5.5.0)
+      eslint: 9.36.0(jiti@2.6.1)
+      ts-api-utils: 2.1.0(typescript@5.9.3)
+      typescript: 5.9.3
     transitivePeerDependencies:
       - supports-color
 
@@ -13689,6 +13772,22 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@typescript-eslint/typescript-estree@8.44.1(typescript@5.9.3)':
+    dependencies:
+      '@typescript-eslint/project-service': 8.44.1(typescript@5.9.3)
+      '@typescript-eslint/tsconfig-utils': 8.44.1(typescript@5.9.3)
+      '@typescript-eslint/types': 8.44.1
+      '@typescript-eslint/visitor-keys': 8.44.1
+      debug: 4.4.1(supports-color@5.5.0)
+      fast-glob: 3.3.3
+      is-glob: 4.0.3
+      minimatch: 9.0.5
+      semver: 7.7.2
+      ts-api-utils: 2.1.0(typescript@5.9.3)
+      typescript: 5.9.3
+    transitivePeerDependencies:
+      - supports-color
+
   '@typescript-eslint/utils@8.44.1(eslint@9.36.0(jiti@2.6.1))(typescript@5.9.2)':
     dependencies:
       '@eslint-community/eslint-utils': 4.9.0(eslint@9.36.0(jiti@2.6.1))
@@ -13697,6 +13796,17 @@ snapshots:
       '@typescript-eslint/typescript-estree': 8.44.1(typescript@5.9.2)
       eslint: 9.36.0(jiti@2.6.1)
       typescript: 5.9.2
+    transitivePeerDependencies:
+      - supports-color
+
+  '@typescript-eslint/utils@8.44.1(eslint@9.36.0(jiti@2.6.1))(typescript@5.9.3)':
+    dependencies:
+      '@eslint-community/eslint-utils': 4.9.0(eslint@9.36.0(jiti@2.6.1))
+      '@typescript-eslint/scope-manager': 8.44.1
+      '@typescript-eslint/types': 8.44.1
+      '@typescript-eslint/typescript-estree': 8.44.1(typescript@5.9.3)
+      eslint: 9.36.0(jiti@2.6.1)
+      typescript: 5.9.3
     transitivePeerDependencies:
       - supports-color
 
@@ -18984,6 +19094,10 @@ snapshots:
     dependencies:
       typescript: 5.9.2
 
+  ts-api-utils@2.1.0(typescript@5.9.3):
+    dependencies:
+      typescript: 5.9.3
+
   tslib@1.14.1: {}
 
   tslib@2.4.0: {}
@@ -19016,6 +19130,17 @@ snapshots:
       '@typescript-eslint/utils': 8.44.1(eslint@9.36.0(jiti@2.6.1))(typescript@5.9.2)
       eslint: 9.36.0(jiti@2.6.1)
       typescript: 5.9.2
+    transitivePeerDependencies:
+      - supports-color
+
+  typescript-eslint@8.44.1(eslint@9.36.0(jiti@2.6.1))(typescript@5.9.3):
+    dependencies:
+      '@typescript-eslint/eslint-plugin': 8.44.1(@typescript-eslint/parser@8.44.1(eslint@9.36.0(jiti@2.6.1))(typescript@5.9.3))(eslint@9.36.0(jiti@2.6.1))(typescript@5.9.3)
+      '@typescript-eslint/parser': 8.44.1(eslint@9.36.0(jiti@2.6.1))(typescript@5.9.3)
+      '@typescript-eslint/typescript-estree': 8.44.1(typescript@5.9.3)
+      '@typescript-eslint/utils': 8.44.1(eslint@9.36.0(jiti@2.6.1))(typescript@5.9.3)
+      eslint: 9.36.0(jiti@2.6.1)
+      typescript: 5.9.3
     transitivePeerDependencies:
       - supports-color
 

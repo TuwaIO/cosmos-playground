@@ -1,10 +1,10 @@
 'use client';
 
 import { useWalletAccountTransactionSendingSigner } from '@solana/react';
+import { Wallet } from '@tuwaio/nova-connect';
 import { TxActionButton as TAB } from '@tuwaio/nova-transactions';
 import { OrbitAdapter } from '@tuwaio/orbit-core';
 import { createSolanaClientWithCache } from '@tuwaio/orbit-solana';
-import { Wallet } from '@tuwaio/satellite-react';
 import { SolanaWallet } from '@tuwaio/satellite-solana';
 import { UiWalletAccount } from '@wallet-standard/react';
 import { Address } from 'gill';
