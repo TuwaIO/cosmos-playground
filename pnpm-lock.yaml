@@ -781,8 +781,8 @@ importers:
         specifier: ^5.90.5
         version: 5.90.5(react@19.2.0)
       '@tuwaio/nova-connect':
-        specifier: ^0.1.1
-        version: 0.1.1(7djiflf2g47cdopaymbvxbjiny)
+        specifier: ^0.1.2
+        version: 0.1.2(7djiflf2g47cdopaymbvxbjiny)
       '@tuwaio/nova-core':
         specifier: ^0.1.0
         version: 0.1.0(@radix-ui/react-dialog@1.1.15(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(clsx@2.1.1)(framer-motion@12.23.24(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react@19.2.0)(tailwind-merge@3.3.1)
@@ -4018,8 +4018,8 @@ packages:
     resolution: {integrity: sha512-eBwceTStSSettBQsLo3X5eJEarcK9f20cGUdi6jOesXOP86iYEIgR4+aH2qyCQ3eaovj+Hl44UGngXueIm/tKg==}
     engines: {node: '>=18.0.0'}
 
-  '@tuwaio/nova-connect@0.1.1':
-    resolution: {integrity: sha512-5fILH6cx/OAA3WPpQESTzxVFDe3Fo8D3inVstSo1t9Xczflfqi3updJ0QJ3W75r2FxY3X2s/X2EUIQF7IF7u4A==}
+  '@tuwaio/nova-connect@0.1.2':
+    resolution: {integrity: sha512-+WsAflhZzQyRzgStstsaCpclZhrTrnWIL10fujdsPPmlHpK9FyaZKNtS0teTRYaKcB2IvXuDfzXz+7vSUixgbw==}
     peerDependencies:
       '@bgd-labs/react-web3-icons': '>=1.5'
       '@emotion/is-prop-valid': 1.x.x
@@ -13301,7 +13301,7 @@ snapshots:
     dependencies:
       sha256-uint8array: 0.10.7
 
-  '@tuwaio/nova-connect@0.1.1(7djiflf2g47cdopaymbvxbjiny)':
+  '@tuwaio/nova-connect@0.1.2(7djiflf2g47cdopaymbvxbjiny)':
     dependencies:
       '@bgd-labs/react-web3-icons': 1.51.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@emotion/is-prop-valid': 1.4.0

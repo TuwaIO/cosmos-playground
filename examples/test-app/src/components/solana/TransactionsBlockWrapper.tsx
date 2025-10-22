@@ -1,6 +1,6 @@
 'use client';
 
-import { useSatelliteConnectStore } from '@tuwaio/nova-connect';
+import { useSatelliteConnectStore } from '@tuwaio/nova-connect/satellite';
 import { textCenterEllipsis } from '@tuwaio/nova-core';
 import { HashLink } from '@tuwaio/nova-transactions';
 import { OrbitAdapter, selectAdapterByKey } from '@tuwaio/orbit-core';

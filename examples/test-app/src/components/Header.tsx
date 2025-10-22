@@ -1,6 +1,6 @@
 'use client';
 
-import { ConnectButton, ConnectButtonProps } from '@tuwaio/nova-connect';
+import { ConnectButton, ConnectButtonProps } from '@tuwaio/nova-connect/components';
 import Image from 'next/image';
 
 import { appEVMChains, solanaRPCUrls } from '@/configs/appConfig';

@@ -3,7 +3,7 @@
 import { DocumentDuplicateIcon } from '@heroicons/react/24/solid';
 import { useWalletAccountTransactionSendingSigner } from '@solana/react';
 import { install as installEd25519 } from '@solana/webcrypto-ed25519-polyfill';
-import { Wallet } from '@tuwaio/nova-connect';
+import { Wallet } from '@tuwaio/nova-connect/satellite';
 import { TxActionButton as TAB } from '@tuwaio/nova-transactions';
 import { OrbitAdapter } from '@tuwaio/orbit-core';
 import { createSolanaClientWithCache } from '@tuwaio/orbit-solana';

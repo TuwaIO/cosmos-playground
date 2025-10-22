@@ -1,7 +1,8 @@
 'use client';
 
-import { NovaConnectProvider, SatelliteConnectProvider } from '@tuwaio/nova-connect';
+import { NovaConnectProvider } from '@tuwaio/nova-connect';
 import { EVMWalletsWatcher } from '@tuwaio/nova-connect/evm';
+import { SatelliteConnectProvider } from '@tuwaio/nova-connect/satellite';
 import { SolanaWalletsWatcher } from '@tuwaio/nova-connect/solana';
 import { satelliteEVMAdapter } from '@tuwaio/satellite-evm';
 import { useSiweAuth } from '@tuwaio/satellite-siwe-next-auth';

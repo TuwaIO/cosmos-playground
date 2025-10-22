@@ -1,7 +1,7 @@
 'use client';
 
 import { useWalletAccountTransactionSendingSigner } from '@solana/react';
-import { Wallet } from '@tuwaio/nova-connect';
+import { Wallet } from '@tuwaio/nova-connect/satellite';
 import { TxActionButton as TAB } from '@tuwaio/nova-transactions';
 import { OrbitAdapter } from '@tuwaio/orbit-core';
 import { createSolanaClientWithCache } from '@tuwaio/orbit-solana';
