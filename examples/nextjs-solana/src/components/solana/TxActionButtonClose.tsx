@@ -1,42 +1,50 @@
 'use client';
 
+import { useWalletAccountTransactionSendingSigner } from '@solana/react';
+import { Wallet } from '@tuwaio/nova-connect/satellite';
 import { TxActionButton as TAB } from '@tuwaio/nova-transactions';
-import { TransactionAdapter } from '@tuwaio/pulsar-core';
-import { UiWalletAccount, useWalletAccountTransactionSendingSigner, WalletUiContextValue } from '@wallet-ui/react';
+import { OrbitAdapter } from '@tuwaio/orbit-core';
+import { createSolanaClientWithCache } from '@tuwaio/orbit-solana';
+import { SolanaWallet } from '@tuwaio/satellite-solana';
+import { UiWalletAccount } from '@wallet-standard/react';
 import { Address } from 'gill';
 import React from 'react';
 
+import { usePulsarStore } from '@/hooks/pulsarStoreHook';
 import { useStore } from '@/hooks/storeHook';
-import { usePulsarStore } from '@/hooks/txTrackingHooks';
 import { txActions, TxType } from '@/transactions';
 
-export const TxActionButtonClose = ({
-  walletUi,
-  solanatest,
-}: {
-  walletUi: WalletUiContextValue;
-  solanatest: Address;
-}) => {
-  const handleTransaction = usePulsarStore((state) => state.handleTransaction);
+export const TxActionButtonClose = ({ activeWallet, solanatest }: { activeWallet: Wallet; solanatest: Address }) => {
+  const executeTxAction = usePulsarStore((state) => state.executeTxAction);
   const transactionsPool = usePulsarStore((state) => state.transactionsPool);
   const getLastTxKey = usePulsarStore((state) => state.getLastTxKey);
   const getAccounts = useStore((state) => state.getAccounts);
   const removeAccFromStore = useStore((state) => state.removeAccFromStore);
 
-  const signer = useWalletAccountTransactionSendingSigner(walletUi.account as UiWalletAccount, walletUi.cluster.id);
+  const activeWalletSolana = activeWallet as SolanaWallet;
+
+  const signer = useWalletAccountTransactionSendingSigner(
+    activeWalletSolana.connectedAccount as UiWalletAccount,
+    `${OrbitAdapter.SOLANA}:${activeWallet?.chainId ?? 'devnet'}`,
+  );
 
   const handleClose = async () => {
-    await handleTransaction({
-      actionFunction: () => txActions.close({ client: walletUi.client, signer, solanatest }),
+    await executeTxAction({
+      actionFunction: () =>
+        txActions.closeSolana({
+          client: createSolanaClientWithCache({ rpcUrlOrMoniker: 'devnet' }),
+          signer,
+          contractAddress: solanatest,
+        }),
       onSuccessCallback: async () => {
-        await getAccounts(walletUi);
+        await getAccounts();
         removeAccFromStore(solanatest.toString());
       },
       params: {
         type: TxType.close,
-        adapter: TransactionAdapter.SOLANA,
+        adapter: OrbitAdapter.SOLANA,
         // The RPC URL must be provided for the tracker to work after a page reload
-        rpcUrl: walletUi.cluster.urlOrMoniker,
+        rpcUrl: activeWallet?.rpcURL,
         desiredChainID: 'devnet', // The cluster name for the pre-flight check
         title: ['Closing', 'Closed', 'Error', 'Replaced'],
         description: [
@@ -46,6 +54,9 @@ export const TxActionButtonClose = ({
           'Transaction was replaced.',
         ],
         withTrackedModal: true,
+        payload: {
+          contractAddress: solanatest,
+        },
       },
     });
   };
@@ -55,8 +66,8 @@ export const TxActionButtonClose = ({
       action={handleClose}
       transactionsPool={transactionsPool}
       getLastTxKey={getLastTxKey}
-      disabled={!walletUi.connected}
-      walletAddress={walletUi.account?.publicKey.toString()}
+      disabled={!activeWallet?.isConnected}
+      walletAddress={activeWallet?.address}
       className={`
         w-full p-2.5 rounded-xl border border-transparent
         text-gray-800 font-semibold shadow-sm transition-all duration-200

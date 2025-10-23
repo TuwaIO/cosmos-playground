@@ -1,27 +1,29 @@
 import { Transaction } from '@tuwaio/pulsar-core';
 import { Address, KeyPairSigner, SolanaClient, TransactionSendingSigner } from 'gill';
 
-import { close } from '@/transactions/close';
-import { decrement } from '@/transactions/decrement';
-import { increment } from '@/transactions/increment';
-import { initialize } from '@/transactions/initialize';
+import { close } from '@/transactions/solana/close';
+import { decrement } from '@/transactions/solana/decrement';
+import { increment as incrementSolana } from '@/transactions/solana/increment';
+import { initialize } from '@/transactions/solana/initialize';
 
 export type BaseTxParams = {
   client: SolanaClient;
   signer: TransactionSendingSigner;
-  solanatest: Address;
+  contractAddress: Address;
 };
 
 export const txActions = {
-  increment: ({ client, signer, solanatest }: BaseTxParams) => increment({ client, signer, solanatest }),
-  decrement: ({ client, signer, solanatest }: BaseTxParams) => decrement({ client, signer, solanatest }),
-  close: ({ client, signer, solanatest }: BaseTxParams) => close({ client, signer, solanatest }),
-  initialize: ({
+  incrementSolana: ({ client, signer, contractAddress }: BaseTxParams) =>
+    incrementSolana({ client, signer, contractAddress }),
+  decrementSolana: ({ client, signer, contractAddress }: BaseTxParams) =>
+    decrement({ client, signer, contractAddress }),
+  closeSolana: ({ client, signer, contractAddress }: BaseTxParams) => close({ client, signer, contractAddress }),
+  initializeSolana: ({
     client,
     signer,
-    solanatest,
-  }: Omit<BaseTxParams, 'solanatest'> & { solanatest: KeyPairSigner<string> }) =>
-    initialize({ client, signer, solanatest }),
+    contractAddress,
+  }: Omit<BaseTxParams, 'contractAddress'> & { contractAddress: KeyPairSigner<string> }) =>
+    initialize({ client, signer, contractAddress }),
 };
 
 export enum TxType {
@@ -34,13 +36,14 @@ export enum TxType {
 type InitializeTx = Transaction & {
   type: TxType.initialize;
   payload: {
-    account: string;
+    contractAddress: string;
   };
 };
 
 type IncrementTx = Transaction & {
   type: TxType.increment;
   payload: {
+    contractAddress: string;
     value: number;
   };
 };
@@ -48,13 +51,16 @@ type IncrementTx = Transaction & {
 type DecrementTx = Transaction & {
   type: TxType.decrement;
   payload: {
+    contractAddress: string;
     value: number;
   };
 };
 
 type CloseTx = Transaction & {
   type: TxType.close;
-  payload: undefined;
+  payload: {
+    contractAddress: string;
+  };
 };
 
 export type TransactionUnion = InitializeTx | IncrementTx | DecrementTx | CloseTx;

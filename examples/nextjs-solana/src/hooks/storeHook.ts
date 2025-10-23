@@ -1,13 +1,12 @@
 'use client';
 
-import { WalletUiContextValue } from '@wallet-ui/react';
 import { createContext, useContext } from 'react';
 import { StoreApi, useStore as uS } from 'zustand';
 
 export type Store = {
   accounts: Record<string, number>;
   accountsLoading: boolean;
-  getAccounts: (walletUi: WalletUiContextValue) => Promise<void>;
+  getAccounts: () => Promise<void>;
   removeAccFromStore: (address: string) => void;
 };
 

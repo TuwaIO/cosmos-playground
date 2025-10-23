@@ -1,35 +1,39 @@
 'use client';
 
+import { useSatelliteConnectStore } from '@tuwaio/nova-connect/satellite';
 import { textCenterEllipsis } from '@tuwaio/nova-core';
 import { HashLink } from '@tuwaio/nova-transactions';
-import { selectAdapterByKey, TransactionAdapter } from '@tuwaio/pulsar-core';
-import { useWalletUi } from '@wallet-ui/react';
+import { OrbitAdapter, selectAdapterByKey } from '@tuwaio/orbit-core';
+import { SolanaWallet } from '@tuwaio/satellite-solana';
 import { address } from 'gill';
-import { ReactNode, useEffect } from 'react';
+import { useEffect } from 'react';
 
-import { TxActionButtonClose } from '@/components/TxActionButtonClose';
-import { TxActionButtonDecrement } from '@/components/TxActionButtonDecrement';
-import { TxActionButtonIncrement } from '@/components/TxActionButtonIncrement';
-import { TxActionButtonInitialize } from '@/components/TxActionButtonInitialize';
+import { TxActionButtonClose } from '@/components/solana/TxActionButtonClose';
+import { TxActionButtonDecrement } from '@/components/solana/TxActionButtonDecrement';
+import { TxActionButtonIncrement } from '@/components/solana/TxActionButtonIncrement';
+import { TxActionButtonInitialize } from '@/components/solana/TxActionButtonInitialize';
 import { PROGRAM_ID } from '@/constants';
+import { usePulsarStore } from '@/hooks/pulsarStoreHook';
 import { useStore } from '@/hooks/storeHook';
-import { usePulsarStore } from '@/hooks/txTrackingHooks';
 
-export const TransactionsBlockWrapper = ({ connectWidget }: { connectWidget: ReactNode }) => {
-  const walletUi = useWalletUi();
+export const TransactionsBlockWrapper = () => {
+  const activeWallet = useSatelliteConnectStore((store) => store.activeWallet);
   const accounts = useStore((state) => state.accounts);
   const getAccounts = useStore((state) => state.getAccounts);
   const accountsLoading = useStore((state) => state.accountsLoading);
   const getAdapter = usePulsarStore((state) => state.getAdapter);
 
   const foundAdapter = selectAdapterByKey({
-    adapterKey: TransactionAdapter.SOLANA,
+    adapterKey: OrbitAdapter.SOLANA,
     adapter: getAdapter(),
   });
 
+  const activeWalletSolana = activeWallet as SolanaWallet;
+
   useEffect(() => {
-    getAccounts(walletUi);
-  }, [walletUi.client]);
+    getAccounts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const openSolscan = () => {
     window.open(foundAdapter?.getExplorerUrl(`/account/${PROGRAM_ID}`), '_blank', 'noopener,noreferrer');
@@ -39,17 +43,11 @@ export const TransactionsBlockWrapper = ({ connectWidget }: { connectWidget: Rea
 
   return (
     <div className="p-4 relative">
-      <div className="m-auto w-full max-w-md h-auto min-h-[680px] bg-[var(--tuwa-bg-primary)] rounded-2xl shadow-2xl border border-[var(--tuwa-border-primary)] overflow-hidden flex flex-col">
-        <header className="bg-gradient-to-r from-[var(--tuwa-button-gradient-from)] to-[var(--tuwa-button-gradient-to)] p-6 flex items-start justify-between">
+      <div className="m-auto w-full max-w-md h-auto min-h-[680px] bg-[var(--tuwa-bg-primary)] rounded-2xl shadow-2xl border border-[var(--tuwa-border-primary)] overflow-hidden flex flex-col relative">
+        <header className="bg-gradient-to-r from-[var(--tuwa-button-gradient-from)] to-[var(--tuwa-button-gradient-to)] p-6 pt-12 flex items-start justify-between">
           <div className="flex-1 pr-4">
-            <h1 className="text-2xl font-bold text-[var(--tuwa-text-on-accent)] mb-1 leading-tight">
-              Pulsar Solana Demo
-            </h1>
+            <h1 className="text-2xl font-bold text-[var(--tuwa-text-on-accent)] mb-1 leading-tight">Solana Demo</h1>
             <p className="text-blue-100 text-sm leading-tight">Transaction Tracking Example</p>
-          </div>
-
-          <div className="flex items-center justify-end min-w-[180px] mt-2.5">
-            <div className="transform transition-all duration-200 ease-in-out">{connectWidget}</div>
           </div>
         </header>
 
@@ -91,9 +89,9 @@ export const TransactionsBlockWrapper = ({ connectWidget }: { connectWidget: Rea
             </div>
 
             <div className="space-y-4">
-              {walletUi.connected ? (
+              {activeWalletSolana?.connectedAccount ? (
                 <div className="h-14">
-                  <TxActionButtonInitialize walletUi={walletUi} />
+                  <TxActionButtonInitialize activeWallet={activeWalletSolana} />
                 </div>
               ) : (
                 <p className="text-center text-sm text-[var(--tuwa-text-secondary)]">
@@ -152,23 +150,23 @@ export const TransactionsBlockWrapper = ({ connectWidget }: { connectWidget: Rea
                         </div>
                       </div>
 
-                      {walletUi.connected && (
+                      {activeWalletSolana?.connectedAccount && (
                         <>
                           <hr className="border-t border-[var(--tuwa-border-primary)] my-4" />
                           <div className="flex flex-col gap-2">
                             <div className="flex gap-2">
                               <TxActionButtonIncrement
-                                walletUi={walletUi}
+                                activeWallet={activeWalletSolana}
                                 currentCount={value}
                                 solanatest={address(key)}
                               />
                               <TxActionButtonDecrement
-                                walletUi={walletUi}
+                                activeWallet={activeWalletSolana}
                                 currentCount={value}
                                 solanatest={address(key)}
                               />
                             </div>
-                            <TxActionButtonClose walletUi={walletUi} solanatest={address(key)} />
+                            <TxActionButtonClose activeWallet={activeWalletSolana} solanatest={address(key)} />
                           </div>
                         </>
                       )}

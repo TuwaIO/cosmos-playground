@@ -61,6 +61,7 @@ export async function getProgramAccountsDecoded<T extends object>(
   });
 
   // 2. Parse the RPC response and prepare it for the decoder.
+  // @ts-ignore
   const encodedAccounts: Array<MaybeEncodedAccount> = programAccounts.map((item) => {
     const account = parseBase64RpcAccount(
       item.pubkey,

@@ -1,43 +1,57 @@
 'use client';
 
 import { ArrowUpIcon } from '@heroicons/react/24/solid';
+import { useWalletAccountTransactionSendingSigner } from '@solana/react';
+import { Wallet } from '@tuwaio/nova-connect/satellite';
 import { TxActionButton as TAB } from '@tuwaio/nova-transactions';
-import { TransactionAdapter } from '@tuwaio/pulsar-core';
-import { UiWalletAccount, useWalletAccountTransactionSendingSigner, WalletUiContextValue } from '@wallet-ui/react';
+import { OrbitAdapter } from '@tuwaio/orbit-core';
+import { createSolanaClientWithCache } from '@tuwaio/orbit-solana';
+import { SolanaWallet } from '@tuwaio/satellite-solana';
+import { UiWalletAccount } from '@wallet-standard/react';
 import { Address } from 'gill';
 import React from 'react';
 
+import { usePulsarStore } from '@/hooks/pulsarStoreHook';
 import { useStore } from '@/hooks/storeHook';
-import { usePulsarStore } from '@/hooks/txTrackingHooks';
 import { txActions, TxType } from '@/transactions';
 
 export const TxActionButtonIncrement = ({
-  walletUi,
+  activeWallet,
   currentCount,
   solanatest,
 }: {
-  walletUi: WalletUiContextValue;
+  activeWallet: Wallet;
   currentCount: number;
   solanatest: Address;
 }) => {
-  const handleTransaction = usePulsarStore((state) => state.handleTransaction);
+  const executeTxAction = usePulsarStore((state) => state.executeTxAction);
   const transactionsPool = usePulsarStore((state) => state.transactionsPool);
   const getLastTxKey = usePulsarStore((state) => state.getLastTxKey);
   const getAccounts = useStore((state) => state.getAccounts);
 
-  const signer = useWalletAccountTransactionSendingSigner(walletUi.account as UiWalletAccount, walletUi.cluster.id);
+  const activeWalletSolana = activeWallet as SolanaWallet;
+
+  const signer = useWalletAccountTransactionSendingSigner(
+    activeWalletSolana.connectedAccount as UiWalletAccount,
+    `${OrbitAdapter.SOLANA}:${activeWallet?.chainId ?? 'devnet'}`,
+  );
 
   const handleIncrement = async () => {
-    await handleTransaction({
-      actionFunction: () => txActions.increment({ client: walletUi.client, signer, solanatest }),
+    await executeTxAction({
+      actionFunction: () =>
+        txActions.incrementSolana({
+          client: createSolanaClientWithCache({ rpcUrlOrMoniker: 'devnet' }),
+          signer,
+          contractAddress: solanatest,
+        }),
       onSuccessCallback: async () => {
-        await getAccounts(walletUi);
+        await getAccounts();
       },
       params: {
         type: TxType.increment,
-        adapter: TransactionAdapter.SOLANA,
+        adapter: OrbitAdapter.SOLANA,
         // The RPC URL must be provided for the tracker to work after a page reload
-        rpcUrl: walletUi.cluster.urlOrMoniker,
+        rpcUrl: activeWallet?.rpcURL,
         desiredChainID: 'devnet', // The cluster name for the pre-flight check
         title: ['Incrementing', 'Incremented', 'Error', 'Replaced'],
         description: [
@@ -47,6 +61,7 @@ export const TxActionButtonIncrement = ({
           'Transaction was replaced.',
         ],
         payload: {
+          contractAddress: solanatest,
           value: currentCount,
         },
         withTrackedModal: true,
@@ -67,8 +82,8 @@ export const TxActionButtonIncrement = ({
         hover:from-[var(--tuwa-button-gradient-from-hover)] hover:to-[var(--tuwa-button-gradient-to-hover)] hover:shadow-lg
         disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] select-none
       `}
-      disabled={!walletUi.connected}
-      walletAddress={walletUi.account?.publicKey.toString()}
+      disabled={!activeWallet?.isConnected}
+      walletAddress={activeWallet?.address}
     >
       <div className="flex items-center justify-center space-x-2">
         <ArrowUpIcon className="w-5 h-5" />

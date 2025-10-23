@@ -1,9 +1,13 @@
+// just for test
+
 'use client';
 
+import { createSolanaRPC } from '@tuwaio/orbit-solana';
 import { produce } from 'immer';
 import { PropsWithChildren, useMemo } from 'react';
 import { createStore } from 'zustand/vanilla';
 
+import { solanaRPCUrls } from '@/configs/appConfig';
 import { PROGRAM_ID } from '@/constants';
 import { Store, StoreContext } from '@/hooks/storeHook';
 import { getSolanatestProgramAccounts } from '@/programs';
@@ -13,8 +17,11 @@ export function StoreProvider({ children }: PropsWithChildren) {
     return createStore<Store>()((set) => ({
       accounts: {},
       accountsLoading: true,
-      getAccounts: async (walletUi) => {
-        const accountsInfo = (await getSolanatestProgramAccounts(walletUi.client.rpc, PROGRAM_ID)) as never as {
+      getAccounts: async () => {
+        const accountsInfo = (await getSolanatestProgramAccounts(
+          createSolanaRPC({ rpcUrlOrMoniker: 'devnet', rpcUrls: solanaRPCUrls }),
+          PROGRAM_ID,
+        )) as never as {
           address: string;
           data: { count: number };
           executable: boolean;
@@ -23,7 +30,6 @@ export function StoreProvider({ children }: PropsWithChildren) {
           programAddress: string;
           space: bigint;
         }[];
-        console.log('accountsInfo', accountsInfo);
         set((state) =>
           produce(state, (draft) => {
             accountsInfo.forEach((account) => {
