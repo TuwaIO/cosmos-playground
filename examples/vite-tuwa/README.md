@@ -1,6 +1,6 @@
 # Pulsar & Cosmos SDK: Vite + TUWA Example
 
-A minimal example demonstrating how to integrate the **All TUWA ecosys** into a React application using Vite.
+A minimal example demonstrating how to integrate the **All TUWA ecosystem** into a React application using Vite.
 
 This example is part of the [Cosmos Playground](https://github.com/TuwaIO/cosmos-playground) monorepo.
 
@@ -105,8 +105,6 @@ If you find this library useful, please consider supporting its development. Eve
 [**➡️ View Support Options**](https://github.com/TuwaIO/workflows/blob/main/Donation.md)
 
 ---
-
-Built with ❤️ using the **Pulsar & Nova** ecosystem.
 
 ## License
 

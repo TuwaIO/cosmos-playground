@@ -17,7 +17,7 @@ pnpm dev
 ## 📦 What's Included
 
 - **React 19** with TypeScript
-- **Next.js 15** with App Directory
+- **Next.js 16** with App Directory
 - **ConnectKit** for wallet connection
 - **Pulsar Engine** for core tracking logic
 - **Nova UI Kit** for pre-built React components
@@ -115,8 +115,6 @@ If you find this library useful, please consider supporting its development. Eve
 [**➡️ View Support Options**](https://github.com/TuwaIO/workflows/blob/main/Donation.md)
 
 ---
-
-Built with ❤️ using the **Pulsar & Nova** ecosystem.
 
 ## License
 

@@ -50,5 +50,3 @@ If you find this library useful, please consider supporting its development. Eve
 ## License
 
 [Apache License 2.0](./LICENSE)
-
-Built with ❤️ by TUWA.
