@@ -3,8 +3,8 @@
 'use client';
 
 import { TxActionButton } from '@tuwaio/nova-transactions';
-import { TransactionAdapter } from '@tuwaio/pulsar-core';
-import { createViemClient } from '@tuwaio/pulsar-evm';
+import { OrbitAdapter } from '@tuwaio/orbit-core';
+import { createViemClient } from '@tuwaio/orbit-evm';
 import { ReactNode, useEffect, useState } from 'react';
 import { Client } from 'viem';
 import { readContract } from 'viem/actions';
@@ -18,7 +18,7 @@ import { usePulsarStore } from '@/hooks/txTrackingHooks';
 import { txActions, TxType } from '@/transactions/actions';
 
 export const TransactionsBlockWrapper = ({ connectWidget }: { connectWidget: ReactNode }) => {
-  const handleTransaction = usePulsarStore((state) => state.handleTransaction);
+  const executeTxAction = usePulsarStore((state) => state.executeTxAction);
   const transactionsPool = usePulsarStore((state) => state.transactionsPool);
   const getLastTxKey = usePulsarStore((state) => state.getLastTxKey);
 
@@ -53,14 +53,14 @@ export const TransactionsBlockWrapper = ({ connectWidget }: { connectWidget: Rea
   const handleIncrement = async () => {
     if (currentCount === null) return;
 
-    await handleTransaction({
+    await executeTxAction({
       actionFunction: txActions.increment,
       onSuccessCallback: (tx) => {
         console.log(`Increment tx succeed, ${tx.payload.value}`);
       },
       params: {
         type: TxType.increment,
-        adapter: TransactionAdapter.EVM,
+        adapter: OrbitAdapter.EVM,
         desiredChainID: sepolia.id,
         title: ['Incrementing', 'Incremented', 'Error when increment', 'Increment tx replaced'],
         description: [

@@ -58,6 +58,8 @@ src/
 
 ## 📚 Core Packages Used
 
+- `@tuwaio/orbit-core`: The core, network adapters utils.
+- `@tuwaio/orbit-evm`: EVM, network adapter utils.
 - `@tuwaio/pulsar-core`: The core, chain-agnostic tracking engine.
 - `@tuwaio/pulsar-evm`: Adapter for EVM-compatible chains, including trackers for Gelato and Safe.
 - `@tuwaio/pulsar-react`: React hooks for integrating your app with the Pulsar engine.
@@ -79,7 +81,7 @@ npm install -g pnpm
 
 ## 🔧 Environment Variables
 
-Create a `.env.local` file in the project root:
+Create a `.env` file in the project root:
 
 ```env
 # Required: Get a Project ID from [https://cloud.walletconnect.com](https://cloud.walletconnect.com)

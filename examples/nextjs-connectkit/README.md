@@ -56,13 +56,6 @@ src/
 └── transactions/  # Logic for defining transaction actions and callbacks
 ```
 
-## 📚 Core Packages Used
-
-- `@tuwaio/pulsar-core`: The core, chain-agnostic tracking engine.
-- `@tuwaio/pulsar-evm`: Adapter for EVM-compatible chains, including trackers for Gelato and Safe.
-- `@tuwaio/pulsar-react`: React hooks for integrating your app with the Pulsar engine.
-- `@tuwaio/nova-transactions`: Pre-built UI components (Modals, Toasts, Buttons, etc.).
-
 ## ⚡ Prerequisites
 
 Make sure you have the following installed:

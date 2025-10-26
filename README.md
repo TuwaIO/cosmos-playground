@@ -28,12 +28,12 @@ The entire setup process is streamlined, bringing the world of blockchain develo
 
 All examples are built with **Pulsar** for seamless transaction tracking and **Nova** for a polished UI.
 
-- **nextjs-all**: A Next.js example showcasing dynamic switching between Solana and EVM adapters with animated transitions.
+- **nextjs-tuwa**: A Next.js example showcasing dynamic switching between Solana and EVM adapters.
 - **nextjs-connectkit**: An example demonstrating integration with Next.js and ConnectKit.
-- **nextjs-dynamic**: An example for integrating with Next.js and the Dynamic wallet.
 - **nextjs-rainbowkit**: A Next.js project featuring the popular RainbowKit library.
 - **nextjs-solana**: A Next.js example demonstrating transaction tracking on the Solana network.
-- **vite-rainbowkit**: A simple Vite-based example with RainbowKit.
+- **nextjs-evm**: A Next.js example demonstrating transaction tracking on the EVM networks.
+- **vite-tuwa**: A simple Vite-based example with Nova Connect.
 
 -----
 

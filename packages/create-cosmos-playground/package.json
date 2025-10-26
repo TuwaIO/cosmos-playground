@@ -10,6 +10,14 @@
     "playground",
     "web3 transactions tracking"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TuwaIO/cosmos-playground.git"
+  },
+  "homepage": "https://github.com/TuwaIO/cosmos-playground",
+  "bugs": {
+    "url": "https://github.com/TuwaIO/cosmos-playground/issues"
+  },
   "author": "Oleksandr Tkach",
   "license": "Apache-2.0",
   "bin": {

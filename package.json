@@ -1,5 +1,5 @@
 {
-  "name": "@tuwaio/web3-transactions-tracking-examples",
+  "name": "@tuwaio/cosmos-playground",
   "version": "0.0.1",
   "private": true,
   "author": "Oleksandr Tkach",
@@ -14,11 +14,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TuwaIO/web3-transactions-tracking-examples.git"
+    "url": "git+https://github.com/TuwaIO/cosmos-playground.git"
   },
-  "homepage": "https://github.com/TuwaIO/web3-transactions-tracking-examples",
+  "homepage": "https://github.com/TuwaIO/cosmos-playground",
   "bugs": {
-    "url": "https://github.com/TuwaIO/web3-transactions-tracking/issues"
+    "url": "https://github.com/TuwaIO/cosmos-playground/issues"
   },
   "contributors": [
     {

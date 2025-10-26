@@ -11,12 +11,12 @@ async function main() {
   console.log('✨ Creating a new Cosmos Playground project...');
 
   const availableTemplates = [
-    'nextjs-all',
+    'nextjs-tuwa',
     'nextjs-connectkit',
-    'nextjs-dynamic',
     'nextjs-rainbowkit',
     'nextjs-solana',
-    'vite-rainbowkit',
+    'nextjs-evm',
+    'vite-tuwa',
   ];
 
   const templateResponse = await prompts({
