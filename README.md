@@ -47,8 +47,8 @@ If you find this library useful, please consider supporting its development. Eve
 
 ---
 
-Built with ❤️ using the **Pulsar & Nova** ecosystem.
-
 ## License
 
 [Apache License 2.0](./LICENSE)
+
+Built with ❤️ by TUWA.
