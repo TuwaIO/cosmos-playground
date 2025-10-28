@@ -106,11 +106,13 @@ pnpm build
 
 For detailed documentation and advanced usage:
 
-- [Pulsar & Nova Documentation](https://docs.tuwa.io/)
+- [Orbit Documentation](https://orbit.docs.tuwa.io/)
+- [Satellite Documentation](https://satellite.docs.tuwa.io/)
+- [Pulsar Documentation](https://pulsar.docs.tuwa.io/)
+- [Nova Documentation](https://stories.tuwa.io/?path=/docs/introduction--docs)
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Wagmi Documentation](https://wagmi.sh/)
 - [Gill Documentation](https://www.gillsdk.com/)
-- [Satellite Connect](https://satellite.docs.tuwa.io/)
 
 ## 🤝 Contributing & Support
 

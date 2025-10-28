@@ -91,9 +91,11 @@ _Note: Vite requires environment variables to be prefixed with `VITE_`.\_
 
 For detailed documentation and advanced usage:
 
-- [Pulsar & Nova Documentation](https://docs.tuwa.io/)
+- [Orbit Documentation](https://orbit.docs.tuwa.io/)
+- [Satellite Documentation](https://satellite.docs.tuwa.io/)
+- [Pulsar Documentation](https://pulsar.docs.tuwa.io/)
+- [Nova Documentation](https://stories.tuwa.io/?path=/docs/introduction--docs)
 - [Vite Documentation](https://vitejs.dev/)
-- [Satellite Connect](https://satellite.docs.tuwa.io/)
 - [Wagmi Documentation](https://wagmi.sh/)
 
 ## 🤝 Contributing & Support

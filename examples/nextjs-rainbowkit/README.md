@@ -110,7 +110,9 @@ pnpm build
 
 For detailed documentation and advanced usage:
 
-- [Pulsar & Nova Documentation](https://docs.tuwa.io/)
+- [Orbit Documentation](https://orbit.docs.tuwa.io/)
+- [Pulsar Documentation](https://pulsar.docs.tuwa.io/)
+- [Nova Documentation](https://stories.tuwa.io/?path=/docs/introduction--docs)
 - [Next.js Documentation](https://nextjs.org/docs)
 - [RainbowKit Documentation](https://rainbowkit.com/)
 - [Wagmi Documentation](https://wagmi.sh/)
