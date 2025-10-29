@@ -38,7 +38,7 @@
     "@tuwaio/orbit-evm": "^0.1.2",
     "@tuwaio/orbit-solana": "^0.1.1",
     "@tuwaio/satellite-core": "^0.1.2",
-    "@tuwaio/satellite-evm": "^0.1.4",
+    "@tuwaio/satellite-evm": "^0.1.5",
     "@tuwaio/satellite-solana": "^0.1.2",
     "@tuwaio/satellite-siwe-next-auth": "^0.1.2",
     "@tuwaio/pulsar-core": "^0.2.2",

@@ -36,7 +36,16 @@ export const appEVMChains = [
 
 export const wagmiConfig = createConfig({
   connectors: initAllConnectors({
-    ...appConfig,
+    initialParameters: {
+      ...appConfig,
+    },
+    geminiParameters: {
+      appMetadata: {
+        name: appConfig.appName,
+        description: 'TUWA Demo App',
+        url: process.env.NODE_ENV === 'development' ? 'http://localhost:3000/' : 'https://demo.tuwa.io/',
+      },
+    },
   }),
   transports: createDefaultTransports(appEVMChains),
   chains: appEVMChains,
