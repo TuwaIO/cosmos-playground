@@ -1,7 +1,7 @@
 'use client';
 
 import { NovaConnectProvider, NovaConnectProviderProps } from '@tuwaio/nova-connect';
-import { EVMWalletsWatcher } from '@tuwaio/nova-connect/evm';
+import { EVMConnectorsWatcher } from '@tuwaio/nova-connect/evm';
 import { SatelliteConnectProvider } from '@tuwaio/nova-connect/satellite';
 import { satelliteEVMAdapter } from '@tuwaio/satellite-evm';
 import { useSiweAuth } from '@tuwaio/satellite-siwe-next-auth';
@@ -20,7 +20,7 @@ export function SatelliteConnectProviders({ children }: { children: React.ReactN
       adapter={[satelliteEVMAdapter(wagmiConfig, enabled ? signInWithSiwe : undefined)]}
       autoConnect={true}
     >
-      <EVMWalletsWatcher wagmiConfig={wagmiConfig} siwe={{ isSignedIn, isRejected, enabled }} />
+      <EVMConnectorsWatcher wagmiConfig={wagmiConfig} siwe={{ isSignedIn, isRejected, enabled }} />
       <NovaTransactionsProvider />
       <NovaConnectProvider
         appChains={appEVMChains}

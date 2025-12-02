@@ -2,7 +2,7 @@
 
 import { NovaConnectProvider, NovaConnectProviderProps } from '@tuwaio/nova-connect';
 import { SatelliteConnectProvider } from '@tuwaio/nova-connect/satellite';
-import { SolanaWalletsWatcher } from '@tuwaio/nova-connect/solana';
+import { SolanaConnectorsWatcher } from '@tuwaio/nova-connect/solana';
 import { satelliteSolanaAdapter } from '@tuwaio/satellite-solana';
 
 import { solanaRPCUrls } from '@/configs/appConfig';
@@ -15,7 +15,7 @@ export function SatelliteConnectProviders({ children }: { children: React.ReactN
 
   return (
     <SatelliteConnectProvider adapter={[satelliteSolanaAdapter({ rpcUrls: solanaRPCUrls })]} autoConnect={true}>
-      <SolanaWalletsWatcher />
+      <SolanaConnectorsWatcher />
       <NovaTransactionsProvider />
       <NovaConnectProvider
         solanaRPCUrls={solanaRPCUrls}

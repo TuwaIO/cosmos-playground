@@ -1,5 +1,6 @@
-import { createDefaultTransports, initAllConnectors } from '@tuwaio/satellite-evm';
-import { createConfig } from '@wagmi/core';
+import { createDefaultTransports, impersonated, safeSdkOptions } from '@tuwaio/satellite-evm';
+import { baseAccount, safe, walletConnect } from '@wagmi/connectors';
+import { createConfig, injected } from '@wagmi/core';
 import {
   arbitrum,
   arbitrumSepolia,
@@ -17,11 +18,14 @@ import {
 
 export const appConfig = {
   appName: 'Satellite EVM Test App',
-  projectId: process.env.VITE_WALLET_PROJECT_ID ?? '9077e559e63e099f496b921a027d0f04',
+  appDescription: 'TUWA Demo App',
+  projectId: '9077e559e63e099f496b921a027d0f04',
+  appLogoUrl: 'https://raw.githubusercontent.com/TuwaIO/workflows/refs/heads/main/preview/preview-logo.png',
+  appUrl: 'https://demo.tuwa.io/',
 };
 
 export const solanaRPCUrls = {
-  mainnet: `https://solana-mainnet.g.alchemy.com/v2/${process.env.VITE_ALCHEMY_KEY}`,
+  // mainnet: `https://solana-mainnet.g.alchemy.com/v2/${process.env.VITE_ALCHEMY_KEY}`,
   devnet: 'https://api.devnet.solana.com',
 };
 
@@ -40,18 +44,26 @@ export const appEVMChains = [
 ] as readonly [Chain, ...Chain[]];
 
 export const wagmiConfig = createConfig({
-  connectors: initAllConnectors({
-    initialParameters: {
-      ...appConfig,
-    },
-    geminiParameters: {
-      appMetadata: {
+  connectors: [
+    injected(),
+    baseAccount({
+      appName: appConfig.appName,
+      appLogoUrl: appConfig.appLogoUrl,
+    }),
+    safe({
+      ...safeSdkOptions,
+    }),
+    walletConnect({
+      projectId: appConfig.projectId,
+      metadata: {
         name: appConfig.appName,
-        description: 'TUWA Demo App',
-        url: process.env.NODE_ENV === 'development' ? 'http://localhost:3000/' : 'https://demo.tuwa.io/',
+        description: appConfig.appDescription,
+        url: appConfig.appUrl,
+        icons: [appConfig.appLogoUrl],
       },
-    },
-  }),
+    }),
+    impersonated({}),
+  ],
   transports: createDefaultTransports(appEVMChains),
   chains: appEVMChains,
   ssr: true,

@@ -3,18 +3,22 @@
 import { WalletIcon } from '@heroicons/react/24/outline';
 import { useSatelliteConnectStore } from '@tuwaio/nova-connect/satellite';
 import { cn } from '@tuwaio/nova-core';
-import { getAdapterFromWalletType, OrbitAdapter } from '@tuwaio/orbit-core';
+import { getAdapterFromConnectorType, OrbitAdapter } from '@tuwaio/orbit-core';
 import { motion } from 'framer-motion';
 
 import { TransactionsBlockWrapper as TransactionsBlockRainbowKit } from '@/components/evm/TransactionsBlockWrapper';
 
 export default function HomePage() {
-  const activeWallet = useSatelliteConnectStore((store) => store.activeWallet);
+  const activeConnection = useSatelliteConnectStore((store) => store.activeConnection);
 
   return (
     <div className="w-full flex justify-center items-center bg-gradient-to-br from-[var(--tuwa-bg-secondary)] to-[var(--tuwa-bg-muted)] gap-4 flex-wrap relative min-h-[calc(100dvh-65px)]">
-      {activeWallet ? (
-        <>{getAdapterFromWalletType(activeWallet.walletType) === OrbitAdapter.EVM && <TransactionsBlockRainbowKit />}</>
+      {activeConnection ? (
+        <>
+          {getAdapterFromConnectorType(activeConnection.connectorType) === OrbitAdapter.EVM && (
+            <TransactionsBlockRainbowKit />
+          )}
+        </>
       ) : (
         <motion.div
           initial={{ y: 20, opacity: 0 }}

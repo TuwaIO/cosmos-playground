@@ -1,11 +1,11 @@
 'use client';
 
 import { useWalletAccountTransactionSendingSigner } from '@solana/react';
-import { Wallet } from '@tuwaio/nova-connect/satellite';
+import { Connection } from '@tuwaio/nova-connect/satellite';
 import { TxActionButton as TAB } from '@tuwaio/nova-transactions';
 import { OrbitAdapter } from '@tuwaio/orbit-core';
 import { createSolanaClientWithCache } from '@tuwaio/orbit-solana';
-import { SolanaWallet } from '@tuwaio/satellite-solana';
+import { SolanaConnection } from '@tuwaio/satellite-solana';
 import { UiWalletAccount } from '@wallet-standard/react';
 import { Address } from 'gill';
 import React from 'react';
@@ -14,14 +14,20 @@ import { usePulsarStore } from '../../hooks/pulsarStoreHook';
 import { useStore } from '../../hooks/storeHook';
 import { txActions, TxType } from '../../transactions';
 
-export const TxActionButtonClose = ({ activeWallet, solanatest }: { activeWallet: Wallet; solanatest: Address }) => {
+export const TxActionButtonClose = ({
+  activeWallet,
+  solanatest,
+}: {
+  activeWallet: Connection;
+  solanatest: Address;
+}) => {
   const executeTxAction = usePulsarStore((state) => state.executeTxAction);
   const transactionsPool = usePulsarStore((state) => state.transactionsPool);
   const getLastTxKey = usePulsarStore((state) => state.getLastTxKey);
   const getAccounts = useStore((state) => state.getAccounts);
   const removeAccFromStore = useStore((state) => state.removeAccFromStore);
 
-  const activeWalletSolana = activeWallet as SolanaWallet;
+  const activeWalletSolana = activeWallet as SolanaConnection;
 
   const signer = useWalletAccountTransactionSendingSigner(
     activeWalletSolana.connectedAccount as UiWalletAccount,

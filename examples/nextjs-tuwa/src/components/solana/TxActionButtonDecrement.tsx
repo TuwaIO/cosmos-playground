@@ -2,11 +2,11 @@
 
 import { ArrowDownIcon } from '@heroicons/react/24/solid';
 import { useWalletAccountTransactionSendingSigner } from '@solana/react';
-import { Wallet } from '@tuwaio/nova-connect/satellite';
+import { Connection } from '@tuwaio/nova-connect/satellite';
 import { TxActionButton as TAB } from '@tuwaio/nova-transactions';
 import { OrbitAdapter } from '@tuwaio/orbit-core';
 import { createSolanaClientWithCache } from '@tuwaio/orbit-solana';
-import { SolanaWallet } from '@tuwaio/satellite-solana';
+import { SolanaConnection } from '@tuwaio/satellite-solana';
 import { UiWalletAccount } from '@wallet-standard/react';
 import { Address } from 'gill';
 import React from 'react';
@@ -20,7 +20,7 @@ export const TxActionButtonDecrement = ({
   currentCount,
   solanatest,
 }: {
-  activeWallet: Wallet;
+  activeWallet: Connection;
   currentCount: number;
   solanatest: Address;
 }) => {
@@ -29,7 +29,7 @@ export const TxActionButtonDecrement = ({
   const getLastTxKey = usePulsarStore((state) => state.getLastTxKey);
   const getAccounts = useStore((state) => state.getAccounts);
 
-  const activeWalletSolana = activeWallet as SolanaWallet;
+  const activeWalletSolana = activeWallet as SolanaConnection;
 
   const signer = useWalletAccountTransactionSendingSigner(
     activeWalletSolana.connectedAccount as UiWalletAccount,

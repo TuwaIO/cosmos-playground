@@ -4,7 +4,7 @@ import { useSatelliteConnectStore } from '@tuwaio/nova-connect/satellite';
 import { textCenterEllipsis } from '@tuwaio/nova-core';
 import { HashLink } from '@tuwaio/nova-transactions';
 import { OrbitAdapter, selectAdapterByKey } from '@tuwaio/orbit-core';
-import { SolanaWallet } from '@tuwaio/satellite-solana';
+import { SolanaConnection } from '@tuwaio/satellite-solana';
 import { address } from 'gill';
 import { useEffect } from 'react';
 
@@ -17,7 +17,7 @@ import { TxActionButtonIncrement } from './TxActionButtonIncrement';
 import { TxActionButtonInitialize } from './TxActionButtonInitialize';
 
 export const TransactionsBlockWrapper = () => {
-  const activeWallet = useSatelliteConnectStore((store) => store.activeWallet);
+  const activeConnection = useSatelliteConnectStore((store) => store.activeConnection);
   const accounts = useStore((state) => state.accounts);
   const getAccounts = useStore((state) => state.getAccounts);
   const accountsLoading = useStore((state) => state.accountsLoading);
@@ -28,7 +28,7 @@ export const TransactionsBlockWrapper = () => {
     adapter: getAdapter(),
   });
 
-  const activeWalletSolana = activeWallet as SolanaWallet;
+  const activeWalletSolana = activeConnection as SolanaConnection;
 
   useEffect(() => {
     getAccounts();

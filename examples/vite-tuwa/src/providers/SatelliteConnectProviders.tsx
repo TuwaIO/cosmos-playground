@@ -1,9 +1,9 @@
 'use client';
 
 import { NovaConnectProvider, NovaConnectProviderProps } from '@tuwaio/nova-connect';
-import { EVMWalletsWatcher } from '@tuwaio/nova-connect/evm';
+import { EVMConnectorsWatcher } from '@tuwaio/nova-connect/evm';
 import { SatelliteConnectProvider } from '@tuwaio/nova-connect/satellite';
-import { SolanaWalletsWatcher } from '@tuwaio/nova-connect/solana';
+import { SolanaConnectorsWatcher } from '@tuwaio/nova-connect/solana';
 import { satelliteEVMAdapter } from '@tuwaio/satellite-evm';
 import { satelliteSolanaAdapter } from '@tuwaio/satellite-solana';
 
@@ -20,8 +20,8 @@ export function SatelliteConnectProviders({ children }: { children: React.ReactN
       adapter={[satelliteEVMAdapter(wagmiConfig), satelliteSolanaAdapter({ rpcUrls: solanaRPCUrls })]}
       autoConnect={true}
     >
-      <EVMWalletsWatcher wagmiConfig={wagmiConfig} />
-      <SolanaWalletsWatcher />
+      <EVMConnectorsWatcher wagmiConfig={wagmiConfig} />
+      <SolanaConnectorsWatcher />
       <NovaTransactionsProvider />
       <NovaConnectProvider
         appChains={appEVMChains}

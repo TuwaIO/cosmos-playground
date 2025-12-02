@@ -12,8 +12,6 @@ async function main() {
 
   const availableTemplates = [
     'nextjs-tuwa',
-    'nextjs-connectkit',
-    'nextjs-rainbowkit',
     'nextjs-solana',
     'nextjs-evm',
     'vite-tuwa',

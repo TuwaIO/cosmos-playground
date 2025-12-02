@@ -3,11 +3,11 @@
 import { DocumentDuplicateIcon } from '@heroicons/react/24/solid';
 import { useWalletAccountTransactionSendingSigner } from '@solana/react';
 import { install as installEd25519 } from '@solana/webcrypto-ed25519-polyfill';
-import { Wallet } from '@tuwaio/nova-connect/satellite';
+import { Connection } from '@tuwaio/nova-connect/satellite';
 import { TxActionButton as TAB } from '@tuwaio/nova-transactions';
 import { OrbitAdapter } from '@tuwaio/orbit-core';
 import { createSolanaClientWithCache } from '@tuwaio/orbit-solana';
-import { SolanaWallet } from '@tuwaio/satellite-solana';
+import { SolanaConnection } from '@tuwaio/satellite-solana';
 import { UiWalletAccount } from '@wallet-standard/react';
 import { generateKeyPairSigner } from 'gill';
 import React from 'react';
@@ -19,13 +19,13 @@ import { txActions, TxType } from '../../transactions';
 // polyfill ed25519 for browsers (to allow `generateKeyPairSigner` to work)
 installEd25519();
 
-export const TxActionButtonInitialize = ({ activeWallet }: { activeWallet: Wallet }) => {
+export const TxActionButtonInitialize = ({ activeWallet }: { activeWallet: Connection }) => {
   const executeTxAction = usePulsarStore((state) => state.executeTxAction);
   const transactionsPool = usePulsarStore((state) => state.transactionsPool);
   const getLastTxKey = usePulsarStore((state) => state.getLastTxKey);
   const getAccounts = useStore((state) => state.getAccounts);
 
-  const activeWalletSolana = activeWallet as SolanaWallet;
+  const activeWalletSolana = activeWallet as SolanaConnection;
 
   const signer = useWalletAccountTransactionSendingSigner(
     activeWalletSolana.connectedAccount as UiWalletAccount,

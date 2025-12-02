@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 import { Client } from 'viem';
 import { readContract } from 'viem/actions';
 import { sepolia } from 'viem/chains';
-import { useAccount } from 'wagmi';
+import { useConnection } from 'wagmi';
 
 import { CounterAbi } from '@/abis/CounterAbi';
 import { appEVMChains } from '@/configs/appConfig';
@@ -25,7 +25,7 @@ export const TransactionsBlockWrapper = () => {
   const [currentCount, setCurrentCount] = useState<number | null>(null);
   const [isLoadingCount, setIsLoadingCount] = useState(true);
 
-  const { address } = useAccount();
+  const { address } = useConnection();
 
   const fetchCurrentCount = async () => {
     try {
