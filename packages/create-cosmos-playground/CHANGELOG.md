@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.9](https://github.com/TuwaIO/cosmos-playground/compare/create-cosmos-playground-v0.0.8...create-cosmos-playground-v0.0.9) (2025-12-02)
+
+
+### Bug Fixes
+
+* update packages and logic; remove connectkit and rainbowkit ([ef37dc4](https://github.com/TuwaIO/cosmos-playground/commit/ef37dc44a873d6a03306981c86d190574a860198))
+
 ## [0.0.8](https://github.com/TuwaIO/cosmos-playground/compare/create-cosmos-playground-v0.0.7...create-cosmos-playground-v0.0.8) (2025-10-26)
 
 
