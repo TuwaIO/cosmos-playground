@@ -1,6 +1,6 @@
 {
   "name": "@tuwaio/create-cosmos-playground",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "A CLI tool to scaffold new Cosmos Playground examples.",
   "keywords": [
     "cli",
