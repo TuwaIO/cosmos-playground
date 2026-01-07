@@ -11,6 +11,8 @@ import { TransactionsBlockWrapper as TransactionsBlockRainbowKit } from '@/compo
 export default function HomePage() {
   const activeConnection = useSatelliteConnectStore((store) => store.activeConnection);
 
+  console.log(activeConnection);
+
   return (
     <div className="w-full flex justify-center items-center bg-gradient-to-br from-[var(--tuwa-bg-secondary)] to-[var(--tuwa-bg-muted)] gap-4 flex-wrap relative min-h-[calc(100dvh-65px)]">
       {activeConnection ? (
