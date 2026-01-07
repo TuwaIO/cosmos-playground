@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.11](https://github.com/TuwaIO/cosmos-playground/compare/create-cosmos-playground-v0.0.10...create-cosmos-playground-v0.0.11) (2026-01-07)
+
+
+### Bug Fixes
+
+* update packages ([#12](https://github.com/TuwaIO/cosmos-playground/issues/12)) ([cfdd03b](https://github.com/TuwaIO/cosmos-playground/commit/cfdd03b68b18a721a74809879a643fb083487542))
+
 ## [0.0.10](https://github.com/TuwaIO/cosmos-playground/compare/create-cosmos-playground-v0.0.9...create-cosmos-playground-v0.0.10) (2025-12-15)
 
 
