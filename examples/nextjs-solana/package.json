@@ -40,7 +40,7 @@
     "@tuwaio/pulsar-react": "^0.2.3",
     "@tuwaio/pulsar-solana": "^0.3.4",
     "@tuwaio/nova-core": "^0.2.3",
-    "@tuwaio/nova-connect": "^0.2.5",
+    "@tuwaio/nova-connect": "^0.2.6",
     "@tuwaio/nova-transactions": "^0.2.4",
     "@wallet-standard/react": "^1.0.1",
     "@solana/webcrypto-ed25519-polyfill": "^5.1.0",
