@@ -12,7 +12,7 @@ importers:
     dependencies:
       '@base-org/account':
         specifier: ^2.5.1
-        version: 2.5.1(@types/react@19.2.7)(bufferutil@4.0.9)(fastestsmallesttextencoderdecoder@1.0.22)(immer@11.1.3)(react@19.2.3)(typescript@5.9.3)(use-sync-external-store@1.4.0(react@19.2.3))(utf-8-validate@5.0.10)(ws@8.18.3(bufferutil@4.0.9)(utf-8-validate@5.0.10))(zod@3.25.76)
+        version: 2.5.1(@types/react@19.2.7)(bufferutil@4.0.9)(fastestsmallesttextencoderdecoder@1.0.22)(immer@11.1.3)(react@19.2.3)(typescript@5.9.3)(use-sync-external-store@1.4.0(react@19.2.3))(utf-8-validate@5.0.10)(ws@8.18.3(bufferutil@4.0.9)(utf-8-validate@5.0.10))(zod@4.1.13)
       '@bgd-labs/react-web3-icons':
         specifier: ^1.58.0
         version: 1.58.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -33,16 +33,16 @@ importers:
         version: 2.2.6(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@safe-global/safe-apps-provider':
         specifier: ^0.18.6
-        version: 0.18.6(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)
+        version: 0.18.6(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.1.13)
       '@safe-global/safe-apps-sdk':
         specifier: ^9.1.0
-        version: 9.1.0(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)
+        version: 9.1.0(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.1.13)
       '@tanstack/react-query':
         specifier: ^5.90.16
         version: 5.90.16(react@19.2.3)
       '@tuwaio/nova-connect':
-        specifier: ^0.2.6
-        version: 0.2.6(9881ee453d57258c869700d5d0bdd72f)
+        specifier: ^0.2.7
+        version: 0.2.7(54425ab2cdfee06fb0d43e782c567e31)
       '@tuwaio/nova-core':
         specifier: ^0.2.3
         version: 0.2.3(@radix-ui/react-dialog@1.1.15(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(clsx@2.1.1)(framer-motion@12.24.8(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)(tailwind-merge@3.4.0)
@@ -54,13 +54,13 @@ importers:
         version: 0.2.2
       '@tuwaio/orbit-evm':
         specifier: ^0.2.5
-        version: 0.2.5(@wagmi/core@3.1.0(@tanstack/query-core@5.90.16)(@types/react@19.2.7)(immer@11.1.3)(ox@0.11.1(typescript@5.9.3)(zod@3.25.76))(react@19.2.3)(typescript@5.9.3)(use-sync-external-store@1.4.0(react@19.2.3))(viem@2.43.5(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)))(viem@2.43.5(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76))
+        version: 0.2.5(@wagmi/core@3.1.0(@tanstack/query-core@5.90.16)(@types/react@19.2.7)(immer@11.1.3)(ox@0.11.1(typescript@5.9.3)(zod@4.1.13))(react@19.2.3)(typescript@5.9.3)(use-sync-external-store@1.4.0(react@19.2.3))(viem@2.43.5(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.1.13)))(viem@2.43.5(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.1.13))
       '@tuwaio/pulsar-core':
         specifier: ^0.3.2
         version: 0.3.2(@tuwaio/orbit-core@0.2.2)(dayjs@1.11.19)(immer@11.1.3)(zustand@5.0.9(@types/react@19.2.7)(immer@11.1.3)(react@19.2.3)(use-sync-external-store@1.4.0(react@19.2.3)))
       '@tuwaio/pulsar-evm':
         specifier: ^0.2.4
-        version: 0.2.4(fd19baeec72d7c6756d0a1181fb72d35)
+        version: 0.2.4(accd590d10424e23dbf13bdd4012447a)
       '@tuwaio/pulsar-react':
         specifier: ^0.2.3
         version: 0.2.3(react@19.2.3)
@@ -69,22 +69,22 @@ importers:
         version: 0.2.2(@tuwaio/orbit-core@0.2.2)(immer@11.1.3)(zustand@5.0.9(@types/react@19.2.7)(immer@11.1.3)(react@19.2.3)(use-sync-external-store@1.4.0(react@19.2.3)))
       '@tuwaio/satellite-evm':
         specifier: ^0.2.5
-        version: 0.2.5(deeeef59c759d032c9d22712d605f34c)
+        version: 0.2.5(250db4cf6cf098f3ebd52e3bc3835866)
       '@tuwaio/satellite-react':
         specifier: ^0.2.4
-        version: 0.2.4(3d0184fff19cf749d7e508ba5037fb84)
+        version: 0.2.4(81fdd580727b297a03bb65959d8362cf)
       '@tuwaio/satellite-siwe-next-auth':
         specifier: ^0.2.4
-        version: 0.2.4(@wagmi/core@3.1.0(@tanstack/query-core@5.90.16)(@types/react@19.2.7)(immer@11.1.3)(ox@0.11.1(typescript@5.9.3)(zod@3.25.76))(react@19.2.3)(typescript@5.9.3)(use-sync-external-store@1.4.0(react@19.2.3))(viem@2.43.5(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)))(iron-session@8.0.4)(next@16.1.1(@babel/core@7.28.5)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)(siwe@3.0.0(ethers@6.13.4(bufferutil@4.0.9)(utf-8-validate@5.0.10)))(viem@2.43.5(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76))(wagmi@3.2.0)
+        version: 0.2.4(@wagmi/core@3.1.0(@tanstack/query-core@5.90.16)(@types/react@19.2.7)(immer@11.1.3)(ox@0.11.1(typescript@5.9.3)(zod@4.1.13))(react@19.2.3)(typescript@5.9.3)(use-sync-external-store@1.4.0(react@19.2.3))(viem@2.43.5(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.1.13)))(iron-session@8.0.4)(next@16.1.1(@babel/core@7.28.5)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)(siwe@3.0.0(ethers@6.13.4(bufferutil@4.0.9)(utf-8-validate@5.0.10)))(viem@2.43.5(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.1.13))(wagmi@3.2.0)
       '@wagmi/connectors':
         specifier: ^7.0.7
-        version: 7.0.7(1a0cc6c155feca9c9cdc5a40d02fdad6)
+        version: 7.0.7(7a57189480c0bfccd2d0fa8b197c8555)
       '@wagmi/core':
         specifier: ^3.1.0
-        version: 3.1.0(@tanstack/query-core@5.90.16)(@types/react@19.2.7)(immer@11.1.3)(ox@0.11.1(typescript@5.9.3)(zod@3.25.76))(react@19.2.3)(typescript@5.9.3)(use-sync-external-store@1.4.0(react@19.2.3))(viem@2.43.5(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76))
+        version: 3.1.0(@tanstack/query-core@5.90.16)(@types/react@19.2.7)(immer@11.1.3)(ox@0.11.1(typescript@5.9.3)(zod@4.1.13))(react@19.2.3)(typescript@5.9.3)(use-sync-external-store@1.4.0(react@19.2.3))(viem@2.43.5(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.1.13))
       '@walletconnect/ethereum-provider':
         specifier: ^2.23.1
-        version: 2.23.1(@types/react@19.2.7)(bufferutil@4.0.9)(react@19.2.3)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)
+        version: 2.23.1(@types/react@19.2.7)(bufferutil@4.0.9)(react@19.2.3)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.1.13)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -123,10 +123,10 @@ importers:
         version: 3.4.0
       viem:
         specifier: ^2.43.5
-        version: 2.43.5(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)
+        version: 2.43.5(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.1.13)
       wagmi:
         specifier: ^3.2.0
-        version: 3.2.0(10cdaa0653524715526c7db9184c365e)
+        version: 3.2.0(7eada2374d415667b4c57352f11de65c)
       zustand:
         specifier: ^5.0.9
         version: 5.0.9(@types/react@19.2.7)(immer@11.1.3)(react@19.2.3)(use-sync-external-store@1.4.0(react@19.2.3))
@@ -216,8 +216,8 @@ importers:
         specifier: ^5.1.0
         version: 5.1.0(typescript@5.9.3)
       '@tuwaio/nova-connect':
-        specifier: ^0.2.6
-        version: 0.2.6(54425ab2cdfee06fb0d43e782c567e31)
+        specifier: ^0.2.7
+        version: 0.2.7(54425ab2cdfee06fb0d43e782c567e31)
       '@tuwaio/nova-core':
         specifier: ^0.2.3
         version: 0.2.3(@radix-ui/react-dialog@1.1.15(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(clsx@2.1.1)(framer-motion@12.24.8(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)(tailwind-merge@3.4.0)
@@ -350,7 +350,7 @@ importers:
     dependencies:
       '@base-org/account':
         specifier: ^2.5.1
-        version: 2.5.1(@types/react@19.2.7)(bufferutil@4.0.9)(fastestsmallesttextencoderdecoder@1.0.22)(immer@11.1.3)(react@19.2.3)(typescript@5.9.3)(use-sync-external-store@1.4.0(react@19.2.3))(utf-8-validate@5.0.10)(ws@8.18.3(bufferutil@4.0.9)(utf-8-validate@5.0.10))(zod@4.1.13)
+        version: 2.5.1(@types/react@19.2.7)(bufferutil@4.0.9)(fastestsmallesttextencoderdecoder@1.0.22)(immer@11.1.3)(react@19.2.3)(typescript@5.9.3)(use-sync-external-store@1.4.0(react@19.2.3))(utf-8-validate@5.0.10)(ws@8.18.3(bufferutil@4.0.9)(utf-8-validate@5.0.10))(zod@3.25.76)
       '@bgd-labs/react-web3-icons':
         specifier: ^1.58.0
         version: 1.58.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -371,10 +371,10 @@ importers:
         version: 2.2.6(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@safe-global/safe-apps-provider':
         specifier: ^0.18.6
-        version: 0.18.6(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.1.13)
+        version: 0.18.6(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)
       '@safe-global/safe-apps-sdk':
         specifier: ^9.1.0
-        version: 9.1.0(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.1.13)
+        version: 9.1.0(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)
       '@solana/react':
         specifier: ^5.1.0
         version: 5.1.0(fastestsmallesttextencoderdecoder@1.0.22)(react@19.2.3)(typescript@5.9.3)
@@ -385,8 +385,8 @@ importers:
         specifier: ^5.90.16
         version: 5.90.16(react@19.2.3)
       '@tuwaio/nova-connect':
-        specifier: ^0.2.6
-        version: 0.2.6(54425ab2cdfee06fb0d43e782c567e31)
+        specifier: ^0.2.7
+        version: 0.2.7(9881ee453d57258c869700d5d0bdd72f)
       '@tuwaio/nova-core':
         specifier: ^0.2.3
         version: 0.2.3(@radix-ui/react-dialog@1.1.15(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(clsx@2.1.1)(framer-motion@12.24.8(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)(tailwind-merge@3.4.0)
@@ -398,7 +398,7 @@ importers:
         version: 0.2.2
       '@tuwaio/orbit-evm':
         specifier: ^0.2.5
-        version: 0.2.5(@wagmi/core@3.1.0(@tanstack/query-core@5.90.16)(@types/react@19.2.7)(immer@11.1.3)(ox@0.11.1(typescript@5.9.3)(zod@4.1.13))(react@19.2.3)(typescript@5.9.3)(use-sync-external-store@1.4.0(react@19.2.3))(viem@2.43.5(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.1.13)))(viem@2.43.5(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.1.13))
+        version: 0.2.5(@wagmi/core@3.1.0(@tanstack/query-core@5.90.16)(@types/react@19.2.7)(immer@11.1.3)(ox@0.11.1(typescript@5.9.3)(zod@3.25.76))(react@19.2.3)(typescript@5.9.3)(use-sync-external-store@1.4.0(react@19.2.3))(viem@2.43.5(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)))(viem@2.43.5(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76))
       '@tuwaio/orbit-solana':
         specifier: ^0.2.2
         version: 0.2.2(@tuwaio/orbit-core@0.2.2)(@wallet-standard/app@1.1.0)(@wallet-standard/ui-core@1.0.0)(@wallet-standard/ui-registry@1.0.1)(gill@0.14.0(@solana/sysvars@5.0.0(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3))(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(ws@8.18.3(bufferutil@4.0.9)(utf-8-validate@5.0.10)))
@@ -407,7 +407,7 @@ importers:
         version: 0.3.2(@tuwaio/orbit-core@0.2.2)(dayjs@1.11.19)(immer@11.1.3)(zustand@5.0.9(@types/react@19.2.7)(immer@11.1.3)(react@19.2.3)(use-sync-external-store@1.4.0(react@19.2.3)))
       '@tuwaio/pulsar-evm':
         specifier: ^0.2.4
-        version: 0.2.4(accd590d10424e23dbf13bdd4012447a)
+        version: 0.2.4(fd19baeec72d7c6756d0a1181fb72d35)
       '@tuwaio/pulsar-react':
         specifier: ^0.2.3
         version: 0.2.3(react@19.2.3)
@@ -419,22 +419,22 @@ importers:
         version: 0.2.2(@tuwaio/orbit-core@0.2.2)(immer@11.1.3)(zustand@5.0.9(@types/react@19.2.7)(immer@11.1.3)(react@19.2.3)(use-sync-external-store@1.4.0(react@19.2.3)))
       '@tuwaio/satellite-evm':
         specifier: ^0.2.5
-        version: 0.2.5(250db4cf6cf098f3ebd52e3bc3835866)
+        version: 0.2.5(deeeef59c759d032c9d22712d605f34c)
       '@tuwaio/satellite-react':
         specifier: ^0.2.4
-        version: 0.2.4(81fdd580727b297a03bb65959d8362cf)
+        version: 0.2.4(3d0184fff19cf749d7e508ba5037fb84)
       '@tuwaio/satellite-siwe-next-auth':
         specifier: ^0.2.4
-        version: 0.2.4(@wagmi/core@3.1.0(@tanstack/query-core@5.90.16)(@types/react@19.2.7)(immer@11.1.3)(ox@0.11.1(typescript@5.9.3)(zod@4.1.13))(react@19.2.3)(typescript@5.9.3)(use-sync-external-store@1.4.0(react@19.2.3))(viem@2.43.5(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.1.13)))(iron-session@8.0.4)(next@16.1.1(@babel/core@7.28.5)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)(siwe@3.0.0(ethers@6.13.4(bufferutil@4.0.9)(utf-8-validate@5.0.10)))(viem@2.43.5(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.1.13))(wagmi@3.2.0)
+        version: 0.2.4(@wagmi/core@3.1.0(@tanstack/query-core@5.90.16)(@types/react@19.2.7)(immer@11.1.3)(ox@0.11.1(typescript@5.9.3)(zod@3.25.76))(react@19.2.3)(typescript@5.9.3)(use-sync-external-store@1.4.0(react@19.2.3))(viem@2.43.5(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)))(iron-session@8.0.4)(next@16.1.1(@babel/core@7.28.5)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)(siwe@3.0.0(ethers@6.13.4(bufferutil@4.0.9)(utf-8-validate@5.0.10)))(viem@2.43.5(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76))(wagmi@3.2.0)
       '@tuwaio/satellite-solana':
         specifier: ^0.2.4
         version: 0.2.4(93bfcc36bff14f02241aaf089cbfd15b)
       '@wagmi/connectors':
         specifier: ^7.0.7
-        version: 7.0.7(7a57189480c0bfccd2d0fa8b197c8555)
+        version: 7.0.7(1a0cc6c155feca9c9cdc5a40d02fdad6)
       '@wagmi/core':
         specifier: ^3.1.0
-        version: 3.1.0(@tanstack/query-core@5.90.16)(@types/react@19.2.7)(immer@11.1.3)(ox@0.11.1(typescript@5.9.3)(zod@4.1.13))(react@19.2.3)(typescript@5.9.3)(use-sync-external-store@1.4.0(react@19.2.3))(viem@2.43.5(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.1.13))
+        version: 3.1.0(@tanstack/query-core@5.90.16)(@types/react@19.2.7)(immer@11.1.3)(ox@0.11.1(typescript@5.9.3)(zod@3.25.76))(react@19.2.3)(typescript@5.9.3)(use-sync-external-store@1.4.0(react@19.2.3))(viem@2.43.5(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76))
       '@wallet-standard/app':
         specifier: ^1.1.0
         version: 1.1.0
@@ -458,7 +458,7 @@ importers:
         version: 1.0.1
       '@walletconnect/ethereum-provider':
         specifier: ^2.23.1
-        version: 2.23.1(@types/react@19.2.7)(bufferutil@4.0.9)(react@19.2.3)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.1.13)
+        version: 2.23.1(@types/react@19.2.7)(bufferutil@4.0.9)(react@19.2.3)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -500,10 +500,10 @@ importers:
         version: 3.4.0
       viem:
         specifier: ^2.43.5
-        version: 2.43.5(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.1.13)
+        version: 2.43.5(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)
       wagmi:
         specifier: ^3.2.0
-        version: 3.2.0(7eada2374d415667b4c57352f11de65c)
+        version: 3.2.0(10cdaa0653524715526c7db9184c365e)
       zustand:
         specifier: ^5.0.9
         version: 5.0.9(@types/react@19.2.7)(immer@11.1.3)(react@19.2.3)(use-sync-external-store@1.4.0(react@19.2.3))
@@ -608,8 +608,8 @@ importers:
         specifier: ^5.90.16
         version: 5.90.16(react@19.2.3)
       '@tuwaio/nova-connect':
-        specifier: ^0.2.6
-        version: 0.2.6(54425ab2cdfee06fb0d43e782c567e31)
+        specifier: ^0.2.7
+        version: 0.2.7(54425ab2cdfee06fb0d43e782c567e31)
       '@tuwaio/nova-core':
         specifier: ^0.2.3
         version: 0.2.3(@radix-ui/react-dialog@1.1.15(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(clsx@2.1.1)(framer-motion@12.24.8(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)(tailwind-merge@3.4.0)
@@ -2928,8 +2928,8 @@ packages:
     peerDependencies:
       react: ^18 || ^19
 
-  '@tuwaio/nova-connect@0.2.6':
-    resolution: {integrity: sha512-pwdwNfgA1VUXGTKg8gTt3/PUrsUD8GdoWtIHJ3rbvRPmum2HubWPOAsoBuOH4fRMkMI91xpJZmLnivM3Cmv4qw==}
+  '@tuwaio/nova-connect@0.2.7':
+    resolution: {integrity: sha512-S4PVj3qx8b+WFboLQJn5IbSDq2/nBBR5vzEXbkRN8yRsJ1aEL55qQXlCZ6boDHaoUkP3W9xr/jya18YtXqGN2Q==}
     peerDependencies:
       '@bgd-labs/react-web3-icons': '>=1.5'
       '@emotion/is-prop-valid': 1.x.x
@@ -9280,7 +9280,7 @@ snapshots:
       '@tanstack/query-core': 5.90.16
       react: 19.2.3
 
-  '@tuwaio/nova-connect@0.2.6(54425ab2cdfee06fb0d43e782c567e31)':
+  '@tuwaio/nova-connect@0.2.7(54425ab2cdfee06fb0d43e782c567e31)':
     dependencies:
       '@bgd-labs/react-web3-icons': 1.58.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@emotion/is-prop-valid': 1.4.0
@@ -9310,7 +9310,7 @@ snapshots:
       gill: 0.14.0(@solana/sysvars@5.0.0(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3))(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(ws@8.18.3(bufferutil@4.0.9)(utf-8-validate@5.0.10))
       viem: 2.43.5(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.1.13)
 
-  '@tuwaio/nova-connect@0.2.6(9881ee453d57258c869700d5d0bdd72f)':
+  '@tuwaio/nova-connect@0.2.7(9881ee453d57258c869700d5d0bdd72f)':
     dependencies:
       '@bgd-labs/react-web3-icons': 1.58.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@emotion/is-prop-valid': 1.4.0
