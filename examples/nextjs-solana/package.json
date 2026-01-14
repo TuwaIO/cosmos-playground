@@ -27,7 +27,8 @@
     "start": "next start"
   },
   "dependencies": {
-    "@bgd-labs/react-web3-icons": "^1.58.0",
+    "@web3icons/react": "^4.1.12",
+    "@web3icons/common": "^0.11.41",
     "@heroicons/react": "^2.2.0",
     "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-select": "^2.2.6",
