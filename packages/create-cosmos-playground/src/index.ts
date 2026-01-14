@@ -69,9 +69,21 @@ async function main() {
     console.log(`\n📦 Installing dependencies with pnpm...`);
     await execa('pnpm', ['install'], { cwd: projectPath, stdio: 'inherit' });
 
-    console.log(`\nDone! Next steps:`);
+    console.log(`\n✅ Done! Next steps:`);
     console.log(`cd ./${projectName}`);
     console.log(`pnpm dev`);
+
+    console.log(`\n---------------------------------------------------------`);
+    console.log(`💡 Troubleshooting:`);
+    console.log(`If you find that the downloaded files are "Read-only" and you cannot edit them,`);
+    console.log(`please change the directory permissions by running:`);
+    console.log(`sudo chmod -R 777 ./`);
+
+    console.log(`\n❤️  Support us:`);
+    console.log(`If you enjoy using TUWA, please give us a star on GitHub:`);
+    console.log(`https://github.com/TuwaIO/nova-uikit`);
+    console.log(`---------------------------------------------------------`);
+
   } catch (error) {
     console.error(`\n❌ An error occurred: ${error}`);
     process.exit(1);

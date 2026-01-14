@@ -4,7 +4,7 @@
   "private": true,
   "author": "Oleksandr Tkach",
   "license": "Apache-2.0",
-  "packageManager": "pnpm@10.27.0",
+  "packageManager": "pnpm@10.28.0",
   "description": "This repository contains a collection of practical examples for tracking Web3 transactions. Here you will find ready-to-use code snippets for monitoring on-chain activity and connecting wallets using various packages.",
   "scripts": {
     "build": "pnpm --filter \"./packages/**\" build",

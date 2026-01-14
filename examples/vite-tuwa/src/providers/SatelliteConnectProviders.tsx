@@ -31,6 +31,10 @@ export function SatelliteConnectProviders({ children }: { children: React.ReactN
         withImpersonated
         withBalance
         withChain
+        legal={{
+          termsUrl: 'https://www.google.com/', // TODO: just for test
+          privacyUrl: 'https://www.google.com/', // TODO: just for test
+        }}
       >
         {children}
       </NovaConnectProvider>
