@@ -236,8 +236,8 @@ export const TransactionsBlockWrapper = () => {
         </div>
 
         {/* Footer */}
-        <footer className="bg-[var(--accountable-background)] px-8 py-4 border-t border-[var(--accountable-border)] flex-shrink-0 h-16 flex items-center justify-center">
-          <div className="flex items-center space-x-2 text-xs text-[var(--accountable-tertiary)] font-[DM_Mono]">
+        <footer className="bg-[var(--accountable-background)] px-4 py-4 border-t border-[var(--accountable-border)] flex-shrink-0 h-16 flex items-center justify-center">
+          <div className="flex items-center space-x-2 text-xs text-[var(--accountable-tertiary)] font-[DM_Mono] flex-wrap gap-1 items-center justify-center">
             <span className="leading-none">Powered by</span>
             <a
               href="https://github.com/TuwaIO"
