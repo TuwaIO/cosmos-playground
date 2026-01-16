@@ -27,7 +27,10 @@ export const chain_list_customization: ChainSelectorCustomization = {
   classNames: {
     dialogInnerContainer: () => SHARED_STYLES.bgBase,
     dialogHeader: () =>
-      'bg-[var(--accountable-background-2)] border-[var(--accountable-border)] text-[var(--accountable-foreground)] [&_h2]:text-[var(--accountable-primary)]',
+      cn(
+        'bg-[var(--accountable-background-2)] border-[var(--accountable-border)] text-[var(--accountable-foreground)] [&_h2]:text-[var(--accountable-primary)]',
+        `[&_h2]:font-[DM_Mono] [&_h2]:font-medium`,
+      ),
   },
 
   dialogHeader: {
