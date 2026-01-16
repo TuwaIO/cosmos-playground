@@ -7,6 +7,7 @@ import { satelliteEVMAdapter } from '@tuwaio/satellite-evm';
 
 import { appEVMChains, wagmiConfig } from '../configs/appConfig';
 import { usePulsarStore } from '../hooks/pulsarStoreHook';
+import { nova_connect_provider_customization } from '../styles/customization/nova_connect_provider';
 import { NovaTransactionsProvider } from './NovaTransactionsProvider';
 
 export function SatelliteConnectProviders({ children }: { children: React.ReactNode }) {
@@ -25,6 +26,7 @@ export function SatelliteConnectProviders({ children }: { children: React.ReactN
         withImpersonated
         withBalance
         withChain
+        customization={nova_connect_provider_customization}
         legal={{
           termsUrl: 'https://yield.accountable.capital/terms-of-service', // TODO: just for test
           privacyUrl: 'https://yield.accountable.capital/privacy-policy', // TODO: just for test

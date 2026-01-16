@@ -1,4 +1,4 @@
-// Accountable Capital Styled Transactions Block
+// Accountable Capital Styled Transactions Block (just for testing)
 
 'use client';
 
