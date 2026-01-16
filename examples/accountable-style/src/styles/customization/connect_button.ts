@@ -1,7 +1,28 @@
 import { ConnectButtonCustomization } from '@tuwaio/nova-connect/components';
 import { cn } from '@tuwaio/nova-core';
 
-import { getItemStyles, SHARED_STYLES } from './shared_styles';
+import { SHARED_STYLES } from './shared_styles';
+
+// Shared item styles generator
+export const getItemStyles = (isActive: boolean) =>
+  cn(
+    SHARED_STYLES.fontMono,
+    'text-sm',
+    SHARED_STYLES.itemInteractive,
+    isActive
+      ? cn(
+          SHARED_STYLES.bgAccent,
+          SHARED_STYLES.textAccentDark,
+          SHARED_STYLES.fontMonoMedium,
+          'focus:ring-[var(--accountable-accent)] focus:ring-offset-[var(--accountable-background-2)]',
+          'focus:bg-[var(--accountable-accent)] focus:outline-none',
+        )
+      : cn(
+          SHARED_STYLES.textForeground,
+          'hover:bg-[var(--accountable-accent-dark)]',
+          'active:bg-[var(--accountable-accent)]',
+        ),
+  );
 
 export const connect_button_customization: ConnectButtonCustomization = {
   classNames: {
