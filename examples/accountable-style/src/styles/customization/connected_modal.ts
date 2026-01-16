@@ -3,6 +3,7 @@ import { cn } from '@tuwaio/nova-core';
 
 import { chain_list_customization } from './chain_list';
 import { SHARED_STYLES } from './shared_styles';
+import { transactions_history_customization } from './tx_history';
 
 export const connected_modal_customization: ConnectedModalCustomization = {
   classNames: {
@@ -147,6 +148,7 @@ export const connected_modal_customization: ConnectedModalCustomization = {
             'p-3 transition-colors',
             'hover:bg-[var(--accountable-accent-dark)]',
           ),
+        connectedRowSwitchIcon: () => cn('text-[var(--accountable-accent)]'),
         connectedRowWalletName: () => cn(SHARED_STYLES.fontMono, 'text-sm', SHARED_STYLES.textForeground),
         connectedRowConnectorName: () => cn(SHARED_STYLES.fontMono, 'text-[10px]', SHARED_STYLES.textSecondary),
         connectedRowDisconnectButton: () =>
@@ -203,7 +205,58 @@ export const connected_modal_customization: ConnectedModalCustomization = {
 
     chainList: chain_list_customization.scrollableChainList,
 
-    // Footer customization
+    // Transaction history customization
+    txHistory: {
+      classNames: {
+        // Container
+        container: () => cn('flex flex-col items-center justify-center p-4', SHARED_STYLES.bgBase),
+
+        // Loading state
+        loadingContainer: () => cn('flex flex-col items-center justify-center p-8 gap-4', SHARED_STYLES.bgBase),
+        loadingSpinner: () =>
+          cn(
+            'animate-spin rounded-full h-8 w-8 border-2',
+            'border-[var(--accountable-accent)]',
+            'border-t-transparent',
+          ),
+        loadingText: () => cn(SHARED_STYLES.fontMono, 'text-sm', SHARED_STYLES.textSecondary),
+
+        // Error state
+        errorContainer: () =>
+          cn('flex flex-col items-center justify-center text-center gap-4 p-6', SHARED_STYLES.bgBase),
+        errorIconContainer: () =>
+          cn('w-12 h-12 p-2 rounded-full', 'bg-[var(--accountable-warning)]/20', 'text-[var(--accountable-warning)]'),
+        errorIcon: () => cn('w-full h-full'),
+        errorContent: () => cn('space-y-2'),
+        errorTitle: () => cn(SHARED_STYLES.fontMonoMedium, 'text-lg', SHARED_STYLES.textForeground),
+        errorDescription: () => cn(SHARED_STYLES.fontMono, 'text-sm max-w-md', SHARED_STYLES.textSecondary),
+
+        // No wallet state
+        noWalletContainer: () => cn('flex flex-col items-center justify-center p-6', SHARED_STYLES.bgBase),
+        noWalletText: () => cn(SHARED_STYLES.fontMono, 'text-sm', SHARED_STYLES.textSecondary),
+
+        // Pulsar required state
+        pulsarRequiredContainer: () =>
+          cn('flex flex-col items-center justify-center text-center gap-4 p-6', SHARED_STYLES.bgBase),
+        pulsarRequiredIconContainer: () =>
+          cn(
+            'w-12 h-12 p-2 rounded-full',
+            'bg-gradient-to-r from-[var(--accountable-accent)] to-[var(--accountable-accent-dark)]',
+            'text-[var(--accountable-foreground)]',
+          ),
+        pulsarRequiredIcon: () => cn('w-full h-full'),
+        pulsarRequiredContent: () => cn('space-y-2'),
+        pulsarRequiredTitle: () => cn(SHARED_STYLES.fontMonoMedium, 'text-lg', SHARED_STYLES.textForeground),
+        pulsarRequiredDescription: () =>
+          cn(SHARED_STYLES.fontMono, 'text-sm max-w-md leading-relaxed', SHARED_STYLES.textSecondary),
+
+        // Transactions history wrapper
+        transactionsHistoryWrapper: () => cn('w-full'),
+      },
+
+      // TransactionsHistory component customization
+      transactionsHistory: transactions_history_customization,
+    },
     footer: {
       classNames: {
         // Container
