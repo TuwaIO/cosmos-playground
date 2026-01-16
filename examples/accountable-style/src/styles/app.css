@@ -29,6 +29,7 @@
   --accountable-alert: #D6BD33;
   --accountable-alertDark: #493F0F;
   --accountable-destructive: #E02424;
+  --accountable-error: #E02424;
 }
 
 @media (hover: hover) {
