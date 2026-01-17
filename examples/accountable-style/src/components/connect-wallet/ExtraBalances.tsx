@@ -1,26 +1,23 @@
-import { cn } from '@tuwaio/nova-core';
+import { useSatelliteConnectStore } from '@tuwaio/nova-connect/satellite';
 
-import { SHARED_STYLES } from '../../styles/customization/shared_styles';
+import { SUPPORTED_TOKENS } from '../../configs/tokenConfig';
+import { ExtraBalance } from './ExtraBalance';
 
 export const ExtraBalancesSection = () => {
-  const balances = [{ symbol: 'USDC', amount: '1,234.56', icon: '○' }];
+  const activeConnection = useSatelliteConnectStore((store) => store.activeConnection);
+
+  if (!activeConnection) {
+    return null;
+  }
+
+  if (!Object.keys(SUPPORTED_TOKENS).includes(activeConnection.chainId.toString())) {
+    return null;
+  }
 
   return (
-    <div className="flex flex-col gap-1 w-full">
-      {balances.map((balance) => (
-        <div
-          key={balance.symbol}
-          className={cn(
-            'flex items-center justify-center gap-2',
-            SHARED_STYLES.fontMono,
-            SHARED_STYLES.textSecondary,
-            'text-sm',
-          )}
-        >
-          <span>{balance.icon}</span>
-          <span>{balance.amount}</span>
-          <span>{balance.symbol}</span>
-        </div>
+    <div className="flex flex-col items-center justify-center gap-1 w-full">
+      {SUPPORTED_TOKENS[+activeConnection.chainId].map((token) => (
+        <ExtraBalance key={token.address} token={token} />
       ))}
     </div>
   );

@@ -55,5 +55,6 @@
 
 .NovaDialogContent__elements {
   border-color: var(--accountable-border);
-  border-radius: 4px !important;
+  background: var(--accountable-background-2);
+  border-radius: 4px;
 }
