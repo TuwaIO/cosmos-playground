@@ -2,7 +2,7 @@ import { ConnectButtonCustomization } from '@tuwaio/nova-connect/components';
 import { cn } from '@tuwaio/nova-core';
 
 import { chain_list_customization } from './chain_list';
-import { SHARED_STYLES } from './shared_styles';
+import { BUTTON_STYLES, SHARED_STYLES } from './shared_styles';
 
 export const connect_button_customization: ConnectButtonCustomization = {
   classNames: {
@@ -11,20 +11,13 @@ export const connect_button_customization: ConnectButtonCustomization = {
     button: ({ buttonData }) => {
       const { isConnected } = buttonData;
       return cn(
-        SHARED_STYLES.baseButton,
-        'px-4 py-2',
-        'text-md',
+        BUTTON_STYLES.base,
+        'px-4 py-2 text-md',
         SHARED_STYLES.fontMono,
         'focus:ring-offset-[var(--accountable-background)]',
         'disabled:opacity-50 disabled:cursor-not-allowed',
         isConnected
-          ? cn(
-              SHARED_STYLES.bgBase,
-              SHARED_STYLES.textForeground,
-              SHARED_STYLES.borderDefault,
-              'hover:bg-[var(--accountable-border)]',
-              SHARED_STYLES.baseFocus,
-            )
+          ? cn(SHARED_STYLES.bgBase, SHARED_STYLES.textForeground, SHARED_STYLES.borderDefault, 'hover:bg-[var(--accountable-border)]', SHARED_STYLES.baseFocus)
           : cn(SHARED_STYLES.bgAccent, SHARED_STYLES.textAccentDark, 'hover:opacity-90', SHARED_STYLES.baseFocus),
       );
     },

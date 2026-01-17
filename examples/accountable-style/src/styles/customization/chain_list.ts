@@ -1,7 +1,7 @@
 import { ChainSelectorCustomization } from '@tuwaio/nova-connect/components';
 import { cn } from '@tuwaio/nova-core';
 
-import { SHARED_STYLES } from './shared_styles';
+import { BUTTON_STYLES, SCROLL_BUTTON_STYLES, SHARED_STYLES } from './shared_styles';
 
 const getItemStyles = (isActive: boolean) =>
   cn(
@@ -16,11 +16,7 @@ const getItemStyles = (isActive: boolean) =>
           'focus:ring-[var(--accountable-accent)] focus:ring-offset-[var(--accountable-background-2)]',
           'focus:bg-[var(--accountable-accent)] focus:outline-none',
         )
-      : cn(
-          SHARED_STYLES.textForeground,
-          'hover:bg-[var(--accountable-accent-dark)]',
-          'active:bg-[var(--accountable-accent)]',
-        ),
+      : cn(SHARED_STYLES.textForeground, 'hover:bg-[var(--accountable-accent-dark)]', 'active:bg-[var(--accountable-accent)]'),
   );
 
 export const chain_list_customization: ChainSelectorCustomization = {
@@ -28,15 +24,21 @@ export const chain_list_customization: ChainSelectorCustomization = {
     dialogInnerContainer: () => SHARED_STYLES.bgBase,
     dialogHeader: () =>
       cn(
-        'bg-[var(--accountable-background-2)] border-[var(--accountable-border)] text-[var(--accountable-foreground)] [&_h2]:text-[var(--accountable-primary)]',
-        `[&_h2]:font-[DM_Mono] [&_h2]:font-medium`,
+        SHARED_STYLES.bgBase,
+        'border-[var(--accountable-border)]',
+        SHARED_STYLES.textForeground,
+        '[&_h2]:text-[var(--accountable-primary)] [&_h2]:font-[DM_Mono] [&_h2]:font-medium',
       ),
   },
 
   dialogHeader: {
     closeButton: {
-      className:
-        'cursor-pointer rounded-[4px] p-1 transition-colors hover:bg-[var(--accountable-accent-dark)] focus:outline-none focus:ring-2 focus:ring-[var(--accountable-accent)] focus:ring-offset-2 [&_svg]:text-[var(--accountable-primary)]',
+      className: cn(
+        'cursor-pointer rounded-[4px] p-1 transition-colors',
+        'hover:bg-[var(--accountable-accent-dark)]',
+        SHARED_STYLES.baseFocus,
+        '[&_svg]:text-[var(--accountable-primary)]',
+      ),
     },
   },
 
@@ -44,17 +46,10 @@ export const chain_list_customization: ChainSelectorCustomization = {
     classNames: {
       button: ({ isOpen }) =>
         cn(
-          SHARED_STYLES.baseButton,
-          SHARED_STYLES.bgBase,
-          SHARED_STYLES.borderDefault,
-          SHARED_STYLES.textForeground,
-          SHARED_STYLES.fontMono,
+          BUTTON_STYLES.ghost,
           'text-md',
           'focus:ring-offset-[var(--accountable-background)]',
-          isOpen
-            ? cn(SHARED_STYLES.borderAccent, 'ring-1 ring-[var(--accountable-accent)]')
-            : 'hover:bg-[var(--accountable-border)]',
-          SHARED_STYLES.baseFocus,
+          isOpen ? cn(SHARED_STYLES.borderAccent, 'ring-1 ring-[var(--accountable-accent)]') : '',
         ),
       arrowWrapper: () => '[&_svg]:text-[var(--accountable-accent)]',
     },
@@ -64,26 +59,14 @@ export const chain_list_customization: ChainSelectorCustomization = {
     contentClassName: SHARED_STYLES.bgBase,
     topButtonCustomization: {
       classNames: {
-        button: () =>
-          cn(
-            SHARED_STYLES.scrollButton,
-            SHARED_STYLES.bgAccentDark,
-            'rounded-t-[4px]',
-            'hover:bg-[var(--accountable-border)]',
-          ),
-        icon: () => SHARED_STYLES.textAccent,
+        button: () => SCROLL_BUTTON_STYLES.buttonTop,
+        icon: () => SCROLL_BUTTON_STYLES.icon,
       },
     },
     bottomButtonCustomization: {
       classNames: {
-        button: () =>
-          cn(
-            SHARED_STYLES.scrollButton,
-            SHARED_STYLES.bgAccentDark,
-            'rounded-b-[4px]',
-            'hover:bg-[var(--accountable-border)]',
-          ),
-        icon: () => SHARED_STYLES.textAccent,
+        button: () => SCROLL_BUTTON_STYLES.buttonBottom,
+        icon: () => SCROLL_BUTTON_STYLES.icon,
       },
     },
   },
@@ -99,26 +82,14 @@ export const chain_list_customization: ChainSelectorCustomization = {
     buttons: {
       topButton: {
         classNames: {
-          button: () =>
-            cn(
-              SHARED_STYLES.scrollButton,
-              SHARED_STYLES.bgAccentDark,
-              'rounded-t-[4px]',
-              'hover:bg-[var(--accountable-border)]',
-            ),
-          icon: () => SHARED_STYLES.textAccent,
+          button: () => SCROLL_BUTTON_STYLES.buttonTop,
+          icon: () => SCROLL_BUTTON_STYLES.icon,
         },
       },
       bottomButton: {
         classNames: {
-          button: () =>
-            cn(
-              SHARED_STYLES.scrollButton,
-              SHARED_STYLES.bgAccentDark,
-              'rounded-b-[4px]',
-              'hover:bg-[var(--accountable-border)]',
-            ),
-          icon: () => SHARED_STYLES.textAccent,
+          button: () => SCROLL_BUTTON_STYLES.buttonBottom,
+          icon: () => SCROLL_BUTTON_STYLES.icon,
         },
       },
     },
