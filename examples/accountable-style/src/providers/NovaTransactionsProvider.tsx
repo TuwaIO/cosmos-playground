@@ -4,6 +4,7 @@ import { getAdapterFromConnectorType } from '@tuwaio/orbit-core';
 import { useInitializeTransactionsPool } from '@tuwaio/pulsar-react';
 
 import { usePulsarStore } from '../hooks/pulsarStoreHook';
+import { nova_tx_provider_customization } from '../styles/customization/nova_tx_provider';
 
 export function NovaTransactionsProvider() {
   const getAdapter = usePulsarStore((state) => state.getAdapter);
@@ -25,6 +26,7 @@ export function NovaTransactionsProvider() {
       connectedWalletAddress={activeConnection?.isConnected ? activeConnection.address : undefined}
       connectedAdapterType={getAdapterFromConnectorType(activeConnection?.connectorType ?? 'evm:')}
       adapter={getAdapter()}
+      customization={nova_tx_provider_customization}
     />
   );
 }

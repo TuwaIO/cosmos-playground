@@ -55,6 +55,7 @@ export const transactions_history_customization: TransactionsHistoryCustomizatio
 
     // Status badge
     itemStatusBadge: cn(SHARED_STYLES.fontMono, 'text-xs font-medium'),
+    itemStatusBadgeLabel: cn(SHARED_STYLES.fontMono),
 
     // Transaction key / hash link
     itemTxKeyContainer: cn('flex flex-col gap-y-2'),
@@ -65,6 +66,7 @@ export const transactions_history_customization: TransactionsHistoryCustomizatio
       'text-[var(--accountable-accent)]',
       'hover:underline hover:text-[var(--accountable-accent)]',
       'transition-colors',
+      '[&_span]:font-[DM_Mono]',
     ),
     itemHashCopyButton: cn(
       'cursor-pointer transition-colors',
