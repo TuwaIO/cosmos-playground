@@ -2,7 +2,7 @@ import { cn } from '@tuwaio/nova-core';
 import { TransactionsHistoryCustomization } from '@tuwaio/nova-transactions';
 
 import { TransactionUnion } from '../../transactions';
-import { CARD_STYLES, ICON_BUTTON_STYLES, SHARED_STYLES } from './shared_styles';
+import { ICON_BUTTON_STYLES, SHARED_STYLES } from './shared_styles';
 
 /**
  * Accountable theme customization for TransactionsHistory.

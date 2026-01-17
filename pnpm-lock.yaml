@@ -38,14 +38,14 @@ importers:
         specifier: ^5.90.17
         version: 5.90.17(react@19.2.3)
       '@tuwaio/nova-connect':
-        specifier: 1.0.0-fix-styles-alpha.30.548b3ae4
-        version: 1.0.0-fix-styles-alpha.30.548b3ae4(c9d93485e0a78e9c444353465b3e6cb1)
+        specifier: 1.0.0-fix-styles-alpha.33.4a713e6a
+        version: 1.0.0-fix-styles-alpha.33.4a713e6a(fce076705c02053a790f37717784e808)
       '@tuwaio/nova-core':
-        specifier: 1.0.0-fix-styles-alpha.30.548b3ae4
-        version: 1.0.0-fix-styles-alpha.30.548b3ae4(@radix-ui/react-dialog@1.1.15(@types/react-dom@19.2.3(@types/react@19.2.8))(@types/react@19.2.8)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(@web3icons/react@4.1.13(react@19.2.3)(typescript@5.9.3))(clsx@2.1.1)(framer-motion@12.26.2(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)(tailwind-merge@3.4.0)
+        specifier: 1.0.0-fix-styles-alpha.33.4a713e6a
+        version: 1.0.0-fix-styles-alpha.33.4a713e6a(@radix-ui/react-dialog@1.1.15(@types/react-dom@19.2.3(@types/react@19.2.8))(@types/react@19.2.8)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(@web3icons/react@4.1.13(react@19.2.3)(typescript@5.9.3))(clsx@2.1.1)(framer-motion@12.26.2(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)(tailwind-merge@3.4.0)
       '@tuwaio/nova-transactions':
-        specifier: 1.0.0-fix-styles-alpha.30.548b3ae4
-        version: 1.0.0-fix-styles-alpha.30.548b3ae4(3e88193ad66aaed269c0e6b313dd9c9f)
+        specifier: 1.0.0-fix-styles-alpha.33.4a713e6a
+        version: 1.0.0-fix-styles-alpha.33.4a713e6a(729b989feac3c3f1a9ad325da42d6ac1)
       '@tuwaio/orbit-core':
         specifier: ^0.2.4
         version: 0.2.4
@@ -3207,8 +3207,8 @@ packages:
       viem:
         optional: true
 
-  '@tuwaio/nova-connect@1.0.0-fix-styles-alpha.30.548b3ae4':
-    resolution: {integrity: sha512-IduRdtAPRJrlZ7IaSjX70TsKmw85qe7bIJvrfYcIcg3oU+bWkx8OztvHGL1GkxBYR33mcEHu+mx/T5P5JC3d7Q==}
+  '@tuwaio/nova-connect@1.0.0-fix-styles-alpha.33.4a713e6a':
+    resolution: {integrity: sha512-UWQZ+/dunHYZeyDvF1oHkjijITzRBnis2vuhh1zj10H+gr4tmuUuhyCv7Spsnc2kIRWvruB+WZA1Mt/Vo+BsVw==}
     peerDependencies:
       '@emotion/is-prop-valid': 1.x.x
       '@heroicons/react': 2.x.x
@@ -3270,8 +3270,8 @@ packages:
       react: '>=19.2.3'
       tailwind-merge: 3.x.x
 
-  '@tuwaio/nova-core@1.0.0-fix-styles-alpha.30.548b3ae4':
-    resolution: {integrity: sha512-DydYToZAI4yakCjKEYjT0mYtQc7o5T8ZjYd4dJnjXt7VoTAtXkyOXCHF3wUOrj+r/1Wy7/r5iFKsa8bOps4X1Q==}
+  '@tuwaio/nova-core@1.0.0-fix-styles-alpha.33.4a713e6a':
+    resolution: {integrity: sha512-I53nk3iOO2F3YvY5nrtvb8+SY3jcVkI6q2Z+uRVyfh3YylESCmyMj74uGnCqStaIfRJPuPDzz71+Lv4Nf/lhlA==}
     peerDependencies:
       '@radix-ui/react-dialog': 1.x.x
       '@web3icons/react': '>=4'
@@ -3295,8 +3295,8 @@ packages:
       react: '>=19.2.3'
       react-toastify: '>=11'
 
-  '@tuwaio/nova-transactions@1.0.0-fix-styles-alpha.30.548b3ae4':
-    resolution: {integrity: sha512-Dv6Q8wPNPt9QkJRZ1rZmlAe528cFxizNWGvymLv6AKWB8MrKODubtvKafAztM86bKSeKlDYqEewv4+8ztlfw9w==}
+  '@tuwaio/nova-transactions@1.0.0-fix-styles-alpha.33.4a713e6a':
+    resolution: {integrity: sha512-DdT8/NjkeVR/dL4IV/IoABclLMqRQWMODcPJBEQMfT3CBvG3Gcv2GJct5VlSeY1ISnQMRYEbhzUcbWdAe1lLlg==}
     peerDependencies:
       '@heroicons/react': 2.x.x
       '@radix-ui/react-dialog': 1.x.x
@@ -9714,13 +9714,13 @@ snapshots:
       gill: 0.14.0(@solana/sysvars@5.0.0(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3))(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(ws@8.18.3(bufferutil@4.0.9)(utf-8-validate@5.0.10))
       viem: 2.44.2(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.1.13)
 
-  '@tuwaio/nova-connect@1.0.0-fix-styles-alpha.30.548b3ae4(c9d93485e0a78e9c444353465b3e6cb1)':
+  '@tuwaio/nova-connect@1.0.0-fix-styles-alpha.33.4a713e6a(fce076705c02053a790f37717784e808)':
     dependencies:
       '@emotion/is-prop-valid': 1.4.0
       '@heroicons/react': 2.2.0(react@19.2.3)
       '@radix-ui/react-dialog': 1.1.15(@types/react-dom@19.2.3(@types/react@19.2.8))(@types/react@19.2.8)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@radix-ui/react-select': 2.2.6(@types/react-dom@19.2.3(@types/react@19.2.8))(@types/react@19.2.8)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@tuwaio/nova-core': 1.0.0-fix-styles-alpha.30.548b3ae4(@radix-ui/react-dialog@1.1.15(@types/react-dom@19.2.3(@types/react@19.2.8))(@types/react@19.2.8)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(@web3icons/react@4.1.13(react@19.2.3)(typescript@5.9.3))(clsx@2.1.1)(framer-motion@12.26.2(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)(tailwind-merge@3.4.0)
+      '@tuwaio/nova-core': 1.0.0-fix-styles-alpha.33.4a713e6a(@radix-ui/react-dialog@1.1.15(@types/react-dom@19.2.3(@types/react@19.2.8))(@types/react@19.2.8)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(@web3icons/react@4.1.13(react@19.2.3)(typescript@5.9.3))(clsx@2.1.1)(framer-motion@12.26.2(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)(tailwind-merge@3.4.0)
       '@tuwaio/orbit-core': 0.2.4
       '@tuwaio/pulsar-core': 0.3.3(@tuwaio/orbit-core@0.2.4)(dayjs@1.11.19)(immer@11.1.3)(zustand@5.0.10(@types/react@19.2.8)(immer@11.1.3)(react@19.2.3)(use-sync-external-store@1.4.0(react@19.2.3)))
       '@tuwaio/satellite-core': 0.2.3(@tuwaio/orbit-core@0.2.4)(immer@11.1.3)(zustand@5.0.10(@types/react@19.2.8)(immer@11.1.3)(react@19.2.3)(use-sync-external-store@1.4.0(react@19.2.3)))
@@ -9734,7 +9734,7 @@ snapshots:
       react-toastify: 11.0.5(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       zustand: 5.0.10(@types/react@19.2.8)(immer@11.1.3)(react@19.2.3)(use-sync-external-store@1.4.0(react@19.2.3))
     optionalDependencies:
-      '@tuwaio/nova-transactions': 1.0.0-fix-styles-alpha.30.548b3ae4(3e88193ad66aaed269c0e6b313dd9c9f)
+      '@tuwaio/nova-transactions': 1.0.0-fix-styles-alpha.33.4a713e6a(729b989feac3c3f1a9ad325da42d6ac1)
       '@tuwaio/orbit-evm': 0.2.6(@wagmi/core@3.2.2(@tanstack/query-core@5.90.17)(@types/react@19.2.8)(immer@11.1.3)(ox@0.11.3(typescript@5.9.3)(zod@3.25.76))(react@19.2.3)(typescript@5.9.3)(use-sync-external-store@1.4.0(react@19.2.3))(viem@2.44.2(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)))(viem@2.44.2(bufferutil@4.0.9)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76))
       '@tuwaio/orbit-solana': 0.2.2(@tuwaio/orbit-core@0.2.4)(@wallet-standard/app@1.1.0)(@wallet-standard/ui-core@1.0.0)(@wallet-standard/ui-registry@1.0.1)(gill@0.14.0(@solana/sysvars@5.0.0(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3))(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(ws@8.18.3(bufferutil@4.0.9)(utf-8-validate@5.0.10)))
       '@tuwaio/satellite-evm': 0.2.6(6d9cedc9caaa02f8d7c367bca8d40612)
@@ -9755,7 +9755,7 @@ snapshots:
       react: 19.2.3
       tailwind-merge: 3.4.0
 
-  '@tuwaio/nova-core@1.0.0-fix-styles-alpha.30.548b3ae4(@radix-ui/react-dialog@1.1.15(@types/react-dom@19.2.3(@types/react@19.2.8))(@types/react@19.2.8)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(@web3icons/react@4.1.13(react@19.2.3)(typescript@5.9.3))(clsx@2.1.1)(framer-motion@12.26.2(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)(tailwind-merge@3.4.0)':
+  '@tuwaio/nova-core@1.0.0-fix-styles-alpha.33.4a713e6a(@radix-ui/react-dialog@1.1.15(@types/react-dom@19.2.3(@types/react@19.2.8))(@types/react@19.2.8)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(@web3icons/react@4.1.13(react@19.2.3)(typescript@5.9.3))(clsx@2.1.1)(framer-motion@12.26.2(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)(tailwind-merge@3.4.0)':
     dependencies:
       '@radix-ui/react-dialog': 1.1.15(@types/react-dom@19.2.3(@types/react@19.2.8))(@types/react@19.2.8)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@web3icons/react': 4.1.13(react@19.2.3)(typescript@5.9.3)
@@ -9778,11 +9778,11 @@ snapshots:
       react: 19.2.3
       react-toastify: 11.0.5(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
 
-  '@tuwaio/nova-transactions@1.0.0-fix-styles-alpha.30.548b3ae4(3e88193ad66aaed269c0e6b313dd9c9f)':
+  '@tuwaio/nova-transactions@1.0.0-fix-styles-alpha.33.4a713e6a(729b989feac3c3f1a9ad325da42d6ac1)':
     dependencies:
       '@heroicons/react': 2.2.0(react@19.2.3)
       '@radix-ui/react-dialog': 1.1.15(@types/react-dom@19.2.3(@types/react@19.2.8))(@types/react@19.2.8)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@tuwaio/nova-core': 1.0.0-fix-styles-alpha.30.548b3ae4(@radix-ui/react-dialog@1.1.15(@types/react-dom@19.2.3(@types/react@19.2.8))(@types/react@19.2.8)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(@web3icons/react@4.1.13(react@19.2.3)(typescript@5.9.3))(clsx@2.1.1)(framer-motion@12.26.2(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)(tailwind-merge@3.4.0)
+      '@tuwaio/nova-core': 1.0.0-fix-styles-alpha.33.4a713e6a(@radix-ui/react-dialog@1.1.15(@types/react-dom@19.2.3(@types/react@19.2.8))(@types/react@19.2.8)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(@web3icons/react@4.1.13(react@19.2.3)(typescript@5.9.3))(clsx@2.1.1)(framer-motion@12.26.2(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)(tailwind-merge@3.4.0)
       '@tuwaio/orbit-core': 0.2.4
       '@tuwaio/pulsar-core': 0.3.3(@tuwaio/orbit-core@0.2.4)(dayjs@1.11.19)(immer@11.1.3)(zustand@5.0.10(@types/react@19.2.8)(immer@11.1.3)(react@19.2.3)(use-sync-external-store@1.4.0(react@19.2.3)))
       '@web3icons/common': 0.11.42(typescript@5.9.3)

@@ -42,7 +42,12 @@ export const connect_card_customization: ConnectCardCustomization = {
 
     // Wallet title
     title: () =>
-      cn(SHARED_STYLES.fontMono, SHARED_STYLES.textForeground, 'group-hover:text-[var(--accountable-accent)]', 'transition-colors duration-200'),
+      cn(
+        SHARED_STYLES.fontMono,
+        SHARED_STYLES.textForeground,
+        'group-hover:text-[var(--accountable-accent)]',
+        'transition-colors duration-200',
+      ),
 
     // Subtitle
     subtitle: ({ cardData }) =>
@@ -50,7 +55,12 @@ export const connect_card_customization: ConnectCardCustomization = {
 
     // Recent badge wrapper (hide on hover)
     recentBadgeWrapper: () =>
-      cn(SHARED_STYLES.fontMono, 'absolute top-0.5 right-0.5', 'transition group-hover:opacity-0 group-hover:scale-90', SHARED_STYLES.textSecondary),
+      cn(
+        SHARED_STYLES.fontMono,
+        'absolute top-0.5 right-0.5',
+        'transition group-hover:opacity-0 group-hover:scale-90',
+        SHARED_STYLES.textSecondary,
+      ),
 
     // Chevron icon (slide in on hover)
     chevron: () =>
@@ -70,7 +80,8 @@ export const connect_card_customization: ConnectCardCustomization = {
           SHARED_STYLES.textSecondary,
           'border border-[var(--accountable-border)] px-2.5 py-0.5 text-xs',
         ),
-      backgroundOverlay: () => 'absolute z-10 pointer-events-none rounded-full bg-[var(--accountable-background-2)] inset-[1px]',
+      backgroundOverlay: () =>
+        'absolute z-10 pointer-events-none rounded-full bg-[var(--accountable-background-2)] inset-[1px]',
     },
     config: {
       gradient: {

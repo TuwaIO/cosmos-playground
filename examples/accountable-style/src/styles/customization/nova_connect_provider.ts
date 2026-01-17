@@ -15,12 +15,28 @@ export const nova_connect_provider_customization: NovaConnectProviderCustomizati
         modalContainer: () => MODAL_STYLES.container,
         header: () => cn(SHARED_STYLES.bgBase, 'border-[var(--accountable-border)]'),
         title: () => cn(MODAL_STYLES.headerTitle, 'text-lg'),
-        infoButton: () => cn('rounded-[4px]', SHARED_STYLES.textSecondary, 'hover:bg-[var(--accountable-accent-dark)] hover:text-[var(--accountable-accent)]'),
-        closeButton: () => cn('rounded-[4px]', SHARED_STYLES.textSecondary, 'hover:bg-[var(--accountable-accent-dark)] hover:text-[var(--accountable-primary)]', SHARED_STYLES.baseFocus),
+        infoButton: () =>
+          cn(
+            'rounded-[4px]',
+            SHARED_STYLES.textSecondary,
+            'hover:bg-[var(--accountable-accent-dark)] hover:text-[var(--accountable-accent)]',
+          ),
+        closeButton: () =>
+          cn(
+            'rounded-[4px]',
+            SHARED_STYLES.textSecondary,
+            'hover:bg-[var(--accountable-accent-dark)] hover:text-[var(--accountable-primary)]',
+            SHARED_STYLES.baseFocus,
+          ),
         mainContent: () => SHARED_STYLES.bgBase,
         footer: () => MODAL_STYLES.footer,
         backButton: () => BUTTON_STYLES.ghost,
-        actionButton: () => cn(BUTTON_STYLES.primary, 'min-h-[40px]', 'hover:bg-[var(--accountable-accent-dark)] hover:text-[var(--accountable-foreground)]'),
+        actionButton: () =>
+          cn(
+            BUTTON_STYLES.primary,
+            'min-h-[40px]',
+            'hover:bg-[var(--accountable-accent-dark)] hover:text-[var(--accountable-foreground)]',
+          ),
       },
 
       // ─────────────────────────────────────────────────────────────────────
@@ -30,7 +46,10 @@ export const nova_connect_provider_customization: NovaConnectProviderCustomizati
         connectorsSelections: {
           connectorsBlock: {
             installed: {
-              classNames: { title: () => cn(SHARED_STYLES.fontMonoMedium, SHARED_STYLES.textAccent, 'text-sm uppercase tracking-wide') },
+              classNames: {
+                title: () =>
+                  cn(SHARED_STYLES.fontMonoMedium, SHARED_STYLES.textAccent, 'text-sm uppercase tracking-wide'),
+              },
               connectCard: connect_card_customization,
             },
             popular: {
@@ -55,12 +74,19 @@ export const nova_connect_provider_customization: NovaConnectProviderCustomizati
             contentSection: () => cn('text-center relative p-4', SHARED_STYLES.bgBase),
             title: () => cn(SHARED_STYLES.fontMonoMedium, SHARED_STYLES.textPrimary, 'text-base'),
             description: () => cn(SHARED_STYLES.fontMono, SHARED_STYLES.textSecondary, 'text-sm leading-relaxed'),
-            navigation: () => cn('flex justify-center space-x-2 mt-6 relative z-3 mx-4 mb-4', '[&>div:first-child]:bg-[var(--accountable-border)]', '[&>div:last-child]:bg-[var(--accountable-background-2)]'),
+            navigation: () =>
+              cn(
+                'flex justify-center space-x-2 mt-6 relative z-3 mx-4 mb-4',
+                '[&>div:first-child]:bg-[var(--accountable-border)]',
+                '[&>div:last-child]:bg-[var(--accountable-background-2)]',
+              ),
             indicator: ({ isActive }) =>
               cn(
                 'cursor-pointer h-2 rounded-full transition-all duration-300',
                 'focus:outline-none focus:ring-2 focus:ring-[var(--accountable-accent)] focus:ring-offset-2',
-                isActive ? 'bg-[var(--accountable-accent)] w-6' : 'bg-[var(--accountable-border)] w-2 hover:bg-[var(--accountable-accent)]',
+                isActive
+                  ? 'bg-[var(--accountable-accent)] w-6'
+                  : 'bg-[var(--accountable-border)] w-2 hover:bg-[var(--accountable-accent)]',
               ),
           },
         },
@@ -118,13 +144,18 @@ export const nova_connect_provider_customization: NovaConnectProviderCustomizati
                     : 'border-[var(--accountable-border)] bg-[var(--accountable-background-2)]',
               ),
             spinner: () =>
-              cn('absolute animate-spin rounded-full -inset-[2px]', 'w-[calc(100%_+_4px)] h-[calc(100%_+_4px)]', 'border-2 border-[var(--accountable-accent)] border-t-transparent'),
+              cn(
+                'absolute animate-spin rounded-full -inset-[2px]',
+                'w-[calc(100%_+_4px)] h-[calc(100%_+_4px)]',
+                'border-2 border-[var(--accountable-accent)] border-t-transparent',
+              ),
             statusIcon: ({ statusData }) =>
               cn(
                 'absolute -top-2 -right-2 w-8 h-8 rounded-full flex items-center justify-center',
                 statusData.state === 'success' ? 'bg-[var(--accountable-accent)]' : 'bg-[var(--accountable-error)]',
               ),
-            walletIconContainer: () => '[&_svg]:w-[60px]! [&_svg]:h-[auto]! md:[&_svg]:w-[80px]! [&_img]:w-[60px]! [&_img]:h-[auto]! md:[&_img]:w-[80px]! leading-[0]',
+            walletIconContainer: () =>
+              '[&_svg]:w-[60px]! [&_svg]:h-[auto]! md:[&_svg]:w-[80px]! [&_img]:w-[60px]! [&_img]:h-[auto]! md:[&_img]:w-[80px]! leading-[0]',
             messageContainer: () => 'text-center space-y-2 max-w-md',
             statusMessage: ({ statusData }) =>
               cn(
@@ -136,9 +167,14 @@ export const nova_connect_provider_customization: NovaConnectProviderCustomizati
                     ? SHARED_STYLES.textAccent
                     : SHARED_STYLES.textForeground,
               ),
-            errorMessage: () => cn(SHARED_STYLES.fontMono, 'text-sm text-center leading-relaxed', SHARED_STYLES.textError),
+            errorMessage: () =>
+              cn(SHARED_STYLES.fontMono, 'text-sm text-center leading-relaxed', SHARED_STYLES.textError),
             errorDetails: () => 'mt-3 text-left',
-            loadingPlaceholder: () => cn('flex flex-col gap-4 items-center justify-center w-full py-8', '[&>div]:bg-[var(--accountable-background-2)]'),
+            loadingPlaceholder: () =>
+              cn(
+                'flex flex-col gap-4 items-center justify-center w-full py-8',
+                '[&>div]:bg-[var(--accountable-background-2)]',
+              ),
           },
         },
       },
@@ -152,7 +188,13 @@ export const nova_connect_provider_customization: NovaConnectProviderCustomizati
   errors: {
     toastErrorCustomization: {
       classNames: {
-        container: () => cn(SHARED_STYLES.fontMono, 'p-4 rounded-md w-full', SHARED_STYLES.bgBase, 'border border-[var(--accountable-error)]'),
+        container: () =>
+          cn(
+            SHARED_STYLES.fontMono,
+            'p-4 rounded-md w-full',
+            SHARED_STYLES.bgBase,
+            'border border-[var(--accountable-error)]',
+          ),
         title: () => cn(SHARED_STYLES.fontMonoMedium, 'text-sm truncate', SHARED_STYLES.textError),
         description: () => cn(SHARED_STYLES.fontMono, 'mt-1 text-xs break-words opacity-80', SHARED_STYLES.textError),
         button: ({ isCopied }) =>
@@ -161,7 +203,9 @@ export const nova_connect_provider_customization: NovaConnectProviderCustomizati
             'cursor-pointer mt-2 text-xs font-medium inline-flex items-center space-x-1.5',
             'rounded-md px-2 py-1 transition-all duration-200',
             'focus:outline-none focus:ring-2 focus:ring-[var(--accountable-error)] focus:ring-opacity-50',
-            isCopied ? 'bg-[var(--accountable-accent)] bg-opacity-10 text-[var(--accountable-accent)]' : 'text-[var(--accountable-error)] hover:bg-[var(--accountable-error)] hover:bg-opacity-10',
+            isCopied
+              ? 'bg-[var(--accountable-accent)] bg-opacity-10 text-[var(--accountable-accent)]'
+              : 'text-[var(--accountable-error)] hover:bg-[var(--accountable-error)] hover:bg-opacity-10',
           ),
         icon: ({ isCopied }) => cn('w-4 h-4 transition-colors', isCopied && SHARED_STYLES.textAccent),
       },

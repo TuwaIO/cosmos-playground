@@ -17,7 +17,13 @@ export const connect_button_customization: ConnectButtonCustomization = {
         'focus:ring-offset-[var(--accountable-background)]',
         'disabled:opacity-50 disabled:cursor-not-allowed',
         isConnected
-          ? cn(SHARED_STYLES.bgBase, SHARED_STYLES.textForeground, SHARED_STYLES.borderDefault, 'hover:bg-[var(--accountable-border)]', SHARED_STYLES.baseFocus)
+          ? cn(
+              SHARED_STYLES.bgBase,
+              SHARED_STYLES.textForeground,
+              SHARED_STYLES.borderDefault,
+              'hover:bg-[var(--accountable-border)]',
+              SHARED_STYLES.baseFocus,
+            )
           : cn(SHARED_STYLES.bgAccent, SHARED_STYLES.textAccentDark, 'hover:opacity-90', SHARED_STYLES.baseFocus),
       );
     },

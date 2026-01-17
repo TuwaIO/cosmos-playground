@@ -56,7 +56,8 @@ export const SHARED_STYLES = {
 // BUTTON STYLES - Reusable button patterns
 // ═══════════════════════════════════════════════════════════════════════════════
 
-const BUTTON_BASE = 'cursor-pointer inline-flex items-center justify-center gap-2 rounded-[4px] transition-all duration-200';
+const BUTTON_BASE =
+  'cursor-pointer inline-flex items-center justify-center gap-2 rounded-[4px] transition-all duration-200';
 
 export const BUTTON_STYLES = {
   // Base layout (no colors)
@@ -174,18 +175,10 @@ export const ICON_BUTTON_STYLES = {
   ),
 
   // Copy button
-  copy: cn(
-    SHARED_STYLES.textSecondary,
-    'hover:text-[var(--accountable-accent)]',
-    'transition-colors',
-  ),
+  copy: cn(SHARED_STYLES.textSecondary, 'hover:text-[var(--accountable-accent)]', 'transition-colors'),
 
   // Copy button with error hover
-  copyError: cn(
-    SHARED_STYLES.textSecondary,
-    'hover:text-[var(--accountable-error)]',
-    'transition-colors',
-  ),
+  copyError: cn(SHARED_STYLES.textSecondary, 'hover:text-[var(--accountable-error)]', 'transition-colors'),
 } as const;
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -285,4 +278,3 @@ export const HASH_LINK_STYLES = {
   link: cn(SHARED_STYLES.textAccent, 'hover:underline transition-colors'),
   copyButton: ICON_BUTTON_STYLES.copy,
 } as const;
-

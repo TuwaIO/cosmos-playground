@@ -16,7 +16,11 @@ const getItemStyles = (isActive: boolean) =>
           'focus:ring-[var(--accountable-accent)] focus:ring-offset-[var(--accountable-background-2)]',
           'focus:bg-[var(--accountable-accent)] focus:outline-none',
         )
-      : cn(SHARED_STYLES.textForeground, 'hover:bg-[var(--accountable-accent-dark)]', 'active:bg-[var(--accountable-accent)]'),
+      : cn(
+          SHARED_STYLES.textForeground,
+          'hover:bg-[var(--accountable-accent-dark)]',
+          'active:bg-[var(--accountable-accent)]',
+        ),
   );
 
 export const chain_list_customization: ChainSelectorCustomization = {
