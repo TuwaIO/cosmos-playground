@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.13](https://github.com/TuwaIO/cosmos-playground/compare/create-cosmos-playground-v0.0.12...create-cosmos-playground-v0.0.13) (2026-01-18)
+
+
+### Bug Fixes
+
+* added custom theme (accountable) ([#15](https://github.com/TuwaIO/cosmos-playground/issues/15)) ([c98826a](https://github.com/TuwaIO/cosmos-playground/commit/c98826ac84a858744e27be3f55bc4f41fead9d8f))
+
 ## [0.0.12](https://github.com/TuwaIO/cosmos-playground/compare/create-cosmos-playground-v0.0.11...create-cosmos-playground-v0.0.12) (2026-01-14)
 
 
