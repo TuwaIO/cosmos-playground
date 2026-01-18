@@ -60,5 +60,10 @@ export const transactions_history_customization: TransactionsHistoryCustomizatio
       '[&_span]:font-[DM_Mono]',
     ),
     itemHashCopyButton: cn('cursor-pointer', ICON_BUTTON_STYLES.copy),
+
+    // Original hash (replaced transactions) - less prominent
+    itemOriginalHashLabel: cn(SHARED_STYLES.fontMonoMedium, 'text-xs', SHARED_STYLES.textSecondary),
+    itemOriginalHashLink: cn(SHARED_STYLES.fontMono, 'text-xs', SHARED_STYLES.textSecondary),
+    itemOriginalHashCopyButton: cn('opacity-50', ICON_BUTTON_STYLES.copy),
   },
 };

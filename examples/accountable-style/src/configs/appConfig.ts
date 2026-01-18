@@ -1,42 +1,17 @@
 import { createDefaultTransports, impersonated, safeSdkOptions } from '@tuwaio/satellite-evm';
 import { baseAccount, safe, walletConnect } from '@wagmi/connectors';
 import { createConfig, injected } from '@wagmi/core';
-import {
-  arbitrum,
-  arbitrumSepolia,
-  avalanche,
-  avalancheFuji,
-  base,
-  bsc,
-  Chain,
-  mainnet,
-  monad,
-  monadTestnet,
-  optimism,
-  sepolia,
-} from 'viem/chains';
+import { arbitrum, Chain, mainnet, monad, monadTestnet, sepolia } from 'viem/chains';
 
 export const appConfig = {
   appName: 'Satellite EVM Test App',
-  appDescription: 'TUWA Demo App',
+  appDescription: 'TUWA + Accountable Demo App',
   projectId: '9077e559e63e099f496b921a027d0f04',
   appLogoUrl: 'https://raw.githubusercontent.com/TuwaIO/workflows/refs/heads/main/preview/preview-logo.png',
   appUrl: 'https://demo.tuwa.io/',
 };
 
-export const appEVMChains = [
-  monad,
-  mainnet,
-  arbitrum,
-  sepolia,
-  monadTestnet,
-  arbitrumSepolia,
-  optimism,
-  avalanche,
-  avalancheFuji,
-  base,
-  bsc,
-] as readonly [Chain, ...Chain[]];
+export const appEVMChains = [monad, mainnet, arbitrum, sepolia, monadTestnet] as readonly [Chain, ...Chain[]];
 
 export const wagmiConfig = createConfig({
   connectors: [

@@ -6,7 +6,7 @@ import { cn } from '@tuwaio/nova-core';
 import { getAdapterFromConnectorType, OrbitAdapter } from '@tuwaio/orbit-core';
 import { motion } from 'framer-motion';
 
-import { TransactionsBlockWrapper as TransactionsBlockRainbowKit } from './evm/TransactionsBlockWrapper';
+import { TransactionsBlockWrapper } from './evm/TransactionsBlockWrapper';
 
 export default function HomePage() {
   const activeConnection = useSatelliteConnectStore((store) => store.activeConnection);
@@ -16,7 +16,7 @@ export default function HomePage() {
       {activeConnection ? (
         <>
           {getAdapterFromConnectorType(activeConnection.connectorType) === OrbitAdapter.EVM && (
-            <TransactionsBlockRainbowKit />
+            <TransactionsBlockWrapper />
           )}
         </>
       ) : (

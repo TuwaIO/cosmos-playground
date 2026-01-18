@@ -21,13 +21,7 @@ export const nova_connect_provider_customization: NovaConnectProviderCustomizati
             SHARED_STYLES.textSecondary,
             'hover:bg-[var(--accountable-accent-dark)] hover:text-[var(--accountable-accent)]',
           ),
-        closeButton: () =>
-          cn(
-            'rounded-[4px]',
-            SHARED_STYLES.textSecondary,
-            'hover:bg-[var(--accountable-accent-dark)] hover:text-[var(--accountable-primary)]',
-            SHARED_STYLES.baseFocus,
-          ),
+        closeButton: () => MODAL_STYLES.closeButton,
         mainContent: () => SHARED_STYLES.bgBase,
         footer: () => MODAL_STYLES.footer,
         backButton: () => BUTTON_STYLES.ghost,
@@ -44,11 +38,34 @@ export const nova_connect_provider_customization: NovaConnectProviderCustomizati
       // ─────────────────────────────────────────────────────────────────────
       childComponents: {
         connectorsSelections: {
+          classNames: {
+            emptyState: () =>
+              cn(
+                SHARED_STYLES.fontMono,
+                SHARED_STYLES.textSecondary,
+                SHARED_STYLES.bgDark,
+                SHARED_STYLES.textSecondary,
+                SHARED_STYLES.borderDefault,
+                'text-sm',
+                'flex flex-col items-center justify-center p-4 text-center rounded-[4px]',
+                `[&_svg]:${SHARED_STYLES.textAccent}`,
+                `[&_h2]:${SHARED_STYLES.textPrimary}`,
+              ),
+          },
           connectorsBlock: {
             installed: {
               classNames: {
                 title: () =>
                   cn(SHARED_STYLES.fontMonoMedium, SHARED_STYLES.textAccent, 'text-sm uppercase tracking-wide'),
+                emptyState: () =>
+                  cn(
+                    SHARED_STYLES.fontMono,
+                    SHARED_STYLES.textSecondary,
+                    SHARED_STYLES.bgDark,
+                    SHARED_STYLES.textSecondary,
+                    'text-sm',
+                    'flex items-center justify-center p-4 rounded-[4px]',
+                  ),
               },
               connectCard: connect_card_customization,
             },
@@ -83,10 +100,8 @@ export const nova_connect_provider_customization: NovaConnectProviderCustomizati
             indicator: ({ isActive }) =>
               cn(
                 'cursor-pointer h-2 rounded-full transition-all duration-300',
-                'focus:outline-none focus:ring-2 focus:ring-[var(--accountable-accent)] focus:ring-offset-2',
-                isActive
-                  ? 'bg-[var(--accountable-accent)] w-6'
-                  : 'bg-[var(--accountable-border)] w-2 hover:bg-[var(--accountable-accent)]',
+                'focus:outline-none focus:ring-2 focus:ring-[var(--accountable-accent)] focus:ring-offset-2 hover:bg-[var(--accountable-accent)]',
+                isActive ? 'bg-[var(--accountable-accent)] w-6' : 'bg-[var(--accountable-border)] w-2',
               ),
           },
         },
@@ -176,6 +191,15 @@ export const nova_connect_provider_customization: NovaConnectProviderCustomizati
                 '[&>div]:bg-[var(--accountable-background-2)]',
               ),
           },
+          walletIcon: {
+            classNames: {
+              container: ({ isLoading, showLoading }) =>
+                cn({
+                  'animate-pulse bg-[var(--accountable-background-2)]': showLoading && isLoading,
+                }),
+              loadingOverlay: () => 'bg-[var(--accountable-accent-dark)]',
+            },
+          },
         },
       },
     },
@@ -186,6 +210,9 @@ export const nova_connect_provider_customization: NovaConnectProviderCustomizati
   // ERRORS PROVIDER CUSTOMIZATION - Toast notifications
   // ═══════════════════════════════════════════════════════════════════════════════
   errors: {
+    toastCloseButton: {
+      className: MODAL_STYLES.closeButton,
+    },
     toastErrorCustomization: {
       classNames: {
         container: () =>

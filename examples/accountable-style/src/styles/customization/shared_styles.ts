@@ -29,7 +29,7 @@ export const SHARED_STYLES = {
   bgDark: 'bg-[var(--accountable-background)]',
   bgAccent: 'bg-[var(--accountable-accent)]',
   bgAccentDark: 'bg-[var(--accountable-accent-dark)]',
-  bgCard: 'bg-[var(--accountable-background-3)]',
+  bgCard: 'bg-[var(--accountable-background-2)]',
 
   // ─────────────────────────────────────────────────────────────────────────────
   // Borders
@@ -61,14 +61,14 @@ const BUTTON_BASE =
 
 export const BUTTON_STYLES = {
   // Base layout (no colors)
-  base: cn(BUTTON_BASE, 'min-h-[48px]'),
+  base: cn(BUTTON_BASE, 'min-h-[44px]'),
   baseSmall: cn(BUTTON_BASE, 'min-h-0'),
 
   // Primary - accent background
   primary: cn(
     BUTTON_BASE,
     SHARED_STYLES.fontMonoMedium,
-    'px-3 py-1 text-xs',
+    'px-2 py-1 text-sm',
     SHARED_STYLES.bgAccent,
     SHARED_STYLES.textAccentDark,
     'hover:bg-[var(--accountable-accent-dark)] hover:text-[var(--accountable-primary)]',
@@ -89,7 +89,6 @@ export const BUTTON_STYLES = {
   // Ghost - transparent background
   ghost: cn(
     BUTTON_BASE,
-    'min-h-[48px]',
     SHARED_STYLES.fontMono,
     SHARED_STYLES.bgBase,
     SHARED_STYLES.borderDefault,
@@ -109,10 +108,10 @@ export const BUTTON_STYLES = {
   // Danger - error action
   danger: cn(
     BUTTON_BASE,
-    'min-h-[48px]',
     SHARED_STYLES.fontMono,
     SHARED_STYLES.borderDefault,
     SHARED_STYLES.textForeground,
+    SHARED_STYLES.bgBase,
     'hover:bg-[var(--accountable-error)]/10',
     'hover:border-[var(--accountable-error)]',
     'hover:text-[var(--accountable-error)]',
@@ -141,6 +140,7 @@ export const MODAL_STYLES = {
     'hover:bg-[var(--accountable-accent-dark)]',
     'hover:text-[var(--accountable-primary)]',
     SHARED_STYLES.baseFocus,
+    `[&_svg]:text-[var(--accountable-secondary)]`,
   ),
 
   // Close button with icon styling
@@ -161,9 +161,9 @@ export const MODAL_STYLES = {
 export const ICON_BUTTON_STYLES = {
   // Default icon button
   default: cn(
-    'cursor-pointer rounded-[4px] p-1.5 transition-colors',
+    'cursor-pointer rounded-[4px] p-1 transition-colors',
     SHARED_STYLES.textSecondary,
-    'hover:text-[var(--accountable-accent)]',
+    'hover:text-[var(--accountable-accent)] hover:bg-[var(--accountable-accent-dark)]',
   ),
 
   // Danger icon button (delete, disconnect)

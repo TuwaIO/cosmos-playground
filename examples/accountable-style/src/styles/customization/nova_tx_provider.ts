@@ -14,6 +14,11 @@ import {
 import { transactions_history_customization } from './tx_history';
 
 export const nova_tx_provider_customization: NovaTransactionsProviderProps<TransactionUnion>['customization'] = {
+  // ========== Toast Close Button Customization ==========
+  toastCloseButton: {
+    className: MODAL_STYLES.closeButton,
+  },
+
   // ========== Toast Customization ==========
   toast: {
     classNames: {
@@ -28,6 +33,11 @@ export const nova_tx_provider_customization: NovaTransactionsProviderProps<Trans
       hashLabel: cn(SHARED_STYLES.fontMonoMedium, 'text-sm pr-1', SHARED_STYLES.textForeground),
       hashLink: cn(SHARED_STYLES.fontMono, SHARED_STYLES.textAccent, 'hover:underline transition-colors'),
       hashCopyButton: ICON_BUTTON_STYLES.copy,
+
+      // Original Hash (replaced transactions)
+      originalHashLabel: cn(SHARED_STYLES.fontMonoMedium, 'text-xs', SHARED_STYLES.textSecondary),
+      originalHashLink: cn(SHARED_STYLES.fontMono, 'text-xs', SHARED_STYLES.textSecondary),
+      originalHashCopyButton: cn('opacity-50', ICON_BUTTON_STYLES.copy),
 
       // Footer & Status
       statusBadge: cn(SHARED_STYLES.fontMono, 'text-xs font-medium'),
@@ -44,7 +54,7 @@ export const nova_tx_provider_customization: NovaTransactionsProviderProps<Trans
   transactionsInfoModal: {
     classNames: {
       header: cn(SHARED_STYLES.bgBase, 'border-[var(--accountable-border)]', SHARED_STYLES.textForeground),
-      headerTitle: SHARED_STYLES.fontMonoMedium,
+      headerTitle: MODAL_STYLES.headerTitle,
       closeButton: cn(MODAL_STYLES.closeButtonWithIcon, SHARED_STYLES.baseFocus),
     },
     historyCustomization: transactions_history_customization,
@@ -56,14 +66,12 @@ export const nova_tx_provider_customization: NovaTransactionsProviderProps<Trans
       // Container & Sections
       container: SHARED_STYLES.bgBase,
       header: cn(SHARED_STYLES.bgBase, 'border-[var(--accountable-border)]', SHARED_STYLES.textForeground),
-      headerTitle: cn(SHARED_STYLES.fontMonoMedium, 'text-lg'),
+      headerTitle: MODAL_STYLES.headerTitle,
       closeButton: MODAL_STYLES.closeButtonWithIcon,
       main: SHARED_STYLES.bgBase,
 
       // Footer
       footer: cn(MODAL_STYLES.footer, 'p-4'),
-      footerActions: 'flex items-center gap-4',
-      footerButtons: 'flex items-center gap-3',
 
       // Buttons
       speedUpButton: BUTTON_STYLES.link,
@@ -103,11 +111,15 @@ export const nova_tx_provider_customization: NovaTransactionsProviderProps<Trans
     infoBlockCustomization: {
       classNames: {
         container: CARD_STYLES.infoBlock,
-        row: 'text-sm',
         rowLabel: cn(SHARED_STYLES.fontMono, SHARED_STYLES.textSecondary),
         rowValue: cn(SHARED_STYLES.fontMonoMedium, SHARED_STYLES.textForeground),
         separator: 'border-[var(--accountable-border)]',
         hashLink: HASH_LINK_STYLES,
+        originalHashLink: {
+          label: cn(SHARED_STYLES.fontMonoMedium, 'text-xs', SHARED_STYLES.textSecondary),
+          link: cn(SHARED_STYLES.fontMono, 'text-xs', SHARED_STYLES.textSecondary),
+          copyButton: cn('opacity-50', ICON_BUTTON_STYLES.copy),
+        },
       },
     },
 

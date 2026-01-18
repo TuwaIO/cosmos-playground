@@ -60,7 +60,7 @@ export const chain_list_customization: ChainSelectorCustomization = {
   },
 
   selectContent: {
-    contentClassName: SHARED_STYLES.bgBase,
+    contentClassName: cn(SHARED_STYLES.bgBase, 'ring-[var(--accountable-border)]'),
     topButtonCustomization: {
       classNames: {
         button: () => SCROLL_BUTTON_STYLES.buttonTop,

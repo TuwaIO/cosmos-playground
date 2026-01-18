@@ -4,6 +4,7 @@ import React from 'react';
 
 import { ExtraBalancesSection } from '../../components/connect-wallet/ExtraBalances';
 import { TelegramBotButton } from '../../components/connect-wallet/TelegramBotButton';
+import { balance_display_customization } from './balance_display';
 import { chain_list_customization } from './chain_list';
 import { BUTTON_STYLES, ICON_BUTTON_STYLES, MODAL_STYLES, SHARED_STYLES } from './shared_styles';
 import { transactions_history_customization } from './tx_history';
@@ -71,6 +72,31 @@ export const connected_modal_customization: ConnectedModalCustomization = {
 
       // Child component customizations
       childCustomizations: {
+        // WalletAvatar - Large avatar in center
+        walletAvatar: {
+          classNames: {
+            // Container with Accountable styling
+            container: () =>
+              cn(
+                // Size override (will use className from MainContent for sizing)
+                'flex-shrink-0 rounded-full relative overflow-hidden w-36 h-36 sm:w-32 sm:h-32',
+                // Accountable border
+                'ring-2 ring-[var(--accountable-border)]',
+                // Focus state
+                'focus-within:ring-[var(--accountable-accent)]',
+              ),
+            // Loading overlay with Accountable colors
+            loadingOverlay: ({ isLoading, showLoading, disableAnimation }) =>
+              cn(
+                'absolute inset-0 rounded-full',
+                'bg-[var(--accountable-background-3)]',
+                !disableAnimation && showLoading && isLoading && 'animate-pulse',
+                (!isLoading || !showLoading) && 'opacity-0',
+                'transition-opacity duration-300',
+              ),
+          },
+        },
+
         // Switch wallet IconButton (LEFT button under avatar)
         switchWalletButton: {
           customization: {
@@ -153,11 +179,10 @@ export const connected_modal_customization: ConnectedModalCustomization = {
         nameAndBalance: {
           classNames: {
             walletNameDisplay: () => cn(SHARED_STYLES.fontMonoMedium, 'text-lg', SHARED_STYLES.textForeground),
-            copyButton: () => cn(ICON_BUTTON_STYLES.default, 'p-1'),
-
-            // Balance display
-            balanceContainer: () => 'flex items-center gap-2',
-            balanceDisplay: () => cn(SHARED_STYLES.fontMono, SHARED_STYLES.textSecondary),
+            copyButton: () => cn(ICON_BUTTON_STYLES.default),
+          },
+          childCustomizations: {
+            balanceDisplay: balance_display_customization,
           },
         },
       },
@@ -250,6 +275,8 @@ export const connected_modal_customization: ConnectedModalCustomization = {
             'transition-colors',
             'hover:border-[var(--accountable-accent)] hover:text-[var(--accountable-accent)]',
           ),
+
+        connectorIconBadge: () => 'border-[var(--accountable-border)]',
       },
     },
 

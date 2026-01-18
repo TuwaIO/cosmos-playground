@@ -42,6 +42,39 @@ export const connect_button_customization: ConnectButtonCustomization = {
               'h-6 w-6 flex-shrink-0 rounded-full overflow-hidden ring-1 ring-[var(--accountable-accent)] focus-within:ring-2 relative z-2',
           },
         },
+        // StatusIcon customization for transaction states
+        statusIcon: {
+          succeed: {
+            classNames: {
+              container: () =>
+                cn(
+                  'w-6 h-6 rounded-full flex items-center justify-center',
+                  'bg-[var(--accountable-accent-dark)] text-[var(--accountable-accent)]',
+                  'ring-1 ring-[var(--accountable-accent)]',
+                ),
+            },
+          },
+          failed: {
+            classNames: {
+              container: () =>
+                cn(
+                  'w-6 h-6 rounded-full flex items-center justify-center',
+                  'bg-[rgba(224,36,36,0.15)] text-[var(--accountable-error)]',
+                  'ring-1 ring-[var(--accountable-error)]',
+                ),
+            },
+          },
+          replaced: {
+            classNames: {
+              container: () =>
+                cn(
+                  'w-6 h-6 rounded-full flex items-center justify-center',
+                  'bg-[var(--accountable-background)] text-[var(--accountable-secondary)]',
+                  'ring-1 ring-[var(--accountable-border)]',
+                ),
+            },
+          },
+        },
       },
       classNames: {
         balanceContainer: () => 'text-[var(--accountable-tertiary)]',

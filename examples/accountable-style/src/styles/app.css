@@ -30,6 +30,31 @@
   --accountable-alertDark: #493F0F;
   --accountable-destructive: #E02424;
   --accountable-error: #E02424;
+
+  /* ═══════════════════════════════════════════════════════════════════
+   * TRANSACTION STATUS BADGE OVERRIDES
+   * Maps nova-transactions status badge variables to Accountable theme
+   * ═══════════════════════════════════════════════════════════════════ */
+
+  /* Success - Dark background with green text/icon */
+  --tuwa-success-bg: #0B553C;
+  --tuwa-success-text: var(--accountable-accent);
+  --tuwa-success-icon: var(--accountable-accent);
+
+  /* Pending - Dark amber background with amber text/icon */
+  --tuwa-pending-bg: var(--accountable-alertDark);
+  --tuwa-pending-text: var(--accountable-alert);
+  --tuwa-pending-icon: var(--accountable-alert);
+
+  /* Error/Failed - Dark red background with red text/icon */
+  --tuwa-error-bg: rgba(224, 36, 36, 0.15);
+  --tuwa-error-text: var(--accountable-error);
+  --tuwa-error-icon: var(--accountable-error);
+
+  /* Info/Replaced - Dark gray background with muted text/icon */
+  --tuwa-info-bg: var(--accountable-background);
+  --tuwa-info-text: var(--accountable-secondary);
+  --tuwa-info-icon: var(--accountable-disabled);
 }
 
 @media (hover: hover) {
@@ -57,4 +82,9 @@
   border-color: var(--accountable-border);
   background: var(--accountable-background-2);
   border-radius: 4px;
+}
+
+.Nova_Web3_Icon {
+  background: var(--accountable-accent-dark);
+  background: var(--accountable-secondary);
 }
