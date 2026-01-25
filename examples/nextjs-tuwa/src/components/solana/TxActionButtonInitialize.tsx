@@ -41,7 +41,7 @@ export const TxActionButtonInitialize = ({ activeWallet }: { activeWallet: Conne
           signer,
           contractAddress: solanatest,
         }),
-      onSuccessCallback: async () => await getAccounts(),
+      onSuccess: async () => await getAccounts(),
       params: {
         type: TxType.initialize,
         adapter: OrbitAdapter.SOLANA,

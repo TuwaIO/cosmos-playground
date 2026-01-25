@@ -129,6 +129,8 @@ export const nova_connect_provider_customization: NovaConnectProviderCustomizati
                   : 'border-[var(--accountable-border)] focus:border-[var(--accountable-accent)] focus:ring-1 focus:ring-[var(--accountable-accent)]',
               ),
             errorMessage: () => cn(SHARED_STYLES.fontMono, 'mt-2 text-sm', SHARED_STYLES.textError),
+            resolvingStatus: () => cn(SHARED_STYLES.fontMono, 'text-[var(--accountable-alert)]'),
+            resolvedAddress: () => cn(SHARED_STYLES.fontMono, SHARED_STYLES.textAccent),
           },
         },
 

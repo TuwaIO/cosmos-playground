@@ -55,41 +55,7 @@ export const TransactionsBlockWrapper = () => {
 
     await executeTxAction({
       actionFunction: txActions.incrementEvm,
-      onSuccessCallback: (tx) => {
-        if (tx.type === TxType.increment) {
-          console.log(`Increment tx succeed, ${tx.payload.value}`);
-        }
-      },
-      params: {
-        type: TxType.increment,
-        adapter: OrbitAdapter.EVM,
-        desiredChainID: sepolia.id,
-        title: ['Incrementing', 'Incremented', 'Error when increment', 'Increment tx replaced'],
-        description: [
-          `Value after incrementing ${currentCount + 1}`,
-          `Success. Current value is ${currentCount + 1}`,
-          'Something went wrong when increment.',
-          'Transaction replaced. Please take a look details in your wallet.',
-        ],
-        payload: {
-          value: currentCount,
-          contractAddress: COUNTER_ADDRESS,
-        },
-        withTrackedModal: true,
-      },
-    });
-
-    setTimeout(() => {
-      fetchCurrentCount();
-    }, 2000);
-  };
-
-  const handleIncrementGelato = async () => {
-    if (currentCount === null) return;
-
-    await executeTxAction({
-      actionFunction: txActions.incrementGelato,
-      onSuccessCallback: (tx) => {
+      onSuccess: (tx) => {
         if (tx.type === TxType.increment) {
           console.log(`Increment tx succeed, ${tx.payload.value}`);
         }
@@ -209,20 +175,6 @@ export const TransactionsBlockWrapper = () => {
                 >
                   <span className="text-xl leading-none contents text-[var(--accountable-accent-dark)]">+</span>
                   <span className="leading-none">Increment Counter</span>
-                </TxActionButton>
-              </div>
-
-              <div className="h-14">
-                <TxActionButton
-                  action={handleIncrementGelato}
-                  transactionsPool={transactionsPool}
-                  getLastTxKey={getLastTxKey}
-                  className="from-[var(--accountable-accent)] to-[var(--accountable-accent)] w-full h-full bg-[var(--accountable-accent)] hover:opacity-90 text-[var(--accountable-accent-dark)] font-medium rounded-[4px] transition-all duration-200 ease-in-out flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] select-none font-[DM_Mono]"
-                  disabled={currentCount === null}
-                  walletAddress={address}
-                >
-                  <span className="text-xl leading-none contents text-[var(--accountable-accent-dark)]">+</span>
-                  <span className="leading-none">Increment Gelato Counter</span>
                 </TxActionButton>
               </div>
 

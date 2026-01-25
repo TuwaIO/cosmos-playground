@@ -42,7 +42,7 @@ export const TxActionButtonClose = ({
           signer,
           contractAddress: solanatest,
         }),
-      onSuccessCallback: async () => {
+      onSuccess: async () => {
         await getAccounts();
         removeAccFromStore(solanatest.toString());
       },

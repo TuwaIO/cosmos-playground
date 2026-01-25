@@ -44,7 +44,7 @@ export const TxActionButtonIncrement = ({
           signer,
           contractAddress: solanatest,
         }),
-      onSuccessCallback: async () => {
+      onSuccess: async () => {
         await getAccounts();
       },
       params: {

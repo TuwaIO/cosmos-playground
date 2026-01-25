@@ -55,7 +55,7 @@ export const TransactionsBlockWrapper = () => {
 
     await executeTxAction({
       actionFunction: txActions.incrementEvm,
-      onSuccessCallback: (tx) => {
+      onSuccess: (tx) => {
         if (tx.type === TxType.increment) {
           console.log(`Increment tx succeed, ${tx.payload.value}`);
         }
@@ -89,8 +89,7 @@ export const TransactionsBlockWrapper = () => {
 
     await executeTxAction({
       actionFunction: txActions.incrementGelato,
-      onSuccessCallback: (tx) => {
-        // TODO: need fix package for tx in onSuccessCallback
+      onSuccess: (tx) => {
         if (tx.type === TxType.increment) {
           console.log(`Increment tx succeed, ${tx.payload.value}`);
         }
