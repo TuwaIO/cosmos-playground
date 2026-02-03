@@ -17,6 +17,7 @@
     "customization"
   ],
   "author": "Oleksandr Tkach",
+  "license": "MIT-0",
   "packageManager": "pnpm@10.28.2",
   "engines": {
     "node": ">=20.0.0",
