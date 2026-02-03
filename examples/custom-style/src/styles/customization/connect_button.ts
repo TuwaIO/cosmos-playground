@@ -14,17 +14,16 @@ export const connect_button_customization: ConnectButtonCustomization = {
         BUTTON_STYLES.base,
         'px-4 py-2 text-md',
         SHARED_STYLES.fontMono,
-        'focus:ring-offset-[var(--accountable-background)]',
+        SHARED_STYLES.focusWithOffset('var(--tuwa-bg-primary)'),
         'disabled:opacity-50 disabled:cursor-not-allowed',
         isConnected
           ? cn(
               SHARED_STYLES.bgBase,
               SHARED_STYLES.textForeground,
               SHARED_STYLES.borderDefault,
-              'hover:bg-[var(--accountable-border)]',
-              SHARED_STYLES.baseFocus,
+              'hover:bg-[var(--tuwa-border-primary)]',
             )
-          : cn(SHARED_STYLES.bgAccent, SHARED_STYLES.textAccentDark, 'hover:opacity-90', SHARED_STYLES.baseFocus),
+          : cn(SHARED_STYLES.bgAccent, SHARED_STYLES.textAccentDark, 'hover:opacity-90'),
       );
     },
   },
@@ -39,7 +38,7 @@ export const connect_button_customization: ConnectButtonCustomization = {
         walletAvatar: {
           classNames: {
             container: () =>
-              'h-6 w-6 flex-shrink-0 rounded-full overflow-hidden ring-1 ring-[var(--accountable-accent)] focus-within:ring-2 relative z-2',
+              'h-6 w-6 flex-shrink-0 rounded-full overflow-hidden ring-1 ring-[var(--tuwa-text-accent)] focus-within:ring-2 relative z-2',
           },
         },
         // StatusIcon customization for transaction states
@@ -49,8 +48,8 @@ export const connect_button_customization: ConnectButtonCustomization = {
               container: () =>
                 cn(
                   'w-6 h-6 rounded-full flex items-center justify-center',
-                  'bg-[var(--accountable-accent-dark)] text-[var(--accountable-accent)]',
-                  'ring-1 ring-[var(--accountable-accent)]',
+                  'bg-[var(--tuwa-bg-muted)] text-[var(--tuwa-text-accent)]',
+                  'ring-1 ring-[var(--tuwa-text-accent)]',
                 ),
             },
           },
@@ -59,8 +58,8 @@ export const connect_button_customization: ConnectButtonCustomization = {
               container: () =>
                 cn(
                   'w-6 h-6 rounded-full flex items-center justify-center',
-                  'bg-[rgba(224,36,36,0.15)] text-[var(--accountable-error)]',
-                  'ring-1 ring-[var(--accountable-error)]',
+                  'bg-[rgba(224,36,36,0.15)] text-[var(--tuwa-error-icon)]',
+                  'ring-1 ring-[var(--tuwa-error-icon)]',
                 ),
             },
           },
@@ -69,17 +68,17 @@ export const connect_button_customization: ConnectButtonCustomization = {
               container: () =>
                 cn(
                   'w-6 h-6 rounded-full flex items-center justify-center',
-                  'bg-[var(--accountable-background)] text-[var(--accountable-secondary)]',
-                  'ring-1 ring-[var(--accountable-border)]',
+                  'bg-[var(--tuwa-bg-primary)] text-[var(--tuwa-text-secondary)]',
+                  'ring-1 ring-[var(--tuwa-border-primary)]',
                 ),
             },
           },
         },
       },
       classNames: {
-        balanceContainer: () => 'text-[var(--accountable-tertiary)]',
+        balanceContainer: () => 'text-[var(--tuwa-text-tertiary)]',
         balanceDivider: () => SHARED_STYLES.bgAccent,
-        mainContent: () => '[&_span]:text-[var(--accountable-primary)] [&_svg]:text-[var(--accountable-accent)]',
+        mainContent: () => '[&_span]:text-[var(--tuwa-text-primary)] [&_svg]:text-[var(--tuwa-text-accent)]',
       },
     },
 

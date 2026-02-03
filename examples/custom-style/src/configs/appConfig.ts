@@ -5,7 +5,7 @@ import { arbitrum, Chain, mainnet, monad, monadTestnet, sepolia } from 'viem/cha
 
 export const appConfig = {
   appName: 'Satellite EVM Test App',
-  appDescription: 'TUWA + Accountable Demo App',
+  appDescription: 'TUWA Custom Style Demo App',
   projectId: '9077e559e63e099f496b921a027d0f04',
   appLogoUrl: 'https://raw.githubusercontent.com/TuwaIO/workflows/refs/heads/main/preview/preview-logo.png',
   appUrl: 'https://demo.tuwa.io/',

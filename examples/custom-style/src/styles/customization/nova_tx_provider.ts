@@ -1,7 +1,6 @@
 import { cn } from '@tuwaio/nova-core';
 import { NovaTransactionsProviderProps } from '@tuwaio/nova-transactions/providers';
 
-import { TransactionUnion } from '../../transactions';
 import {
   BUTTON_STYLES,
   CARD_STYLES,
@@ -13,7 +12,8 @@ import {
 } from './shared_styles';
 import { transactions_history_customization } from './tx_history';
 
-export const nova_tx_provider_customization: NovaTransactionsProviderProps<TransactionUnion>['customization'] = {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const nova_tx_provider_customization: NovaTransactionsProviderProps<any>['customization'] = {
   // ========== Toast Close Button Customization ==========
   toastCloseButton: {
     className: MODAL_STYLES.closeButton,
@@ -29,7 +29,7 @@ export const nova_tx_provider_customization: NovaTransactionsProviderProps<Trans
       description: cn(SHARED_STYLES.fontMono, 'mt-1 text-xs', SHARED_STYLES.textSecondary),
 
       // Transaction Key / Hash
-      transactionKey: 'border-[var(--accountable-border)]',
+      transactionKey: 'border-[var(--tuwa-border-primary)]',
       hashLabel: cn(SHARED_STYLES.fontMonoMedium, 'text-sm pr-1', SHARED_STYLES.textForeground),
       hashLink: cn(SHARED_STYLES.fontMono, SHARED_STYLES.textAccent, 'hover:underline transition-colors'),
       hashCopyButton: ICON_BUTTON_STYLES.copy,
@@ -53,7 +53,7 @@ export const nova_tx_provider_customization: NovaTransactionsProviderProps<Trans
   // ========== Transactions Info Modal ==========
   transactionsInfoModal: {
     classNames: {
-      header: cn(SHARED_STYLES.bgBase, 'border-[var(--accountable-border)]', SHARED_STYLES.textForeground),
+      header: cn(SHARED_STYLES.bgBase, 'border-[var(--tuwa-border-primary)]', SHARED_STYLES.textForeground),
       headerTitle: MODAL_STYLES.headerTitle,
       closeButton: cn(MODAL_STYLES.closeButtonWithIcon, SHARED_STYLES.baseFocus),
     },
@@ -65,7 +65,7 @@ export const nova_tx_provider_customization: NovaTransactionsProviderProps<Trans
     classNames: {
       // Container & Sections
       container: SHARED_STYLES.bgBase,
-      header: cn(SHARED_STYLES.bgBase, 'border-[var(--accountable-border)]', SHARED_STYLES.textForeground),
+      header: cn(SHARED_STYLES.bgBase, 'border-[var(--tuwa-border-primary)]', SHARED_STYLES.textForeground),
       headerTitle: MODAL_STYLES.headerTitle,
       closeButton: MODAL_STYLES.closeButtonWithIcon,
       main: SHARED_STYLES.bgBase,
@@ -79,8 +79,8 @@ export const nova_tx_provider_customization: NovaTransactionsProviderProps<Trans
       retryButton: cn(
         BUTTON_STYLES.primary,
         'text-sm px-4 py-2',
-        'from-[var(--accountable-accent)] to-[var(--accountable-accent)]',
-        'hover:from-[var(--accountable-accent-dark)] hover:to-[var(--accountable-accent-dark)]',
+        'from-[var(--tuwa-text-accent)] to-[var(--tuwa-text-accent)]',
+        'hover:from-[var(--tuwa-bg-muted)] hover:to-[var(--tuwa-bg-muted)]',
       ),
       allTransactionsButton: BUTTON_STYLES.secondary,
       closeModalButton: BUTTON_STYLES.secondary,
@@ -113,7 +113,7 @@ export const nova_tx_provider_customization: NovaTransactionsProviderProps<Trans
         container: CARD_STYLES.infoBlock,
         rowLabel: cn(SHARED_STYLES.fontMono, SHARED_STYLES.textSecondary),
         rowValue: cn(SHARED_STYLES.fontMonoMedium, SHARED_STYLES.textForeground),
-        separator: 'border-[var(--accountable-border)]',
+        separator: 'border-[var(--tuwa-border-primary)]',
         hashLink: HASH_LINK_STYLES,
         originalHashLink: {
           label: cn(SHARED_STYLES.fontMonoMedium, 'text-xs', SHARED_STYLES.textSecondary),

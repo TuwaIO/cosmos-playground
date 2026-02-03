@@ -13,14 +13,10 @@ const getItemStyles = (isActive: boolean) =>
           SHARED_STYLES.bgAccent,
           SHARED_STYLES.textAccentDark,
           SHARED_STYLES.fontMonoMedium,
-          'focus:ring-[var(--accountable-accent)] focus:ring-offset-[var(--accountable-background-2)]',
-          'focus:bg-[var(--accountable-accent)] focus:outline-none',
+          SHARED_STYLES.focusWithOffset('var(--tuwa-bg-secondary)'),
+          'focus:bg-[var(--tuwa-text-accent)]',
         )
-      : cn(
-          SHARED_STYLES.textForeground,
-          'hover:bg-[var(--accountable-accent-dark)]',
-          'active:bg-[var(--accountable-accent)]',
-        ),
+      : cn(SHARED_STYLES.textForeground, 'hover:bg-[var(--tuwa-bg-muted)]', 'active:bg-[var(--tuwa-text-accent)]'),
   );
 
 export const chain_list_customization: ChainSelectorCustomization = {
@@ -29,9 +25,9 @@ export const chain_list_customization: ChainSelectorCustomization = {
     dialogHeader: () =>
       cn(
         SHARED_STYLES.bgBase,
-        'border-[var(--accountable-border)]',
+        'border-[var(--tuwa-border-primary)]',
         SHARED_STYLES.textForeground,
-        '[&_h2]:text-[var(--accountable-primary)] [&_h2]:font-[DM_Mono] [&_h2]:font-medium',
+        '[&_h2]:text-[var(--tuwa-text-primary)] [&_h2]:font-[DM_Mono] [&_h2]:font-medium',
       ),
   },
 
@@ -39,9 +35,9 @@ export const chain_list_customization: ChainSelectorCustomization = {
     closeButton: {
       className: cn(
         'cursor-pointer rounded-[4px] p-1 transition-colors',
-        'hover:bg-[var(--accountable-accent-dark)]',
+        'hover:bg-[var(--tuwa-bg-muted)]',
         SHARED_STYLES.baseFocus,
-        '[&_svg]:text-[var(--accountable-primary)]',
+        '[&_svg]:text-[var(--tuwa-text-primary)]',
       ),
     },
   },
@@ -52,15 +48,15 @@ export const chain_list_customization: ChainSelectorCustomization = {
         cn(
           BUTTON_STYLES.ghost,
           'text-md',
-          'focus:ring-offset-[var(--accountable-background)]',
-          isOpen ? cn(SHARED_STYLES.borderAccent, 'ring-1 ring-[var(--accountable-accent)]') : '',
+          SHARED_STYLES.focusWithOffset('var(--tuwa-bg-primary)'),
+          isOpen ? cn(SHARED_STYLES.borderAccent, 'ring-1 ring-[var(--tuwa-text-accent)]') : '',
         ),
-      arrowWrapper: () => '[&_svg]:text-[var(--accountable-accent)]',
+      arrowWrapper: () => '[&_svg]:text-[var(--tuwa-text-accent)]',
     },
   },
 
   selectContent: {
-    contentClassName: cn(SHARED_STYLES.bgBase, 'ring-[var(--accountable-border)]'),
+    contentClassName: cn(SHARED_STYLES.bgBase, 'ring-[var(--tuwa-border-primary)]'),
     topButtonCustomization: {
       classNames: {
         button: () => SCROLL_BUTTON_STYLES.buttonTop,
@@ -99,7 +95,7 @@ export const chain_list_customization: ChainSelectorCustomization = {
     },
     chainListRenderer: {
       classNames: {
-        activeIndicatorWrapper: () => 'text-[var(--accountable-background-2)]',
+        activeIndicatorWrapper: () => 'text-[var(--tuwa-bg-secondary)]',
         item: ({ isActive }) =>
           cn('flex items-center justify-between px-4 py-2 min-h-[48px] gap-2 rounded-[6px]', getItemStyles(isActive)),
       },

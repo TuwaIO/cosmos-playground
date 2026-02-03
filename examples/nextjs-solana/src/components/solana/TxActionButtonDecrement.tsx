@@ -75,7 +75,7 @@ export const TxActionButtonDecrement = ({
       transactionsPool={transactionsPool}
       getLastTxKey={getLastTxKey}
       className={`
-        w-full p-2.5 rounded-xl border border-transparent
+        w-full p-2.5 rounded-[var(--tuwa-rounded-corners)] border border-transparent
         text-white font-semibold shadow-md transition-all duration-200
         focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-700
         bg-gray-800

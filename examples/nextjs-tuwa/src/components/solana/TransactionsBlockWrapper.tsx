@@ -43,7 +43,7 @@ export const TransactionsBlockWrapper = () => {
 
   return (
     <div className="p-4 relative">
-      <div className="m-auto w-full max-w-md h-auto min-h-[680px] bg-[var(--tuwa-bg-primary)] rounded-2xl shadow-2xl border border-[var(--tuwa-border-primary)] overflow-hidden flex flex-col relative">
+      <div className="m-auto w-full max-w-md h-auto min-h-[680px] bg-[var(--tuwa-bg-primary)] rounded-[var(--tuwa-rounded-corners)] shadow-2xl border border-[var(--tuwa-border-primary)] overflow-hidden flex flex-col relative">
         <header className="bg-gradient-to-r from-[var(--tuwa-button-gradient-from)] to-[var(--tuwa-button-gradient-to)] p-6 pt-12 flex items-start justify-between">
           <div className="flex-1 pr-4">
             <h1 className="text-2xl font-bold text-[var(--tuwa-text-on-accent)] mb-1 leading-tight">Solana Demo</h1>
@@ -64,7 +64,7 @@ export const TransactionsBlockWrapper = () => {
           <hr className="border-t border-[var(--tuwa-border-primary)]" />
 
           <article className="space-y-6 flex-1">
-            <div className="bg-[var(--tuwa-bg-secondary)] rounded-xl p-4 border border-[var(--tuwa-border-secondary)] flex flex-col justify-center shadow-lg">
+            <div className="bg-[var(--tuwa-bg-secondary)] rounded-[var(--tuwa-rounded-corners)] p-4 border border-[var(--tuwa-border-secondary)] flex flex-col justify-center shadow-lg">
               <div className="flex items-center justify-between w-full">
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 bg-[var(--tuwa-info-bg)] rounded-full flex items-center justify-center flex-shrink-0">
@@ -124,7 +124,7 @@ export const TransactionsBlockWrapper = () => {
                 ) : (
                   sortedAccounts.map(([key, value]) => (
                     <div
-                      className="bg-[var(--tuwa-bg-secondary)] rounded-xl p-4 border border-[var(--tuwa-border-secondary)] min-h-[100px] flex flex-col justify-center"
+                      className="bg-[var(--tuwa-bg-secondary)] rounded-[var(--tuwa-rounded-corners)] p-4 border border-[var(--tuwa-border-secondary)] min-h-[100px] flex flex-col justify-center"
                       key={key}
                     >
                       <div className="flex items-center justify-between w-full mb-3">

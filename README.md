@@ -28,7 +28,7 @@ The entire setup process is streamlined, bringing the world of blockchain develo
 
 All examples are built with **Pulsar** for seamless transaction tracking and **Nova** for a polished UI.
 
-- [**accountable-theme**](https://accountable-style.tuwa.io/): A Vite example showcasing full customization of nova-transactions and nova-connect.
+- [**custom-style**](https://custom-style.tuwa.io/): A Vite example showcasing full customization of nova-transactions and nova-connect.
 - **nextjs-tuwa**: A Next.js example showcasing dynamic switching between Solana and EVM adapters.
 - **nextjs-solana**: A Next.js example demonstrating transaction tracking on the Solana network.
 - **nextjs-evm**: A Next.js example demonstrating transaction tracking on the EVM networks.

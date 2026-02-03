@@ -28,8 +28,8 @@ export function SatelliteConnectProviders({ children }: { children: React.ReactN
         withChain
         customization={nova_connect_provider_customization}
         legal={{
-          termsUrl: 'https://yield.accountable.capital/terms-of-service', // TODO: just for test
-          privacyUrl: 'https://yield.accountable.capital/privacy-policy', // TODO: just for test
+          termsUrl: 'https://www.google.com/', // TODO: just for test
+          privacyUrl: 'https://www.google.com/', // TODO: just for test
         }}
       >
         {children}

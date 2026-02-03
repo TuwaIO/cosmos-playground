@@ -26,7 +26,7 @@ export default function HomePage() {
           transition={{ duration: 0.5, ease: [0.1, 0.1, 0.2, 1] }}
           className={cn(
             'flex flex-col items-center justify-center p-8 m-8 max-w-sm text-center',
-            'rounded-xl shadow-2xl backdrop-blur-sm',
+            'rounded-[var(--tuwa-rounded-corners)] shadow-2xl backdrop-blur-sm',
             'bg-[var(--tuwa-bg-primary)] ring-1 ring-[var(--tuwa-border-primary)]',
           )}
         >

@@ -1,14 +1,14 @@
 import { cn } from '@tuwaio/nova-core';
 import { TransactionsHistoryCustomization } from '@tuwaio/nova-transactions';
 
-import { TransactionUnion } from '../../transactions';
 import { ICON_BUTTON_STYLES, SHARED_STYLES } from './shared_styles';
 
 /**
- * Accountable theme customization for TransactionsHistory.
+ * Custom theme customization for TransactionsHistory.
  * This can be used both in ConnectedModal and standalone NovaTransactionsProvider.
  */
-export const transactions_history_customization: TransactionsHistoryCustomization<TransactionUnion> = {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const transactions_history_customization: TransactionsHistoryCustomization<any> = {
   classNames: {
     // Container
     container: 'flex flex-col gap-y-3',
@@ -27,8 +27,8 @@ export const transactions_history_customization: TransactionsHistoryCustomizatio
     // Individual item
     itemContainer: cn(
       'flex flex-col gap-2 p-3 transition-colors',
-      'border-b border-[var(--accountable-border)]',
-      'hover:bg-[var(--accountable-accent-dark)]',
+      'border-b border-[var(--tuwa-border-primary)]',
+      'hover:bg-[var(--tuwa-bg-muted)]',
     ),
 
     // Item icon
@@ -37,7 +37,7 @@ export const transactions_history_customization: TransactionsHistoryCustomizatio
       SHARED_STYLES.bgBase,
       SHARED_STYLES.borderDefault,
     ),
-    itemIcon: 'h-8 w-8 text-[var(--accountable-secondary)]',
+    itemIcon: 'h-8 w-8 text-[var(--tuwa-text-secondary)]',
 
     // Item content
     itemContentWrapper: 'flex flex-col',

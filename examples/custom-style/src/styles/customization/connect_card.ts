@@ -11,11 +11,10 @@ export const connect_card_customization: ConnectCardCustomization = {
         'group cursor-pointer p-4 rounded-xl transition-colors relative border disabled:opacity-50 disabled:cursor-not-allowed',
         'w-full h-auto flex items-center justify-between',
         { 'w-[125px] h-[125px] p-2 flex flex-col items-center justify-center text-center': cardData.isTouch },
-        // Accountable theme
-        'border-[var(--accountable-border)]',
+        'border-[var(--tuwa-border-primary)]',
         SHARED_STYLES.bgBase,
-        'hover:bg-[var(--accountable-accent-dark)]',
-        'hover:border-[var(--accountable-accent)]',
+        'hover:bg-[var(--tuwa-bg-muted)]',
+        'hover:border-[var(--tuwa-text-accent)]',
         SHARED_STYLES.baseFocus,
       ),
 
@@ -25,7 +24,7 @@ export const connect_card_customization: ConnectCardCustomization = {
         'flex gap-3 transition duration-300 ease-in-out items-center',
         { 'flex-col items-center gap-1': cardData.isTouch },
         SHARED_STYLES.textForeground,
-        'group-hover:text-[var(--accountable-accent)]',
+        'group-hover:text-[var(--tuwa-text-accent)]',
       ),
 
     // Icon container
@@ -45,7 +44,7 @@ export const connect_card_customization: ConnectCardCustomization = {
       cn(
         SHARED_STYLES.fontMono,
         SHARED_STYLES.textForeground,
-        'group-hover:text-[var(--accountable-accent)]',
+        'group-hover:text-[var(--tuwa-text-accent)]',
         'transition-colors duration-200',
       ),
 
@@ -69,7 +68,7 @@ export const connect_card_customization: ConnectCardCustomization = {
         'translate-x-[-10px] opacity-0',
         'group-hover:translate-x-0 group-hover:opacity-100',
         SHARED_STYLES.textSecondary,
-        'group-hover:text-[var(--accountable-accent)]',
+        'group-hover:text-[var(--tuwa-text-accent)]',
       ),
   },
   recentBadge: {
@@ -78,17 +77,17 @@ export const connect_card_customization: ConnectCardCustomization = {
         cn(
           'inline-flex items-center rounded-full font-medium relative overflow-hidden',
           SHARED_STYLES.textSecondary,
-          'border border-[var(--accountable-border)] px-2.5 py-0.5 text-xs',
+          'border border-[var(--tuwa-border-primary)] px-2.5 py-0.5 text-xs',
         ),
       backgroundOverlay: () =>
-        'absolute z-10 pointer-events-none rounded-full bg-[var(--accountable-background-2)] inset-[1px]',
+        'absolute z-10 pointer-events-none rounded-full bg-[var(--tuwa-bg-secondary)] inset-[1px]',
     },
     config: {
       gradient: {
         direction: '90deg',
         stops: [
           { position: 0, color: 'rgba(255, 255, 255, 0)' },
-          { position: 20, color: 'var(--accountable-accent)' },
+          { position: 20, color: 'var(--tuwa-text-accent)' },
           { position: 40, color: 'rgba(255, 255, 255, 0)' },
         ],
       },

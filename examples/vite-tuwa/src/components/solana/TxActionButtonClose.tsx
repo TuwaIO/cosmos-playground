@@ -75,7 +75,7 @@ export const TxActionButtonClose = ({
       disabled={!activeWallet?.isConnected}
       walletAddress={activeWallet?.address}
       className={`
-        w-full p-2.5 rounded-xl border border-transparent
+        w-full p-2.5 rounded-[var(--tuwa-rounded-corners)] border border-transparent
         text-gray-800 font-semibold shadow-sm transition-all duration-200
         focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400
         bg-gradient-to-r from-neutral-200 to-neutral-300

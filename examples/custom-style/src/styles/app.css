@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&display=swap');
+
+@import '@tuwaio/nova-core/dist/index.css';
+@import '@tuwaio/nova-transactions/dist/index.css';
+@import '@tuwaio/nova-connect/dist/index.css';
+@import 'tailwindcss';
+
+:root {
+  /* ═══════════════════════════════════════════════════════════════════
+   * TUWA VARIABLE OVERRIDES - Custom Theme
+   * Overrides default TUWA design tokens for custom branding
+   * ═══════════════════════════════════════════════════════════════════ */
+
+  /* --- Text Colors --- */
+  --tuwa-text-primary: #ebeff5;
+  --tuwa-text-secondary: #c2c6c9;
+  --tuwa-text-tertiary: #9ea2a6;
+  --tuwa-text-accent: #1ad699;
+  --tuwa-text-on-accent: #05291d;
+
+  /* --- Background Colors --- */
+  --tuwa-bg-primary: #000000;
+  --tuwa-bg-secondary: #171717;
+  --tuwa-bg-muted: #05291d;
+
+  /* --- Border Colors --- */
+  --tuwa-border-primary: #292b2e;
+  --tuwa-border-secondary: #171717;
+
+  /* --- Status Colors --- */
+  --tuwa-success-bg: #0b553c;
+  --tuwa-success-text: #1ad699;
+  --tuwa-success-icon: #1ad699;
+
+  --tuwa-pending-bg: #493f0f;
+  --tuwa-pending-text: #d6bd33;
+  --tuwa-pending-icon: #d6bd33;
+
+  --tuwa-error-bg: rgba(224, 36, 36, 0.15);
+  --tuwa-error-text: #e02424;
+  --tuwa-error-icon: #e02424;
+
+  --tuwa-info-bg: #000000;
+  --tuwa-info-text: #c2c6c9;
+  --tuwa-info-icon: #585c61;
+
+  /* --- Custom Theme Extensions (not in base TUWA) --- */
+  --text-disabled: #585c61;
+}
+
+@media (hover: hover) {
+  :root .NovaCustomScroll::-webkit-scrollbar {
+    background-color: var(--tuwa-bg-primary);
+  }
+  :root .NovaCustomScroll::-webkit-scrollbar-thumb {
+    background-color: var(--tuwa-text-accent);
+  }
+  :root .NovaCustomScroll::-webkit-scrollbar-thumb:hover {
+    background-color: var(--tuwa-bg-primary);
+  }
+  :root .NovaCustomScrollNoPadding::-webkit-scrollbar {
+    background-color: var(--tuwa-bg-primary);
+  }
+  :root .NovaCustomScrollNoPadding::-webkit-scrollbar-thumb {
+    background-color: var(--tuwa-text-accent);
+  }
+  :root .NovaCustomScrollNoPadding::-webkit-scrollbar-thumb:hover {
+    background-color: var(--tuwa-bg-primary);
+  }
+}
+
+:root .NovaDialogContent__elements {
+  border-color: var(--tuwa-border-primary);
+  background: var(--tuwa-bg-secondary);
+  border-radius: var(--tuwa-rounded-corners);
+}
+
+:root .Nova_Web3_Icon {
+  background: var(--tuwa-text-secondary);
+}

@@ -2,6 +2,7 @@
 
 'use client';
 
+import { useSatelliteConnectStore } from '@tuwaio/nova-connect/satellite';
 import { TxActionButton } from '@tuwaio/nova-transactions';
 import { OrbitAdapter } from '@tuwaio/orbit-core';
 import { createViemClient } from '@tuwaio/orbit-evm';
@@ -9,7 +10,6 @@ import { useEffect, useState } from 'react';
 import { Client } from 'viem';
 import { readContract } from 'viem/actions';
 import { sepolia } from 'viem/chains';
-import { useConnection } from 'wagmi';
 
 import { CounterAbi } from '@/abis/CounterAbi';
 import { appEVMChains } from '@/configs/appConfig';
@@ -18,6 +18,7 @@ import { usePulsarStore } from '@/hooks/pulsarStoreHook';
 import { txActions, TxType } from '@/transactions';
 
 export const TransactionsBlockWrapper = () => {
+  const activeConnection = useSatelliteConnectStore((store) => store.activeConnection);
   const executeTxAction = usePulsarStore((state) => state.executeTxAction);
   const transactionsPool = usePulsarStore((state) => state.transactionsPool);
   const getLastTxKey = usePulsarStore((state) => state.getLastTxKey);
@@ -25,7 +26,7 @@ export const TransactionsBlockWrapper = () => {
   const [currentCount, setCurrentCount] = useState<number | null>(null);
   const [isLoadingCount, setIsLoadingCount] = useState(true);
 
-  const { address } = useConnection();
+  const { address } = activeConnection ?? {};
 
   const fetchCurrentCount = async () => {
     try {
@@ -124,7 +125,7 @@ export const TransactionsBlockWrapper = () => {
 
   return (
     <div className="p-4 relative">
-      <div className="m-auto w-full max-w-md h-auto min-h-[680px] bg-[var(--tuwa-bg-primary)] rounded-2xl shadow-2xl border border-[var(--tuwa-border-primary)] overflow-hidden flex flex-col relative">
+      <div className="m-auto w-full max-w-md h-auto min-h-[680px] bg-[var(--tuwa-bg-primary)] rounded-[var(--tuwa-rounded-corners)] shadow-2xl border border-[var(--tuwa-border-primary)] overflow-hidden flex flex-col relative">
         <div className="bg-gradient-to-r from-[var(--tuwa-button-gradient-from)] to-[var(--tuwa-button-gradient-to)] p-6 flex-shrink-0">
           <div className="flex-1 pr-4">
             <h1 className="text-2xl font-bold text-[var(--tuwa-text-on-accent)] mb-1 leading-tight">EVM Demo</h1>
@@ -147,7 +148,7 @@ export const TransactionsBlockWrapper = () => {
 
           {/* Action Section */}
           <div className="space-y-6 flex-1">
-            <div className="bg-[var(--tuwa-bg-secondary)] rounded-xl p-4 border border-[var(--tuwa-border-secondary)] min-h-[100px] flex flex-col justify-center">
+            <div className="bg-[var(--tuwa-bg-secondary)] rounded-[var(--tuwa-rounded-corners)] p-4 border border-[var(--tuwa-border-secondary)] min-h-[100px] flex flex-col justify-center">
               <div className="flex items-center justify-between w-full mb-3">
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 bg-[var(--tuwa-info-bg)] rounded-full flex items-center justify-center flex-shrink-0">
@@ -191,7 +192,7 @@ export const TransactionsBlockWrapper = () => {
                   action={handleIncrement}
                   transactionsPool={transactionsPool}
                   getLastTxKey={getLastTxKey}
-                  className="w-full h-full bg-gradient-to-r from-[var(--tuwa-button-gradient-from)] to-[var(--tuwa-button-gradient-to)] hover:from-[var(--tuwa-button-gradient-from-hover)] hover:to-[var(--tuwa-button-gradient-to-hover)] text-[var(--tuwa-text-on-accent)] font-semibold rounded-xl transition-all duration-200 ease-in-out hover:shadow-lg flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] select-none"
+                  className="w-full h-full bg-gradient-to-r from-[var(--tuwa-button-gradient-from)] to-[var(--tuwa-button-gradient-to)] hover:from-[var(--tuwa-button-gradient-from-hover)] hover:to-[var(--tuwa-button-gradient-to-hover)] text-[var(--tuwa-text-on-accent)] font-semibold rounded-[var(--tuwa-rounded-corners)] transition-all duration-200 ease-in-out hover:shadow-lg flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] select-none"
                   disabled={currentCount === null}
                   walletAddress={address}
                 >
@@ -205,7 +206,7 @@ export const TransactionsBlockWrapper = () => {
                   action={handleIncrementGelato}
                   transactionsPool={transactionsPool}
                   getLastTxKey={getLastTxKey}
-                  className="w-full h-full bg-gradient-to-r from-[var(--tuwa-button-gradient-from)] to-[var(--tuwa-button-gradient-to)] hover:from-[var(--tuwa-button-gradient-from-hover)] hover:to-[var(--tuwa-button-gradient-to-hover)] text-[var(--tuwa-text-on-accent)] font-semibold rounded-xl transition-all duration-200 ease-in-out hover:shadow-lg flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] select-none"
+                  className="w-full h-full bg-gradient-to-r from-[var(--tuwa-button-gradient-from)] to-[var(--tuwa-button-gradient-to)] hover:from-[var(--tuwa-button-gradient-from-hover)] hover:to-[var(--tuwa-button-gradient-to-hover)] text-[var(--tuwa-text-on-accent)] font-semibold rounded-[var(--tuwa-rounded-corners)] transition-all duration-200 ease-in-out hover:shadow-lg flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] select-none"
                   disabled={currentCount === null}
                   walletAddress={address}
                 >

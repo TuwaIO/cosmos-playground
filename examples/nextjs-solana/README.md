@@ -121,9 +121,3 @@ Contributions are welcome! Please read our main **[Contribution Guidelines](http
 If you find this library useful, please consider supporting its development. Every contribution helps!
 
 [**➡️ View Support Options**](https://github.com/TuwaIO/workflows/blob/main/Donation.md)
-
----
-
-## License
-
-[Apache License 2.0](./LICENSE)

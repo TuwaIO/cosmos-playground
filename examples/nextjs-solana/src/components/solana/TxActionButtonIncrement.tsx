@@ -75,7 +75,7 @@ export const TxActionButtonIncrement = ({
       transactionsPool={transactionsPool}
       getLastTxKey={getLastTxKey}
       className={`
-        w-full p-2.5 rounded-xl border border-transparent
+        w-full p-2.5 rounded-[var(--tuwa-rounded-corners)] border border-transparent
         text-[var(--tuwa-text-on-accent)] font-semibold shadow-md transition-all duration-200
         focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--tuwa-button-gradient-to-hover)]
         bg-gradient-to-r from-[var(--tuwa-button-gradient-from)] to-[var(--tuwa-button-gradient-to)]
