@@ -6,9 +6,9 @@ import { arbitrum, Chain, mainnet, monad, monadTestnet, sepolia } from 'viem/cha
 export const appConfig = {
   appName: 'Satellite EVM Test App',
   appDescription: 'TUWA Custom Style Demo App',
-  projectId: '9077e559e63e099f496b921a027d0f04',
+  projectId: '147ee28e5b18bd6d3302da6dd90a9cf1',
   appLogoUrl: 'https://raw.githubusercontent.com/TuwaIO/workflows/refs/heads/main/preview/preview-logo.png',
-  appUrl: 'https://demo.tuwa.io/',
+  appUrl: 'https://custom-style.tuwa.io/',
 };
 
 export const appEVMChains = [monad, mainnet, arbitrum, sepolia, monadTestnet] as readonly [Chain, ...Chain[]];
