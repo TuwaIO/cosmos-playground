@@ -46,7 +46,7 @@
     "@tuwaio/pulsar-evm": "^0.4.0",
     "@tuwaio/pulsar-react": "^0.3.1",
     "@tuwaio/pulsar-solana": "^0.5.0",
-    "@tuwaio/nova-core": "^0.3.1",
+    "@tuwaio/nova-core": "^0.3.2",
     "@tuwaio/nova-connect": "^0.3.1",
     "@tuwaio/nova-transactions": "^0.3.0",
     "@wallet-standard/react": "^1.0.1",
