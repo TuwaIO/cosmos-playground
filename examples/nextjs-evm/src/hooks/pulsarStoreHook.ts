@@ -12,5 +12,6 @@ export const usePulsarStore = createBoundedUseStore(
   createPulsarStore<TransactionUnion>({
     name: storageName,
     adapter: [pulsarEvmAdapter(wagmiConfig, appEVMChains)],
+    gelatoApiKey: process.env.NEXT_PUBLIC_GELATO_API_KEY,
   }),
 );

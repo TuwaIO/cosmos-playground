@@ -6,6 +6,7 @@ import { useSatelliteConnectStore } from '@tuwaio/nova-connect/satellite';
 import { TxActionButton } from '@tuwaio/nova-transactions';
 import { OrbitAdapter } from '@tuwaio/orbit-core';
 import { createViemClient } from '@tuwaio/orbit-evm';
+import { TransactionTracker } from '@tuwaio/pulsar-core';
 import { useEffect, useState } from 'react';
 import { Client } from 'viem';
 import { readContract } from 'viem/actions';
@@ -58,7 +59,8 @@ export const TransactionsBlockWrapper = () => {
       actionFunction: txActions.incrementEvm,
       onSuccess: (tx) => {
         if (tx.type === TxType.increment) {
-          console.log(`Increment tx succeed, ${tx.payload.value}`);
+          setTimeout(() => fetchCurrentCount(), 2000);
+          console.log(`Increment tx succeed, ${currentCount}`);
         }
       },
       params: {
@@ -79,10 +81,6 @@ export const TransactionsBlockWrapper = () => {
         withTrackedModal: true,
       },
     });
-
-    setTimeout(() => {
-      fetchCurrentCount();
-    }, 2000);
   };
 
   const handleIncrementGelato = async () => {
@@ -92,12 +90,14 @@ export const TransactionsBlockWrapper = () => {
       actionFunction: txActions.incrementGelato,
       onSuccess: (tx) => {
         if (tx.type === TxType.increment) {
-          console.log(`Increment tx succeed, ${tx.payload.value}`);
+          setTimeout(() => fetchCurrentCount(), 2000);
+          console.log(`Increment tx succeed, ${currentCount}`);
         }
       },
       params: {
         type: TxType.increment,
         adapter: OrbitAdapter.EVM,
+        tracker: TransactionTracker.Gelato,
         desiredChainID: sepolia.id,
         title: ['Incrementing', 'Incremented', 'Error when increment', 'Increment tx replaced'],
         description: [
@@ -113,10 +113,6 @@ export const TransactionsBlockWrapper = () => {
         withTrackedModal: true,
       },
     });
-
-    setTimeout(() => {
-      fetchCurrentCount();
-    }, 2000);
   };
 
   const openEtherscan = () => {

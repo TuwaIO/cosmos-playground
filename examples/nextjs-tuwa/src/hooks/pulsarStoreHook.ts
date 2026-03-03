@@ -18,5 +18,6 @@ export const usePulsarStore = createBoundedUseStore(
         rpcUrls: solanaRPCUrls,
       }),
     ],
+    gelatoApiKey: process.env.NEXT_PUBLIC_GELATO_API_KEY,
   }),
 );

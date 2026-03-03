@@ -18,5 +18,9 @@ export const usePulsarStore = createBoundedUseStore(
         rpcUrls: solanaRPCUrls,
       }),
     ],
+    gelatoApiKey:
+      typeof process !== 'undefined'
+        ? process.env.VITE_GELATO_API_KEY
+        : 'test__YdhbAtrsdIe0InknnlnLNN9OVEGOYjz5_TIEGxCncI_',
   }),
 );

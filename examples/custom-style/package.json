@@ -30,7 +30,6 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@gelatonetwork/relay-sdk": "^5.6.1",
     "@heroicons/react": "^2.2.0",
     "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-select": "^2.2.6",

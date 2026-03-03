@@ -2,11 +2,9 @@ import { Transaction } from '@tuwaio/pulsar-core';
 
 import { wagmiConfig } from '../configs/appConfig';
 import { increment } from './evm/increment';
-import { incrementGelato } from './evm/incrementGelato';
 
 export const txActions = {
   incrementEvm: () => increment({ wagmiConfig }),
-  incrementGelato: () => incrementGelato(),
 };
 
 export enum TxType {

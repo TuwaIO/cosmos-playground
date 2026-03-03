@@ -58,7 +58,8 @@ export const TransactionsBlockWrapper = () => {
       actionFunction: txActions.incrementEvm,
       onSuccess: (tx) => {
         if (tx.type === TxType.increment) {
-          console.log(`Increment tx succeed, ${tx.payload.value}`);
+          setTimeout(() => fetchCurrentCount(), 2000);
+          console.log(`Increment tx succeed, ${currentCount}`);
         }
       },
       params: {
@@ -79,10 +80,6 @@ export const TransactionsBlockWrapper = () => {
         withTrackedModal: true,
       },
     });
-
-    setTimeout(() => {
-      fetchCurrentCount();
-    }, 2000);
   };
 
   const openEtherscan = () => {

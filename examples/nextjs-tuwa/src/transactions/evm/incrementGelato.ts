@@ -1,4 +1,4 @@
-import { GelatoRelay, SponsoredCallRequest } from '@gelatonetwork/relay-sdk';
+import { createGelatoEvmRelayerClient } from '@gelatocloud/gasless';
 import { encodeFunctionData } from 'viem';
 import { sepolia } from 'viem/chains';
 
@@ -6,17 +6,19 @@ import { CounterAbi } from '@/abis/CounterAbi';
 import { COUNTER_ADDRESS } from '@/constants';
 
 export async function incrementGelato() {
-  const relay = new GelatoRelay();
+  const relayer = createGelatoEvmRelayerClient({
+    apiKey: process.env.NEXT_PUBLIC_GELATO_API_KEY ?? '',
+    testnet: true,
+  });
+
   const data = encodeFunctionData({
     abi: CounterAbi,
     functionName: 'increment',
   });
 
-  const request: SponsoredCallRequest = {
-    chainId: BigInt(sepolia.id),
-    target: COUNTER_ADDRESS,
-    data: data,
-  };
-
-  return relay.sponsoredCall(request, process.env.NEXT_PUBLIC_GELATO_API_KEY || '');
+  return relayer.sendTransaction({
+    chainId: sepolia.id,
+    data,
+    to: COUNTER_ADDRESS,
+  });
 }
