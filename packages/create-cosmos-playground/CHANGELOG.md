@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.16](https://github.com/TuwaIO/cosmos-playground/compare/create-cosmos-playground-v0.0.15...create-cosmos-playground-v0.0.16) (2026-03-03)
+
+
+### Bug Fixes
+
+* updated packages and gelato tracking ([56bea0a](https://github.com/TuwaIO/cosmos-playground/commit/56bea0a3651cd6352c653086fa3b6046b6a1ea57))
+
 ## [0.0.15](https://github.com/TuwaIO/cosmos-playground/compare/create-cosmos-playground-v0.0.14...create-cosmos-playground-v0.0.15) (2026-02-03)
 
 
