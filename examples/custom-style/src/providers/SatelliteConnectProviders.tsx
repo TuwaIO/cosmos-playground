@@ -15,7 +15,10 @@ export function SatelliteConnectProviders({ children }: { children: React.ReactN
   const getAdapter = usePulsarStore((state) => state.getAdapter);
 
   return (
-    <SatelliteConnectProvider adapter={satelliteEVMAdapter(wagmiConfig)} autoConnect={import.meta.env.PROD}>
+    <SatelliteConnectProvider
+      adapter={satelliteEVMAdapter(wagmiConfig, appEVMChains)}
+      autoConnect={import.meta.env.PROD}
+    >
       <EVMConnectorsWatcher wagmiConfig={wagmiConfig} />
 
       <NovaTransactionsProvider />

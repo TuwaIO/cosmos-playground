@@ -17,7 +17,7 @@ export function SatelliteConnectProviders({ children }: { children: React.ReactN
 
   return (
     <SatelliteConnectProvider
-      adapter={[satelliteEVMAdapter(wagmiConfig), satelliteSolanaAdapter({ rpcUrls: solanaRPCUrls })]}
+      adapter={[satelliteEVMAdapter(wagmiConfig, appEVMChains), satelliteSolanaAdapter({ rpcUrls: solanaRPCUrls })]}
       autoConnect={true}
     >
       <EVMConnectorsWatcher wagmiConfig={wagmiConfig} />

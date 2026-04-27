@@ -17,7 +17,7 @@ export function SatelliteConnectProviders({ children }: { children: React.ReactN
 
   return (
     <SatelliteConnectProvider
-      adapter={[satelliteEVMAdapter(wagmiConfig, enabled ? signInWithSiwe : undefined)]}
+      adapter={[satelliteEVMAdapter(wagmiConfig, appEVMChains, enabled ? signInWithSiwe : undefined)]}
       autoConnect={true}
     >
       <EVMConnectorsWatcher wagmiConfig={wagmiConfig} siwe={{ isSignedIn, isRejected, enabled }} />

@@ -20,7 +20,7 @@ export function SatelliteConnectProviders({ children }: { children: React.ReactN
   return (
     <SatelliteConnectProvider
       adapter={[
-        satelliteEVMAdapter(wagmiConfig, enabled ? signInWithSiwe : undefined),
+        satelliteEVMAdapter(wagmiConfig, appEVMChains, enabled ? signInWithSiwe : undefined),
         satelliteSolanaAdapter({ rpcUrls: solanaRPCUrls }),
       ]}
       autoConnect={true}

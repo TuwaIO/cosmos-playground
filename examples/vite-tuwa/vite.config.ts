@@ -24,10 +24,14 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     assetsDir: '',
+    target: 'esnext',
     rollupOptions: {
       output: {
-        entryFileNames: 'index.js',
-        chunkFileNames: '[name].js',
+        manualChunks: (id) => {
+          if (id.includes('node_modules/viem') || id.includes('node_modules/@tuwaio')) {
+            return 'core-web3';
+          }
+        },
         assetFileNames: (assetInfo) => {
           const info = assetInfo.name?.split('.') ?? [];
           const extension = info[info.length - 1];
@@ -46,7 +50,7 @@ export default defineConfig({
     },
     minify: 'esbuild',
     sourcemap: false,
-    chunkSizeWarningLimit: 1000,
+    chunkSizeWarningLimit: 1500,
   },
 
   server: {

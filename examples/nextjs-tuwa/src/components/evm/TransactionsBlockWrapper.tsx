@@ -79,6 +79,7 @@ export const TransactionsBlockWrapper = () => {
           contractAddress: COUNTER_ADDRESS,
         },
         withTrackedModal: true,
+        requiredConfirmations: 3,
       },
     });
   };
