@@ -21,37 +21,17 @@ export default defineConfig({
     ],
   },
 
-  // resolve: {
-  //   alias: {
-  //     '@tuwaio/nova-core/dist': path.resolve(__dirname, '../../packages/nova-core/dist'),
-  //     '@tuwaio/nova-transactions/dist': path.resolve(__dirname, '../../packages/nova-transactions/dist'),
-  //     '@tuwaio/nova-connect/dist': path.resolve(__dirname, '../../packages/nova-connect/dist'),
-  //
-  //     // nova-core
-  //     '@tuwaio/nova-core': path.resolve(__dirname, '../../packages/nova-core/src'),
-  //
-  //     // nova-transactions
-  //     '@tuwaio/nova-transactions/providers': path.resolve(__dirname, '../../packages/nova-transactions/src/providers'),
-  //     '@tuwaio/nova-transactions': path.resolve(__dirname, '../../packages/nova-transactions/src'),
-  //
-  //     // nova-connect
-  //     '@tuwaio/nova-connect/components': path.resolve(__dirname, '../../packages/nova-connect/src/components'),
-  //     '@tuwaio/nova-connect/hooks': path.resolve(__dirname, '../../packages/nova-connect/src/hooks'),
-  //     '@tuwaio/nova-connect/satellite': path.resolve(__dirname, '../../packages/nova-connect/src/satellite'),
-  //     '@tuwaio/nova-connect/i18n': path.resolve(__dirname, '../../packages/nova-connect/src/i18n'),
-  //     '@tuwaio/nova-connect/evm': path.resolve(__dirname, '../../packages/nova-connect/src/evm'),
-  //     '@tuwaio/nova-connect/solana': path.resolve(__dirname, '../../packages/nova-connect/src/solana'),
-  //     '@tuwaio/nova-connect': path.resolve(__dirname, '../../packages/nova-connect/src'),
-  //   },
-  // },
-
   build: {
     outDir: 'dist',
     assetsDir: '',
+    target: 'esnext',
     rollupOptions: {
       output: {
-        entryFileNames: 'index.js',
-        chunkFileNames: '[name].js',
+        manualChunks: (id) => {
+          if (id.includes('node_modules/viem') || id.includes('node_modules/@tuwaio')) {
+            return 'core-web3';
+          }
+        },
         assetFileNames: (assetInfo) => {
           const info = assetInfo.name?.split('.') ?? [];
           const extension = info[info.length - 1];
@@ -70,7 +50,7 @@ export default defineConfig({
     },
     minify: 'esbuild',
     sourcemap: false,
-    chunkSizeWarningLimit: 1000,
+    chunkSizeWarningLimit: 1500,
   },
 
   server: {
