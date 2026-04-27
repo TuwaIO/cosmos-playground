@@ -48,7 +48,6 @@ export default defineConfig({
         },
       },
     },
-    minify: 'esbuild',
     sourcemap: false,
     chunkSizeWarningLimit: 1500,
   },
