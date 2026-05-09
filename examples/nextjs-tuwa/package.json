@@ -37,19 +37,19 @@
     "@tanstack/react-query": "^5.100.9",
     "@tuwaio/orbit-core": "^0.2.8",
     "@tuwaio/orbit-evm": "^0.2.12",
-    "@tuwaio/orbit-solana": "^0.2.5",
+    "@tuwaio/orbit-solana": "^0.2.6",
     "@tuwaio/satellite-core": "^0.3.3",
     "@tuwaio/satellite-evm": "^0.3.3",
-    "@tuwaio/satellite-solana": "^0.3.3",
+    "@tuwaio/satellite-solana": "^0.3.5",
     "@tuwaio/satellite-siwe-next-auth": "^0.3.4",
-    "@tuwaio/satellite-react": "^0.3.3",
-    "@tuwaio/pulsar-core": "^0.6.1",
+    "@tuwaio/satellite-react": "^0.3.4",
+    "@tuwaio/pulsar-core": "^0.6.2",
     "@tuwaio/pulsar-evm": "^0.5.1",
     "@tuwaio/pulsar-react": "^0.4.1",
-    "@tuwaio/pulsar-solana": "^0.6.1",
+    "@tuwaio/pulsar-solana": "^0.6.2",
     "@tuwaio/nova-core": "^0.4.2",
-    "@tuwaio/nova-connect": "^0.4.2",
-    "@tuwaio/nova-transactions": "^0.4.2",
+    "@tuwaio/nova-connect": "^0.4.3",
+    "@tuwaio/nova-transactions": "^0.4.3",
     "@wallet-standard/react": "^1.0.2",
     "@wallet-standard/app": "^1.1.0",
     "@wallet-standard/base": "^1.1.0",
@@ -119,5 +119,10 @@
       "opera >= 54",
       "safari >= 14"
     ]
+  },
+  "pnpm": {
+    "overrides": {
+      "@wallet-standard/ui-registry": "^1.1.0"
+    }
   }
 }

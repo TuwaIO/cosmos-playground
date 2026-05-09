@@ -25,5 +25,15 @@
       "name": "Oleksandr Tkach",
       "url": "https://github.com/Argeare5"
     }
-  ]
+  ],
+  "pnpm": {
+    "overrides": {
+      "@wallet-standard/ui-registry": "1.1.0",
+      "@wallet-standard/ui-compare": "1.0.2",
+      "@wallet-standard/ui-features": "1.0.2",
+      "@wallet-standard/ui": "1.0.2",
+      "@wallet-standard/react-core": "1.0.2",
+      "@wallet-standard/react": "1.0.2"
+    }
+  }
 }
