@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.20](https://github.com/TuwaIO/cosmos-playground/compare/create-cosmos-playground-v0.0.19...create-cosmos-playground-v0.0.20) (2026-05-20)
+
+
+### Bug Fixes
+
+* added tuwa quasar playground ([4e9f257](https://github.com/TuwaIO/cosmos-playground/commit/4e9f25752c54d86819ef1890c4103aa741936b6d))
+
 ## [0.0.19](https://github.com/TuwaIO/cosmos-playground/compare/create-cosmos-playground-v0.0.18...create-cosmos-playground-v0.0.19) (2026-05-14)
 
 
