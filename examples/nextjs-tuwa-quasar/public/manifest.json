@@ -1,0 +1,17 @@
+{
+  "short_name": "Pulsar & Quasar",
+  "name": "Pulsar & Quasar Cloud Sync: Next.js",
+  "description": "An example Next.js application integrating Pulsar Transaction Tracking with Quasar Cloud Sync.",
+  "iconPath": "icon0.svg",
+  "icons": [
+    {
+      "iconPath": "icon0.svg",
+      "sizes": "32x32",
+      "type": "image/svg"
+    }
+  ],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

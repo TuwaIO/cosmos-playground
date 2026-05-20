@@ -11,6 +11,7 @@ async function main() {
   console.log('✨ Creating a new Cosmos Playground project...');
 
   const availableTemplates = [
+    'nextjs-tuwa-quasar',
     'custom-style',
     'nextjs-tuwa',
     'nextjs-solana',
