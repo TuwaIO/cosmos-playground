@@ -98,7 +98,6 @@ NEXT_PUBLIC_WALLET_PROJECT_ID=your_project_id
 QUASAR_SDK_SK=sk_live_...
 
 # Optional: Quasar API Base URL. Defaults to https://api.tuwa.io.
-# Use https://api-stg.tuwa.io if you are deploying against the staging environment.
 QUASAR_BASE_URL=https://api.tuwa.io
 
 # Required: Secret for signing SIWE session cookies (must be at least 32 characters)
@@ -137,6 +136,7 @@ For detailed documentation and advanced usage:
 - [Satellite Documentation](https://satellite.docs.tuwa.io/)
 - [Pulsar Documentation](https://pulsar.docs.tuwa.io/)
 - [Nova Documentation](https://stories.tuwa.io/?path=/docs/introduction--docs)
+- [SDK Documentation](https://sdk.docs.tuwa.io/)
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Wagmi Documentation](https://wagmi.sh/)
 - [Gill Documentation](https://www.gillsdk.com/)
