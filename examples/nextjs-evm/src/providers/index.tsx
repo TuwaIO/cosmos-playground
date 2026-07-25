@@ -1,7 +1,7 @@
 'use client';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { SiweNextAuthProvider } from '@tuwaio/satellite-siwe-next-auth';
+import { SiweNextAuthProvider } from '@tuwaio/sdk/satellite/siwe';
 import { ReactNode } from 'react';
 import { WagmiProvider } from 'wagmi';
 

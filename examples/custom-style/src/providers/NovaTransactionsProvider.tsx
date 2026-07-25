@@ -1,7 +1,7 @@
-import { useSatelliteConnectStore } from '@tuwaio/nova-connect/satellite';
-import { NovaTransactionsProvider as NTP } from '@tuwaio/nova-transactions/providers';
-import { getAdapterFromConnectorType } from '@tuwaio/orbit-core';
-import { useInitializeTransactionsPool } from '@tuwaio/pulsar-react';
+import { useSatelliteConnectStore } from '@tuwaio/sdk/nova-connect/satellite';
+import { NovaTransactionsProvider as NTP } from '@tuwaio/sdk/nova-transactions/providers';
+import { getAdapterFromConnectorType } from '@tuwaio/sdk/orbit';
+import { useInitializeTransactionsPool } from '@tuwaio/sdk/pulsar';
 
 import { usePulsarStore } from '../hooks/pulsarStoreHook';
 import { nova_tx_provider_customization } from '../styles/customization/nova_tx_provider';

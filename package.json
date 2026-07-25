@@ -4,7 +4,7 @@
   "private": true,
   "author": "Oleksandr Tkach",
   "license": "Apache-2.0",
-  "packageManager": "pnpm@11.4.0",
+  "packageManager": "pnpm@11.17.0",
   "description": "This repository contains a collection of practical examples for tracking Web3 transactions. Here you will find ready-to-use code snippets for monitoring on-chain activity and connecting wallets using various packages.",
   "scripts": {
     "build": "pnpm --filter \"./packages/**\" build",
@@ -25,13 +25,5 @@
       "name": "Oleksandr Tkach",
       "url": "https://github.com/Argeare5"
     }
-  ],
-  "overrides": {
-    "@wallet-standard/ui-registry": "1.1.0",
-    "@wallet-standard/ui-compare": "1.0.2",
-    "@wallet-standard/ui-features": "1.0.2",
-    "@wallet-standard/ui": "1.0.2",
-    "@wallet-standard/react-core": "1.0.2",
-    "@wallet-standard/react": "1.0.2"
-  }
+  ]
 }

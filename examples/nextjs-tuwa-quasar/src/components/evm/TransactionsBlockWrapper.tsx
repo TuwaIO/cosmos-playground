@@ -2,11 +2,11 @@
 
 'use client';
 
-import { useSatelliteConnectStore } from '@tuwaio/nova-connect/satellite';
-import { TxActionButton } from '@tuwaio/nova-transactions';
-import { OrbitAdapter } from '@tuwaio/orbit-core';
-import { createViemClient } from '@tuwaio/orbit-evm';
-import { TransactionTracker } from '@tuwaio/pulsar-core';
+import { createViemClient } from '@tuwaio/evm-sdk/orbit';
+import { useSatelliteConnectStore } from '@tuwaio/sdk/nova-connect/satellite';
+import { TxActionButton } from '@tuwaio/sdk/nova-transactions';
+import { OrbitAdapter } from '@tuwaio/sdk/orbit';
+import { TransactionTracker } from '@tuwaio/sdk/pulsar';
 import { useEffect, useState } from 'react';
 import { Client } from 'viem';
 import { readContract } from 'viem/actions';

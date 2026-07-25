@@ -1,5 +1,5 @@
-import { SatelliteStoreContext, useSatelliteConnectStore } from '@tuwaio/nova-connect/satellite';
 import { QuasarActiveConnection, QuasarAuthBridge as QuasarSDKAuthBridge } from '@tuwaio/quasar-sdk/react';
+import { SatelliteStoreContext, useSatelliteConnectStore } from '@tuwaio/sdk/nova-connect/satellite';
 import { useContext, useEffect } from 'react';
 
 import { wagmiConfig } from '@/configs/appConfig';

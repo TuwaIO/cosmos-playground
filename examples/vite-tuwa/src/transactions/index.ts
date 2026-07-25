@@ -1,4 +1,4 @@
-import { Transaction } from '@tuwaio/pulsar-core';
+import { Transaction } from '@tuwaio/sdk/pulsar';
 import { Address, KeyPairSigner, SolanaClient, TransactionSendingSigner } from 'gill';
 
 import { wagmiConfig } from '../configs/appConfig';

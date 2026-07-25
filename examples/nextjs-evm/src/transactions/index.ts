@@ -1,4 +1,4 @@
-import { Transaction } from '@tuwaio/pulsar-core';
+import { Transaction } from '@tuwaio/sdk/pulsar';
 
 import { wagmiConfig } from '@/configs/appConfig';
 import { increment } from '@/transactions/evm/increment';

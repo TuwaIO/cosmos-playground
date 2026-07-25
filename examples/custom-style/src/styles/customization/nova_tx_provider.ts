@@ -1,5 +1,5 @@
-import { cn } from '@tuwaio/nova-core';
-import { NovaTransactionsProviderProps } from '@tuwaio/nova-transactions/providers';
+import { cn } from '@tuwaio/sdk/nova-core';
+import { NovaTransactionsProviderProps } from '@tuwaio/sdk/nova-transactions/providers';
 
 import {
   BUTTON_STYLES,
@@ -25,27 +25,26 @@ export const nova_tx_provider_customization: NovaTransactionsProviderProps<any>[
       container: cn('rounded-[4px]', SHARED_STYLES.borderDefault, SHARED_STYLES.bgBase),
 
       // Title & Description
-      title: cn(SHARED_STYLES.fontMonoMedium, 'text-sm', SHARED_STYLES.textForeground),
-      description: cn(SHARED_STYLES.fontMono, 'mt-1 text-xs', SHARED_STYLES.textSecondary),
+      title: cn('text-sm', SHARED_STYLES.textForeground),
+      description: cn('mt-1 text-xs', SHARED_STYLES.textSecondary),
 
       // Transaction Key / Hash
       transactionKey: 'border-[var(--tuwa-border-primary)]',
-      hashLabel: cn(SHARED_STYLES.fontMonoMedium, 'text-sm pr-1', SHARED_STYLES.textForeground),
-      hashLink: cn(SHARED_STYLES.fontMono, SHARED_STYLES.textAccent, 'hover:underline transition-colors'),
+      hashLabel: cn('text-sm pr-1', SHARED_STYLES.textForeground),
+      hashLink: cn(SHARED_STYLES.textAccent, 'hover:underline transition-colors'),
       hashCopyButton: ICON_BUTTON_STYLES.copy,
 
       // Original Hash (replaced transactions)
-      originalHashLabel: cn(SHARED_STYLES.fontMonoMedium, 'text-xs', SHARED_STYLES.textSecondary),
-      originalHashLink: cn(SHARED_STYLES.fontMono, 'text-xs', SHARED_STYLES.textSecondary),
+      originalHashLabel: cn('text-xs', SHARED_STYLES.textSecondary),
+      originalHashLink: cn('text-xs', SHARED_STYLES.textSecondary),
       originalHashCopyButton: cn('opacity-50', ICON_BUTTON_STYLES.copy),
 
       // Footer & Status
-      statusBadge: cn(SHARED_STYLES.fontMono, 'text-xs font-medium'),
-      statusBadgeLabel: SHARED_STYLES.fontMono,
+      statusBadge: cn('text-xs'),
 
       // Action Buttons
       speedUpButton: BUTTON_STYLES.link,
-      cancelButton: cn(SHARED_STYLES.fontMono, SHARED_STYLES.textSecondary, 'hover:opacity-80'),
+      cancelButton: cn(SHARED_STYLES.textSecondary, 'hover:opacity-80'),
       txInfoButton: BUTTON_STYLES.primary,
     },
   },
@@ -75,7 +74,7 @@ export const nova_tx_provider_customization: NovaTransactionsProviderProps<any>[
 
       // Buttons
       speedUpButton: BUTTON_STYLES.link,
-      cancelButton: cn(SHARED_STYLES.fontMono, 'text-sm', SHARED_STYLES.textSecondary, 'hover:opacity-80'),
+      cancelButton: cn('text-sm', SHARED_STYLES.textSecondary, 'hover:opacity-80'),
       retryButton: cn(
         BUTTON_STYLES.primary,
         'text-sm px-4 py-2',
@@ -102,7 +101,7 @@ export const nova_tx_provider_customization: NovaTransactionsProviderProps<any>[
     // Progress Indicator (Created → Processing → Succeed)
     progressIndicatorCustomization: {
       stepClassNames: {
-        label: cn(SHARED_STYLES.fontMono, SHARED_STYLES.textForeground),
+        label: cn(SHARED_STYLES.textForeground),
         statusOverrides: STATUS_STYLES.progress,
       },
     },
@@ -111,13 +110,13 @@ export const nova_tx_provider_customization: NovaTransactionsProviderProps<any>[
     infoBlockCustomization: {
       classNames: {
         container: CARD_STYLES.infoBlock,
-        rowLabel: cn(SHARED_STYLES.fontMono, SHARED_STYLES.textSecondary),
-        rowValue: cn(SHARED_STYLES.fontMonoMedium, SHARED_STYLES.textForeground),
+        rowLabel: cn(SHARED_STYLES.textSecondary),
+        rowValue: cn(SHARED_STYLES.textForeground),
         separator: 'border-[var(--tuwa-border-primary)]',
         hashLink: HASH_LINK_STYLES,
         originalHashLink: {
-          label: cn(SHARED_STYLES.fontMonoMedium, 'text-xs', SHARED_STYLES.textSecondary),
-          link: cn(SHARED_STYLES.fontMono, 'text-xs', SHARED_STYLES.textSecondary),
+          label: cn('text-xs', SHARED_STYLES.textSecondary),
+          link: cn('text-xs', SHARED_STYLES.textSecondary),
           copyButton: cn('opacity-50', ICON_BUTTON_STYLES.copy),
         },
       },
@@ -127,11 +126,11 @@ export const nova_tx_provider_customization: NovaTransactionsProviderProps<any>[
     errorBlockCustomization: {
       classNames: {
         container: CARD_STYLES.error,
-        title: cn(SHARED_STYLES.fontMonoMedium, SHARED_STYLES.textError),
+        title: cn(SHARED_STYLES.textError),
         icon: SHARED_STYLES.textError,
         copyButton: ICON_BUTTON_STYLES.copyError,
         messageContainer: cn('rounded-[4px]', SHARED_STYLES.bgDark, SHARED_STYLES.borderDefault),
-        messageText: cn(SHARED_STYLES.fontMono, 'text-xs', SHARED_STYLES.textForeground),
+        messageText: cn('text-xs', SHARED_STYLES.textForeground),
       },
     },
   },

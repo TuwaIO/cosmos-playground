@@ -1,5 +1,5 @@
 // Import the ready-made server instance from the new package
-import { createSiweApiHandler } from '@tuwaio/satellite-siwe-next-auth/server';
+import { createSiweApiHandler } from '@tuwaio/sdk/satellite/siwe/server';
 
 const siweApiHandler = createSiweApiHandler();
 

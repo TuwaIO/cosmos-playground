@@ -1,5 +1,5 @@
-import { ConnectedModalCustomization } from '@tuwaio/nova-connect/components';
-import { cn } from '@tuwaio/nova-core';
+import { ConnectedModalCustomization } from '@tuwaio/sdk/nova-connect/components';
+import { cn } from '@tuwaio/sdk/nova-core';
 import React from 'react';
 
 import { ExtraBalancesSection } from '../../components/connect-wallet/ExtraBalances';
@@ -62,7 +62,7 @@ export const connected_modal_customization: ConnectedModalCustomization = {
         container: () => cn('flex flex-col items-center justify-center gap-3 p-4', SHARED_STYLES.bgBase),
 
         // Transactions button - accent style, NOT full width
-        transactionsButton: () => cn(BUTTON_STYLES.primary, 'min-h-[40px] px-6 text-sm', SHARED_STYLES.fontMono),
+        transactionsButton: () => cn(BUTTON_STYLES.primary, 'min-h-[40px] px-6 text-sm'),
 
         // Extra balances container
         extraBalancesContainer: () => 'w-full',
@@ -176,7 +176,7 @@ export const connected_modal_customization: ConnectedModalCustomization = {
         // Name and balance section
         nameAndBalance: {
           classNames: {
-            walletNameDisplay: () => cn(SHARED_STYLES.fontMonoMedium, 'text-lg', SHARED_STYLES.textForeground),
+            walletNameDisplay: () => cn('text-lg', SHARED_STYLES.textForeground),
             copyButton: () => cn(ICON_BUTTON_STYLES.default),
           },
           childCustomizations: {
@@ -196,38 +196,29 @@ export const connected_modal_customization: ConnectedModalCustomization = {
         emptyState: () => cn('flex flex-col items-center justify-center p-8', SHARED_STYLES.bgBase),
 
         // Active section
-        activeSectionTitle: () =>
-          cn(SHARED_STYLES.fontMonoMedium, 'mb-2 text-xs uppercase tracking-wider', SHARED_STYLES.textAccent),
+        activeSectionTitle: () => cn('mb-2 text-xs uppercase tracking-wider', SHARED_STYLES.textAccent),
         activeSectionWrapper: () =>
           cn('overflow-hidden rounded-[4px]', SHARED_STYLES.borderDefault, SHARED_STYLES.bgBase),
 
         // Recent section
-        recentSectionTitle: () =>
-          cn(SHARED_STYLES.fontMono, 'mb-2 text-xs uppercase tracking-wider', SHARED_STYLES.textSecondary),
+        recentSectionTitle: () => cn('mb-2 text-xs uppercase tracking-wider', SHARED_STYLES.textSecondary),
         recentSectionList: () => 'max-h-[240px] overflow-x-hidden overflow-y-auto flex flex-col gap-2',
 
         // Active row
         activeRowContainer: () =>
           cn('relative flex items-center justify-between p-4', 'bg-[var(--tuwa-text-accent)]/5'),
         activeRowBadge: () =>
-          cn(
-            SHARED_STYLES.fontMono,
-            'rounded-full px-1.5 py-0.5 text-[10px] font-medium',
-            'bg-[var(--tuwa-text-accent)]/20',
-            SHARED_STYLES.textAccent,
-          ),
-        activeRowWalletName: () => cn(SHARED_STYLES.fontMonoMedium, SHARED_STYLES.textForeground),
-        activeRowConnectorName: () => cn(SHARED_STYLES.fontMono, 'text-xs', SHARED_STYLES.textSecondary),
+          cn('rounded-full px-1.5 py-0.5 text-[10px]', 'bg-[var(--tuwa-text-accent)]/20', SHARED_STYLES.textAccent),
+        activeRowWalletName: () => cn(SHARED_STYLES.textForeground),
+        activeRowConnectorName: () => cn('text-xs', SHARED_STYLES.textSecondary),
         activeRowActionsContainer: () => 'mt-1 flex items-center gap-2',
-        activeRowCopyButton: () =>
-          cn('flex cursor-pointer items-center gap-1 text-[10px]', SHARED_STYLES.fontMono, ICON_BUTTON_STYLES.copy),
+        activeRowCopyButton: () => cn('flex cursor-pointer items-center gap-1 text-[10px]', ICON_BUTTON_STYLES.copy),
         activeRowExplorerButton: () =>
-          cn('flex cursor-pointer items-center gap-1 text-[10px]', SHARED_STYLES.fontMono, ICON_BUTTON_STYLES.copy),
+          cn('flex cursor-pointer items-center gap-1 text-[10px]', ICON_BUTTON_STYLES.copy),
         activeRowDisconnectButton: () =>
           cn(
             BUTTON_STYLES.base,
             'mt-4 min-h-0 px-3 py-1.5 text-xs',
-            SHARED_STYLES.fontMono,
             SHARED_STYLES.borderDefault,
             SHARED_STYLES.textForeground,
             'hover:bg-[var(--tuwa-error-icon)]/10 hover:border-[var(--tuwa-error-icon)] hover:text-[var(--tuwa-error-icon)]',
@@ -242,20 +233,19 @@ export const connected_modal_customization: ConnectedModalCustomization = {
             'hover:bg-[var(--tuwa-bg-muted)]',
           ),
         connectedRowSwitchIcon: () => SHARED_STYLES.textAccent,
-        connectedRowWalletName: () => cn(SHARED_STYLES.fontMono, 'text-sm', SHARED_STYLES.textForeground),
-        connectedRowConnectorName: () => cn(SHARED_STYLES.fontMono, 'text-[10px]', SHARED_STYLES.textSecondary),
+        connectedRowWalletName: () => cn('text-sm', SHARED_STYLES.textForeground),
+        connectedRowConnectorName: () => cn('text-[10px]', SHARED_STYLES.textSecondary),
         connectedRowDisconnectButton: () => ICON_BUTTON_STYLES.danger,
 
         // Recent row
         recentRowContainer: () =>
           cn('flex items-center justify-between rounded-[4px] p-3', SHARED_STYLES.borderDefault, SHARED_STYLES.bgBase),
-        recentRowWalletName: () => cn(SHARED_STYLES.fontMono, 'text-sm', SHARED_STYLES.textForeground),
-        recentRowConnectorName: () => cn(SHARED_STYLES.fontMono, 'text-[10px]', SHARED_STYLES.textSecondary),
+        recentRowWalletName: () => cn('text-sm', SHARED_STYLES.textForeground),
+        recentRowConnectorName: () => cn('text-[10px]', SHARED_STYLES.textSecondary),
         recentRowConnectButton: () =>
           cn(
             BUTTON_STYLES.baseSmall,
             'px-3 py-1.5 text-xs',
-            SHARED_STYLES.fontMono,
             SHARED_STYLES.borderDefault,
             SHARED_STYLES.textForeground,
             'hover:bg-[var(--tuwa-bg-muted)] hover:border-[var(--tuwa-text-accent)]',
@@ -268,7 +258,6 @@ export const connected_modal_customization: ConnectedModalCustomization = {
             'mt-2 w-full cursor-pointer rounded-[4px]',
             'border border-dashed border-[var(--tuwa-border-primary)]',
             'p-3 text-sm',
-            SHARED_STYLES.fontMono,
             SHARED_STYLES.textSecondary,
             'transition-colors',
             'hover:border-[var(--tuwa-text-accent)] hover:text-[var(--tuwa-text-accent)]',
@@ -287,26 +276,25 @@ export const connected_modal_customization: ConnectedModalCustomization = {
         loadingContainer: () => cn('flex flex-col items-center justify-center p-8 gap-4', SHARED_STYLES.bgBase),
         loadingSpinner: () =>
           cn('animate-spin rounded-full h-8 w-8 border-2', 'border-[var(--tuwa-text-accent)] border-t-transparent'),
-        loadingText: () => cn(SHARED_STYLES.fontMono, 'text-sm', SHARED_STYLES.textSecondary),
+        loadingText: () => cn('text-sm', SHARED_STYLES.textSecondary),
         errorContainer: () =>
           cn('flex flex-col items-center justify-center text-center gap-4 p-6', SHARED_STYLES.bgBase),
         errorIconContainer: () =>
           'w-12 h-12 p-2 rounded-full bg-[var(--tuwa-pending-icon)]/20 text-[var(--tuwa-pending-icon)]',
         errorIcon: () => 'w-full h-full',
         errorContent: () => 'space-y-2',
-        errorTitle: () => cn(SHARED_STYLES.fontMonoMedium, 'text-lg', SHARED_STYLES.textForeground),
-        errorDescription: () => cn(SHARED_STYLES.fontMono, 'text-sm max-w-md', SHARED_STYLES.textSecondary),
+        errorTitle: () => cn('text-lg', SHARED_STYLES.textForeground),
+        errorDescription: () => cn('text-sm max-w-md', SHARED_STYLES.textSecondary),
         noWalletContainer: () => cn('flex flex-col items-center justify-center p-6', SHARED_STYLES.bgBase),
-        noWalletText: () => cn(SHARED_STYLES.fontMono, 'text-sm', SHARED_STYLES.textSecondary),
+        noWalletText: () => cn('text-sm', SHARED_STYLES.textSecondary),
         pulsarRequiredContainer: () =>
           cn('flex flex-col items-center justify-center text-center gap-4 p-6', SHARED_STYLES.bgBase),
         pulsarRequiredIconContainer: () =>
           'w-12 h-12 p-2 rounded-full bg-gradient-to-r from-[var(--tuwa-text-accent)] to-[var(--tuwa-bg-muted)] text-[var(--tuwa-text-primary)]',
         pulsarRequiredIcon: () => 'w-full h-full',
         pulsarRequiredContent: () => 'space-y-2',
-        pulsarRequiredTitle: () => cn(SHARED_STYLES.fontMonoMedium, 'text-lg', SHARED_STYLES.textForeground),
-        pulsarRequiredDescription: () =>
-          cn(SHARED_STYLES.fontMono, 'text-sm max-w-md leading-relaxed', SHARED_STYLES.textSecondary),
+        pulsarRequiredTitle: () => cn('text-lg', SHARED_STYLES.textForeground),
+        pulsarRequiredDescription: () => cn('text-sm max-w-md leading-relaxed', SHARED_STYLES.textSecondary),
         transactionsHistoryWrapper: () => 'w-full',
       },
       transactionsHistory: transactions_history_customization,

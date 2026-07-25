@@ -1,4 +1,4 @@
-import { signAndSendSolanaTx } from '@tuwaio/pulsar-solana';
+import { signAndSendSolanaTx } from '@tuwaio/solana-sdk/pulsar';
 import { KeyPairSigner } from 'gill';
 
 import { PROGRAM_ID } from '../../constants';

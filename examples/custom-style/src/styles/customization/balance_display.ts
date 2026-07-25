@@ -1,5 +1,5 @@
-import { BalanceDisplayCustomization } from '@tuwaio/nova-connect/components';
-import { cn } from '@tuwaio/nova-core';
+import { BalanceDisplayCustomization } from '@tuwaio/sdk/nova-connect/components';
+import { cn } from '@tuwaio/sdk/nova-core';
 
 import { SHARED_STYLES } from './shared_styles';
 
@@ -8,7 +8,7 @@ export const balance_display_customization: BalanceDisplayCustomization = {
     // Container
     container: () => cn('flex items-center relative'),
     // Balance value text
-    balanceValue: () => cn(SHARED_STYLES.fontMono, SHARED_STYLES.textSecondary),
+    balanceValue: () => cn(SHARED_STYLES.textSecondary),
     // Refresh button
     refreshButton: ({ isLoading, showSuccess }) =>
       cn(
@@ -22,6 +22,6 @@ export const balance_display_customization: BalanceDisplayCustomization = {
     // Loading state
     loadingState: () => cn('animate-pulse rounded-xl h-5 w-24', 'bg-[var(--tuwa-border-primary)]'),
     // Empty state
-    emptyState: () => cn(SHARED_STYLES.fontMono, SHARED_STYLES.textSecondary, 'opacity-75'),
+    emptyState: () => cn(SHARED_STYLES.textSecondary, 'opacity-75'),
   },
 };

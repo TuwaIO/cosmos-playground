@@ -1,8 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&display=swap');
-
-@import '@tuwaio/nova-core/dist/index.css';
-@import '@tuwaio/nova-transactions/dist/index.css';
-@import '@tuwaio/nova-connect/dist/index.css';
+@import '@tuwaio/sdk/styles/all.css';
 @import 'tailwindcss';
 
 :root {

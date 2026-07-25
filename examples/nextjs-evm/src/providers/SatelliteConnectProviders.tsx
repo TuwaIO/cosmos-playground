@@ -1,10 +1,10 @@
 'use client';
 
-import { NovaConnectProvider, NovaConnectProviderProps } from '@tuwaio/nova-connect';
-import { EVMConnectorsWatcher } from '@tuwaio/nova-connect/evm';
-import { SatelliteConnectProvider } from '@tuwaio/nova-connect/satellite';
-import { satelliteEVMAdapter } from '@tuwaio/satellite-evm';
-import { useSiweAuth } from '@tuwaio/satellite-siwe-next-auth';
+import { EVMConnectorsWatcher } from '@tuwaio/evm-sdk/nova-connect';
+import { satelliteEVMAdapter } from '@tuwaio/evm-sdk/satellite';
+import { NovaConnectProvider, NovaConnectProviderProps } from '@tuwaio/sdk/nova-connect';
+import { SatelliteConnectProvider } from '@tuwaio/sdk/nova-connect/satellite';
+import { useSiweAuth } from '@tuwaio/sdk/satellite/siwe';
 
 import { appEVMChains, wagmiConfig } from '@/configs/appConfig';
 import { usePulsarStore } from '@/hooks/pulsarStoreHook';

@@ -1,4 +1,4 @@
-import { BalanceDisplay } from '@tuwaio/nova-connect/components';
+import { BalanceDisplay } from '@tuwaio/sdk/nova-connect/components';
 
 import { TokenConfig } from '../../configs/tokenConfig';
 import { useGetExtraBalance } from '../../hooks/useGetExtraBalance';

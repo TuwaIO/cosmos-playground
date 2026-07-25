@@ -17,6 +17,7 @@ async function main() {
     'nextjs-solana',
     'nextjs-evm',
     'vite-tuwa',
+    'nextjs-tuwa-not-sdk',
   ];
 
   const templateResponse = await prompts({

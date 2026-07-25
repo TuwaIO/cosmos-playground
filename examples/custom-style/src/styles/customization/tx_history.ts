@@ -1,5 +1,5 @@
-import { cn } from '@tuwaio/nova-core';
-import { TransactionsHistoryCustomization } from '@tuwaio/nova-transactions';
+import { cn } from '@tuwaio/sdk/nova-core';
+import { TransactionsHistoryCustomization } from '@tuwaio/sdk/nova-transactions';
 
 import { ICON_BUTTON_STYLES, SHARED_STYLES } from './shared_styles';
 
@@ -14,15 +14,15 @@ export const transactions_history_customization: TransactionsHistoryCustomizatio
     container: 'flex flex-col gap-y-3',
 
     // Title (if used)
-    titleText: cn(SHARED_STYLES.fontMonoMedium, 'text-lg', SHARED_STYLES.textForeground),
+    titleText: cn('text-lg', SHARED_STYLES.textForeground),
 
     // List wrapper
     listWrapper: cn('max-h-[400px] overflow-y-auto rounded-[4px]', SHARED_STYLES.borderDefault, SHARED_STYLES.bgBase),
 
     // Placeholder
     placeholderContainer: cn('rounded-[4px] p-8 text-center', SHARED_STYLES.bgBase, SHARED_STYLES.borderDefault),
-    placeholderTitle: cn(SHARED_STYLES.fontMonoMedium, SHARED_STYLES.textForeground),
-    placeholderMessage: cn(SHARED_STYLES.fontMono, 'mt-1 text-sm', SHARED_STYLES.textSecondary),
+    placeholderTitle: cn(SHARED_STYLES.textForeground),
+    placeholderMessage: cn('mt-1 text-sm', SHARED_STYLES.textSecondary),
 
     // Individual item
     itemContainer: cn(
@@ -41,29 +41,22 @@ export const transactions_history_customization: TransactionsHistoryCustomizatio
 
     // Item content
     itemContentWrapper: 'flex flex-col',
-    itemTitle: cn(SHARED_STYLES.fontMonoMedium, 'text-sm', SHARED_STYLES.textForeground),
-    itemTimestamp: cn(SHARED_STYLES.fontMono, 'mb-1 block text-xs', SHARED_STYLES.textSecondary),
-    itemDescription: cn(SHARED_STYLES.fontMono, 'mt-1 text-xs', SHARED_STYLES.textSecondary),
+    itemTitle: cn('text-sm', SHARED_STYLES.textForeground),
+    itemTimestamp: cn('mb-1 block text-xs', SHARED_STYLES.textSecondary),
+    itemDescription: cn('mt-1 text-xs', SHARED_STYLES.textSecondary),
 
     // Status badge
-    itemStatusBadge: cn(SHARED_STYLES.fontMono, 'text-xs font-medium'),
-    itemStatusBadgeLabel: SHARED_STYLES.fontMono,
+    itemStatusBadge: cn('text-xs'),
 
     // Transaction key / hash link
     itemTxKeyContainer: 'flex flex-col gap-y-2',
-    itemHashLabel: cn(SHARED_STYLES.fontMonoMedium, 'text-sm pr-1', SHARED_STYLES.textForeground),
-    itemHashLink: cn(
-      SHARED_STYLES.fontMono,
-      'flex items-center gap-x-1',
-      SHARED_STYLES.textAccent,
-      'hover:underline transition-colors',
-      '[&_span]:font-[DM_Mono]',
-    ),
+    itemHashLabel: cn('text-sm pr-1', SHARED_STYLES.textForeground),
+    itemHashLink: cn('flex items-center gap-x-1', SHARED_STYLES.textAccent, 'hover:underline transition-colors'),
     itemHashCopyButton: cn('cursor-pointer', ICON_BUTTON_STYLES.copy),
 
     // Original hash (replaced transactions) - less prominent
-    itemOriginalHashLabel: cn(SHARED_STYLES.fontMonoMedium, 'text-xs', SHARED_STYLES.textSecondary),
-    itemOriginalHashLink: cn(SHARED_STYLES.fontMono, 'text-xs', SHARED_STYLES.textSecondary),
+    itemOriginalHashLabel: cn('text-xs', SHARED_STYLES.textSecondary),
+    itemOriginalHashLink: cn('text-xs', SHARED_STYLES.textSecondary),
     itemOriginalHashCopyButton: cn('opacity-50', ICON_BUTTON_STYLES.copy),
   },
 };

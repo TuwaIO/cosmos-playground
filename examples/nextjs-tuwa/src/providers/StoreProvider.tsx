@@ -2,7 +2,7 @@
 
 'use client';
 
-import { createSolanaRPC } from '@tuwaio/orbit-solana';
+import { createSolanaRPC } from '@tuwaio/solana-sdk/orbit';
 import { produce } from 'immer';
 import { PropsWithChildren, useMemo } from 'react';
 import { createStore } from 'zustand/vanilla';

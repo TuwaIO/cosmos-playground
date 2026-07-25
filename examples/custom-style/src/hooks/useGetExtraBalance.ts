@@ -4,9 +4,9 @@
  */
 'use client';
 
-import { NativeBalanceResult } from '@tuwaio/nova-connect';
-import { useSatelliteConnectStore } from '@tuwaio/nova-connect/satellite';
-import { createViemClient } from '@tuwaio/orbit-evm';
+import { createViemClient } from '@tuwaio/evm-sdk/orbit';
+import { NativeBalanceResult } from '@tuwaio/sdk/nova-connect';
+import { useSatelliteConnectStore } from '@tuwaio/sdk/nova-connect/satellite';
 import { useCallback, useEffect, useRef } from 'react';
 import { Address, formatUnits } from 'viem';
 import { create } from 'zustand';
@@ -85,6 +85,7 @@ export function useGetExtraBalance(token: TokenConfig): BalanceData {
   const cachedBalance = useBalanceCacheStore((s) => (cacheKey ? s.cache[cacheKey] : undefined));
 
   const fetchBalance = useCallback(
+    // eslint-disable-next-line react-hooks/preserve-manual-memoization
     async (forceRefresh = false) => {
       if (!activeConnection?.address || !activeConnection?.chainId || !cacheKey) return;
 

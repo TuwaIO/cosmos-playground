@@ -1,4 +1,4 @@
-import { cn } from '@tuwaio/nova-core';
+import { cn } from '@tuwaio/sdk/nova-core';
 import React from 'react';
 
 import { SHARED_STYLES } from '../../styles/customization/shared_styles';
@@ -27,10 +27,8 @@ export const TelegramBotButton = () => {
         </svg>
       </div>
       <div className="flex flex-col">
-        <span className={cn(SHARED_STYLES.fontMonoMedium, 'text-[#0088cc]')}>Telegram Bot</span>
-        <span className={cn(SHARED_STYLES.fontMono, 'text-xs', SHARED_STYLES.textSecondary)}>
-          Bot Connection & Settings
-        </span>
+        <span className={cn('text-[#0088cc]')}>Telegram Bot</span>
+        <span className={cn('text-xs', SHARED_STYLES.textSecondary)}>Bot Connection & Settings</span>
       </div>
     </a>
   );

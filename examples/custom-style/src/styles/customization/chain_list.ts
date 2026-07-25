@@ -1,18 +1,16 @@
-import { ChainSelectorCustomization } from '@tuwaio/nova-connect/components';
-import { cn } from '@tuwaio/nova-core';
+import { ChainSelectorCustomization } from '@tuwaio/sdk/nova-connect/components';
+import { cn } from '@tuwaio/sdk/nova-core';
 
 import { BUTTON_STYLES, SCROLL_BUTTON_STYLES, SHARED_STYLES } from './shared_styles';
 
 const getItemStyles = (isActive: boolean) =>
   cn(
-    SHARED_STYLES.fontMono,
     'text-sm cursor-pointer transition-colors duration-200',
     SHARED_STYLES.itemInteractive,
     isActive
       ? cn(
           SHARED_STYLES.bgAccent,
           SHARED_STYLES.textAccentDark,
-          SHARED_STYLES.fontMonoMedium,
           SHARED_STYLES.focusWithOffset('var(--tuwa-bg-secondary)'),
           'focus:bg-[var(--tuwa-text-accent)]',
         )
@@ -27,7 +25,7 @@ export const chain_list_customization: ChainSelectorCustomization = {
         SHARED_STYLES.bgBase,
         'border-[var(--tuwa-border-primary)]',
         SHARED_STYLES.textForeground,
-        '[&_h2]:text-[var(--tuwa-text-primary)] [&_h2]:font-[DM_Mono] [&_h2]:font-medium',
+        '[&_h2]:text-[var(--tuwa-text-primary)]',
       ),
   },
 

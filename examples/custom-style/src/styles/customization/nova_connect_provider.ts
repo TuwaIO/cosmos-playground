@@ -1,5 +1,5 @@
-import { NovaConnectProviderCustomization } from '@tuwaio/nova-connect';
-import { cn } from '@tuwaio/nova-core';
+import { NovaConnectProviderCustomization } from '@tuwaio/sdk/nova-connect';
+import { cn } from '@tuwaio/sdk/nova-core';
 
 import { connect_card_customization } from './connect_card';
 import { connected_modal_customization } from './connected_modal';
@@ -41,7 +41,6 @@ export const nova_connect_provider_customization: NovaConnectProviderCustomizati
           classNames: {
             emptyState: () =>
               cn(
-                SHARED_STYLES.fontMono,
                 SHARED_STYLES.textSecondary,
                 SHARED_STYLES.bgDark,
                 SHARED_STYLES.textSecondary,
@@ -55,11 +54,9 @@ export const nova_connect_provider_customization: NovaConnectProviderCustomizati
           connectorsBlock: {
             installed: {
               classNames: {
-                title: () =>
-                  cn(SHARED_STYLES.fontMonoMedium, SHARED_STYLES.textAccent, 'text-sm uppercase tracking-wide'),
+                title: () => cn(SHARED_STYLES.textAccent, 'text-sm uppercase tracking-wide'),
                 emptyState: () =>
                   cn(
-                    SHARED_STYLES.fontMono,
                     SHARED_STYLES.textSecondary,
                     SHARED_STYLES.bgDark,
                     SHARED_STYLES.textSecondary,
@@ -70,7 +67,7 @@ export const nova_connect_provider_customization: NovaConnectProviderCustomizati
               connectCard: connect_card_customization,
             },
             popular: {
-              classNames: { title: () => cn(SHARED_STYLES.fontMono, SHARED_STYLES.textSecondary, 'text-sm') },
+              classNames: { title: () => cn(SHARED_STYLES.textSecondary, 'text-sm') },
               connectCard: connect_card_customization,
             },
           },
@@ -78,8 +75,8 @@ export const nova_connect_provider_customization: NovaConnectProviderCustomizati
           disclaimer: {
             classNames: {
               container: () => cn('p-2 rounded-[4px] flex flex-col gap-2 sm:p-4 sm:gap-4', SHARED_STYLES.borderDefault),
-              title: () => cn(SHARED_STYLES.fontMono, SHARED_STYLES.textPrimary, 'font-medium text-md'),
-              description: () => cn(SHARED_STYLES.fontMono, SHARED_STYLES.textSecondary, 'text-[12px]'),
+              title: () => cn(SHARED_STYLES.textPrimary, 'text-md'),
+              description: () => cn(SHARED_STYLES.textSecondary, 'text-[12px]'),
               button: () => cn(BUTTON_STYLES.ghost, 'px-2 min-h-[40px] text-sm'),
             },
           },
@@ -89,7 +86,7 @@ export const nova_connect_provider_customization: NovaConnectProviderCustomizati
         networkSelections: {
           classNames: {
             container: () => cn('flex flex-col gap-4', SHARED_STYLES.textForeground),
-            title: () => cn(SHARED_STYLES.fontMono, SHARED_STYLES.textForeground, 'mb-2'),
+            title: () => cn(SHARED_STYLES.textForeground, 'mb-2'),
             networkList: ({ selectionsData }) =>
               cn(
                 'flex NovaCustomScroll',
@@ -107,15 +104,15 @@ export const nova_connect_provider_customization: NovaConnectProviderCustomizati
                 SHARED_STYLES.textSecondary,
               ),
             errorIcon: () => cn(SHARED_STYLES.textAccent, 'mb-3'),
-            errorTitle: () => cn(SHARED_STYLES.fontMonoMedium, 'text-lg mb-1', SHARED_STYLES.textForeground),
-            errorMessage: () => cn(SHARED_STYLES.fontMono, 'text-sm'),
+            errorTitle: () => cn('text-lg mb-1', SHARED_STYLES.textForeground),
+            errorMessage: () => cn('text-sm'),
           },
           connectCard: connect_card_customization,
           disclaimer: {
             classNames: {
               container: () => cn('p-2 rounded-[4px] flex flex-col gap-2 sm:p-4 sm:gap-4', SHARED_STYLES.borderDefault),
-              title: () => cn(SHARED_STYLES.fontMonoMedium, SHARED_STYLES.textForeground, 'text-md'),
-              description: () => cn(SHARED_STYLES.fontMono, SHARED_STYLES.textSecondary, 'text-[12px]'),
+              title: () => cn(SHARED_STYLES.textForeground, 'text-md'),
+              description: () => cn(SHARED_STYLES.textSecondary, 'text-[12px]'),
               button: () => cn(BUTTON_STYLES.ghost, 'px-2 min-h-[40px] text-sm'),
             },
           },
@@ -125,8 +122,8 @@ export const nova_connect_provider_customization: NovaConnectProviderCustomizati
           classNames: {
             section: () => cn('relative m-[-16px]', SHARED_STYLES.bgBase),
             contentSection: () => cn('text-center relative p-4', SHARED_STYLES.bgBase),
-            title: () => cn(SHARED_STYLES.fontMonoMedium, SHARED_STYLES.textPrimary, 'text-base'),
-            description: () => cn(SHARED_STYLES.fontMono, SHARED_STYLES.textSecondary, 'text-sm leading-relaxed'),
+            title: () => cn(SHARED_STYLES.textPrimary, 'text-base'),
+            description: () => cn(SHARED_STYLES.textSecondary, 'text-sm leading-relaxed'),
             navigation: () =>
               cn(
                 'flex justify-center space-x-2 mt-6 relative z-3 mx-4 mb-4',
@@ -145,17 +142,16 @@ export const nova_connect_provider_customization: NovaConnectProviderCustomizati
 
         getWallet: {
           classNames: {
-            title: () => cn(SHARED_STYLES.fontMonoMedium, SHARED_STYLES.textPrimary, 'text-base mb-3'),
-            description: () => cn(SHARED_STYLES.fontMono, SHARED_STYLES.textSecondary, 'text-sm'),
+            title: () => cn(SHARED_STYLES.textPrimary, 'text-base mb-3'),
+            description: () => cn(SHARED_STYLES.textSecondary, 'text-sm'),
           },
         },
 
         impersonateForm: {
           classNames: {
-            label: () => cn(SHARED_STYLES.fontMono, SHARED_STYLES.textSecondary, 'text-sm'),
+            label: () => cn(SHARED_STYLES.textSecondary, 'text-sm'),
             input: ({ hasError }) =>
               cn(
-                SHARED_STYLES.fontMono,
                 SHARED_STYLES.bgBase,
                 SHARED_STYLES.textForeground,
                 'w-full mt-2 px-4 py-3 rounded-[4px] text-sm',
@@ -165,19 +161,19 @@ export const nova_connect_provider_customization: NovaConnectProviderCustomizati
                   ? 'border-[var(--tuwa-error-icon)] focus:ring-1 focus:ring-[var(--tuwa-error-icon)]'
                   : 'border-[var(--tuwa-border-primary)] focus:border-[var(--tuwa-text-accent)] focus:ring-1 focus:ring-[var(--tuwa-text-accent)]',
               ),
-            errorMessage: () => cn(SHARED_STYLES.fontMono, 'mt-2 text-sm', SHARED_STYLES.textError),
-            resolvingStatus: () => cn(SHARED_STYLES.fontMono, 'text-[var(--tuwa-pending-icon)]'),
-            resolvedAddress: () => cn(SHARED_STYLES.fontMono, SHARED_STYLES.textAccent),
+            errorMessage: () => cn('mt-2 text-sm', SHARED_STYLES.textError),
+            resolvingStatus: () => cn('text-[var(--tuwa-pending-icon)]'),
+            resolvedAddress: () => cn(SHARED_STYLES.textAccent),
           },
         },
 
         legalDisclaimer: {
           classNames: {
             container: () => cn('border-t border-[var(--tuwa-border-primary)] pt-3 mt-2'),
-            text: () => cn(SHARED_STYLES.fontMono, SHARED_STYLES.textSecondary, 'text-xs text-center'),
+            text: () => cn(SHARED_STYLES.textSecondary, 'text-xs text-center'),
             termsLink: () => 'underline transition-colors hover:text-[var(--tuwa-text-accent)]',
             privacyLink: () => 'underline transition-colors hover:text-[var(--tuwa-text-accent)]',
-            separator: () => cn(SHARED_STYLES.fontMono, SHARED_STYLES.textSecondary, 'text-xs text-center'),
+            separator: () => cn(SHARED_STYLES.textSecondary, 'text-xs text-center'),
           },
         },
 
@@ -186,7 +182,6 @@ export const nova_connect_provider_customization: NovaConnectProviderCustomizati
           classNames: {
             statusMessage: ({ statusData }) =>
               cn(
-                SHARED_STYLES.fontMonoMedium,
                 'text-lg transition-colors duration-300',
                 statusData.state === 'error'
                   ? SHARED_STYLES.textError
@@ -194,8 +189,7 @@ export const nova_connect_provider_customization: NovaConnectProviderCustomizati
                     ? SHARED_STYLES.textAccent
                     : SHARED_STYLES.textForeground,
               ),
-            errorMessage: () =>
-              cn(SHARED_STYLES.fontMono, 'text-sm text-center leading-relaxed', SHARED_STYLES.textError),
+            errorMessage: () => cn('text-sm text-center leading-relaxed', SHARED_STYLES.textError),
           },
         },
       },
@@ -212,19 +206,12 @@ export const nova_connect_provider_customization: NovaConnectProviderCustomizati
     },
     toastErrorCustomization: {
       classNames: {
-        container: () =>
-          cn(
-            SHARED_STYLES.fontMono,
-            'p-4 rounded-md w-full',
-            SHARED_STYLES.bgBase,
-            'border border-[var(--tuwa-error-icon)]',
-          ),
-        title: () => cn(SHARED_STYLES.fontMonoMedium, 'text-sm truncate', SHARED_STYLES.textError),
-        description: () => cn(SHARED_STYLES.fontMono, 'mt-1 text-xs break-words opacity-80', SHARED_STYLES.textError),
+        container: () => cn('p-4 rounded-md w-full', SHARED_STYLES.bgBase, 'border border-[var(--tuwa-error-icon)]'),
+        title: () => cn('text-sm truncate', SHARED_STYLES.textError),
+        description: () => cn('mt-1 text-xs break-words opacity-80', SHARED_STYLES.textError),
         button: ({ isCopied }) =>
           cn(
-            SHARED_STYLES.fontMono,
-            'cursor-pointer mt-2 text-xs font-medium inline-flex items-center space-x-1.5',
+            'cursor-pointer mt-2 text-xs inline-flex items-center space-x-1.5',
             'rounded-md px-2 py-1 transition-all duration-200',
             'focus:outline-none focus:ring-2 focus:ring-[var(--tuwa-error-icon)] focus:ring-opacity-50',
             isCopied

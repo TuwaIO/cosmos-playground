@@ -1,7 +1,7 @@
 'use client';
 
-import { createBoundedUseStore, createPulsarStore } from '@tuwaio/pulsar-core';
-import { pulsarSolanaAdapter } from '@tuwaio/pulsar-solana';
+import { createBoundedUseStore, createPulsarStore } from '@tuwaio/sdk/pulsar';
+import { pulsarSolanaAdapter } from '@tuwaio/solana-sdk/pulsar';
 
 import { solanaRPCUrls } from '@/configs/appConfig';
 import { TransactionUnion } from '@/transactions';

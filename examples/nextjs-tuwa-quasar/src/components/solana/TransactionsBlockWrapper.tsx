@@ -1,10 +1,10 @@
 'use client';
 
-import { useSatelliteConnectStore } from '@tuwaio/nova-connect/satellite';
-import { textCenterEllipsis } from '@tuwaio/nova-core';
-import { HashLink } from '@tuwaio/nova-transactions';
-import { OrbitAdapter, selectAdapterByKey } from '@tuwaio/orbit-core';
-import { SolanaConnection } from '@tuwaio/satellite-solana';
+import { useSatelliteConnectStore } from '@tuwaio/sdk/nova-connect/satellite';
+import { textCenterEllipsis } from '@tuwaio/sdk/nova-core';
+import { HashLink } from '@tuwaio/sdk/nova-transactions';
+import { OrbitAdapter, selectAdapterByKey } from '@tuwaio/sdk/orbit';
+import { SolanaConnection } from '@tuwaio/solana-sdk/satellite';
 import { address } from 'gill';
 import { useEffect } from 'react';
 
@@ -17,7 +17,7 @@ import { usePulsarStore } from '@/hooks/pulsarStoreHook';
 import { useStore } from '@/hooks/storeHook';
 
 export const TransactionsBlockWrapper = () => {
-  const activeConnection = useSatelliteConnectStore((store) => store.activeConnection);
+  const activeWallet = useSatelliteConnectStore((store) => store.activeConnection);
   const accounts = useStore((state) => state.accounts);
   const getAccounts = useStore((state) => state.getAccounts);
   const accountsLoading = useStore((state) => state.accountsLoading);
@@ -28,7 +28,7 @@ export const TransactionsBlockWrapper = () => {
     adapter: getAdapter(),
   });
 
-  const activeWalletSolana = activeConnection as SolanaConnection;
+  const activeWalletSolana = activeWallet as SolanaConnection;
 
   useEffect(() => {
     getAccounts();

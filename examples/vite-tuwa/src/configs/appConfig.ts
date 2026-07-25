@@ -1,4 +1,4 @@
-import { createDefaultTransports, impersonated, safeSdkOptions } from '@tuwaio/satellite-evm';
+import { createDefaultTransports, impersonated, safeSdkOptions } from '@tuwaio/evm-sdk/satellite';
 import { baseAccount, safe, walletConnect } from '@wagmi/connectors';
 import { createConfig, injected } from '@wagmi/core';
 import {
@@ -20,7 +20,7 @@ export const appConfig = {
   appName: 'Satellite EVM Test App',
   appDescription: 'TUWA Demo App',
   projectId: '9077e559e63e099f496b921a027d0f04',
-  appLogoUrl: 'https://raw.githubusercontent.com/TuwaIO/workflows/refs/heads/main/preview/preview-logo.png',
+  appLogoUrl: 'https://cdn.jsdelivr.net/gh/TuwaIO/workflows@main/preview/preview-logo.png',
   appUrl: 'https://demo.tuwa.io/',
 };
 

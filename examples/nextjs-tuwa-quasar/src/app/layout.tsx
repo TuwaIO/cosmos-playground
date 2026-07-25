@@ -2,7 +2,6 @@ import '@/styles/app.css';
 
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
-import Head from 'next/head';
 import { ReactNode } from 'react';
 
 import { Header } from '@/components/Header';
@@ -23,8 +22,13 @@ export const metadata: Metadata = {
   description:
     'An example demonstrating the integration of Pulsar transaction tracking and Quasar Cloud Sync with a Next.js application using the Quasar SDK.',
   manifest: '/manifest.json',
+  appleWebApp: {
+    title: 'Pulsar & Quasar: Next.js',
+  },
   icons: {
-    icon: '/favicon.ico',
+    icon: 'https://cdn.jsdelivr.net/gh/TuwaIO/workflows@main/favicon/icon0.svg',
+    shortcut: 'https://cdn.jsdelivr.net/gh/TuwaIO/workflows@main/favicon/web-app-manifest-512x512.png',
+    apple: 'https://cdn.jsdelivr.net/gh/TuwaIO/workflows@main/favicon/web-app-manifest-512x512.png',
   },
 };
 
@@ -35,9 +39,6 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <Head>
-        <meta name="apple-mobile-web-app-title" content="Pulsar & Quasar: Next.js" />
-      </Head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Providers>
           <Header />

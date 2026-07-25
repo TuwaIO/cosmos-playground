@@ -1,5 +1,5 @@
-import { ConnectButtonCustomization } from '@tuwaio/nova-connect/components';
-import { cn } from '@tuwaio/nova-core';
+import { ConnectButtonCustomization } from '@tuwaio/sdk/nova-connect/components';
+import { cn } from '@tuwaio/sdk/nova-core';
 
 import { chain_list_customization } from './chain_list';
 import { BUTTON_STYLES, SHARED_STYLES } from './shared_styles';
@@ -13,7 +13,6 @@ export const connect_button_customization: ConnectButtonCustomization = {
       return cn(
         BUTTON_STYLES.base,
         'px-4 py-2 text-md',
-        SHARED_STYLES.fontMono,
         SHARED_STYLES.focusWithOffset('var(--tuwa-bg-primary)'),
         'disabled:opacity-50 disabled:cursor-not-allowed',
         isConnected
@@ -29,10 +28,6 @@ export const connect_button_customization: ConnectButtonCustomization = {
   },
 
   childComponents: {
-    waitForConnectionContent: {
-      classNames: { text: () => 'font-light' },
-    },
-
     connectedContent: {
       childCustomizations: {
         walletAvatar: {

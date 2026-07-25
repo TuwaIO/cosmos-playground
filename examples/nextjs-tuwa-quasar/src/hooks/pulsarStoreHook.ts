@@ -1,9 +1,9 @@
 'use client';
 
-import { createBoundedUseStore, createPulsarStore, createTxInMemoryStore } from '@tuwaio/pulsar-core';
-import { pulsarEvmAdapter } from '@tuwaio/pulsar-evm';
-import { pulsarSolanaAdapter } from '@tuwaio/pulsar-solana';
+import { pulsarEvmAdapter } from '@tuwaio/evm-sdk/pulsar';
 import { getMiniSessionAuth } from '@tuwaio/quasar-sdk/react';
+import { createBoundedUseStore, createPulsarStore, createTxInMemoryStore } from '@tuwaio/sdk/pulsar';
+import { pulsarSolanaAdapter } from '@tuwaio/solana-sdk/pulsar';
 
 import { getHistory, syncTransaction } from '@/app/actions';
 import { appConfig, appEVMChains, solanaRPCUrls, wagmiConfig } from '@/configs/appConfig';

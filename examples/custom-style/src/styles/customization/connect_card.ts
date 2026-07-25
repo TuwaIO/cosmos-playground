@@ -1,5 +1,5 @@
-import { ConnectCardCustomization } from '@tuwaio/nova-connect/components';
-import { cn } from '@tuwaio/nova-core';
+import { ConnectCardCustomization } from '@tuwaio/sdk/nova-connect/components';
+import { cn } from '@tuwaio/sdk/nova-core';
 
 import { SHARED_STYLES } from './shared_styles';
 
@@ -41,21 +41,14 @@ export const connect_card_customization: ConnectCardCustomization = {
 
     // Wallet title
     title: () =>
-      cn(
-        SHARED_STYLES.fontMono,
-        SHARED_STYLES.textForeground,
-        'group-hover:text-[var(--tuwa-text-accent)]',
-        'transition-colors duration-200',
-      ),
+      cn(SHARED_STYLES.textForeground, 'group-hover:text-[var(--tuwa-text-accent)]', 'transition-colors duration-200'),
 
     // Subtitle
-    subtitle: ({ cardData }) =>
-      cn(SHARED_STYLES.fontMono, SHARED_STYLES.textSecondary, 'text-sm', { 'text-[10px]': cardData.isTouch }),
+    subtitle: ({ cardData }) => cn(SHARED_STYLES.textSecondary, 'text-sm', { 'text-[10px]': cardData.isTouch }),
 
     // Recent badge wrapper (hide on hover)
     recentBadgeWrapper: () =>
       cn(
-        SHARED_STYLES.fontMono,
         'absolute top-0.5 right-0.5',
         'transition group-hover:opacity-0 group-hover:scale-90',
         SHARED_STYLES.textSecondary,
@@ -75,7 +68,7 @@ export const connect_card_customization: ConnectCardCustomization = {
     classNames: {
       container: () =>
         cn(
-          'inline-flex items-center rounded-full font-medium relative overflow-hidden',
+          'inline-flex items-center rounded-full relative overflow-hidden',
           SHARED_STYLES.textSecondary,
           'border border-[var(--tuwa-border-primary)] px-2.5 py-0.5 text-xs',
         ),

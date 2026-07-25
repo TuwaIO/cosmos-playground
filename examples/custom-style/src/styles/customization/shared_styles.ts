@@ -1,4 +1,4 @@
-import { cn } from '@tuwaio/nova-core';
+import { cn } from '@tuwaio/sdk/nova-core';
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // SHARED STYLES - Custom Theme
@@ -6,12 +6,6 @@ import { cn } from '@tuwaio/nova-core';
 // ═══════════════════════════════════════════════════════════════════════════════
 
 export const SHARED_STYLES = {
-  // ─────────────────────────────────────────────────────────────────────────────
-  // Typography
-  // ─────────────────────────────────────────────────────────────────────────────
-  fontMono: 'font-[DM_Mono] font-light',
-  fontMonoMedium: 'font-[DM_Mono] font-medium',
-
   // ─────────────────────────────────────────────────────────────────────────────
   // Colors - Text
   // ─────────────────────────────────────────────────────────────────────────────
@@ -72,7 +66,6 @@ export const BUTTON_STYLES = {
   // Primary - accent background
   primary: cn(
     BUTTON_BASE,
-    SHARED_STYLES.fontMonoMedium,
     'px-2 py-1 text-sm',
     SHARED_STYLES.bgAccent,
     SHARED_STYLES.textAccentDark,
@@ -83,7 +76,7 @@ export const BUTTON_STYLES = {
   // Secondary - outlined
   secondary: cn(
     BUTTON_BASE,
-    SHARED_STYLES.fontMono,
+    'min-h-[32px]',
     'px-4 py-2 text-sm',
     'bg-[var(--tuwa-bg-muted)]',
     SHARED_STYLES.textForeground,
@@ -94,7 +87,7 @@ export const BUTTON_STYLES = {
   // Ghost - transparent background
   ghost: cn(
     BUTTON_BASE,
-    SHARED_STYLES.fontMono,
+    'min-h-[44px]',
     SHARED_STYLES.bgBase,
     SHARED_STYLES.borderDefault,
     SHARED_STYLES.textForeground,
@@ -103,17 +96,11 @@ export const BUTTON_STYLES = {
   ),
 
   // Link - text only
-  link: cn(
-    SHARED_STYLES.fontMono,
-    'cursor-pointer text-sm transition-opacity',
-    SHARED_STYLES.textAccent,
-    'hover:opacity-80',
-  ),
+  link: cn('cursor-pointer text-sm transition-opacity', SHARED_STYLES.textAccent, 'hover:opacity-80'),
 
   // Danger - error action
   danger: cn(
     BUTTON_BASE,
-    SHARED_STYLES.fontMono,
     SHARED_STYLES.borderDefault,
     SHARED_STYLES.textForeground,
     SHARED_STYLES.bgBase,
@@ -136,7 +123,7 @@ export const MODAL_STYLES = {
   header: cn(SHARED_STYLES.bgBase, 'border-b border-[var(--tuwa-border-primary)]'),
 
   // Header title
-  headerTitle: cn(SHARED_STYLES.fontMonoMedium, SHARED_STYLES.textPrimary),
+  headerTitle: cn(SHARED_STYLES.textPrimary),
 
   // Close/back button
   closeButton: cn(
@@ -279,7 +266,7 @@ export const STATUS_STYLES = {
 // ═══════════════════════════════════════════════════════════════════════════════
 
 export const HASH_LINK_STYLES = {
-  label: cn(SHARED_STYLES.fontMonoMedium, SHARED_STYLES.textForeground),
+  label: cn(SHARED_STYLES.textForeground),
   link: cn(SHARED_STYLES.textAccent, 'hover:underline transition-colors'),
   copyButton: ICON_BUTTON_STYLES.copy,
 } as const;

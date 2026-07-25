@@ -2,10 +2,10 @@
 
 'use client';
 
-import { useSatelliteConnectStore } from '@tuwaio/nova-connect/satellite';
-import { TxActionButton } from '@tuwaio/nova-transactions';
-import { OrbitAdapter } from '@tuwaio/orbit-core';
-import { createViemClient } from '@tuwaio/orbit-evm';
+import { createViemClient } from '@tuwaio/evm-sdk/orbit';
+import { useSatelliteConnectStore } from '@tuwaio/sdk/nova-connect/satellite';
+import { TxActionButton } from '@tuwaio/sdk/nova-transactions';
+import { OrbitAdapter } from '@tuwaio/sdk/orbit';
 import { useEffect, useState } from 'react';
 import { Client } from 'viem';
 import { readContract } from 'viem/actions';
@@ -92,10 +92,8 @@ export const TransactionsBlockWrapper = () => {
         {/* Header */}
         <div className="bg-[var(--tuwa-text-accent)] p-6 flex-shrink-0">
           <div className="flex-1 pr-4">
-            <h1 className="text-2xl font-medium text-[var(--tuwa-text-on-accent)] mb-1 leading-tight font-[DM_Mono]">
-              EVM Demo
-            </h1>
-            <p className="text-[var(--tuwa-text-on-accent)] opacity-70 text-sm leading-tight font-[DM_Mono]">
+            <h1 className="text-2xl font-medium text-[var(--tuwa-text-on-accent)] mb-1 leading-tight">EVM Demo</h1>
+            <p className="text-[var(--tuwa-text-on-accent)] opacity-70 text-sm leading-tight">
               Transaction Tracking Example
             </p>
           </div>
@@ -104,10 +102,10 @@ export const TransactionsBlockWrapper = () => {
         {/* Content */}
         <div className="flex-1 p-8 space-y-8">
           <div className="text-center h-16 flex flex-col justify-center">
-            <h2 className="text-xl font-medium text-[var(--tuwa-text-primary)] mb-2 leading-tight font-[DM_Mono]">
+            <h2 className="text-xl font-medium text-[var(--tuwa-text-primary)] mb-2 leading-tight">
               Smart Contract Interaction
             </h2>
-            <p className="text-[var(--tuwa-text-tertiary)] text-sm leading-tight font-[DM_Mono]">
+            <p className="text-[var(--tuwa-text-tertiary)] text-sm leading-tight">
               Test transaction tracking with a simple counter contract
             </p>
           </div>
@@ -121,22 +119,18 @@ export const TransactionsBlockWrapper = () => {
               <div className="flex items-center justify-between w-full mb-3">
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 bg-[var(--tuwa-bg-muted)] rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-[var(--tuwa-text-accent)] font-medium text-lg font-[DM_Mono]">#</span>
+                    <span className="text-[var(--tuwa-text-accent)] font-medium text-lg">#</span>
                   </div>
                   <div className="min-w-0 flex-1">
-                    <h3 className="font-medium text-[var(--tuwa-text-primary)] leading-tight font-[DM_Mono]">
-                      Counter Contract
-                    </h3>
-                    <p className="text-xs text-[var(--tuwa-text-tertiary)] leading-tight font-[DM_Mono]">
-                      Sepolia Testnet
-                    </p>
+                    <h3 className="font-medium text-[var(--tuwa-text-primary)] leading-tight">Counter Contract</h3>
+                    <p className="text-xs text-[var(--tuwa-text-tertiary)] leading-tight">Sepolia Testnet</p>
                   </div>
                 </div>
                 <div className="text-right flex-shrink-0">
-                  <div className="text-sm text-[var(--tuwa-text-secondary)] leading-tight font-[DM_Mono]">Contract</div>
+                  <div className="text-sm text-[var(--tuwa-text-secondary)] leading-tight">Contract</div>
                   <button
                     onClick={openEtherscan}
-                    className="text-xs font-[DM_Mono] text-[var(--tuwa-text-accent)] hover:opacity-70 leading-tight cursor-pointer transition-opacity duration-200 underline hover:no-underline"
+                    className="text-xs text-[var(--tuwa-text-accent)] hover:opacity-70 leading-tight cursor-pointer transition-opacity duration-200 underline hover:no-underline"
                   >
                     {COUNTER_ADDRESS.slice(0, 6)}...{COUNTER_ADDRESS.slice(-4)}
                   </button>
@@ -145,8 +139,8 @@ export const TransactionsBlockWrapper = () => {
 
               <div className="flex items-center justify-center pt-2 border-t border-[var(--tuwa-border-primary)]">
                 <div className="text-center">
-                  <div className="text-xs text-[var(--tuwa-text-tertiary)] mb-1 font-[DM_Mono]">Current Value</div>
-                  <div className="text-2xl font-medium text-[var(--tuwa-text-accent)] font-[DM_Mono]">
+                  <div className="text-xs text-[var(--tuwa-text-tertiary)] mb-1">Current Value</div>
+                  <div className="text-2xl font-medium text-[var(--tuwa-text-accent)]">
                     {isLoadingCount ? (
                       <div className="animate-pulse">...</div>
                     ) : currentCount !== null ? (
@@ -165,7 +159,7 @@ export const TransactionsBlockWrapper = () => {
                   action={handleIncrement}
                   transactionsPool={transactionsPool}
                   getLastTxKey={getLastTxKey}
-                  className="from-[var(--tuwa-text-accent)] to-[var(--tuwa-text-accent)] w-full h-full bg-[var(--tuwa-text-accent)] hover:opacity-90 text-[var(--tuwa-text-on-accent)] font-medium rounded-[var(--tuwa-rounded-corners)] transition-all duration-200 ease-in-out flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] select-none font-[DM_Mono]"
+                  className="from-[var(--tuwa-text-accent)] to-[var(--tuwa-text-accent)] w-full h-full bg-[var(--tuwa-text-accent)] hover:opacity-90 text-[var(--tuwa-text-on-accent)] font-medium rounded-[var(--tuwa-rounded-corners)] transition-all duration-200 ease-in-out flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] select-none"
                   disabled={currentCount === null}
                   walletAddress={address}
                 >
@@ -175,7 +169,7 @@ export const TransactionsBlockWrapper = () => {
               </div>
 
               <div className="h-8 flex items-center justify-center">
-                <p className="text-center text-xs text-[var(--tuwa-text-tertiary)] leading-tight font-[DM_Mono]">
+                <p className="text-center text-xs text-[var(--tuwa-text-tertiary)] leading-tight">
                   This will increment the counter by 1 and track the transaction
                 </p>
               </div>
@@ -185,7 +179,7 @@ export const TransactionsBlockWrapper = () => {
 
         {/* Footer */}
         <footer className="bg-[var(--tuwa-bg-primary)] px-4 py-4 border-t border-[var(--tuwa-border-primary)] flex-shrink-0 h-16 flex items-center justify-center">
-          <div className="flex items-center space-x-2 text-xs text-[var(--tuwa-text-tertiary)] font-[DM_Mono] flex-wrap gap-1 items-center justify-center">
+          <div className="flex items-center space-x-2 text-xs text-[var(--tuwa-text-tertiary)] flex-wrap gap-1 items-center justify-center">
             <span className="leading-none">Powered by</span>
             <a
               href="https://github.com/TuwaIO"

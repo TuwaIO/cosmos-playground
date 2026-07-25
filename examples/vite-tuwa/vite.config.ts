@@ -1,26 +1,9 @@
-// @ts-expect-error - missing types
 import tailwindcss from '@tailwindcss/vite';
-// @ts-expect-error - missing types
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-
-  optimizeDeps: {
-    include: [
-      '@tuwaio/nova-core',
-      '@tuwaio/nova-transactions',
-      '@tuwaio/nova-connect',
-      '@tuwaio/nova-connect/components',
-      '@tuwaio/nova-connect/hooks',
-      '@tuwaio/nova-connect/satellite',
-      '@tuwaio/nova-connect/i18n',
-      '@tuwaio/nova-connect/evm',
-      '@tuwaio/nova-connect/solana',
-    ],
-  },
-
   build: {
     outDir: 'dist',
     assetsDir: '',

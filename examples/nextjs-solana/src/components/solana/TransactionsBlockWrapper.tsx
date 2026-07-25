@@ -1,10 +1,10 @@
 'use client';
 
-import { useSatelliteConnectStore } from '@tuwaio/nova-connect/satellite';
-import { textCenterEllipsis } from '@tuwaio/nova-core';
-import { HashLink } from '@tuwaio/nova-transactions';
-import { OrbitAdapter, selectAdapterByKey } from '@tuwaio/orbit-core';
-import { SolanaConnection } from '@tuwaio/satellite-solana';
+import { useSatelliteConnectStore } from '@tuwaio/sdk/nova-connect/satellite';
+import { textCenterEllipsis } from '@tuwaio/sdk/nova-core';
+import { HashLink } from '@tuwaio/sdk/nova-transactions';
+import { OrbitAdapter, selectAdapterByKey } from '@tuwaio/sdk/orbit';
+import { SolanaConnection } from '@tuwaio/solana-sdk/satellite';
 import { address } from 'gill';
 import { useEffect } from 'react';
 

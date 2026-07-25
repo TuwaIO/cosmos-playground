@@ -1,9 +1,9 @@
 'use client';
 
-import { NovaConnectProvider, NovaConnectProviderProps } from '@tuwaio/nova-connect';
-import { SatelliteConnectProvider } from '@tuwaio/nova-connect/satellite';
-import { SolanaConnectorsWatcher } from '@tuwaio/nova-connect/solana';
-import { satelliteSolanaAdapter } from '@tuwaio/satellite-solana';
+import { NovaConnectProvider, NovaConnectProviderProps } from '@tuwaio/sdk/nova-connect';
+import { SatelliteConnectProvider } from '@tuwaio/sdk/nova-connect/satellite';
+import { SolanaConnectorsWatcher } from '@tuwaio/solana-sdk/nova-connect';
+import { satelliteSolanaAdapter } from '@tuwaio/solana-sdk/satellite';
 
 import { solanaRPCUrls } from '@/configs/appConfig';
 import { usePulsarStore } from '@/hooks/pulsarStoreHook';

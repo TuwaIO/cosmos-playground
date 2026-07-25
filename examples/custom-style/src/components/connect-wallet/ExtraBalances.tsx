@@ -1,4 +1,4 @@
-import { useSatelliteConnectStore } from '@tuwaio/nova-connect/satellite';
+import { useSatelliteConnectStore } from '@tuwaio/sdk/nova-connect/satellite';
 
 import { SUPPORTED_TOKENS } from '../../configs/tokenConfig';
 import { ExtraBalance } from './ExtraBalance';
