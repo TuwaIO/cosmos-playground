@@ -9,7 +9,7 @@ allowBuilds:
   utf-8-validate: false
 minimumReleaseAgeExclude:
   - '@types/node@25.9.1'
-  - '@types/react@19.2.15'
+  - '@types/react@19.2.15 || 19.2.18'
   - "@tuwaio/*"
   - viem
   - '@tanstack/query-core@5.101.4'
@@ -66,3 +66,4 @@ minimumReleaseAgeExclude:
   - '@radix-ui/react-use-rect@1.1.4'
   - '@radix-ui/react-use-size@1.1.4'
   - '@base-org/account@2.5.8'
+  - '@types/react-dom@19.2.4'

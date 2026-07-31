@@ -17,7 +17,7 @@
   ],
   "author": "Oleksandr Tkach",
   "license": "MIT-0",
-  "packageManager": "pnpm@11.17.0",
+  "packageManager": "pnpm@11.18.0",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
@@ -27,20 +27,20 @@
     "@gelatocloud/gasless": "^0.0.12",
     "@tanstack/react-query": "^5.101.4",
     "@wagmi/core": "^3.6.4",
-    "@wagmi/connectors": "^8.0.25",
-    "@tuwaio/sdk": "^0.0.6",
-    "@tuwaio/evm-sdk": "^0.0.5",
+    "@wagmi/connectors": "^8.0.26",
+    "@tuwaio/sdk": "^0.0.7",
+    "@tuwaio/evm-sdk": "^0.0.6",
     "next": "16.2.12",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "viem": "^2.55.10",
-    "wagmi": "^3.7.4",
+    "wagmi": "^3.7.5",
     "@base-org/account": "^2.5.8",
     "@walletconnect/ethereum-provider": "^2.23.10",
     "@safe-global/safe-apps-provider": "^0.18.6",
     "@safe-global/safe-apps-sdk": "^9.1.0",
     "@heroicons/react": "^2.2.0",
-    "framer-motion": "^12.42.2"
+    "framer-motion": "^12.43.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -56,10 +56,10 @@
     "typescript-eslint": "^8.65.0",
     "@tailwindcss/postcss": "^4.3.3",
     "@tailwindcss/vite": "^4.3.3",
-    "@types/react": "^19.2.17",
-    "@types/react-dom": "^19.2.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
     "autoprefixer": "^10.5.4",
-    "postcss": "^8.5.23",
+    "postcss": "^8.5.25",
     "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3"
   }
