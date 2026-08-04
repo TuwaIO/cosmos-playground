@@ -1,12 +1,13 @@
 'use client';
 
 import { pulsarEvmAdapter } from '@tuwaio/evm-sdk/pulsar';
-import { getMiniSessionAuth } from '@tuwaio/quasar-sdk/react';
+import { getMiniSessionAuth, preFlightTxCheck } from '@tuwaio/quasar-sdk/react';
 import { createBoundedUseStore, createPulsarStore, createTxInMemoryStore } from '@tuwaio/sdk/pulsar';
 import { pulsarSolanaAdapter } from '@tuwaio/solana-sdk/pulsar';
 
 import { getHistory, syncTransaction } from '@/app/actions';
 import { appConfig, appEVMChains, solanaRPCUrls, wagmiConfig } from '@/configs/appConfig';
+import { QUASAR_BASE_URL } from '@/constants';
 import { TransactionUnion } from '@/transactions';
 
 const storageName = 'transactions-tracking-storage-example';
@@ -20,7 +21,7 @@ const initialStore = createPulsarStore<TransactionUnion>({
     }),
   ],
   beforeTxProcess: async () => {
-    await getMiniSessionAuth();
+    await preFlightTxCheck(QUASAR_BASE_URL);
   },
   onRemoteCreate: async (tx) => {
     try {
@@ -28,6 +29,7 @@ const initialStore = createPulsarStore<TransactionUnion>({
       await syncTransaction(tx, auth);
     } catch (err) {
       console.error('[PulsarHook] Remote sync failed:', err);
+      throw err; // Rethrow to inform pulsar-core that sync failed
     }
   },
   gelatoApiKey: process.env.NEXT_PUBLIC_GELATO_API_KEY,
@@ -37,6 +39,7 @@ export const usePulsarStore = createBoundedUseStore(initialStore);
 
 const pulsarInMemoryStore = createTxInMemoryStore<TransactionUnion>({
   localTransactionsPool: initialStore.getState().transactionsPool,
+  reconcileUnsyncedTransactions: initialStore.getState().reconcileUnsyncedTransactions,
 
   getHistory: async ({ page, walletAddress }) => {
     try {

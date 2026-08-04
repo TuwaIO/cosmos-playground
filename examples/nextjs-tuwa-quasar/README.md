@@ -98,7 +98,7 @@ NEXT_PUBLIC_WALLET_PROJECT_ID=your_project_id
 QUASAR_SDK_SK=sk_live_...
 
 # Optional: Quasar API Base URL. Defaults to https://api.tuwa.io.
-QUASAR_BASE_URL=https://api.tuwa.io
+NEXT_PUBLIC_QUASAR_BASE_URL=https://api.tuwa.io
 
 # Required: Secret for signing SIWE session cookies (must be at least 32 characters)
 SIWE_SESSION_SECRET=your_32_character_long_session_secret
