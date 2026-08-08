@@ -1,6 +1,6 @@
 {
   "name": "@tuwaio/create-cosmos-playground",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "description": "Layer 8 (L8) CLI tool to scaffold production-ready TUWA Ecosystem dApp starter templates.",
   "keywords": [
     "cli",
