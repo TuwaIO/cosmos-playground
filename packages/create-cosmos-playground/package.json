@@ -1,7 +1,7 @@
 {
   "name": "@tuwaio/create-cosmos-playground",
   "version": "0.0.22",
-  "description": "A CLI tool to scaffold new Cosmos Playground examples.",
+  "description": "Layer 8 (L8) CLI tool to scaffold production-ready TUWA Ecosystem dApp starter templates.",
   "keywords": [
     "cli",
     "scaffolding",
@@ -30,7 +30,7 @@
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
     "@types/prompts": "^2.4.9",
-    "@types/node": "^26.1.2",
+    "@types/node": "^26.2.0",
     "typescript": "^6.0.3"
   },
   "dependencies": {

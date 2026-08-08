@@ -1,52 +1,45 @@
 # 🪐 Cosmos Playground
 
-Welcome to **Cosmos Playground**, a collection of practical and ready-to-use examples for modern Web3 frontend development. Our mission is to make the blockchain world more accessible and enjoyable for developers. With our new CLI tool, getting started has never been easier!
+[![License](https://img.shields.io/npm/l/@tuwaio/sdk.svg)](./LICENSE)
+
+Official collection of application templates, integration examples, and CLI scaffolding for the **TUWA Ecosystem** (`Orbit`, `Satellite`, `Pulsar`, `Nova UI`, `SIWX`, `Quasar`, `SDK`).
 
 ---
 
-## 🚀 The Easiest Way to Get Started
+## 🏛️ Ecosystem Architecture & Templates
 
-Say goodbye to manual setup. Use the `@tuwaio/create-cosmos-playground` CLI to scaffold a new project with your chosen template in seconds. Just one command, and you're ready to go!
+The **Cosmos Playground** monorepo contains production-ready dApp starter kits:
+
+| Template | Framework | Features |
+| :--- | :--- | :--- |
+| [**`nextjs-tuwa-quasar`**](./examples/nextjs-tuwa-quasar) | Next.js 16 (App Router) | Multi-chain (EVM + Solana), Pulsar Tracking, Quasar Cloud Sync, SIWX (CAIP-122) Auth **(Benchmark Template)** |
+| [**`nextjs-evm`**](./examples/nextjs-evm) | Next.js 16 (App Router) | EVM Network Adapter, Pulsar Tracking Engine, SIWX (CAIP-122) Auth |
+| [**`nextjs-tuwa`**](./examples/nextjs-tuwa) | Next.js 16 (App Router) | Multi-chain (EVM + Solana), Pulsar Tracking Engine |
+| [**`nextjs-tuwa-not-sdk`**](./examples/nextjs-tuwa-not-sdk) | Next.js 16 (App Router) | Granular non-umbrella package integration (`@tuwaio/satellite-*`, `@tuwaio/pulsar-*`, `@tuwaio/nova-*`) |
+| [**`nextjs-solana`**](./examples/nextjs-solana) | Next.js 16 (App Router) | Solana Network Adapter, Gill/Wallet-Standard, Pulsar Tracking Engine |
+| [**`custom-style`**](./examples/custom-style) | Vite + React 19 | Custom Tailwind CSS styling overrides for Nova UI Kit |
+| [**`vite-tuwa`**](./examples/vite-tuwa) | Vite + React 19 | Fast client-side multi-chain dApp template |
+
+---
+
+## 🚀 Scaffolding via CLI
+
+Scaffold a new dApp in seconds using the official CLI:
 
 ```bash
 npx @tuwaio/create-cosmos-playground
-````
+```
 
-This command will:
-
-1.  Prompt you to select one of the templates listed below.
-2.  Ask for a name for your new project.
-3.  Automatically download the template from GitHub.
-4.  Install all necessary dependencies using `pnpm`.
-5.  Provide instructions on how to run your new application.
-
-The entire setup process is streamlined, bringing the world of blockchain development closer to you than ever before!
-
------
-
-## Demos & Examples
-
-All examples are built with **Pulsar** for seamless transaction tracking and **Nova** for a polished UI.
-
-- [**nextjs-tuwa-quasar**](https://demo.tuwa.io/): An integration of Pulsar transaction tracking and Quasar Cloud Sync with a Next.js application using the Quasar SDK.
-- [**custom-style**](https://custom-style.tuwa.io/): A Vite example showcasing full customization of nova-transactions and nova-connect.
-- **nextjs-tuwa**: A Next.js example showcasing dynamic switching between Solana and EVM adapters.
-- **nextjs-solana**: A Next.js example demonstrating transaction tracking on the Solana network.
-- **nextjs-evm**: A Next.js example demonstrating transaction tracking on the EVM networks.
-- **vite-tuwa**: A simple Vite-based example with Nova Connect.
-
------
+---
 
 ## 🤝 Contributing & Support
 
 Contributions are welcome! Please read our main **[Contribution Guidelines](https://github.com/TuwaIO/workflows/blob/main/CONTRIBUTING.md)**.
 
-If you find this library useful, please consider supporting its development. Every contribution helps!
-
 [**➡️ View Support Options**](https://github.com/TuwaIO/workflows/blob/main/Donation.md)
 
 ---
 
-## License
+## 📄 License
 
 [Apache License 2.0](./LICENSE)

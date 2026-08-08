@@ -1,14 +1,26 @@
-# Pulsar & Cosmos SDK: Vite + TUWA Example
+# Pulsar & Cosmos SDK: Vite Multi-Chain Example
 
-A minimal example demonstrating how to integrate the **All TUWA ecosystem** into a React application using Vite.
+[![License](https://img.shields.io/npm/l/@tuwaio/sdk.svg)](./LICENSE)
+
+A minimal example demonstrating how to integrate the **Pulsar Transaction Tracking Engine** and **Nova UI Kit** into a React application using Vite supporting EVM and Solana multi-chain networks.
 
 This example is part of the [Cosmos Playground](https://github.com/TuwaIO/cosmos-playground) monorepo.
 
-## 🚀 Quick Start
+---
+
+## 🏛️ Overview
+
+This template demonstrates multi-chain Vite integration using the TUWA Ecosystem SDKs:
+- **Client**: Multi-chain connection via `@tuwaio/sdk/satellite` and `@tuwaio/solana-sdk/satellite`, Nova UI via `@tuwaio/sdk/nova-connect`, and Pulsar tracking via `@tuwaio/sdk/pulsar`.
+
+---
+
+## 💾 Installation & Quick Start
 
 ```bash
 # Install dependencies
 pnpm install
+
 # Start development server
 pnpm dev
 # Open http://localhost:5173 in your browser

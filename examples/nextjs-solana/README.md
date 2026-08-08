@@ -1,14 +1,26 @@
-# Pulsar & Cosmos SDK: Next.js + Nova Connect Solana Only Example
+# Pulsar & Cosmos SDK: Next.js Solana Only Example
 
-A minimal example demonstrating how to integrate the **Pulsar Transaction Tracking Engine** and **Nova UI Kit** into a Next.js application using the App Directory and Nova Connect.
+[![License](https://img.shields.io/npm/l/@tuwaio/sdk.svg)](./LICENSE)
+
+A minimal example demonstrating how to integrate **Pulsar Transaction Tracking Engine** and **Nova UI Kit** into a Next.js Solana application using `@tuwaio/solana-sdk`.
 
 This example is part of the [Cosmos Playground](https://github.com/TuwaIO/cosmos-playground) monorepo.
 
-## 🚀 Quick Start
+---
+
+## 🏛️ Overview
+
+This template demonstrates clean Solana integration using the TUWA Ecosystem SDKs:
+- **Client**: Solana wallet connection via `@tuwaio/solana-sdk/satellite`, Nova UI via `@tuwaio/sdk/nova-connect`, and Pulsar tracking via `@tuwaio/solana-sdk/pulsar`.
+
+---
+
+## 💾 Installation & Quick Start
 
 ```bash
 # Install dependencies
 pnpm install
+
 # Start development server
 pnpm dev
 # Open http://localhost:3000 in your browser

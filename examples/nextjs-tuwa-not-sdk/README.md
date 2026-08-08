@@ -1,14 +1,26 @@
-# Pulsar & Nova: Next.js + Solana/EVM Example
+# Pulsar & Nova: Next.js Granular Package Example
 
-A minimal example demonstrating how to integrate the **Pulsar Transaction Tracking Engine** and **Nova UI Kit** into a Next.js application, supporting both **Solana** and **EVM** transactions. Wallet connections are handled by **Nova Connect**.
+[![License](https://img.shields.io/npm/l/@tuwaio/satellite-core.svg)](./LICENSE)
+
+A minimal example demonstrating how to integrate individual TUWA ecosystem packages (`@tuwaio/orbit-*`, `@tuwaio/satellite-*`, `@tuwaio/pulsar-*`, `@tuwaio/nova-*`) into a Next.js application without using umbrella SDK packages.
 
 This example is part of the [Cosmos Playground](https://github.com/TuwaIO/cosmos-playground) monorepo.
 
-## 🚀 Quick Start
+---
+
+## 🏛️ Overview
+
+This template demonstrates granular package integration using direct TUWA ecosystem modules:
+- **Client**: `@tuwaio/satellite-core`, `@tuwaio/satellite-evm`, `@tuwaio/satellite-solana`, `@tuwaio/pulsar-core`, `@tuwaio/pulsar-evm`, `@tuwaio/pulsar-solana`, `@tuwaio/nova-connect`, `@tuwaio/nova-transactions`.
+
+---
+
+## 💾 Installation & Quick Start
 
 ```bash
 # Install dependencies
 pnpm install
+
 # Start development server
 pnpm dev
 # Open http://localhost:3000 in your browser

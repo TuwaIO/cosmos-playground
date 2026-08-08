@@ -1,28 +1,19 @@
 # @tuwaio/create-cosmos-playground
 
-A CLI tool to scaffold new Cosmos Playground examples quickly and easily. This tool helps you start new projects based on predefined templates hosted on GitHub.
+[![License](https://img.shields.io/npm/l/@tuwaio/create-cosmos-playground.svg)](./LICENSE)
+
+Layer 8 (L8) CLI tool to scaffold production-ready TUWA Ecosystem dApp starter templates.
 
 ---
 
-## ✨ Features
+## 🏛️ Ecosystem Layer Architecture
 
-- **Intuitive prompts:** Easily select from available project templates and name your new project.
-- **Automated setup:** The tool automatically downloads your chosen project template from the GitHub repository.
-- **Seamless dependencies:** Dependencies are automatically installed using `pnpm` after scaffolding.
-- **Multiple templates:** Supports a variety of templates for different web3 frameworks and chains.
+- **Role in Ecosystem**: Layer 8 (L8) App Generator CLI.
+- **Responsibility**: Scaffolding dApp starter templates from `TuwaIO/cosmos-playground` with automated `pnpm` dependency resolution.
 
 ---
 
-## 🛠 Prerequisites
-
-- Node.js >= 20.0.0
-- An internet connection is required to download templates and dependencies.
-
----
-
-## 🚀 Usage
-
-To use this tool, simply run the `npx` command in your terminal:
+## 💾 Installation & Usage
 
 ```bash
 npx @tuwaio/create-cosmos-playground

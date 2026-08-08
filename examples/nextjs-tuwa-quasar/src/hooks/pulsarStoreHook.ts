@@ -1,8 +1,9 @@
 'use client';
 
 import { pulsarEvmAdapter } from '@tuwaio/evm-sdk/pulsar';
-import { getMiniSessionAuth, preFlightTxCheck } from '@tuwaio/quasar-sdk/react';
+import { preFlightTxCheck } from '@tuwaio/quasar-sdk';
 import { createBoundedUseStore, createPulsarStore, createTxInMemoryStore } from '@tuwaio/sdk/pulsar';
+import { useSiwxSessionStore } from '@tuwaio/sdk/siwx';
 import { pulsarSolanaAdapter } from '@tuwaio/solana-sdk/pulsar';
 
 import { getHistory, syncTransaction } from '@/app/actions';
@@ -25,7 +26,7 @@ const initialStore = createPulsarStore<TransactionUnion>({
   },
   onRemoteCreate: async (tx) => {
     try {
-      const auth = await getMiniSessionAuth();
+      const auth = useSiwxSessionStore.getState().session;
       await syncTransaction(tx, auth);
     } catch (err) {
       console.error('[PulsarHook] Remote sync failed:', err);
@@ -43,7 +44,7 @@ const pulsarInMemoryStore = createTxInMemoryStore<TransactionUnion>({
 
   getHistory: async ({ page, walletAddress }) => {
     try {
-      const auth = await getMiniSessionAuth();
+      const auth = useSiwxSessionStore.getState().session;
       const history = await getHistory(
         {
           walletAddress,

@@ -4,23 +4,20 @@ import { EVMConnectorsWatcher } from '@tuwaio/evm-sdk/nova-connect';
 import { satelliteEVMAdapter } from '@tuwaio/evm-sdk/satellite';
 import { NovaConnectProvider, NovaConnectProviderProps } from '@tuwaio/sdk/nova-connect';
 import { SatelliteConnectProvider } from '@tuwaio/sdk/nova-connect/satellite';
-import { useSiweAuth } from '@tuwaio/sdk/satellite/siwe';
+import { useSiwxSessionStore } from '@tuwaio/sdk/siwx';
 
 import { appEVMChains, wagmiConfig } from '@/configs/appConfig';
 import { usePulsarStore } from '@/hooks/pulsarStoreHook';
 import { NovaTransactionsProvider } from '@/providers/NovaTransactionsProvider';
 
 export function SatelliteConnectProviders({ children }: { children: React.ReactNode }) {
-  const { signInWithSiwe, enabled, isRejected, isSignedIn } = useSiweAuth();
+  const siwxSession = useSiwxSessionStore((s) => s.session);
   const transactionPool = usePulsarStore((state) => state.transactionsPool);
   const getAdapter = usePulsarStore((state) => state.getAdapter);
 
   return (
-    <SatelliteConnectProvider
-      adapter={[satelliteEVMAdapter(wagmiConfig, appEVMChains, enabled ? signInWithSiwe : undefined)]}
-      autoConnect={true}
-    >
-      <EVMConnectorsWatcher wagmiConfig={wagmiConfig} siwe={{ isSignedIn, isRejected, enabled }} />
+    <SatelliteConnectProvider adapter={[satelliteEVMAdapter(wagmiConfig, appEVMChains)]} autoConnect={true}>
+      <EVMConnectorsWatcher wagmiConfig={wagmiConfig} siwx={siwxSession ?? undefined} />
       <NovaTransactionsProvider />
       <NovaConnectProvider
         appChains={appEVMChains}
@@ -29,6 +26,18 @@ export function SatelliteConnectProviders({ children }: { children: React.ReactN
         withImpersonated
         withBalance
         withChain
+        siwx={{
+          verifier: async (payload) => {
+            const res = await fetch('/api/siwx/verify', {
+              method: 'POST',
+              body: JSON.stringify(payload),
+            });
+            return res.ok ? res.json() : null;
+          },
+          onError: (error) => {
+            console.warn('[SIWX Auth Error]', error);
+          },
+        }}
       >
         {children}
       </NovaConnectProvider>

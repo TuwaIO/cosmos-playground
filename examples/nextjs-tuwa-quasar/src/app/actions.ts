@@ -1,6 +1,8 @@
 'use server';
 
-import { MiniSessionAuth, Quasar, Transaction, utils } from '@tuwaio/quasar-sdk';
+import { Quasar, Transaction } from '@tuwaio/quasar-sdk';
+import { isSessionMatchingTarget, SiwxClientSession } from '@tuwaio/sdk/siwx';
+import { SiwxSession } from '@tuwaio/sdk/siwx/server';
 
 import { appConfig } from '@/configs/appConfig';
 import { QUASAR_BASE_URL } from '@/constants';
@@ -15,16 +17,17 @@ const quasar = new Quasar({
  * Syncs a transaction to Quasar.
  * Requires a valid signature to prevent quota draining.
  */
-export async function syncTransaction(tx: Transaction, authData: MiniSessionAuth) {
-  const isValidSignature = await utils.verifyMiniSession({
-    walletAddress: authData.walletAddress,
-    signature: authData.signature,
-    timestamp: authData.timestamp,
-    chainType: authData.chainType,
-  });
+export async function syncTransaction(tx: Transaction, session: SiwxClientSession | SiwxSession | null) {
+  if (!session) {
+    return { success: false, reason: 'unauthenticated' };
+  }
 
-  if (!isValidSignature) {
-    throw new Error('Invalid or expired security signature. Please try again.');
+  if (tx.from && !isSessionMatchingTarget(session, tx.from, tx.chainId)) {
+    console.warn('[Quasar Action] Session mismatch for syncTransaction:', {
+      sessionAddress: session.address,
+      txFrom: tx.from,
+    });
+    return { success: false, reason: 'session_mismatch' };
   }
 
   try {
@@ -34,8 +37,8 @@ export async function syncTransaction(tx: Transaction, authData: MiniSessionAuth
 
     return { success: true };
   } catch (error) {
-    console.error('Sync failed', error);
-    throw error;
+    console.warn('[Quasar Engine Sync Error]', error instanceof Error ? error.message : error);
+    return { success: false, error: error instanceof Error ? error.message : String(error) };
   }
 }
 
@@ -54,17 +57,18 @@ export async function getHistory(
     txKey?: string;
     appName?: string;
   },
-  authData: MiniSessionAuth,
+  session: SiwxClientSession | SiwxSession | null,
 ) {
-  const isValidSignature = await utils.verifyMiniSession({
-    walletAddress: authData.walletAddress,
-    signature: authData.signature,
-    timestamp: authData.timestamp,
-    chainType: authData.chainType,
-  });
-
-  if (!isValidSignature) {
-    throw new Error('Invalid or expired security signature. Please try again.');
+  if (!session || !isSessionMatchingTarget(session, params.walletAddress, params.chainId)) {
+    return {
+      docs: [],
+      totalDocs: 0,
+      limit: params.limit ?? 10,
+      page: params.page ?? 1,
+      totalPages: 1,
+      hasNextPage: false,
+      hasPrevPage: false,
+    };
   }
 
   try {
@@ -74,7 +78,15 @@ export async function getHistory(
 
     return history;
   } catch (error) {
-    console.error('Get history failed', error);
-    throw error;
+    console.warn('[Quasar Engine GetHistory Error]', error instanceof Error ? error.message : error);
+    return {
+      docs: [],
+      totalDocs: 0,
+      limit: params.limit ?? 10,
+      page: params.page ?? 1,
+      totalPages: 1,
+      hasNextPage: false,
+      hasPrevPage: false,
+    };
   }
 }

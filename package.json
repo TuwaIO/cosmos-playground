@@ -4,8 +4,8 @@
   "private": true,
   "author": "Oleksandr Tkach",
   "license": "Apache-2.0",
-  "packageManager": "pnpm@11.18.0",
-  "description": "This repository contains a collection of practical examples for tracking Web3 transactions. Here you will find ready-to-use code snippets for monitoring on-chain activity and connecting wallets using various packages.",
+  "packageManager": "pnpm@11.20.0",
+  "description": "Monorepo for Cosmos Playground: Official application templates, integration examples, and CLI scaffolding for the TUWA Ecosystem.",
   "scripts": {
     "build": "pnpm --filter \"./packages/**\" build",
     "postinstall": "pnpm build",

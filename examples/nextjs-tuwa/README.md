@@ -1,14 +1,26 @@
-# Pulsar & Nova: Next.js + Solana/EVM Example
+# Pulsar & Cosmos SDK: Next.js + Solana/EVM Example
 
-A minimal example demonstrating how to integrate the **Pulsar Transaction Tracking Engine** and **Nova UI Kit** into a Next.js application, supporting both **Solana** and **EVM** transactions. Wallet connections are handled by **Nova Connect**.
+[![License](https://img.shields.io/npm/l/@tuwaio/sdk.svg)](./LICENSE)
+
+A minimal example demonstrating how to integrate the **Pulsar Transaction Tracking Engine** and **Nova UI Kit** into a Next.js application, supporting both **Solana** and **EVM** transactions. Wallet connections are handled by `@tuwaio/sdk`.
 
 This example is part of the [Cosmos Playground](https://github.com/TuwaIO/cosmos-playground) monorepo.
 
-## 🚀 Quick Start
+---
+
+## 🏛️ Overview
+
+This template demonstrates multi-chain EVM and Solana integration using the TUWA Ecosystem SDKs:
+- **Client**: Multi-chain connection via `@tuwaio/sdk/satellite` and `@tuwaio/solana-sdk/satellite`, Nova UI via `@tuwaio/sdk/nova-connect`, and Pulsar tracking via `@tuwaio/sdk/pulsar`.
+
+---
+
+## 💾 Installation & Quick Start
 
 ```bash
 # Install dependencies
 pnpm install
+
 # Start development server
 pnpm dev
 # Open http://localhost:3000 in your browser
