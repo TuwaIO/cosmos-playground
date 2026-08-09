@@ -34,6 +34,9 @@ export function SatelliteConnectProviders({ children }: { children: React.ReactN
             });
             return res.ok ? res.json() : null;
           },
+          destroyer: async () => {
+            await fetch('/api/siwx/logout', { method: 'POST' });
+          },
           onError: (error) => {
             console.warn('[SIWX Auth Error]', error);
           },

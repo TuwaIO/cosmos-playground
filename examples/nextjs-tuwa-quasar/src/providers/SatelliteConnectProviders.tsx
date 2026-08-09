@@ -57,6 +57,9 @@ export function SatelliteConnectProviders({ children }: { children: React.ReactN
             });
             return res.ok ? res.json() : null;
           },
+          destroyer: async () => {
+            await fetch('/api/siwx/logout', { method: 'POST' });
+          },
           onSuccess: (session) => {
             const address = session.address.includes(':') ? session.address.split(':').pop()! : session.address;
             fetchInitial(address);

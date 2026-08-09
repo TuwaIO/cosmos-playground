@@ -1,5 +1,5 @@
 import { createDefaultTransports, impersonated, safeSdkOptions } from '@tuwaio/evm-sdk/satellite';
-import { baseAccount, safe, walletConnect } from '@wagmi/connectors';
+import { safe, walletConnect } from '@wagmi/connectors';
 import { createConfig, injected } from '@wagmi/core';
 import { arbitrum, Chain, mainnet, monad, monadTestnet, sepolia } from 'viem/chains';
 
@@ -16,10 +16,6 @@ export const appEVMChains = [monad, mainnet, arbitrum, sepolia, monadTestnet] as
 export const wagmiConfig = createConfig({
   connectors: [
     injected(),
-    baseAccount({
-      appName: appConfig.appName,
-      appLogoUrl: appConfig.appLogoUrl,
-    }),
     safe({
       ...safeSdkOptions,
     }),
