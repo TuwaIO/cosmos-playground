@@ -57,7 +57,17 @@ NEXT_PUBLIC_QUASAR_BASE_URL=https://api.tuwa.io
 
 # Optional: Gelato API key for sponsoring transactions
 NEXT_PUBLIC_GELATO_API_KEY=your_project_key
+
+# Required for verifying incoming Quasar webhook deliveries
+QUASAR_WEBHOOK_SECRET=whsec_...
 ```
+
+### Webhook receiver
+
+Register `https://<your-host>/api/webhooks/quasar` in the Quasar Dashboard. The example verifies the
+`x-quasar-signature` HMAC header, stores the latest verified event in memory, and displays it in the UI.
+For local delivery testing, expose the development server with a tunnel such as ngrok or cloudflared and use
+the generated HTTPS URL. In-memory events are reset when the server restarts.
 
 ## 🚀 Deployment
 

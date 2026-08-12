@@ -14,6 +14,7 @@ import React from 'react';
 
 import { usePulsarStore } from '@/hooks/pulsarStoreHook';
 import { useStore } from '@/hooks/storeHook';
+import { notifyTransactionSuccess } from '@/lib/webhookMonitorEvents';
 import { txActions, TxType } from '@/transactions';
 
 // polyfill ed25519 for browsers (to allow `generateKeyPairSigner` to work)
@@ -41,7 +42,10 @@ export const TxActionButtonInitialize = ({ activeWallet }: { activeWallet: Conne
           signer,
           contractAddress: solanatest,
         }),
-      onSuccess: async () => await getAccounts(),
+      onSuccess: async () => {
+        await getAccounts();
+        notifyTransactionSuccess();
+      },
       params: {
         type: TxType.initialize,
         adapter: OrbitAdapter.SOLANA,

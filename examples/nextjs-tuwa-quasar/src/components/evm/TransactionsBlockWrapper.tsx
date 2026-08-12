@@ -16,6 +16,7 @@ import { CounterAbi } from '@/abis/CounterAbi';
 import { appEVMChains } from '@/configs/appConfig';
 import { COUNTER_ADDRESS } from '@/constants';
 import { usePulsarStore } from '@/hooks/pulsarStoreHook';
+import { notifyTransactionSuccess } from '@/lib/webhookMonitorEvents';
 import { txActions, TxType } from '@/transactions';
 
 export const TransactionsBlockWrapper = () => {
@@ -61,6 +62,7 @@ export const TransactionsBlockWrapper = () => {
       onSuccess: (tx) => {
         if (tx.type === TxType.increment) {
           setTimeout(() => fetchCurrentCount(), 2000);
+          notifyTransactionSuccess();
           console.log(`Increment tx succeed, ${currentCount}`);
         }
       },
@@ -93,6 +95,7 @@ export const TransactionsBlockWrapper = () => {
       onSuccess: (tx) => {
         if (tx.type === TxType.increment) {
           setTimeout(() => fetchCurrentCount(), 2000);
+          notifyTransactionSuccess();
           console.log(`Increment tx succeed, ${currentCount}`);
         }
       },

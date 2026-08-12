@@ -13,6 +13,7 @@ import React from 'react';
 
 import { usePulsarStore } from '@/hooks/pulsarStoreHook';
 import { useStore } from '@/hooks/storeHook';
+import { notifyTransactionSuccess } from '@/lib/webhookMonitorEvents';
 import { txActions, TxType } from '@/transactions';
 
 export const TxActionButtonDecrement = ({
@@ -46,6 +47,7 @@ export const TxActionButtonDecrement = ({
         }),
       onSuccess: async () => {
         await getAccounts();
+        notifyTransactionSuccess();
       },
       params: {
         type: TxType.decrement,

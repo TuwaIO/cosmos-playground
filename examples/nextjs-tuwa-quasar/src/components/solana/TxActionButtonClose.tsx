@@ -12,6 +12,7 @@ import React from 'react';
 
 import { usePulsarStore } from '@/hooks/pulsarStoreHook';
 import { useStore } from '@/hooks/storeHook';
+import { notifyTransactionSuccess } from '@/lib/webhookMonitorEvents';
 import { txActions, TxType } from '@/transactions';
 
 export const TxActionButtonClose = ({
@@ -45,6 +46,7 @@ export const TxActionButtonClose = ({
       onSuccess: async () => {
         await getAccounts();
         removeAccFromStore(solanatest.toString());
+        notifyTransactionSuccess();
       },
       params: {
         type: TxType.close,
