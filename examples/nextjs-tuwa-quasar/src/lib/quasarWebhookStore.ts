@@ -19,15 +19,19 @@ export type QuasarWebhookEvent = {
   status: 'processed';
 };
 
-const MAX_EVENTS = 20;
+const MAX_EVENTS = 50;
 const events: QuasarWebhookEvent[] = [];
 
-// This small in-memory store keeps the example easy to run without a database.
-// Data is lost when the process restarts or when a request reaches another instance.
+/**
+ * Saves a validated Quasar webhook delivery into the in-memory store.
+ */
 export function saveQuasarWebhook(event: string, payload: QuasarWebhookPayload): QuasarWebhookEvent {
   const now = new Date().toISOString();
+  const txKey = payload.txKey;
+  const hash = payload.hash;
+
   const savedEvent: QuasarWebhookEvent = {
-    id: `${payload.txKey ?? 'webhook'}:${payload.action ?? event}:${payload.timestamp ?? now}`,
+    id: `${txKey ?? hash ?? 'webhook'}:${payload.action ?? event}:${payload.timestamp ?? now}`,
     event,
     payload,
     receivedAt: now,
@@ -46,9 +50,34 @@ export function saveQuasarWebhook(event: string, payload: QuasarWebhookPayload):
   return savedEvent;
 }
 
-export function getQuasarWebhooks() {
+/**
+ * Retrieves stored webhook events, optionally filtered by a specific transaction key or transaction hash.
+ */
+export function getQuasarWebhooks(filter?: { txKey?: string | null; hash?: string | null }) {
+  const txKey = filter?.txKey?.trim();
+  const hash = filter?.hash?.trim();
+
+  let matchedEvents = [...events];
+  if (txKey || hash) {
+    matchedEvents = events.filter((item) => {
+      if (txKey && item.payload.txKey === txKey) return true;
+      if (hash && item.payload.hash === hash) return true;
+      return false;
+    });
+  }
+
+  // Create a fast lookup map by txKey
+  const byTxKey: Record<string, QuasarWebhookEvent> = {};
+  for (const item of events) {
+    if (item.payload.txKey && !byTxKey[item.payload.txKey]) {
+      byTxKey[item.payload.txKey] = item;
+    }
+  }
+
   return {
-    latest: events[0] ?? null,
-    events: [...events],
+    latest: matchedEvents[0] ?? (filter ? null : (events[0] ?? null)),
+    events: matchedEvents,
+    allEventsCount: events.length,
+    byTxKey,
   };
 }

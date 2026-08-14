@@ -45,9 +45,9 @@ export const TxActionButtonIncrement = ({
           signer,
           contractAddress: solanatest,
         }),
-      onSuccess: async () => {
+      onSuccess: async (tx) => {
         await getAccounts();
-        notifyTransactionSuccess();
+        notifyTransactionSuccess({ txKey: tx?.txKey });
       },
       params: {
         type: TxType.increment,
@@ -82,7 +82,7 @@ export const TxActionButtonIncrement = ({
         focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--tuwa-button-gradient-to-hover)]
         bg-gradient-to-r from-[var(--tuwa-button-gradient-from)] to-[var(--tuwa-button-gradient-to)]
         hover:from-[var(--tuwa-button-gradient-from-hover)] hover:to-[var(--tuwa-button-gradient-to-hover)] hover:shadow-lg
-        disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] select-none
+        disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] select-none cursor-pointer
       `}
       disabled={!activeWallet?.isConnected}
       walletAddress={activeWallet?.address}

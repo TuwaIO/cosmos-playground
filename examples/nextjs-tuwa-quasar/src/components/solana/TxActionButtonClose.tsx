@@ -43,10 +43,10 @@ export const TxActionButtonClose = ({
           signer,
           contractAddress: solanatest,
         }),
-      onSuccess: async () => {
+      onSuccess: async (tx) => {
         await getAccounts();
         removeAccFromStore(solanatest.toString());
-        notifyTransactionSuccess();
+        notifyTransactionSuccess({ txKey: tx?.txKey });
       },
       params: {
         type: TxType.close,
@@ -82,7 +82,7 @@ export const TxActionButtonClose = ({
         focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400
         bg-gradient-to-r from-neutral-200 to-neutral-300
         hover:from-neutral-300 hover:to-neutral-400 hover:shadow-lg
-        disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] select-none
+        disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] select-none cursor-pointer
       `}
     >
       <span className="text-sm leading-none">Close</span>

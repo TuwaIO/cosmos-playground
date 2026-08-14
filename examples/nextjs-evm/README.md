@@ -97,12 +97,25 @@ npm install -g pnpm
 Create a `.env` file in the project root:
 
 ```env
-# Required: Get a Project ID from [https://cloud.walletconnect.com](https://cloud.walletconnect.com)
+# Required: Get a Project ID from https://cloud.walletconnect.com
 NEXT_PUBLIC_WALLET_PROJECT_ID=your_project_id
 
 # Optional: Gelato API key for sponsoring transactions
 NEXT_PUBLIC_GELATO_API_KEY=your_project_key
+
+# Server-only: Signing secret for stateless demo session profile (minimum 32 characters)
+SIWX_DEMO_SIGNING_SECRET=your_demo_signing_secret_min_32_characters_long
 ```
+
+---
+
+## 🛡️ Authentication Architecture & Production Limitations
+
+This template utilizes the **Stateless Demo Profile** (`createStatelessDemoSiwxHandler`) for zero-infrastructure demonstration:
+
+- **Stateless Verification**: Uses HMAC-SHA256 authenticated cookies (`siwx-demo-session`) to sign in without a local Redis or database instance.
+- **Production Standard**: Production applications with persistent user accounts, session revocation, and multi-replica horizontal scaling should deploy a durable storage adapter (`createSiwxApiHandler` with Redis or PostgreSQL). See the [SIWX Documentation](https://siwx.docs.tuwa.io/) for details.
+
 
 ## 🚀 Deployment
 

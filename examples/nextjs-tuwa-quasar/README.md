@@ -60,7 +60,20 @@ NEXT_PUBLIC_GELATO_API_KEY=your_project_key
 
 # Required for verifying incoming Quasar webhook deliveries
 QUASAR_WEBHOOK_SECRET=whsec_...
+
+# Server-only: Signing secret for stateless demo session profile (minimum 32 characters)
+SIWX_DEMO_SIGNING_SECRET=your_demo_signing_secret_min_32_characters_long
 ```
+
+---
+
+## 🛡️ Authentication Architecture & Production Limitations
+
+This template utilizes the **Stateless Demo Profile** (`createStatelessDemoSiwxHandler` and `getSiwxServerSession` with `signingSecret`) to run immediately without requiring local Redis or PostgreSQL database infrastructure:
+
+- **Stateless Tokens**: Encrypted HMAC-SHA256 session cookies (`siwx-demo-session`) verified directly in Next.js Server Actions.
+- **Server Action Protection**: Privileged server actions (`syncTransaction` and `getHistory`) authenticate strictly from HTTP-Only cookies server-side to prevent quota draining. Never accept client-side session credentials.
+- **Production Standard**: For real production deployments with persistent user accounts, session revocation, logout across multi-replica servers, and strict protection against replay, deploy a durable storage backend using `createSiwxApiHandler` with Redis (`SiwxSessionStore` and `SiwxNonceStore`). See the [SIWX Documentation](https://siwx.docs.tuwa.io/) for durable profile setup.
 
 ### Webhook receiver
 

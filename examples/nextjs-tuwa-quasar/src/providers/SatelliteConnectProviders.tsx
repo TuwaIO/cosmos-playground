@@ -53,6 +53,7 @@ export function SatelliteConnectProviders({ children }: { children: React.ReactN
           verifier: async (payload) => {
             const res = await fetch('/api/siwx/verify', {
               method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(payload),
             });
             return res.ok ? res.json() : null;

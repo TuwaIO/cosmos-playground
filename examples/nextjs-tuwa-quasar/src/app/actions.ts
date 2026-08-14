@@ -1,23 +1,36 @@
 'use server';
 
 import { Quasar, Transaction } from '@tuwaio/quasar-sdk';
-import { isSessionMatchingTarget, SiwxClientSession } from '@tuwaio/sdk/siwx';
-import { SiwxSession } from '@tuwaio/sdk/siwx/server';
+import { isSessionMatchingTarget } from '@tuwaio/sdk/siwx';
+import { getSiwxServerSession } from '@tuwaio/sdk/siwx/server';
+import { cookies } from 'next/headers';
 
 import { appConfig } from '@/configs/appConfig';
 import { QUASAR_BASE_URL } from '@/constants';
+
+const DEMO_SIGNING_SECRET =
+  process.env.SIWX_DEMO_SIGNING_SECRET || 'cosmos-playground-demo-secret-key-32-chars-minimum!!!';
 
 const quasar = new Quasar({
   baseUrl: QUASAR_BASE_URL,
   secretKey: process.env.QUASAR_SDK_SK ?? '',
 });
 
+async function getVerifiedSession() {
+  return getSiwxServerSession({
+    cookieSource: await cookies(),
+    cookieName: 'siwx-demo-session',
+    signingSecret: DEMO_SIGNING_SECRET,
+  });
+}
+
 // --- Server Action for onRemoteCreate ---
 /**
  * Syncs a transaction to Quasar.
- * Requires a valid signature to prevent quota draining.
+ * Requires a verified server session to prevent quota draining.
  */
-export async function syncTransaction(tx: Transaction, session: SiwxClientSession | SiwxSession | null) {
+export async function syncTransaction(tx: Transaction) {
+  const session = await getVerifiedSession();
   if (!session) {
     return { success: false, reason: 'unauthenticated' };
   }
@@ -45,20 +58,18 @@ export async function syncTransaction(tx: Transaction, session: SiwxClientSessio
 // --- Server Action for getHistory ---
 /**
  * Retrieves transaction history from Quasar.
- * Requires a valid Mini-Session signature to protect the API quota.
+ * Requires a verified server session to protect the API quota.
  */
-export async function getHistory(
-  params: {
-    walletAddress: string;
-    page?: number;
-    limit?: number;
-    chainId?: string;
-    status?: string;
-    txKey?: string;
-    appName?: string;
-  },
-  session: SiwxClientSession | SiwxSession | null,
-) {
+export async function getHistory(params: {
+  walletAddress: string;
+  page?: number;
+  limit?: number;
+  chainId?: string;
+  status?: string;
+  txKey?: string;
+  appName?: string;
+}) {
+  const session = await getVerifiedSession();
   if (!session || !isSessionMatchingTarget(session, params.walletAddress, params.chainId)) {
     return {
       docs: [],

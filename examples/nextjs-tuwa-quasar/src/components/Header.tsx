@@ -9,7 +9,7 @@ export function Header() {
   const transactionPool = usePulsarStore((state) => state.transactionsPool);
 
   return (
-    <header className="p-2 flex items-center justify-between gap-4 bg-[var(--tuwa-bg-secondary)] border-b border-[var(--tuwa-border-secondary)]">
+    <header className="px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 bg-[var(--tuwa-bg-secondary)] border-b border-[var(--tuwa-border-secondary)]">
       <a href="https://www.tuwa.io/" target="_blank" rel="noreferrer">
         <Image
           width={126}

@@ -48,6 +48,7 @@ export const TransactionsBlockWrapper = () => {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line
     fetchCurrentCount();
   }, []);
 

@@ -18,8 +18,12 @@ function isValidSignature(signature: string, rawBody: string, secret: string) {
   return crypto.timingSafeEqual(Buffer.from(signature, 'hex'), Buffer.from(expectedSignature, 'hex'));
 }
 
-export async function GET() {
-  return NextResponse.json(getQuasarWebhooks());
+export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url);
+  const txKey = searchParams.get('txKey');
+  const hash = searchParams.get('hash');
+
+  return NextResponse.json(getQuasarWebhooks({ txKey, hash }));
 }
 
 export async function POST(request: NextRequest) {
