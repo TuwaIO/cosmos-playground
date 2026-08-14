@@ -50,6 +50,7 @@ export function SatelliteConnectProviders({ children }: { children: React.ReactN
         withChain
         pagination={pagination}
         siwx={{
+          expirationSeconds: 1800,
           verifier: async (payload) => {
             const res = await fetch('/api/siwx/verify', {
               method: 'POST',

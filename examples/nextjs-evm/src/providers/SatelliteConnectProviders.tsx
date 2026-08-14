@@ -27,6 +27,7 @@ export function SatelliteConnectProviders({ children }: { children: React.ReactN
         withBalance
         withChain
         siwx={{
+          expirationSeconds: 1800,
           verifier: async (payload) => {
             const res = await fetch('/api/siwx/verify', {
               method: 'POST',
