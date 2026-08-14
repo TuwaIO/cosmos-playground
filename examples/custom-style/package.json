@@ -29,8 +29,8 @@
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "@tanstack/react-query": "^5.101.4",
-    "@tuwaio/sdk": "^0.1.10",
-    "@tuwaio/evm-sdk": "^0.1.10",
+    "@tuwaio/sdk": "^0.1.11",
+    "@tuwaio/evm-sdk": "^0.1.11",
     "@wagmi/core": "^3.6.4",
     "@wagmi/connectors": "^8.1.0",
     "@web3icons/react": "^4.1.20",
@@ -65,7 +65,7 @@
     "autoprefixer": "^10.5.4",
     "postcss": "^8.5.26",
     "tailwindcss": "^4.3.3",
-    "typescript": "^6.0.3",
+    "typescript": "6.0.3",
     "vite": "^8.2.1",
     "esbuild": "^0.28.2",
     "buffer": "^6.0.3"

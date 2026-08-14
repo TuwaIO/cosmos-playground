@@ -1,7 +1,9 @@
 import { createStatelessDemoSiwxHandler } from '@tuwaio/sdk/siwx/server-next';
 
+import { DEMO_SIGNING_SECRET } from '@/lib/authConfig';
+
 const handler = createStatelessDemoSiwxHandler({
-  signingSecret: process.env.SIWX_DEMO_SIGNING_SECRET || 'cosmos-playground-demo-secret-key-32-chars-minimum!!!',
+  signingSecret: DEMO_SIGNING_SECRET,
   policy: {
     requireExpirationTime: false,
     maxIssuedAtAgeSeconds: 300,

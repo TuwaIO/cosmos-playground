@@ -3,6 +3,10 @@ packages:
   - 'packages/*'
 overrides:
   zod: 3.25.76
+  '@tuwaio/satellite-react': 0.4.8
+  '@tuwaio/nova-connect': 0.5.9
+  '@tuwaio/siwx-core': 0.2.1
+  '@tuwaio/siwx-react': 0.2.1
 allowBuilds:
   '@reown/appkit': false
   bufferutil: false
@@ -71,3 +75,48 @@ minimumReleaseAgeExclude:
   - '@types/react-dom@19.2.4'
   - '@wagmi/connectors@8.1.0'
   - wagmi@3.7.6
+  - '@solana/accounts@7.1.0'
+  - '@solana/addresses@7.1.0'
+  - '@solana/assertions@7.1.0'
+  - '@solana/codecs-core@7.1.0'
+  - '@solana/codecs-data-structures@7.1.0'
+  - '@solana/codecs-numbers@7.1.0'
+  - '@solana/codecs-strings@7.1.0'
+  - '@solana/codecs@7.1.0'
+  - '@solana/errors@7.1.0'
+  - '@solana/fast-stable-stringify@7.1.0'
+  - '@solana/fixed-points@7.1.0'
+  - '@solana/functional@7.1.0'
+  - '@solana/instruction-plans@7.1.0'
+  - '@solana/instructions@7.1.0'
+  - '@solana/keys@7.1.0'
+  - '@solana/kit@7.1.0'
+  - '@solana/nominal-types@7.1.0'
+  - '@solana/offchain-messages@7.1.0'
+  - '@solana/options@7.1.0'
+  - '@solana/plugin-core@7.1.0'
+  - '@solana/plugin-interfaces@7.1.0'
+  - '@solana/program-client-core@7.1.0'
+  - '@solana/programs@7.1.0'
+  - '@solana/promises@7.1.0'
+  - '@solana/react@7.1.0'
+  - '@solana/rpc-api@7.1.0'
+  - '@solana/rpc-parsed-types@7.1.0'
+  - '@solana/rpc-spec-types@7.1.0'
+  - '@solana/rpc-spec@7.1.0'
+  - '@solana/rpc-subscriptions-api@7.1.0'
+  - '@solana/rpc-subscriptions-channel-websocket@7.1.0'
+  - '@solana/rpc-subscriptions-spec@7.1.0'
+  - '@solana/rpc-subscriptions@7.1.0'
+  - '@solana/rpc-transformers@7.1.0'
+  - '@solana/rpc-transport-http@7.1.0'
+  - '@solana/rpc-types@7.1.0'
+  - '@solana/rpc@7.1.0'
+  - '@solana/signers@7.1.0'
+  - '@solana/subscribable@7.1.0'
+  - '@solana/sysvars@7.1.0'
+  - '@solana/transaction-confirmation@7.1.0'
+  - '@solana/transaction-introspection@7.1.0'
+  - '@solana/transaction-messages@7.1.0'
+  - '@solana/transactions@7.1.0'
+  - '@solana/webcrypto-ed25519-polyfill@7.1.0'

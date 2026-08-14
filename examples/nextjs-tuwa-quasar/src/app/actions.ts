@@ -7,9 +7,7 @@ import { cookies } from 'next/headers';
 
 import { appConfig } from '@/configs/appConfig';
 import { QUASAR_BASE_URL } from '@/constants';
-
-const DEMO_SIGNING_SECRET =
-  process.env.SIWX_DEMO_SIGNING_SECRET || 'cosmos-playground-demo-secret-key-32-chars-minimum!!!';
+import { DEMO_SIGNING_SECRET } from '@/lib/authConfig';
 
 const quasar = new Quasar({
   baseUrl: QUASAR_BASE_URL,
