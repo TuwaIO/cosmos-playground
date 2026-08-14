@@ -33,7 +33,6 @@ export function QuasarWebhookMonitor() {
     allEventsCount: 0,
     byTxKey: {},
   });
-  const [selectedTxKey, setSelectedTxKey] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
@@ -45,13 +44,15 @@ export function QuasarWebhookMonitor() {
     return Object.values(transactionsPool).sort((a, b) => (b.localTimestamp ?? 0) - (a.localTimestamp ?? 0));
   }, [transactionsPool]);
 
-  const activeTxKey = selectedTxKey ?? (trackedTransactions.length > 0 ? trackedTransactions[0].txKey : null);
+  // Latest executed transaction
+  const latestTransaction = trackedTransactions[0] ?? null;
+  const targetTxKey = latestTransaction?.txKey ?? null;
 
   // Fetch webhooks from the server
-  const fetchWebhooks = useCallback(async (targetTxKey?: string | null) => {
+  const fetchWebhooks = useCallback(async (key?: string | null) => {
     try {
       setIsLoading(true);
-      const query = targetTxKey ? `?txKey=${encodeURIComponent(targetTxKey)}` : '';
+      const query = key ? `?txKey=${encodeURIComponent(key)}` : '';
       const response = await fetch(`/api/webhooks/quasar${query}`, { cache: 'no-store' });
       if (!response.ok) throw new Error('Webhook status request failed');
 
@@ -66,13 +67,13 @@ export function QuasarWebhookMonitor() {
     }
   }, []);
 
-  // Initial load and periodic refresh
+  // Periodic polling for webhook arrivals
   useEffect(() => {
     let isCancelled = false;
 
     const load = async () => {
       try {
-        const query = activeTxKey ? `?txKey=${encodeURIComponent(activeTxKey)}` : '';
+        const query = targetTxKey ? `?txKey=${encodeURIComponent(targetTxKey)}` : '';
         const response = await fetch(`/api/webhooks/quasar${query}`, { cache: 'no-store' });
         if (!response.ok) throw new Error('Webhook status request failed');
 
@@ -98,18 +99,14 @@ export function QuasarWebhookMonitor() {
       isCancelled = true;
       clearInterval(interval);
     };
-  }, [activeTxKey]);
+  }, [targetTxKey]);
 
-  // Listen for real-time transaction completion events
+  // Listen for real-time transaction completion events and fast-retry polling
   useEffect(() => {
     const handleTxSuccess = (event: Event) => {
       const customEvent = event as CustomEvent<TransactionSuccessDetail>;
       const txKey = customEvent.detail?.txKey;
-      if (txKey) {
-        setSelectedTxKey(txKey);
-      }
 
-      // Fast retry after broadcast to pick up incoming webhook delivery
       const timer1 = setTimeout(() => void fetchWebhooks(txKey), 2_000);
       const timer2 = setTimeout(() => void fetchWebhooks(txKey), 5_000);
       const timer3 = setTimeout(() => void fetchWebhooks(txKey), 10_000);
@@ -125,13 +122,13 @@ export function QuasarWebhookMonitor() {
     return () => window.removeEventListener(TRANSACTION_SUCCESS_EVENT, handleTxSuccess);
   }, [fetchWebhooks]);
 
-  // Resolve active webhook event: either bound to activeTxKey or latest available
+  // Resolve webhook for the latest transaction, falling back to latest stored webhook
   const activeWebhook = useMemo(() => {
-    if (activeTxKey && webhookData.byTxKey[activeTxKey]) {
-      return webhookData.byTxKey[activeTxKey];
+    if (targetTxKey && webhookData.byTxKey[targetTxKey]) {
+      return webhookData.byTxKey[targetTxKey];
     }
     return webhookData.latest;
-  }, [activeTxKey, webhookData]);
+  }, [targetTxKey, webhookData]);
 
   // Copy JSON payload to clipboard
   const handleCopyPayload = () => {
@@ -140,11 +137,6 @@ export function QuasarWebhookMonitor() {
     setIsCopied(true);
     setTimeout(() => setIsCopied(false), 2000);
   };
-
-  const selectedTransaction = useMemo(() => {
-    if (!activeTxKey) return null;
-    return trackedTransactions.find((tx) => tx.txKey === activeTxKey) ?? null;
-  }, [activeTxKey, trackedTransactions]);
 
   return (
     <section className="relative w-full max-w-md overflow-hidden rounded-[var(--tuwa-rounded-corners)] border border-[var(--tuwa-border-primary)] bg-[var(--tuwa-bg-primary)] shadow-2xl backdrop-blur-xl transition-all duration-300">
@@ -192,7 +184,7 @@ export function QuasarWebhookMonitor() {
         </div>
 
         <button
-          onClick={() => void fetchWebhooks(selectedTxKey)}
+          onClick={() => void fetchWebhooks(targetTxKey)}
           disabled={isLoading}
           title="Refresh webhook status"
           className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[var(--tuwa-rounded-corners)] border border-[var(--tuwa-border-secondary)] bg-[var(--tuwa-bg-secondary)] text-[var(--tuwa-text-secondary)] transition-all duration-200 hover:border-[var(--tuwa-border-primary)] hover:text-[var(--tuwa-text-primary)] disabled:opacity-50 cursor-pointer"
@@ -202,57 +194,20 @@ export function QuasarWebhookMonitor() {
       </div>
 
       <div className="p-4 sm:p-5 space-y-4">
-        {/* Transaction Selector Tabs (when multiple transactions exist) */}
-        {trackedTransactions.length > 0 && (
-          <div className="space-y-1.5">
-            <div className="flex flex-wrap items-center justify-between gap-1 text-[11px] text-[var(--tuwa-text-tertiary)] px-0.5">
-              <span>Bound Transactions ({trackedTransactions.length})</span>
-              <span className="text-[10px] text-[var(--tuwa-text-tertiary)]">Select to inspect</span>
-            </div>
-            <div className="flex gap-1.5 overflow-x-auto pb-1 scrollbar-thin">
-              {trackedTransactions.map((tx, index) => {
-                const isSelected = tx.txKey === selectedTxKey;
-                const hasWebhook = Boolean(webhookData.byTxKey[tx.txKey]);
-                return (
-                  <button
-                    key={tx.txKey}
-                    onClick={() => {
-                      setSelectedTxKey(tx.txKey);
-                      void fetchWebhooks(tx.txKey);
-                    }}
-                    className={`flex items-center gap-1.5 rounded-[var(--tuwa-rounded-corners)] px-2.5 py-1.5 text-xs font-medium transition-all whitespace-nowrap border cursor-pointer ${
-                      isSelected
-                        ? 'border-[var(--tuwa-text-accent)] bg-[var(--tuwa-bg-secondary)] text-[var(--tuwa-text-primary)] shadow-sm'
-                        : 'border-[var(--tuwa-border-secondary)] bg-[var(--tuwa-bg-secondary)]/40 text-[var(--tuwa-text-secondary)] hover:border-[var(--tuwa-border-primary)] hover:text-[var(--tuwa-text-primary)]'
-                    }`}
-                  >
-                    <span
-                      className={`h-2 w-2 rounded-full shrink-0 ${hasWebhook ? 'bg-emerald-400' : 'bg-amber-400 animate-pulse'}`}
-                    />
-                    <span>
-                      Tx #{trackedTransactions.length - index} ({tx.adapter?.toUpperCase() ?? 'WEB3'})
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        )}
-
-        {/* Selected Transaction Metadata Bar */}
-        {selectedTransaction && (
+        {/* Target Latest Transaction Bar */}
+        {latestTransaction && (
           <div className="rounded-[var(--tuwa-rounded-corners)] border border-[var(--tuwa-border-secondary)] bg-[var(--tuwa-bg-secondary)]/30 p-2.5 text-xs space-y-1.5">
             <div className="flex flex-wrap items-center justify-between gap-1">
-              <span className="text-[var(--tuwa-text-tertiary)]">Target Transaction</span>
+              <span className="text-[var(--tuwa-text-tertiary)]">Latest Transaction</span>
               <span className="font-mono text-[11px] text-[var(--tuwa-text-accent)] break-all">
-                {textCenterEllipsis(selectedTransaction.txKey, 10, 8)}
+                {textCenterEllipsis(latestTransaction.txKey, 10, 8)}
               </span>
             </div>
-            {'hash' in selectedTransaction && typeof selectedTransaction.hash === 'string' && (
+            {'hash' in latestTransaction && typeof latestTransaction.hash === 'string' && (
               <div className="flex flex-wrap items-center justify-between gap-1 text-[11px]">
                 <span className="text-[var(--tuwa-text-tertiary)]">On-Chain Hash</span>
                 <span className="font-mono text-[var(--tuwa-text-primary)] break-all">
-                  {textCenterEllipsis(selectedTransaction.hash, 8, 6)}
+                  {textCenterEllipsis(latestTransaction.hash, 8, 6)}
                 </span>
               </div>
             )}
@@ -290,7 +245,7 @@ export function QuasarWebhookMonitor() {
               <div className="flex flex-wrap items-center justify-between gap-1">
                 <span className="text-[var(--tuwa-text-tertiary)]">Bound txKey</span>
                 <span className="font-mono text-[var(--tuwa-text-primary)] break-all">
-                  {textCenterEllipsis(activeWebhook.payload.txKey ?? selectedTxKey ?? '—', 10, 8)}
+                  {textCenterEllipsis(activeWebhook.payload.txKey ?? targetTxKey ?? '—', 10, 8)}
                 </span>
               </div>
               {activeWebhook.payload.chainId && (
@@ -348,7 +303,7 @@ export function QuasarWebhookMonitor() {
               <ClockIcon className="h-5 w-5 animate-pulse" />
             </div>
             <p className="font-medium text-[var(--tuwa-text-primary)] mb-1">
-              {selectedTxKey ? 'Waiting for webhook for this transaction' : 'No transactions executed yet'}
+              {targetTxKey ? 'Waiting for webhook for this transaction' : 'No transactions executed yet'}
             </p>
             <p className="text-[11px] text-[var(--tuwa-text-tertiary)] max-w-xs mb-3">
               Execute an EVM or Solana action above. Quasar Cloud will index the on-chain event and deliver a signed
