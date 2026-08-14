@@ -11,7 +11,7 @@ const handler = createStatelessDemoSiwxHandler({
     expectedDomain: [parsedAppUrl.host, parsedAppUrl.hostname, 'localhost:3000', 'demo.tuwa.io'],
     expectedUri: [appConfig.appUrl, 'http://localhost:3000', 'https://demo.tuwa.io'],
     allowedChainIds: appEVMChains.flatMap((c) => [String(c.id), `eip155:${c.id}`]),
-    requireExpirationTime: false,
+    requireExpirationTime: true,
     maxIssuedAtAgeSeconds: 300,
     maxSessionLifetimeSeconds: 1800, // 30 minutes
     clockSkewSeconds: 60,

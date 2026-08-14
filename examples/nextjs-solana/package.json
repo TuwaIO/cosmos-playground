@@ -25,8 +25,8 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
-    "@tuwaio/sdk": "^0.1.11",
-    "@tuwaio/solana-sdk": "^0.1.12",
+    "@tuwaio/sdk": "^0.1.12",
+    "@tuwaio/solana-sdk": "^0.1.13",
     "@wallet-standard/base": "^1.1.1",
     "@wallet-standard/react": "^1.0.3",
     "@solana/webcrypto-ed25519-polyfill": "^7.1.0",

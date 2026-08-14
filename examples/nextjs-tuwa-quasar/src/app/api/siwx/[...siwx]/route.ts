@@ -17,7 +17,7 @@ const handler = createStatelessDemoSiwxHandler({
       'solana:mainnet',
       'solana:devnet',
     ],
-    requireExpirationTime: false,
+    requireExpirationTime: true,
     maxIssuedAtAgeSeconds: 300,
     maxSessionLifetimeSeconds: 1800, // 30 minutes
     clockSkewSeconds: 60,
