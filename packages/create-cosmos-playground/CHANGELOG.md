@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.24](https://github.com/TuwaIO/cosmos-playground/compare/create-cosmos-playground-v0.0.23...create-cosmos-playground-v0.0.24) (2026-08-14)
+
+
+### Bug Fixes
+
+* updated packages and docs ([ffdb9d5](https://github.com/TuwaIO/cosmos-playground/commit/ffdb9d5e4f898a60319908c5e1b0cf0b92a59ea5))
+
 ## [0.0.23](https://github.com/TuwaIO/cosmos-playground/compare/create-cosmos-playground-v0.0.22...create-cosmos-playground-v0.0.23) (2026-08-08)
 
 
