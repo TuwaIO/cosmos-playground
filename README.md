@@ -20,6 +20,10 @@ The **Cosmos Playground** monorepo contains production-ready dApp starter kits:
 | [**`custom-style`**](./examples/custom-style) | Vite + React 19 | Custom Tailwind CSS styling overrides for Nova UI Kit |
 | [**`vite-tuwa`**](./examples/vite-tuwa) | Vite + React 19 | Fast client-side multi-chain dApp template |
 
+> [!NOTE]
+> **Stateless Demo Mode Notice:**
+> Demo mode works without a database or Redis by using a short-lived stateless signed session. Real projects with user accounts, persistent login, logout/revoke, multi-replica deployment, and strong protection against session replay and Quasar quota drain MUST connect Redis, PostgreSQL, SQLite, or another durable storage adapter.
+
 ---
 
 ## 🚀 Scaffolding via CLI
