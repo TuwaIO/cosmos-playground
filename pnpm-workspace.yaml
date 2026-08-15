@@ -2,10 +2,10 @@ packages:
   - 'examples/*'
   - 'packages/*'
 overrides:
-  '@tuwaio/satellite-react': 0.4.9
-  '@tuwaio/nova-connect': 0.5.10
+  '@tuwaio/satellite-react': 0.4.10
+  '@tuwaio/nova-connect': 0.5.11
   '@tuwaio/siwx-core': 0.2.2
-  '@tuwaio/siwx-react': 0.2.2
+  '@tuwaio/siwx-react': 0.2.3
 allowBuilds:
   '@reown/appkit': false
   esbuild: false
@@ -20,21 +20,21 @@ minimumReleaseAgeExclude:
   - '@next/swc-win32-arm64-msvc@16.3.1'
   - '@next/swc-win32-x64-msvc@16.3.1'
   - '@solana/webcrypto-ed25519-polyfill@7.1.0'
-  - '@tuwaio/evm-sdk@0.1.12'
-  - '@tuwaio/nova-connect@0.5.10'
+  - '@tuwaio/evm-sdk@0.1.12 || 0.1.13'
+  - '@tuwaio/nova-connect@0.5.10 || 0.5.11'
   - '@tuwaio/nova-core@0.5.1'
   - '@tuwaio/nova-transactions@0.5.3'
-  - '@tuwaio/quasar-sdk@0.1.6'
+  - '@tuwaio/quasar-sdk@0.1.6 || 0.1.7'
   - '@tuwaio/satellite-core@0.4.3'
   - '@tuwaio/satellite-evm@0.4.4'
-  - '@tuwaio/satellite-react@0.4.8 || 0.4.9'
+  - '@tuwaio/satellite-react@0.4.8 || 0.4.9 || 0.4.10'
   - '@tuwaio/satellite-solana@0.4.9'
-  - '@tuwaio/sdk@0.1.12'
+  - '@tuwaio/sdk@0.1.12 || 0.1.13'
   - '@tuwaio/siwx-core@0.2.1 || 0.2.2'
   - '@tuwaio/siwx-evm@0.2.1'
-  - '@tuwaio/siwx-react@0.2.2'
+  - '@tuwaio/siwx-react@0.2.2 || 0.2.3'
   - '@tuwaio/siwx-server@0.2.2'
   - '@tuwaio/siwx-solana@0.2.1'
-  - '@tuwaio/solana-sdk@0.1.13'
+  - '@tuwaio/solana-sdk@0.1.13 || 0.1.14'
   - next@16.3.1
   - viem@2.55.16
