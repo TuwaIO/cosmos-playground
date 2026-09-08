@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.25](https://github.com/TuwaIO/cosmos-playground/compare/create-cosmos-playground-v0.0.24...create-cosmos-playground-v0.0.25) (2026-09-08)
+
+
+### Bug Fixes
+
+* updated packages & docs & deprecated gelato & removed gill ([0f2f63d](https://github.com/TuwaIO/cosmos-playground/commit/0f2f63d0abfc40b01ce972164844c3f8219f6eb7))
+
 ## [0.0.24](https://github.com/TuwaIO/cosmos-playground/compare/create-cosmos-playground-v0.0.23...create-cosmos-playground-v0.0.24) (2026-08-14)
 
 
