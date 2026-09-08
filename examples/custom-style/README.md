@@ -41,7 +41,7 @@ pnpm dev
 - ✅ Real-time, multi-chain transaction tracking
 - ✅ Comprehensive transaction history modal
 - ✅ Automatic toast notifications for transaction status
-- ✅ Support for standard EVM, Gelato, and Safe transactions
+- ✅ Support for standard EVM transactions and custom styling overrides
 
 ## 🛠️ Available Scripts
 
@@ -62,9 +62,7 @@ src/
 ├── constants.ts   # Shared constants
 ├── hooks/         # Custom React hooks
 ├── providers/     # React Context providers, including NovaProvider setup
-├── programs/      # Solana Program generated client
 ├── styles/        # Global CSS and Tailwind styles
-├── targets/       # Solana Program IDL
 └── transactions/  # Logic for defining transaction actions and callbacks
 ```
 
@@ -90,10 +88,7 @@ Create a `.env` file in the project root:
 # Required: Get a Project ID from [https://cloud.walletconnect.com](https://cloud.walletconnect.com)
 VITE_WALLET_PROJECT_ID=your_project_id
 
-# Optional: Gelato API key for sponsoring transactions
-VITE_GELATO_API_KEY=your_project_key
-
-# Optional: Alchemy API key for solana mainnet RPC URL
+# Optional: Alchemy API key for RPC URLs
 VITE_ALCHEMY_KEY=your_alchemy_key
 ```
 

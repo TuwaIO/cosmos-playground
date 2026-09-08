@@ -41,15 +41,16 @@ pnpm dev
 - ✅ Real-time, multi-chain transaction tracking
 - ✅ Comprehensive transaction history modal
 - ✅ Automatic toast notifications for transaction status
-- ✅ Support for standard EVM, Gelato, and Safe transactions
+- ✅ Support for standard EVM, ERC-4337 (Pimlico), and Safe transactions
 
 ## 🛠️ Available Scripts
 
 ```bash
-pnpm dev        # Start development server
-pnpm build      # Build for production
-pnpm preview    # Preview production build
-pnpm type-check # Run TypeScript checks
+pnpm dev             # Start development server
+pnpm build           # Build for production
+pnpm preview         # Preview production build
+pnpm type-check      # Run TypeScript checks
+pnpm generate:solana # Regenerate Solana Codama clients
 ```
 
 ## 📁 Project Structure
@@ -62,7 +63,7 @@ src/
 ├── constants.ts   # Shared constants
 ├── hooks/         # Custom React hooks
 ├── providers/     # React Context providers, including NovaProvider setup
-├── programs/      # Solana Program generated client
+├── programs/      # Solana Program generated client via Codama
 ├── styles/        # Global CSS and Tailwind styles
 ├── targets/       # Solana Program IDL
 └── transactions/  # Logic for defining transaction actions and callbacks
@@ -90,14 +91,14 @@ Create a `.env` file in the project root:
 # Required: Get a Project ID from [https://cloud.walletconnect.com](https://cloud.walletconnect.com)
 VITE_WALLET_PROJECT_ID=your_project_id
 
-# Optional: Gelato API key for sponsoring transactions
-VITE_GELATO_API_KEY=your_project_key
+# Optional: Pimlico API key for ERC-4337 UserOperation bundler transactions
+VITE_PIMLICO_API_KEY=your_pimlico_api_key
 
 # Optional: Alchemy API key for solana mainnet RPC URL
 VITE_ALCHEMY_KEY=your_alchemy_key
 ```
 
-_Note: Vite requires environment variables to be prefixed with `VITE_`.\_
+_Note: Vite requires environment variables to be prefixed with `VITE_`._
 
 ## 📖 Learn More
 
@@ -107,6 +108,8 @@ For detailed documentation and advanced usage:
 - [Satellite Documentation](https://satellite.docs.tuwa.io/)
 - [Pulsar Documentation](https://pulsar.docs.tuwa.io/)
 - [Nova Documentation](https://stories.tuwa.io/?path=/docs/introduction--docs)
+- [Solana Kit Documentation](https://github.com/solana-labs/solana-web3.js)
+- [Codama Documentation](https://github.com/codama-idl/codama)
 - [Vite Documentation](https://vitejs.dev/)
 - [Wagmi Documentation](https://wagmi.sh/)
 

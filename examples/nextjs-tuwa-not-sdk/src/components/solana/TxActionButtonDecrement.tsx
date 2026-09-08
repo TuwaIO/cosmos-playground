@@ -1,6 +1,7 @@
 'use client';
 
 import { ArrowDownIcon } from '@heroicons/react/24/solid';
+import type { Address } from '@solana/kit';
 import { useWalletAccountTransactionSendingSigner } from '@solana/react';
 import { Connection } from '@tuwaio/nova-connect/satellite';
 import { TxActionButton as TAB } from '@tuwaio/nova-transactions';
@@ -8,7 +9,6 @@ import { OrbitAdapter } from '@tuwaio/orbit-core';
 import { createSolanaClientWithCache } from '@tuwaio/orbit-solana';
 import { SolanaConnection } from '@tuwaio/satellite-solana';
 import { UiWalletAccount } from '@wallet-standard/react';
-import { Address } from 'gill';
 import React from 'react';
 
 import { usePulsarStore } from '@/hooks/pulsarStoreHook';

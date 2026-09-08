@@ -1,4 +1,5 @@
-import { Address, getBase58Decoder, SolanaClient } from 'gill';
+import { type Address, getBase58Decoder } from '@solana/kit';
+import type { SolanaClient } from '@tuwaio/solana-sdk/orbit';
 import { getProgramAccountsDecoded } from '@/programs/getProgramAccountsDecoded';
 import { getSolanatestDecoder, SOLANATEST_DISCRIMINATOR } from './solanatest/generated'
 

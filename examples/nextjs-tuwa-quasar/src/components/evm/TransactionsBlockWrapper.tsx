@@ -88,35 +88,37 @@ export const TransactionsBlockWrapper = () => {
     });
   };
 
-  const handleIncrementGelato = async () => {
+  const handleIncrementPimlico = async () => {
     if (currentCount === null) return;
 
     await executeTxAction({
-      actionFunction: txActions.incrementGelato,
+      actionFunction: txActions.incrementPimlico,
       onSuccess: (tx) => {
         if (tx.type === TxType.increment) {
           setTimeout(() => fetchCurrentCount(), 2000);
           const hash = 'hash' in tx && typeof tx.hash === 'string' ? tx.hash : undefined;
           notifyTransactionSuccess({ txKey: tx.txKey, hash });
-          console.log(`Increment tx succeed, ${currentCount}`);
+          console.log(`Increment Pimlico tx succeed, ${currentCount}`);
         }
       },
       params: {
         type: TxType.increment,
         adapter: OrbitAdapter.EVM,
-        tracker: TransactionTracker.Gelato,
+        tracker: TransactionTracker.ERC4337,
         desiredChainID: sepolia.id,
-        title: ['Incrementing', 'Incremented', 'Error when increment', 'Increment tx replaced'],
+        pimlicoApiKey: process.env.NEXT_PUBLIC_PIMLICO_API_KEY,
+        title: [
+          'Incrementing (ERC-4337)',
+          'Incremented (ERC-4337)',
+          'Error when increment (ERC-4337)',
+          'Increment tx replaced',
+        ],
         description: [
           `Value after incrementing ${currentCount + 1}`,
           `Success. Current value is ${currentCount + 1}`,
-          'Something went wrong when increment.',
-          'Transaction replaced. Please take a look details in your wallet.',
+          `Value after incrementing ${currentCount + 1}`,
+          `Value after incrementing ${currentCount + 1}`,
         ],
-        payload: {
-          value: currentCount,
-          contractAddress: COUNTER_ADDRESS,
-        },
         withTrackedModal: true,
       },
     });
@@ -205,7 +207,7 @@ export const TransactionsBlockWrapper = () => {
 
             <div className="h-14">
               <TxActionButton
-                action={handleIncrementGelato}
+                action={handleIncrementPimlico}
                 transactionsPool={transactionsPool}
                 getLastTxKey={getLastTxKey}
                 className="w-full h-full bg-gradient-to-r from-[var(--tuwa-button-gradient-from)] to-[var(--tuwa-button-gradient-to)] hover:from-[var(--tuwa-button-gradient-from-hover)] hover:to-[var(--tuwa-button-gradient-to-hover)] text-[var(--tuwa-text-on-accent)] font-semibold rounded-[var(--tuwa-rounded-corners)] transition-all duration-200 ease-in-out hover:shadow-lg flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] select-none cursor-pointer"
@@ -213,7 +215,7 @@ export const TransactionsBlockWrapper = () => {
                 walletAddress={address}
               >
                 <span className="text-xl leading-none contents text-[var(--tuwa-text-on-accent)]">+</span>
-                <span className="leading-none">Increment Gelato Counter</span>
+                <span className="leading-none">Increment Pimlico Counter</span>
               </TxActionButton>
             </div>
 

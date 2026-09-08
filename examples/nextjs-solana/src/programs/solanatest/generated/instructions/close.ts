@@ -14,6 +14,8 @@ import {
   getBytesEncoder,
   getStructDecoder,
   getStructEncoder,
+  SOLANA_ERROR__PROGRAM_CLIENTS__INSUFFICIENT_ACCOUNT_METAS,
+  SolanaError,
   transformEncoder,
   type AccountMeta,
   type AccountSignerMeta,
@@ -28,15 +30,13 @@ import {
   type TransactionSigner,
   type WritableAccount,
   type WritableSignerAccount,
-} from 'gill';
+} from '@solana/kit';
+import { getAccountMetaFactory, type ResolvedInstructionAccount } from '@solana/kit/program-client-core';
 import { SOLANATEST_PROGRAM_ADDRESS } from '../programs';
-import { getAccountMetaFactory, type ResolvedAccount } from '../shared';
 
-export const CLOSE_DISCRIMINATOR = new Uint8Array([
-  98, 165, 201, 177, 108, 65, 206, 96,
-]);
+export const CLOSE_DISCRIMINATOR: ReadonlyUint8Array = new Uint8Array([98, 165, 201, 177, 108, 65, 206, 96]);
 
-export function getCloseDiscriminatorBytes() {
+export function getCloseDiscriminatorBytes(): ReadonlyUint8Array {
   return fixEncoderSize(getBytesEncoder(), 8).encode(CLOSE_DISCRIMINATOR);
 }
 
@@ -50,12 +50,9 @@ export type CloseInstruction<
   InstructionWithAccounts<
     [
       TAccountPayer extends string
-        ? WritableSignerAccount<TAccountPayer> &
-            AccountSignerMeta<TAccountPayer>
+        ? WritableSignerAccount<TAccountPayer> & AccountSignerMeta<TAccountPayer>
         : TAccountPayer,
-      TAccountSolanatest extends string
-        ? WritableAccount<TAccountSolanatest>
-        : TAccountSolanatest,
+      TAccountSolanatest extends string ? WritableAccount<TAccountSolanatest> : TAccountSolanatest,
       ...TRemainingAccounts,
     ]
   >;
@@ -65,32 +62,21 @@ export type CloseInstructionData = { discriminator: ReadonlyUint8Array };
 export type CloseInstructionDataArgs = {};
 
 export function getCloseInstructionDataEncoder(): FixedSizeEncoder<CloseInstructionDataArgs> {
-  return transformEncoder(
-    getStructEncoder([['discriminator', fixEncoderSize(getBytesEncoder(), 8)]]),
-    (value) => ({ ...value, discriminator: CLOSE_DISCRIMINATOR })
-  );
+  return transformEncoder(getStructEncoder([['discriminator', fixEncoderSize(getBytesEncoder(), 8)]]), (value) => ({
+    ...value,
+    discriminator: CLOSE_DISCRIMINATOR,
+  }));
 }
 
 export function getCloseInstructionDataDecoder(): FixedSizeDecoder<CloseInstructionData> {
-  return getStructDecoder([
-    ['discriminator', fixDecoderSize(getBytesDecoder(), 8)],
-  ]);
+  return getStructDecoder([['discriminator', fixDecoderSize(getBytesDecoder(), 8)]]);
 }
 
-export function getCloseInstructionDataCodec(): FixedSizeCodec<
-  CloseInstructionDataArgs,
-  CloseInstructionData
-> {
-  return combineCodec(
-    getCloseInstructionDataEncoder(),
-    getCloseInstructionDataDecoder()
-  );
+export function getCloseInstructionDataCodec(): FixedSizeCodec<CloseInstructionDataArgs, CloseInstructionData> {
+  return combineCodec(getCloseInstructionDataEncoder(), getCloseInstructionDataDecoder());
 }
 
-export type CloseInput<
-  TAccountPayer extends string = string,
-  TAccountSolanatest extends string = string,
-> = {
+export type CloseInput<TAccountPayer extends string = string, TAccountSolanatest extends string = string> = {
   payer: TransactionSigner<TAccountPayer>;
   solanatest: Address<TAccountSolanatest>;
 };
@@ -101,7 +87,7 @@ export function getCloseInstruction<
   TProgramAddress extends Address = typeof SOLANATEST_PROGRAM_ADDRESS,
 >(
   input: CloseInput<TAccountPayer, TAccountSolanatest>,
-  config?: { programAddress?: TProgramAddress }
+  config?: { programAddress?: TProgramAddress },
 ): CloseInstruction<TProgramAddress, TAccountPayer, TAccountSolanatest> {
   // Program address.
   const programAddress = config?.programAddress ?? SOLANATEST_PROGRAM_ADDRESS;
@@ -111,17 +97,11 @@ export function getCloseInstruction<
     payer: { value: input.payer ?? null, isWritable: true },
     solanatest: { value: input.solanatest ?? null, isWritable: true },
   };
-  const accounts = originalAccounts as Record<
-    keyof typeof originalAccounts,
-    ResolvedAccount
-  >;
+  const accounts = originalAccounts as Record<keyof typeof originalAccounts, ResolvedInstructionAccount>;
 
   const getAccountMeta = getAccountMetaFactory(programAddress, 'programId');
   return Object.freeze({
-    accounts: [
-      getAccountMeta(accounts.payer),
-      getAccountMeta(accounts.solanatest),
-    ],
+    accounts: [getAccountMeta('payer', accounts.payer), getAccountMeta('solanatest', accounts.solanatest)],
     data: getCloseInstructionDataEncoder().encode({}),
     programAddress,
   } as CloseInstruction<TProgramAddress, TAccountPayer, TAccountSolanatest>);
@@ -139,17 +119,14 @@ export type ParsedCloseInstruction<
   data: CloseInstructionData;
 };
 
-export function parseCloseInstruction<
-  TProgram extends string,
-  TAccountMetas extends readonly AccountMeta[],
->(
-  instruction: Instruction<TProgram> &
-    InstructionWithAccounts<TAccountMetas> &
-    InstructionWithData<ReadonlyUint8Array>
+export function parseCloseInstruction<TProgram extends string, TAccountMetas extends readonly AccountMeta[]>(
+  instruction: Instruction<TProgram> & InstructionWithAccounts<TAccountMetas> & InstructionWithData<ReadonlyUint8Array>,
 ): ParsedCloseInstruction<TProgram, TAccountMetas> {
   if (instruction.accounts.length < 2) {
-    // TODO: Coded error.
-    throw new Error('Not enough accounts');
+    throw new SolanaError(SOLANA_ERROR__PROGRAM_CLIENTS__INSUFFICIENT_ACCOUNT_METAS, {
+      actualAccountMetas: instruction.accounts.length,
+      expectedAccountMetas: 2,
+    });
   }
   let accountIndex = 0;
   const getNextAccount = () => {

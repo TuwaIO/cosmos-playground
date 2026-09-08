@@ -1,5 +1,5 @@
+import type { KeyPairSigner } from '@solana/kit';
 import { signAndSendSolanaTx } from '@tuwaio/solana-sdk/pulsar';
-import { KeyPairSigner } from 'gill';
 
 import { PROGRAM_ID } from '../../constants';
 import { getInitializeInstruction } from '../../programs';

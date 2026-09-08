@@ -14,6 +14,8 @@ import {
   getBytesEncoder,
   getStructDecoder,
   getStructEncoder,
+  SOLANA_ERROR__PROGRAM_CLIENTS__INSUFFICIENT_ACCOUNT_METAS,
+  SolanaError,
   transformEncoder,
   type AccountMeta,
   type Address,
@@ -25,15 +27,13 @@ import {
   type InstructionWithData,
   type ReadonlyUint8Array,
   type WritableAccount,
-} from 'gill';
+} from '@solana/kit';
+import { getAccountMetaFactory, type ResolvedInstructionAccount } from '@solana/kit/program-client-core';
 import { SOLANATEST_PROGRAM_ADDRESS } from '../programs';
-import { getAccountMetaFactory, type ResolvedAccount } from '../shared';
 
-export const INCREMENT_DISCRIMINATOR = new Uint8Array([
-  11, 18, 104, 9, 104, 174, 59, 33,
-]);
+export const INCREMENT_DISCRIMINATOR: ReadonlyUint8Array = new Uint8Array([11, 18, 104, 9, 104, 174, 59, 33]);
 
-export function getIncrementDiscriminatorBytes() {
+export function getIncrementDiscriminatorBytes(): ReadonlyUint8Array {
   return fixEncoderSize(getBytesEncoder(), 8).encode(INCREMENT_DISCRIMINATOR);
 }
 
@@ -45,9 +45,7 @@ export type IncrementInstruction<
   InstructionWithData<ReadonlyUint8Array> &
   InstructionWithAccounts<
     [
-      TAccountSolanatest extends string
-        ? WritableAccount<TAccountSolanatest>
-        : TAccountSolanatest,
+      TAccountSolanatest extends string ? WritableAccount<TAccountSolanatest> : TAccountSolanatest,
       ...TRemainingAccounts,
     ]
   >;
@@ -57,26 +55,21 @@ export type IncrementInstructionData = { discriminator: ReadonlyUint8Array };
 export type IncrementInstructionDataArgs = {};
 
 export function getIncrementInstructionDataEncoder(): FixedSizeEncoder<IncrementInstructionDataArgs> {
-  return transformEncoder(
-    getStructEncoder([['discriminator', fixEncoderSize(getBytesEncoder(), 8)]]),
-    (value) => ({ ...value, discriminator: INCREMENT_DISCRIMINATOR })
-  );
+  return transformEncoder(getStructEncoder([['discriminator', fixEncoderSize(getBytesEncoder(), 8)]]), (value) => ({
+    ...value,
+    discriminator: INCREMENT_DISCRIMINATOR,
+  }));
 }
 
 export function getIncrementInstructionDataDecoder(): FixedSizeDecoder<IncrementInstructionData> {
-  return getStructDecoder([
-    ['discriminator', fixDecoderSize(getBytesDecoder(), 8)],
-  ]);
+  return getStructDecoder([['discriminator', fixDecoderSize(getBytesDecoder(), 8)]]);
 }
 
 export function getIncrementInstructionDataCodec(): FixedSizeCodec<
   IncrementInstructionDataArgs,
   IncrementInstructionData
 > {
-  return combineCodec(
-    getIncrementInstructionDataEncoder(),
-    getIncrementInstructionDataDecoder()
-  );
+  return combineCodec(getIncrementInstructionDataEncoder(), getIncrementInstructionDataDecoder());
 }
 
 export type IncrementInput<TAccountSolanatest extends string = string> = {
@@ -88,23 +81,18 @@ export function getIncrementInstruction<
   TProgramAddress extends Address = typeof SOLANATEST_PROGRAM_ADDRESS,
 >(
   input: IncrementInput<TAccountSolanatest>,
-  config?: { programAddress?: TProgramAddress }
+  config?: { programAddress?: TProgramAddress },
 ): IncrementInstruction<TProgramAddress, TAccountSolanatest> {
   // Program address.
   const programAddress = config?.programAddress ?? SOLANATEST_PROGRAM_ADDRESS;
 
   // Original accounts.
-  const originalAccounts = {
-    solanatest: { value: input.solanatest ?? null, isWritable: true },
-  };
-  const accounts = originalAccounts as Record<
-    keyof typeof originalAccounts,
-    ResolvedAccount
-  >;
+  const originalAccounts = { solanatest: { value: input.solanatest ?? null, isWritable: true } };
+  const accounts = originalAccounts as Record<keyof typeof originalAccounts, ResolvedInstructionAccount>;
 
   const getAccountMeta = getAccountMetaFactory(programAddress, 'programId');
   return Object.freeze({
-    accounts: [getAccountMeta(accounts.solanatest)],
+    accounts: [getAccountMeta('solanatest', accounts.solanatest)],
     data: getIncrementInstructionDataEncoder().encode({}),
     programAddress,
   } as IncrementInstruction<TProgramAddress, TAccountSolanatest>);
@@ -121,17 +109,14 @@ export type ParsedIncrementInstruction<
   data: IncrementInstructionData;
 };
 
-export function parseIncrementInstruction<
-  TProgram extends string,
-  TAccountMetas extends readonly AccountMeta[],
->(
-  instruction: Instruction<TProgram> &
-    InstructionWithAccounts<TAccountMetas> &
-    InstructionWithData<ReadonlyUint8Array>
+export function parseIncrementInstruction<TProgram extends string, TAccountMetas extends readonly AccountMeta[]>(
+  instruction: Instruction<TProgram> & InstructionWithAccounts<TAccountMetas> & InstructionWithData<ReadonlyUint8Array>,
 ): ParsedIncrementInstruction<TProgram, TAccountMetas> {
   if (instruction.accounts.length < 1) {
-    // TODO: Coded error.
-    throw new Error('Not enough accounts');
+    throw new SolanaError(SOLANA_ERROR__PROGRAM_CLIENTS__INSUFFICIENT_ACCOUNT_METAS, {
+      actualAccountMetas: instruction.accounts.length,
+      expectedAccountMetas: 1,
+    });
   }
   let accountIndex = 0;
   const getNextAccount = () => {

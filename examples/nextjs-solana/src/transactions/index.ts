@@ -1,5 +1,6 @@
+import type { Address, KeyPairSigner, TransactionSendingSigner } from '@solana/kit';
 import { Transaction } from '@tuwaio/sdk/pulsar';
-import { Address, KeyPairSigner, SolanaClient, TransactionSendingSigner } from 'gill';
+import type { SolanaClient } from '@tuwaio/solana-sdk/orbit';
 
 import { close } from '@/transactions/solana/close';
 import { decrement } from '@/transactions/solana/decrement';

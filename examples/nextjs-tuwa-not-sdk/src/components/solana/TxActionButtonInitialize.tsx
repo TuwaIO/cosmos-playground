@@ -1,6 +1,7 @@
 'use client';
 
 import { DocumentDuplicateIcon } from '@heroicons/react/24/solid';
+import { generateKeyPairSigner } from '@solana/kit';
 import { useWalletAccountTransactionSendingSigner } from '@solana/react';
 import { install as installEd25519 } from '@solana/webcrypto-ed25519-polyfill';
 import { Connection } from '@tuwaio/nova-connect/satellite';
@@ -9,7 +10,6 @@ import { OrbitAdapter } from '@tuwaio/orbit-core';
 import { createSolanaClientWithCache } from '@tuwaio/orbit-solana';
 import { SolanaConnection } from '@tuwaio/satellite-solana';
 import { UiWalletAccount } from '@wallet-standard/react';
-import { generateKeyPairSigner } from 'gill';
 import React from 'react';
 
 import { usePulsarStore } from '@/hooks/pulsarStoreHook';

@@ -43,7 +43,7 @@ pnpm dev
 - ✅ Real-time, multi-chain transaction tracking
 - ✅ Comprehensive transaction history modal
 - ✅ Automatic toast notifications for transaction status
-- ✅ Support for standard EVM, Gelato, and Safe transactions
+- ✅ Support for standard EVM, ERC-4337 (Pimlico), and Safe transactions
 - ✅ Server-side rendering compatibility
 
 ## 🛠️ Available Scripts
@@ -74,7 +74,7 @@ src/
 - `@tuwaio/orbit-core`: The core, network adapters utils.
 - `@tuwaio/orbit-evm`: EVM, network adapter utils.
 - `@tuwaio/pulsar-core`: The core, chain-agnostic tracking engine.
-- `@tuwaio/pulsar-evm`: Adapter for EVM-compatible chains, including trackers for Gelato and Safe.
+- `@tuwaio/pulsar-evm`: Adapter for EVM-compatible chains, including trackers for ERC-4337 (Pimlico) and Safe.
 - `@tuwaio/pulsar-react`: React hooks for integrating your app with the Pulsar engine.
 - `@tuwaio/nova-transactions`: Pre-built UI components (Modals, Toasts, Buttons, etc.).
 
@@ -100,8 +100,11 @@ Create a `.env` file in the project root:
 # Required: Get a Project ID from https://cloud.walletconnect.com
 NEXT_PUBLIC_WALLET_PROJECT_ID=your_project_id
 
-# Optional: Gelato API key for sponsoring transactions
-NEXT_PUBLIC_GELATO_API_KEY=your_project_key
+# Optional: Pimlico API key for ERC-4337 UserOperation bundler transactions
+NEXT_PUBLIC_PIMLICO_API_KEY=your_pimlico_api_key
+
+# Optional: Alchemy API key for sepolia RPC URL
+NEXT_PUBLIC_ALCHEMY_KEY=your_alchemy_key
 
 # Server-only: Signing secret for stateless demo session profile (minimum 32 characters)
 SIWX_DEMO_SIGNING_SECRET=your_demo_signing_secret_min_32_characters_long

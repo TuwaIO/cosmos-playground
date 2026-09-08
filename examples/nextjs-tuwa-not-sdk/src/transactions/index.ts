@@ -1,5 +1,6 @@
+import type { Address, KeyPairSigner, TransactionSendingSigner } from '@solana/kit';
+import type { SolanaClient } from '@tuwaio/orbit-solana';
 import { Transaction } from '@tuwaio/pulsar-core';
-import { Address, KeyPairSigner, SolanaClient, TransactionSendingSigner } from 'gill';
 
 import { wagmiConfig } from '@/configs/appConfig';
 import { increment } from '@/transactions/evm/increment';
@@ -9,6 +10,7 @@ import { increment as incrementSolana } from '@/transactions/solana/increment';
 import { initialize } from '@/transactions/solana/initialize';
 
 import { incrementGelato } from './evm/incrementGelato';
+import { incrementPimlico } from './evm/incrementPimlico';
 
 export type BaseTxParams = {
   client: SolanaClient;
@@ -19,6 +21,7 @@ export type BaseTxParams = {
 export const txActions = {
   incrementEvm: () => increment({ wagmiConfig }),
   incrementGelato: () => incrementGelato(),
+  incrementPimlico: () => incrementPimlico({ wagmiConfig }),
   incrementSolana: ({ client, signer, contractAddress }: BaseTxParams) =>
     incrementSolana({ client, signer, contractAddress }),
   decrementSolana: ({ client, signer, contractAddress }: BaseTxParams) =>

@@ -2,12 +2,11 @@ import { Transaction } from '@tuwaio/sdk/pulsar';
 
 import { wagmiConfig } from '@/configs/appConfig';
 import { increment } from '@/transactions/evm/increment';
-
-import { incrementGelato } from './evm/incrementGelato';
+import { incrementPimlico } from '@/transactions/evm/incrementPimlico';
 
 export const txActions = {
   incrementEvm: () => increment({ wagmiConfig }),
-  incrementGelato: () => incrementGelato(),
+  incrementPimlicoEvm: () => incrementPimlico({ wagmiConfig }),
 };
 
 export enum TxType {

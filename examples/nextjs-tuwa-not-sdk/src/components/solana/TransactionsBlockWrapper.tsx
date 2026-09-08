@@ -1,11 +1,11 @@
 'use client';
 
+import { address } from '@solana/kit';
 import { useSatelliteConnectStore } from '@tuwaio/nova-connect/satellite';
 import { textCenterEllipsis } from '@tuwaio/nova-core';
 import { HashLink } from '@tuwaio/nova-transactions';
 import { OrbitAdapter, selectAdapterByKey } from '@tuwaio/orbit-core';
 import { SolanaConnection } from '@tuwaio/satellite-solana';
-import { address } from 'gill';
 import { useEffect } from 'react';
 
 import { TxActionButtonClose } from '@/components/solana/TxActionButtonClose';

@@ -55,8 +55,8 @@ QUASAR_SDK_SK=sk_live_...
 # Optional: Quasar API Base URL. Defaults to https://api.tuwa.io.
 NEXT_PUBLIC_QUASAR_BASE_URL=https://api.tuwa.io
 
-# Optional: Gelato API key for sponsoring transactions
-NEXT_PUBLIC_GELATO_API_KEY=your_project_key
+# Optional: Pimlico API key for ERC-4337 UserOperation bundler
+NEXT_PUBLIC_PIMLICO_API_KEY=your_pimlico_api_key
 
 # Required for verifying incoming Quasar webhook deliveries
 QUASAR_WEBHOOK_SECRET=whsec_...
@@ -108,7 +108,7 @@ For detailed documentation and advanced usage:
 - [SDK Documentation](https://sdk.docs.tuwa.io/)
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Wagmi Documentation](https://wagmi.sh/)
-- [Gill Documentation](https://www.gillsdk.com/)
+- [Solana Kit Documentation](https://github.com/anza-xyz/kit)
 
 ## 🤝 Contributing & Support
 

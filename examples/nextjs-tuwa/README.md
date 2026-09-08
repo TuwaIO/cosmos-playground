@@ -42,7 +42,7 @@ pnpm dev
 - ✅ Real-time, multi-chain transaction tracking
 - ✅ Comprehensive transaction history modal
 - ✅ Automatic toast notifications for transaction status
-- ✅ Support for standard EVM, Gelato, and Safe transactions
+- ✅ Support for standard EVM, Safe, and Pimlico ERC-4337 transactions
 - ✅ Server-side rendering compatibility
 
 ## 🛠️ Available Scripts
@@ -92,8 +92,8 @@ Create a `.env` file in the project root:
 # Required: Get a Project ID from [https://cloud.walletconnect.com](https://cloud.walletconnect.com)
 NEXT_PUBLIC_WALLET_PROJECT_ID=your_project_id
 
-# Optional: Gelato API key for sponsoring transactions
-NEXT_PUBLIC_GELATO_API_KEY=your_project_key
+# Optional: Pimlico API key for ERC-4337 UserOperation bundler
+NEXT_PUBLIC_PIMLICO_API_KEY=your_pimlico_api_key
 
 # Optional: Alchemy API key for solana mainnet RPC URL
 NEXT_PUBLIC_ALCHEMY_KEY=your_alchemy_key
@@ -124,7 +124,7 @@ For detailed documentation and advanced usage:
 - [Nova Documentation](https://stories.tuwa.io/?path=/docs/introduction--docs)
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Wagmi Documentation](https://wagmi.sh/)
-- [Gill Documentation](https://www.gillsdk.com/)
+- [Solana Kit Documentation](https://github.com/anza-xyz/kit)
 
 ## 🤝 Contributing & Support
 

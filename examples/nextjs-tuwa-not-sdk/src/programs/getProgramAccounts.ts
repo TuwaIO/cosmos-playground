@@ -2,7 +2,8 @@
  * @file This file provides a utility function for fetching and filtering program accounts on the Solana blockchain.
  */
 
-import { type Address, Base58EncodedBytes, SolanaClient } from 'gill';
+import type { SolanaClient } from '@tuwaio/orbit-solana';
+import type { Address, Base58EncodedBytes } from '@solana/kit';
 
 /**
  * Defines the configuration required for fetching program accounts with a memcmp filter.
@@ -24,7 +25,7 @@ export interface GetProgramAccountsConfig {
  * to use a `memcmp` filter at offset 0. It's useful for finding all accounts
  * that start with a specific sequence of bytes (e.g., a discriminator for an account type).
  *
- * @param rpc - The Solana RPC client instance from the `gill` library.
+ * @param rpc - The Solana RPC client instance from the `@tuwaio/orbit-solana` library.
  * @param config - The configuration object containing the program address and the filter bytes.
  * @returns A promise that resolves with the RPC response containing the filtered accounts.
  * @throws Will throw an error if the RPC call fails.

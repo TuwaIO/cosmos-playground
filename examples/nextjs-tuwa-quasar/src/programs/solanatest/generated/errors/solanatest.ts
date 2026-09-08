@@ -11,7 +11,7 @@ import {
   type Address,
   type SOLANA_ERROR__INSTRUCTION_ERROR__CUSTOM,
   type SolanaError,
-} from 'gill';
+} from '@solana/kit';
 import { SOLANATEST_PROGRAM_ADDRESS } from '../programs';
 
 /** Overflow: Cannot increment count because it would overflow. */
@@ -19,12 +19,10 @@ export const SOLANATEST_ERROR__OVERFLOW = 0x1770; // 6000
 /** Underflow: Cannot decrement count because it would underflow. */
 export const SOLANATEST_ERROR__UNDERFLOW = 0x1771; // 6001
 
-export type SolanatestError =
-  | typeof SOLANATEST_ERROR__OVERFLOW
-  | typeof SOLANATEST_ERROR__UNDERFLOW;
+export type SolanatestError = typeof SOLANATEST_ERROR__OVERFLOW | typeof SOLANATEST_ERROR__UNDERFLOW;
 
 let solanatestErrorMessages: Record<SolanatestError, string> | undefined;
-if (process.env.NODE_ENV !== 'production') {
+if (process.env['NODE_ENV'] !== 'production') {
   solanatestErrorMessages = {
     [SOLANATEST_ERROR__OVERFLOW]: `Cannot increment count because it would overflow.`,
     [SOLANATEST_ERROR__UNDERFLOW]: `Cannot decrement count because it would underflow.`,
@@ -32,7 +30,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 export function getSolanatestErrorMessage(code: SolanatestError): string {
-  if (process.env.NODE_ENV !== 'production') {
+  if (process.env['NODE_ENV'] !== 'production') {
     return (solanatestErrorMessages as Record<SolanatestError, string>)[code];
   }
 
@@ -41,16 +39,9 @@ export function getSolanatestErrorMessage(code: SolanatestError): string {
 
 export function isSolanatestError<TProgramErrorCode extends SolanatestError>(
   error: unknown,
-  transactionMessage: {
-    instructions: Record<number, { programAddress: Address }>;
-  },
-  code?: TProgramErrorCode
+  transactionMessage: { instructions: Record<number, { programAddress: Address }> },
+  code?: TProgramErrorCode,
 ): error is SolanaError<typeof SOLANA_ERROR__INSTRUCTION_ERROR__CUSTOM> &
   Readonly<{ context: Readonly<{ code: TProgramErrorCode }> }> {
-  return isProgramError<TProgramErrorCode>(
-    error,
-    transactionMessage,
-    SOLANATEST_PROGRAM_ADDRESS,
-    code
-  );
+  return isProgramError<TProgramErrorCode>(error, transactionMessage, SOLANATEST_PROGRAM_ADDRESS, code);
 }

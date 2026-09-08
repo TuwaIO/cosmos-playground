@@ -42,15 +42,16 @@ pnpm dev
 - ✅ Real-time, multi-chain transaction tracking
 - ✅ Comprehensive transaction history modal
 - ✅ Automatic toast notifications for transaction status
-- ✅ Support for standard EVM, Gelato, and Safe transactions
+- ✅ Support for Solana programs and standard transactions
 - ✅ Server-side rendering compatibility
 
 ## 🛠️ Available Scripts
 
 ```bash
-pnpm dev # Start development server
-pnpm build # Build for production
-pnpm start # Start production server
+pnpm dev             # Start development server
+pnpm build           # Build for production
+pnpm start           # Start production server
+pnpm generate:solana # Regenerate Solana Codama clients
 ```
 
 ## 📁 Project Structure
@@ -73,7 +74,7 @@ src/
 - `@tuwaio/orbit-core`: The core, network adapters utils.
 - `@tuwaio/orbit-solana`: Solana, network adapter utils.
 - `@tuwaio/pulsar-core`: The core, chain-agnostic tracking engine.
-- `@tuwaio/pulsar-solana`: Adapter for Solana-compatible chains, including trackers for Gelato and Safe.
+- `@tuwaio/pulsar-solana`: Adapter for Solana transaction tracking via `@solana/kit`.
 - `@tuwaio/pulsar-react`: React hooks for integrating your app with the Pulsar engine.
 - `@tuwaio/nova-transactions`: Pre-built UI components (Modals, Toasts, Buttons, etc.).
 
@@ -124,7 +125,8 @@ For detailed documentation and advanced usage:
 - [Pulsar Documentation](https://pulsar.docs.tuwa.io/)
 - [Nova Documentation](https://stories.tuwa.io/?path=/docs/introduction--docs)
 - [Next.js Documentation](https://nextjs.org/docs)
-- [Gill Documentation](https://www.gillsdk.com/)
+- [Solana Kit Documentation](https://github.com/solana-labs/solana-web3.js)
+- [Codama Documentation](https://github.com/codama-idl/codama)
 
 ## 🤝 Contributing & Support
 

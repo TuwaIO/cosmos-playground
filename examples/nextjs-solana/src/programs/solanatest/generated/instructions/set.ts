@@ -16,6 +16,8 @@ import {
   getStructEncoder,
   getU8Decoder,
   getU8Encoder,
+  SOLANA_ERROR__PROGRAM_CLIENTS__INSUFFICIENT_ACCOUNT_METAS,
+  SolanaError,
   transformEncoder,
   type AccountMeta,
   type Address,
@@ -27,15 +29,13 @@ import {
   type InstructionWithData,
   type ReadonlyUint8Array,
   type WritableAccount,
-} from 'gill';
+} from '@solana/kit';
+import { getAccountMetaFactory, type ResolvedInstructionAccount } from '@solana/kit/program-client-core';
 import { SOLANATEST_PROGRAM_ADDRESS } from '../programs';
-import { getAccountMetaFactory, type ResolvedAccount } from '../shared';
 
-export const SET_DISCRIMINATOR = new Uint8Array([
-  198, 51, 53, 241, 116, 29, 126, 194,
-]);
+export const SET_DISCRIMINATOR: ReadonlyUint8Array = new Uint8Array([198, 51, 53, 241, 116, 29, 126, 194]);
 
-export function getSetDiscriminatorBytes() {
+export function getSetDiscriminatorBytes(): ReadonlyUint8Array {
   return fixEncoderSize(getBytesEncoder(), 8).encode(SET_DISCRIMINATOR);
 }
 
@@ -47,17 +47,12 @@ export type SetInstruction<
   InstructionWithData<ReadonlyUint8Array> &
   InstructionWithAccounts<
     [
-      TAccountSolanatest extends string
-        ? WritableAccount<TAccountSolanatest>
-        : TAccountSolanatest,
+      TAccountSolanatest extends string ? WritableAccount<TAccountSolanatest> : TAccountSolanatest,
       ...TRemainingAccounts,
     ]
   >;
 
-export type SetInstructionData = {
-  discriminator: ReadonlyUint8Array;
-  value: number;
-};
+export type SetInstructionData = { discriminator: ReadonlyUint8Array; value: number };
 
 export type SetInstructionDataArgs = { value: number };
 
@@ -67,7 +62,7 @@ export function getSetInstructionDataEncoder(): FixedSizeEncoder<SetInstructionD
       ['discriminator', fixEncoderSize(getBytesEncoder(), 8)],
       ['value', getU8Encoder()],
     ]),
-    (value) => ({ ...value, discriminator: SET_DISCRIMINATOR })
+    (value) => ({ ...value, discriminator: SET_DISCRIMINATOR }),
   );
 }
 
@@ -78,14 +73,8 @@ export function getSetInstructionDataDecoder(): FixedSizeDecoder<SetInstructionD
   ]);
 }
 
-export function getSetInstructionDataCodec(): FixedSizeCodec<
-  SetInstructionDataArgs,
-  SetInstructionData
-> {
-  return combineCodec(
-    getSetInstructionDataEncoder(),
-    getSetInstructionDataDecoder()
-  );
+export function getSetInstructionDataCodec(): FixedSizeCodec<SetInstructionDataArgs, SetInstructionData> {
+  return combineCodec(getSetInstructionDataEncoder(), getSetInstructionDataDecoder());
 }
 
 export type SetInput<TAccountSolanatest extends string = string> = {
@@ -98,26 +87,21 @@ export function getSetInstruction<
   TProgramAddress extends Address = typeof SOLANATEST_PROGRAM_ADDRESS,
 >(
   input: SetInput<TAccountSolanatest>,
-  config?: { programAddress?: TProgramAddress }
+  config?: { programAddress?: TProgramAddress },
 ): SetInstruction<TProgramAddress, TAccountSolanatest> {
   // Program address.
   const programAddress = config?.programAddress ?? SOLANATEST_PROGRAM_ADDRESS;
 
   // Original accounts.
-  const originalAccounts = {
-    solanatest: { value: input.solanatest ?? null, isWritable: true },
-  };
-  const accounts = originalAccounts as Record<
-    keyof typeof originalAccounts,
-    ResolvedAccount
-  >;
+  const originalAccounts = { solanatest: { value: input.solanatest ?? null, isWritable: true } };
+  const accounts = originalAccounts as Record<keyof typeof originalAccounts, ResolvedInstructionAccount>;
 
   // Original args.
   const args = { ...input };
 
   const getAccountMeta = getAccountMetaFactory(programAddress, 'programId');
   return Object.freeze({
-    accounts: [getAccountMeta(accounts.solanatest)],
+    accounts: [getAccountMeta('solanatest', accounts.solanatest)],
     data: getSetInstructionDataEncoder().encode(args as SetInstructionDataArgs),
     programAddress,
   } as SetInstruction<TProgramAddress, TAccountSolanatest>);
@@ -134,17 +118,14 @@ export type ParsedSetInstruction<
   data: SetInstructionData;
 };
 
-export function parseSetInstruction<
-  TProgram extends string,
-  TAccountMetas extends readonly AccountMeta[],
->(
-  instruction: Instruction<TProgram> &
-    InstructionWithAccounts<TAccountMetas> &
-    InstructionWithData<ReadonlyUint8Array>
+export function parseSetInstruction<TProgram extends string, TAccountMetas extends readonly AccountMeta[]>(
+  instruction: Instruction<TProgram> & InstructionWithAccounts<TAccountMetas> & InstructionWithData<ReadonlyUint8Array>,
 ): ParsedSetInstruction<TProgram, TAccountMetas> {
   if (instruction.accounts.length < 1) {
-    // TODO: Coded error.
-    throw new Error('Not enough accounts');
+    throw new SolanaError(SOLANA_ERROR__PROGRAM_CLIENTS__INSUFFICIENT_ACCOUNT_METAS, {
+      actualAccountMetas: instruction.accounts.length,
+      expectedAccountMetas: 1,
+    });
   }
   let accountIndex = 0;
   const getNextAccount = () => {

@@ -5,15 +5,15 @@
 
 import { Buffer } from 'buffer'; // Ensure Buffer is explicitly imported for cross-platform compatibility.
 import {
-  Account,
-  AccountInfoBase,
-  AccountInfoWithBase64EncodedData,
+  type Account,
+  type AccountInfoBase,
+  type AccountInfoWithBase64EncodedData,
   decodeAccount,
-  Decoder,
-  MaybeEncodedAccount,
+  type Decoder,
+  type MaybeEncodedAccount,
   parseBase64RpcAccount,
-  SolanaClient,
-} from 'gill';
+} from '@solana/kit';
+import type { SolanaClient } from '@tuwaio/solana-sdk/orbit';
 
 import { getProgramAccounts, GetProgramAccountsConfig } from './getProgramAccounts';
 
@@ -33,7 +33,7 @@ export interface GetProgramAccountsDecodedConfig<T extends object> extends GetPr
  * for retrieving and immediately working with typed account data without manual parsing.
  *
  * @template T The object type to which the account data will be decoded.
- * @param rpc The Solana RPC client instance from the `gill` library.
+ * @param rpc The Solana RPC client instance.
  * @param config The configuration, including the program address, filter, and a data decoder.
  * @returns A promise that resolves to an array of fully decoded program accounts.
  * @throws Will throw an error if the RPC call or the decoding process fails.

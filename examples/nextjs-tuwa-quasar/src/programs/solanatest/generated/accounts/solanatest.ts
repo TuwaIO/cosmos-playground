@@ -33,13 +33,11 @@ import {
   type MaybeAccount,
   type MaybeEncodedAccount,
   type ReadonlyUint8Array,
-} from 'gill';
+} from '@solana/kit';
 
-export const SOLANATEST_DISCRIMINATOR = new Uint8Array([
-  188, 63, 12, 105, 104, 194, 130, 9,
-]);
+export const SOLANATEST_DISCRIMINATOR: ReadonlyUint8Array = new Uint8Array([188, 63, 12, 105, 104, 194, 130, 9]);
 
-export function getSolanatestDiscriminatorBytes() {
+export function getSolanatestDiscriminatorBytes(): ReadonlyUint8Array {
   return fixEncoderSize(getBytesEncoder(), 8).encode(SOLANATEST_DISCRIMINATOR);
 }
 
@@ -47,16 +45,18 @@ export type Solanatest = { discriminator: ReadonlyUint8Array; count: number };
 
 export type SolanatestArgs = { count: number };
 
+/** Gets the encoder for {@link SolanatestArgs} account data. */
 export function getSolanatestEncoder(): FixedSizeEncoder<SolanatestArgs> {
   return transformEncoder(
     getStructEncoder([
       ['discriminator', fixEncoderSize(getBytesEncoder(), 8)],
       ['count', getU8Encoder()],
     ]),
-    (value) => ({ ...value, discriminator: SOLANATEST_DISCRIMINATOR })
+    (value) => ({ ...value, discriminator: SOLANATEST_DISCRIMINATOR }),
   );
 }
 
+/** Gets the decoder for {@link Solanatest} account data. */
 export function getSolanatestDecoder(): FixedSizeDecoder<Solanatest> {
   return getStructDecoder([
     ['discriminator', fixDecoderSize(getBytesDecoder(), 8)],
@@ -64,32 +64,27 @@ export function getSolanatestDecoder(): FixedSizeDecoder<Solanatest> {
   ]);
 }
 
-export function getSolanatestCodec(): FixedSizeCodec<
-  SolanatestArgs,
-  Solanatest
-> {
+/** Gets the codec for {@link Solanatest} account data. */
+export function getSolanatestCodec(): FixedSizeCodec<SolanatestArgs, Solanatest> {
   return combineCodec(getSolanatestEncoder(), getSolanatestDecoder());
 }
 
 export function decodeSolanatest<TAddress extends string = string>(
-  encodedAccount: EncodedAccount<TAddress>
+  encodedAccount: EncodedAccount<TAddress>,
 ): Account<Solanatest, TAddress>;
 export function decodeSolanatest<TAddress extends string = string>(
-  encodedAccount: MaybeEncodedAccount<TAddress>
+  encodedAccount: MaybeEncodedAccount<TAddress>,
 ): MaybeAccount<Solanatest, TAddress>;
 export function decodeSolanatest<TAddress extends string = string>(
-  encodedAccount: EncodedAccount<TAddress> | MaybeEncodedAccount<TAddress>
+  encodedAccount: EncodedAccount<TAddress> | MaybeEncodedAccount<TAddress>,
 ): Account<Solanatest, TAddress> | MaybeAccount<Solanatest, TAddress> {
-  return decodeAccount(
-    encodedAccount as MaybeEncodedAccount<TAddress>,
-    getSolanatestDecoder()
-  );
+  return decodeAccount(encodedAccount as MaybeEncodedAccount<TAddress>, getSolanatestDecoder());
 }
 
 export async function fetchSolanatest<TAddress extends string = string>(
   rpc: Parameters<typeof fetchEncodedAccount>[0],
   address: Address<TAddress>,
-  config?: FetchAccountConfig
+  config?: FetchAccountConfig,
 ): Promise<Account<Solanatest, TAddress>> {
   const maybeAccount = await fetchMaybeSolanatest(rpc, address, config);
   assertAccountExists(maybeAccount);
@@ -99,7 +94,7 @@ export async function fetchSolanatest<TAddress extends string = string>(
 export async function fetchMaybeSolanatest<TAddress extends string = string>(
   rpc: Parameters<typeof fetchEncodedAccount>[0],
   address: Address<TAddress>,
-  config?: FetchAccountConfig
+  config?: FetchAccountConfig,
 ): Promise<MaybeAccount<Solanatest, TAddress>> {
   const maybeAccount = await fetchEncodedAccount(rpc, address, config);
   return decodeSolanatest(maybeAccount);
@@ -108,7 +103,7 @@ export async function fetchMaybeSolanatest<TAddress extends string = string>(
 export async function fetchAllSolanatest(
   rpc: Parameters<typeof fetchEncodedAccounts>[0],
   addresses: Array<Address>,
-  config?: FetchAccountsConfig
+  config?: FetchAccountsConfig,
 ): Promise<Account<Solanatest>[]> {
   const maybeAccounts = await fetchAllMaybeSolanatest(rpc, addresses, config);
   assertAccountsExist(maybeAccounts);
@@ -118,7 +113,7 @@ export async function fetchAllSolanatest(
 export async function fetchAllMaybeSolanatest(
   rpc: Parameters<typeof fetchEncodedAccounts>[0],
   addresses: Array<Address>,
-  config?: FetchAccountsConfig
+  config?: FetchAccountsConfig,
 ): Promise<MaybeAccount<Solanatest>[]> {
   const maybeAccounts = await fetchEncodedAccounts(rpc, addresses, config);
   return maybeAccounts.map((maybeAccount) => decodeSolanatest(maybeAccount));

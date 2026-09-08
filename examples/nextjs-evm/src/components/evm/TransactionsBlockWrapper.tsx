@@ -84,11 +84,11 @@ export const TransactionsBlockWrapper = () => {
     });
   };
 
-  const handleIncrementGelato = async () => {
+  const handleIncrementPimlico = async () => {
     if (currentCount === null) return;
 
     await executeTxAction({
-      actionFunction: txActions.incrementGelato,
+      actionFunction: txActions.incrementPimlicoEvm,
       onSuccess: (tx) => {
         if (tx.type === TxType.increment) {
           setTimeout(() => fetchCurrentCount(), 2000);
@@ -98,9 +98,9 @@ export const TransactionsBlockWrapper = () => {
       params: {
         type: TxType.increment,
         adapter: OrbitAdapter.EVM,
-        tracker: TransactionTracker.Gelato,
+        tracker: TransactionTracker.ERC4337,
         desiredChainID: sepolia.id,
-        title: ['Incrementing', 'Incremented', 'Error when increment', 'Increment tx replaced'],
+        title: ['Incrementing (Pimlico)', 'Incremented (Pimlico)', 'Error when increment', 'UserOperation replaced'],
         description: [
           `Value after incrementing ${currentCount + 1}`,
           `Success. Current value is ${currentCount + 1}`,
@@ -200,7 +200,7 @@ export const TransactionsBlockWrapper = () => {
 
               <div className="h-14">
                 <TxActionButton
-                  action={handleIncrementGelato}
+                  action={handleIncrementPimlico}
                   transactionsPool={transactionsPool}
                   getLastTxKey={getLastTxKey}
                   className="w-full h-full bg-gradient-to-r from-[var(--tuwa-button-gradient-from)] to-[var(--tuwa-button-gradient-to)] hover:from-[var(--tuwa-button-gradient-from-hover)] hover:to-[var(--tuwa-button-gradient-to-hover)] text-[var(--tuwa-text-on-accent)] font-semibold rounded-[var(--tuwa-rounded-corners)] transition-all duration-200 ease-in-out hover:shadow-lg flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] select-none"
@@ -208,7 +208,7 @@ export const TransactionsBlockWrapper = () => {
                   walletAddress={address}
                 >
                   <span className="text-xl leading-none contents text-[var(--tuwa-text-on-accent)]">+</span>
-                  <span className="leading-none">Increment Gelato Counter</span>
+                  <span className="leading-none">Increment Pimlico Counter</span>
                 </TxActionButton>
               </div>
 

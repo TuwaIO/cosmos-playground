@@ -7,18 +7,55 @@
  */
 
 import {
+  assertIsInstructionWithAccounts,
   containsBytes,
+  extendClient,
   fixEncoderSize,
   getBytesEncoder,
+  SOLANA_ERROR__PROGRAM_CLIENTS__FAILED_TO_IDENTIFY_ACCOUNT,
+  SOLANA_ERROR__PROGRAM_CLIENTS__FAILED_TO_IDENTIFY_INSTRUCTION,
+  SOLANA_ERROR__PROGRAM_CLIENTS__UNRECOGNIZED_INSTRUCTION_TYPE,
+  SolanaError,
   type Address,
+  type ClientWithPayer,
+  type ClientWithRpc,
+  type ClientWithTransactionPlanning,
+  type ClientWithTransactionSending,
+  type ExtendedClient,
+  type GetAccountInfoApi,
+  type GetMultipleAccountsApi,
+  type Instruction,
+  type InstructionWithData,
   type ReadonlyUint8Array,
-} from 'gill';
+} from '@solana/kit';
 import {
+  addSelfFetchFunctions,
+  addSelfPlanAndSendFunctions,
+  type SelfFetchFunctions,
+  type SelfPlanAndSendFunctions,
+} from '@solana/kit/program-client-core';
+import { getSolanatestCodec, type Solanatest, type SolanatestArgs } from '../accounts';
+import {
+  getCloseInstruction,
+  getDecrementInstruction,
+  getIncrementInstruction,
+  getInitializeInstruction,
+  getSetInstruction,
+  parseCloseInstruction,
+  parseDecrementInstruction,
+  parseIncrementInstruction,
+  parseInitializeInstruction,
+  parseSetInstruction,
+  type CloseInput,
+  type DecrementInput,
+  type IncrementInput,
+  type InitializeInput,
   type ParsedCloseInstruction,
   type ParsedDecrementInstruction,
   type ParsedIncrementInstruction,
   type ParsedInitializeInstruction,
   type ParsedSetInstruction,
+  type SetInput,
 } from '../instructions';
 
 export const SOLANATEST_PROGRAM_ADDRESS = '' as Address<''>;
@@ -28,23 +65,22 @@ export enum SolanatestAccount {
 }
 
 export function identifySolanatestAccount(
-  account: { data: ReadonlyUint8Array } | ReadonlyUint8Array
+  account: { data: ReadonlyUint8Array } | ReadonlyUint8Array,
 ): SolanatestAccount {
   const data = 'data' in account ? account.data : account;
   if (
     containsBytes(
       data,
-      fixEncoderSize(getBytesEncoder(), 8).encode(
-        new Uint8Array([188, 63, 12, 105, 104, 194, 130, 9])
-      ),
-      0
+      fixEncoderSize(getBytesEncoder(), 8).encode(new Uint8Array([188, 63, 12, 105, 104, 194, 130, 9])),
+      0,
     )
   ) {
     return SolanatestAccount.Solanatest;
   }
-  throw new Error(
-    'The provided account could not be identified as a solanatest account.'
-  );
+  throw new SolanaError(SOLANA_ERROR__PROGRAM_CLIENTS__FAILED_TO_IDENTIFY_ACCOUNT, {
+    accountData: data,
+    programName: 'solanatest',
+  });
 }
 
 export enum SolanatestInstruction {
@@ -56,16 +92,14 @@ export enum SolanatestInstruction {
 }
 
 export function identifySolanatestInstruction(
-  instruction: { data: ReadonlyUint8Array } | ReadonlyUint8Array
+  instruction: { data: ReadonlyUint8Array } | ReadonlyUint8Array,
 ): SolanatestInstruction {
   const data = 'data' in instruction ? instruction.data : instruction;
   if (
     containsBytes(
       data,
-      fixEncoderSize(getBytesEncoder(), 8).encode(
-        new Uint8Array([98, 165, 201, 177, 108, 65, 206, 96])
-      ),
-      0
+      fixEncoderSize(getBytesEncoder(), 8).encode(new Uint8Array([98, 165, 201, 177, 108, 65, 206, 96])),
+      0,
     )
   ) {
     return SolanatestInstruction.Close;
@@ -73,10 +107,8 @@ export function identifySolanatestInstruction(
   if (
     containsBytes(
       data,
-      fixEncoderSize(getBytesEncoder(), 8).encode(
-        new Uint8Array([106, 227, 168, 59, 248, 27, 150, 101])
-      ),
-      0
+      fixEncoderSize(getBytesEncoder(), 8).encode(new Uint8Array([106, 227, 168, 59, 248, 27, 150, 101])),
+      0,
     )
   ) {
     return SolanatestInstruction.Decrement;
@@ -84,10 +116,8 @@ export function identifySolanatestInstruction(
   if (
     containsBytes(
       data,
-      fixEncoderSize(getBytesEncoder(), 8).encode(
-        new Uint8Array([11, 18, 104, 9, 104, 174, 59, 33])
-      ),
-      0
+      fixEncoderSize(getBytesEncoder(), 8).encode(new Uint8Array([11, 18, 104, 9, 104, 174, 59, 33])),
+      0,
     )
   ) {
     return SolanatestInstruction.Increment;
@@ -95,10 +125,8 @@ export function identifySolanatestInstruction(
   if (
     containsBytes(
       data,
-      fixEncoderSize(getBytesEncoder(), 8).encode(
-        new Uint8Array([175, 175, 109, 31, 13, 152, 155, 237])
-      ),
-      0
+      fixEncoderSize(getBytesEncoder(), 8).encode(new Uint8Array([175, 175, 109, 31, 13, 152, 155, 237])),
+      0,
     )
   ) {
     return SolanatestInstruction.Initialize;
@@ -106,32 +134,110 @@ export function identifySolanatestInstruction(
   if (
     containsBytes(
       data,
-      fixEncoderSize(getBytesEncoder(), 8).encode(
-        new Uint8Array([198, 51, 53, 241, 116, 29, 126, 194])
-      ),
-      0
+      fixEncoderSize(getBytesEncoder(), 8).encode(new Uint8Array([198, 51, 53, 241, 116, 29, 126, 194])),
+      0,
     )
   ) {
     return SolanatestInstruction.Set;
   }
-  throw new Error(
-    'The provided instruction could not be identified as a solanatest instruction.'
-  );
+  throw new SolanaError(SOLANA_ERROR__PROGRAM_CLIENTS__FAILED_TO_IDENTIFY_INSTRUCTION, {
+    instructionData: data,
+    programName: 'solanatest',
+  });
 }
 
 export type ParsedSolanatestInstruction<TProgram extends string = ''> =
-  | ({
-      instructionType: SolanatestInstruction.Close;
-    } & ParsedCloseInstruction<TProgram>)
-  | ({
-      instructionType: SolanatestInstruction.Decrement;
-    } & ParsedDecrementInstruction<TProgram>)
-  | ({
-      instructionType: SolanatestInstruction.Increment;
-    } & ParsedIncrementInstruction<TProgram>)
-  | ({
-      instructionType: SolanatestInstruction.Initialize;
-    } & ParsedInitializeInstruction<TProgram>)
-  | ({
-      instructionType: SolanatestInstruction.Set;
-    } & ParsedSetInstruction<TProgram>);
+  | ({ instructionType: SolanatestInstruction.Close } & ParsedCloseInstruction<TProgram>)
+  | ({ instructionType: SolanatestInstruction.Decrement } & ParsedDecrementInstruction<TProgram>)
+  | ({ instructionType: SolanatestInstruction.Increment } & ParsedIncrementInstruction<TProgram>)
+  | ({ instructionType: SolanatestInstruction.Initialize } & ParsedInitializeInstruction<TProgram>)
+  | ({ instructionType: SolanatestInstruction.Set } & ParsedSetInstruction<TProgram>);
+
+export function parseSolanatestInstruction<TProgram extends string>(
+  instruction: Instruction<TProgram> & InstructionWithData<ReadonlyUint8Array>,
+): ParsedSolanatestInstruction<TProgram> {
+  const instructionType = identifySolanatestInstruction(instruction);
+  switch (instructionType) {
+    case SolanatestInstruction.Close: {
+      assertIsInstructionWithAccounts(instruction);
+      return { instructionType: SolanatestInstruction.Close, ...parseCloseInstruction(instruction) };
+    }
+    case SolanatestInstruction.Decrement: {
+      assertIsInstructionWithAccounts(instruction);
+      return { instructionType: SolanatestInstruction.Decrement, ...parseDecrementInstruction(instruction) };
+    }
+    case SolanatestInstruction.Increment: {
+      assertIsInstructionWithAccounts(instruction);
+      return { instructionType: SolanatestInstruction.Increment, ...parseIncrementInstruction(instruction) };
+    }
+    case SolanatestInstruction.Initialize: {
+      assertIsInstructionWithAccounts(instruction);
+      return { instructionType: SolanatestInstruction.Initialize, ...parseInitializeInstruction(instruction) };
+    }
+    case SolanatestInstruction.Set: {
+      assertIsInstructionWithAccounts(instruction);
+      return { instructionType: SolanatestInstruction.Set, ...parseSetInstruction(instruction) };
+    }
+    default:
+      throw new SolanaError(SOLANA_ERROR__PROGRAM_CLIENTS__UNRECOGNIZED_INSTRUCTION_TYPE, {
+        instructionType: instructionType as string,
+        programName: 'solanatest',
+      });
+  }
+}
+
+export type SolanatestPlugin = {
+  accounts: SolanatestPluginAccounts;
+  instructions: SolanatestPluginInstructions;
+  identifyAccount: typeof identifySolanatestAccount;
+  identifyInstruction: typeof identifySolanatestInstruction;
+  parseInstruction: typeof parseSolanatestInstruction;
+};
+
+export type SolanatestPluginAccounts = {
+  solanatest: ReturnType<typeof getSolanatestCodec> & SelfFetchFunctions<SolanatestArgs, Solanatest>;
+};
+
+export type SolanatestPluginInstructions = {
+  close: (
+    input: MakeOptional<CloseInput, 'payer'>,
+  ) => ReturnType<typeof getCloseInstruction> & SelfPlanAndSendFunctions;
+  decrement: (input: DecrementInput) => ReturnType<typeof getDecrementInstruction> & SelfPlanAndSendFunctions;
+  increment: (input: IncrementInput) => ReturnType<typeof getIncrementInstruction> & SelfPlanAndSendFunctions;
+  initialize: (
+    input: MakeOptional<InitializeInput, 'payer'>,
+  ) => ReturnType<typeof getInitializeInstruction> & SelfPlanAndSendFunctions;
+  set: (input: SetInput) => ReturnType<typeof getSetInstruction> & SelfPlanAndSendFunctions;
+};
+
+export type SolanatestPluginRequirements = ClientWithRpc<GetAccountInfoApi & GetMultipleAccountsApi> &
+  ClientWithPayer &
+  ClientWithTransactionPlanning &
+  ClientWithTransactionSending;
+
+export function solanatestProgram() {
+  return <T extends SolanatestPluginRequirements>(client: T): ExtendedClient<T, { solanatest: SolanatestPlugin }> => {
+    return extendClient(client, {
+      solanatest: <SolanatestPlugin>{
+        accounts: { solanatest: addSelfFetchFunctions(client, getSolanatestCodec()) },
+        instructions: {
+          close: (input) =>
+            addSelfPlanAndSendFunctions(client, getCloseInstruction({ ...input, payer: input.payer ?? client.payer })),
+          decrement: (input) => addSelfPlanAndSendFunctions(client, getDecrementInstruction(input)),
+          increment: (input) => addSelfPlanAndSendFunctions(client, getIncrementInstruction(input)),
+          initialize: (input) =>
+            addSelfPlanAndSendFunctions(
+              client,
+              getInitializeInstruction({ ...input, payer: input.payer ?? client.payer }),
+            ),
+          set: (input) => addSelfPlanAndSendFunctions(client, getSetInstruction(input)),
+        },
+        identifyAccount: identifySolanatestAccount,
+        identifyInstruction: identifySolanatestInstruction,
+        parseInstruction: parseSolanatestInstruction,
+      },
+    });
+  };
+}
+
+type MakeOptional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;

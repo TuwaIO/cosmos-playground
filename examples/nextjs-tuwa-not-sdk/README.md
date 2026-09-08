@@ -11,6 +11,7 @@ This example is part of the [Cosmos Playground](https://github.com/TuwaIO/cosmos
 ## 🏛️ Overview
 
 This template demonstrates granular package integration using direct TUWA ecosystem modules:
+
 - **Client**: `@tuwaio/satellite-core`, `@tuwaio/satellite-evm`, `@tuwaio/satellite-solana`, `@tuwaio/pulsar-core`, `@tuwaio/pulsar-evm`, `@tuwaio/pulsar-solana`, `@tuwaio/nova-connect`, `@tuwaio/nova-transactions`.
 
 ---
@@ -24,7 +25,7 @@ pnpm install
 # Start development server
 pnpm dev
 # Open http://localhost:3000 in your browser
-````
+```
 
 ## 📦 What's Included
 
@@ -124,7 +125,7 @@ For detailed documentation and advanced usage:
 - [Nova Documentation](https://stories.tuwa.io/?path=/docs/introduction--docs)
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Wagmi Documentation](https://wagmi.sh/)
-- [Gill Documentation](https://www.gillsdk.com/)
+- [Solana Kit Documentation](https://www.solanakit.com/)
 
 ## 🤝 Contributing & Support
 

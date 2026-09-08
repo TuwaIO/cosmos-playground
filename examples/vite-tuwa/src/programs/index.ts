@@ -1,8 +1,10 @@
-import { Address, getBase58Decoder, SolanaClient } from 'gill';
-import { getProgramAccountsDecoded } from './getProgramAccountsDecoded';
-import { getSolanatestDecoder, SOLANATEST_DISCRIMINATOR } from './solanatest/generated'
+import { type Address, getBase58Decoder } from '@solana/kit';
+import type { SolanaClient } from '@tuwaio/solana-sdk/orbit';
 
-export * from './solanatest/generated'
+import { getProgramAccountsDecoded } from './getProgramAccountsDecoded';
+import { getSolanatestDecoder, SOLANATEST_DISCRIMINATOR } from './solanatest/generated';
+
+export * from './solanatest/generated';
 
 export function getSolanatestProgramAccounts(rpc: SolanaClient['rpc'], programAddress: Address) {
   return getProgramAccountsDecoded(rpc, {

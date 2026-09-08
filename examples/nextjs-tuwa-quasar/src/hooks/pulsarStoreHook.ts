@@ -31,7 +31,6 @@ const initialStore = createPulsarStore<TransactionUnion>({
       throw err; // Rethrow to inform pulsar-core that sync failed
     }
   },
-  gelatoApiKey: process.env.NEXT_PUBLIC_GELATO_API_KEY,
 });
 
 export const usePulsarStore = createBoundedUseStore(initialStore);

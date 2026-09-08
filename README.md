@@ -16,7 +16,7 @@ The **Cosmos Playground** monorepo contains production-ready dApp starter kits:
 | [**`nextjs-evm`**](./examples/nextjs-evm) | Next.js 16 (App Router) | EVM Network Adapter, Pulsar Tracking Engine, SIWX (CAIP-122) Auth |
 | [**`nextjs-tuwa`**](./examples/nextjs-tuwa) | Next.js 16 (App Router) | Multi-chain (EVM + Solana), Pulsar Tracking Engine |
 | [**`nextjs-tuwa-not-sdk`**](./examples/nextjs-tuwa-not-sdk) | Next.js 16 (App Router) | Granular non-umbrella package integration (`@tuwaio/satellite-*`, `@tuwaio/pulsar-*`, `@tuwaio/nova-*`) |
-| [**`nextjs-solana`**](./examples/nextjs-solana) | Next.js 16 (App Router) | Solana Network Adapter, Gill/Wallet-Standard, Pulsar Tracking Engine |
+| [**`nextjs-solana`**](./examples/nextjs-solana) | Next.js 16 (App Router) | Solana Network Adapter, @solana/kit / Wallet-Standard, Pulsar Tracking Engine |
 | [**`custom-style`**](./examples/custom-style) | Vite + React 19 | Custom Tailwind CSS styling overrides for Nova UI Kit |
 | [**`vite-tuwa`**](./examples/vite-tuwa) | Vite + React 19 | Fast client-side multi-chain dApp template |
 
