@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import degit from 'degit';
 import { execa } from 'execa';
 import fs from 'fs-extra';
 import path from 'path';
@@ -7,17 +8,33 @@ import prompts from 'prompts';
 
 const REPO_URL = 'TuwaIO/cosmos-playground/examples';
 
+type PackageManager = 'pnpm' | 'bun' | 'yarn' | 'npm' | null;
+
 /**
- * Checks whether pnpm is available in the execution environment.
- * @returns A promise that resolves to true if pnpm is installed, false otherwise.
+ * Checks whether a specific CLI command is executable in the current environment.
+ * @param command - The executable command name to verify.
+ * @returns A promise resolving to true if the command succeeded, false otherwise.
  */
-async function isPnpmInstalled(): Promise<boolean> {
+async function isCommandAvailable(command: string): Promise<boolean> {
   try {
-    await execa('pnpm', ['--version']);
+    await execa(command, ['--version']);
     return true;
   } catch {
     return false;
   }
+}
+
+/**
+ * Detects the best available package manager installed on the host machine.
+ * Priority order: pnpm > bun > yarn > npm.
+ * @returns The detected package manager or null if none was found.
+ */
+async function detectPackageManager(): Promise<PackageManager> {
+  if (await isCommandAvailable('pnpm')) return 'pnpm';
+  if (await isCommandAvailable('bun')) return 'bun';
+  if (await isCommandAvailable('yarn')) return 'yarn';
+  if (await isCommandAvailable('npm')) return 'npm';
+  return null;
 }
 
 async function main() {
@@ -77,15 +94,20 @@ async function main() {
   try {
     console.log(`\n⬇️ Downloading template "${template}" from GitHub...`);
 
-    // Use npx to invoke degit locally
     const degitSource = `${REPO_URL}/${template}`;
-    await execa('npx', ['degit', degitSource, projectPath], { stdio: 'inherit' });
+    try {
+      const emitter = degit(degitSource, { cache: false, force: true });
+      await emitter.clone(projectPath);
+    } catch {
+      // Fallback to npx degit if programmatic clone fails
+      await execa('npx', ['degit', degitSource, projectPath], { stdio: 'inherit' });
+    }
 
     console.log(`\n🎉 Your new project "${projectName}" has been created!`);
 
-    const hasPnpm = await isPnpmInstalled();
+    const packageManager = await detectPackageManager();
 
-    if (hasPnpm) {
+    if (packageManager === 'pnpm') {
       // Ensure pnpm-workspace.yaml pre-configures known build scripts to avoid ERR_PNPM_IGNORED_BUILDS
       const workspaceYamlPath = path.join(projectPath, 'pnpm-workspace.yaml');
       if (!fs.existsSync(workspaceYamlPath)) {
@@ -106,14 +128,30 @@ async function main() {
         await execa('pnpm', ['approve-builds', '--all'], { cwd: projectPath, stdio: 'inherit' });
         await execa('pnpm', ['install'], { cwd: projectPath, stdio: 'inherit' });
       }
-    } else {
+    } else if (packageManager === 'npm') {
       console.log(`\n⚠️  Warning: pnpm is not detected on your system. Falling back to npm.`);
       console.log(`💡 We recommend installing pnpm for optimal performance: npm install -g pnpm`);
       console.log(`\n📦 Installing dependencies with npm...`);
       await execa('npm', ['install'], { cwd: projectPath, stdio: 'inherit' });
+    } else if (packageManager === 'bun') {
+      console.log(`\n⚠️  Warning: pnpm is not detected. Falling back to bun.`);
+      console.log(`\n📦 Installing dependencies with bun...`);
+      await execa('bun', ['install'], { cwd: projectPath, stdio: 'inherit' });
+    } else if (packageManager === 'yarn') {
+      console.log(`\n⚠️  Warning: pnpm is not detected. Falling back to yarn.`);
+      console.log(`\n📦 Installing dependencies with yarn...`);
+      await execa('yarn', ['install'], { cwd: projectPath, stdio: 'inherit' });
+    } else {
+      console.log(`\n⚠️  Warning: No supported package manager (pnpm, npm, bun, yarn) detected on your system.`);
+      console.log(`📁 Project template was successfully cloned into ./${projectName}`);
+      console.log(`\n💡 To complete setup:`);
+      console.log(`1. Install pnpm (recommended: https://pnpm.io/installation) or Node.js / npm`);
+      console.log(`2. cd ./${projectName}`);
+      console.log(`3. pnpm install && pnpm dev`);
+      return;
     }
 
-    const devCommand = hasPnpm ? 'pnpm dev' : 'npm run dev';
+    const devCommand = packageManager === 'npm' ? 'npm run dev' : `${packageManager} dev`;
 
     console.log(`\n✅ Done! Next steps:`);
     console.log(`cd ./${projectName}`);
