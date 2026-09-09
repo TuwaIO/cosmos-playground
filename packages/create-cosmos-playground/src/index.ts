@@ -7,6 +7,19 @@ import prompts from 'prompts';
 
 const REPO_URL = 'TuwaIO/cosmos-playground/examples';
 
+/**
+ * Checks whether pnpm is available in the execution environment.
+ * @returns A promise that resolves to true if pnpm is installed, false otherwise.
+ */
+async function isPnpmInstalled(): Promise<boolean> {
+  try {
+    await execa('pnpm', ['--version']);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 async function main() {
   console.log('✨ Creating a new Cosmos Playground project...');
 
@@ -69,12 +82,42 @@ async function main() {
     await execa('npx', ['degit', degitSource, projectPath], { stdio: 'inherit' });
 
     console.log(`\n🎉 Your new project "${projectName}" has been created!`);
-    console.log(`\n📦 Installing dependencies with pnpm...`);
-    await execa('pnpm', ['install'], { cwd: projectPath, stdio: 'inherit' });
+
+    const hasPnpm = await isPnpmInstalled();
+
+    if (hasPnpm) {
+      // Ensure pnpm-workspace.yaml pre-configures known build scripts to avoid ERR_PNPM_IGNORED_BUILDS
+      const workspaceYamlPath = path.join(projectPath, 'pnpm-workspace.yaml');
+      if (!fs.existsSync(workspaceYamlPath)) {
+        const defaultWorkspaceConfig = [
+          'allowBuilds:',
+          "  '@reown/appkit': true",
+          '  esbuild: true',
+          '',
+        ].join('\n');
+        await fs.writeFile(workspaceYamlPath, defaultWorkspaceConfig, 'utf-8');
+      }
+
+      console.log(`\n📦 Installing dependencies with pnpm...`);
+      try {
+        await execa('pnpm', ['install'], { cwd: projectPath, stdio: 'inherit' });
+      } catch {
+        console.log(`\n⚙️ Automatically approving dependency build scripts...`);
+        await execa('pnpm', ['approve-builds', '--all'], { cwd: projectPath, stdio: 'inherit' });
+        await execa('pnpm', ['install'], { cwd: projectPath, stdio: 'inherit' });
+      }
+    } else {
+      console.log(`\n⚠️  Warning: pnpm is not detected on your system. Falling back to npm.`);
+      console.log(`💡 We recommend installing pnpm for optimal performance: npm install -g pnpm`);
+      console.log(`\n📦 Installing dependencies with npm...`);
+      await execa('npm', ['install'], { cwd: projectPath, stdio: 'inherit' });
+    }
+
+    const devCommand = hasPnpm ? 'pnpm dev' : 'npm run dev';
 
     console.log(`\n✅ Done! Next steps:`);
     console.log(`cd ./${projectName}`);
-    console.log(`pnpm dev`);
+    console.log(`${devCommand}`);
 
     console.log(`\n---------------------------------------------------------`);
     console.log(`💡 Troubleshooting:`);
