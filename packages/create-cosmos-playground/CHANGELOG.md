@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.27](https://github.com/TuwaIO/cosmos-playground/compare/create-cosmos-playground-v0.0.26...create-cosmos-playground-v0.0.27) (2026-09-09)
+
+
+### Bug Fixes
+
+* optimize create playground script ([4cfe3cb](https://github.com/TuwaIO/cosmos-playground/commit/4cfe3cbee3c58edb357279977988f3a7254ddb01))
+
 ## [0.0.26](https://github.com/TuwaIO/cosmos-playground/compare/create-cosmos-playground-v0.0.25...create-cosmos-playground-v0.0.26) (2026-09-09)
 
 
