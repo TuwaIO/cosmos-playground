@@ -20,7 +20,7 @@ minimumReleaseAgeExclude:
   - '@tuwaio/satellite-react@0.5.0'
   - '@tuwaio/satellite-solana@0.5.0'
   - '@tuwaio/evm-sdk@0.1.14'
-  - '@tuwaio/quasar-sdk@0.1.8'
+  - '@tuwaio/quasar-sdk@0.1.8 || 0.1.9'
   - '@tuwaio/sdk@0.1.14'
   - '@tuwaio/siwx-core@0.3.0'
   - '@tuwaio/siwx-evm@0.3.0'
