@@ -852,8 +852,8 @@ importers:
         specifier: ^0.1.14
         version: 0.1.14(@tuwaio/nova-connect@0.6.0(9f8fb8494dead5e8a9d8199edf724def))(@tuwaio/orbit-core@0.3.0)(@tuwaio/pulsar-core@0.7.0(@tuwaio/orbit-core@0.3.0)(dayjs@1.11.23)(immer@11.1.18)(zustand@5.0.15(@types/react@19.2.18)(immer@11.1.18)(react@19.2.8)(use-sync-external-store@1.4.0(react@19.2.8))))(@tuwaio/satellite-core@0.5.0(@tuwaio/orbit-core@0.3.0)(immer@11.1.18)(zustand@5.0.15(@types/react@19.2.18)(immer@11.1.18)(react@19.2.8)(use-sync-external-store@1.4.0(react@19.2.8))))(@tuwaio/satellite-react@0.5.0(80bd6bc51d119f6e6a6a78743ba9de48))(@tuwaio/sdk@0.1.14(f4ebe07ffe336deafb84d6a58c640c81))(@tuwaio/siwx-core@0.3.0)(@wagmi/core@3.6.5(@tanstack/query-core@5.102.8)(@types/react@19.2.18)(immer@11.1.18)(react@19.2.8)(typescript@6.0.3)(use-sync-external-store@1.4.0(react@19.2.8))(viem@2.56.3(typescript@6.0.3)(zod@4.5.4)))(dayjs@1.11.23)(immer@11.1.18)(viem@2.56.3(typescript@6.0.3)(zod@4.5.4))(zustand@5.0.15(@types/react@19.2.18)(immer@11.1.18)(react@19.2.8)(use-sync-external-store@1.4.0(react@19.2.8)))
       '@tuwaio/quasar-sdk':
-        specifier: ^0.1.10
-        version: 0.1.10(@tuwaio/pulsar-core@0.7.0(@tuwaio/orbit-core@0.3.0)(dayjs@1.11.23)(immer@11.1.18)(zustand@5.0.15(@types/react@19.2.18)(immer@11.1.18)(react@19.2.8)(use-sync-external-store@1.4.0(react@19.2.8))))(@tuwaio/siwx-core@0.3.0)(@tuwaio/siwx-react@0.3.0(@tuwaio/siwx-core@0.3.0)(immer@11.1.18)(react@19.2.8)(zustand@5.0.15(@types/react@19.2.18)(immer@11.1.18)(react@19.2.8)(use-sync-external-store@1.4.0(react@19.2.8))))(@tuwaio/siwx-server@0.3.0(@tuwaio/siwx-core@0.3.0))(ofetch@1.5.1)
+        specifier: ^0.1.11
+        version: 0.1.11(@tuwaio/pulsar-core@0.7.0(@tuwaio/orbit-core@0.3.0)(dayjs@1.11.23)(immer@11.1.18)(zustand@5.0.15(@types/react@19.2.18)(immer@11.1.18)(react@19.2.8)(use-sync-external-store@1.4.0(react@19.2.8))))(@tuwaio/siwx-core@0.3.0)(@tuwaio/siwx-react@0.3.0(@tuwaio/siwx-core@0.3.0)(immer@11.1.18)(react@19.2.8)(zustand@5.0.15(@types/react@19.2.18)(immer@11.1.18)(react@19.2.8)(use-sync-external-store@1.4.0(react@19.2.8))))(@tuwaio/siwx-server@0.3.0(@tuwaio/siwx-core@0.3.0))(ofetch@1.5.1)
       '@tuwaio/sdk':
         specifier: ^0.1.14
         version: 0.1.14(f4ebe07ffe336deafb84d6a58c640c81)
@@ -3385,8 +3385,8 @@ packages:
       immer: 11.x.x
       zustand: 5.x.x
 
-  '@tuwaio/quasar-sdk@0.1.10':
-    resolution: {integrity: sha512-1s0XH4vw9gx4trpSQVX/HR+D1zCP1hpAoSpAm9oxFGIacZLNX0q9/lAmXXf6V9JLdPI2P9G2HTr/86J9U8bzMA==}
+  '@tuwaio/quasar-sdk@0.1.11':
+    resolution: {integrity: sha512-l/owAujYrgkYCExxZtJDUN2D32UTOHQ5Snu4wMvHpvH9MXUWW80qaitP8/t0eg6bA4esYlGdRpzTdzQt4W7aBQ==}
     hasBin: true
     peerDependencies:
       '@tuwaio/pulsar-core': '>=0.7'
@@ -8561,7 +8561,7 @@ snapshots:
       immer: 11.1.18
       zustand: 5.0.15(@types/react@19.2.18)(immer@11.1.18)(react@19.2.8)(use-sync-external-store@1.4.0(react@19.2.8))
 
-  '@tuwaio/quasar-sdk@0.1.10(@tuwaio/pulsar-core@0.7.0(@tuwaio/orbit-core@0.3.0)(dayjs@1.11.23)(immer@11.1.18)(zustand@5.0.15(@types/react@19.2.18)(immer@11.1.18)(react@19.2.8)(use-sync-external-store@1.4.0(react@19.2.8))))(@tuwaio/siwx-core@0.3.0)(@tuwaio/siwx-react@0.3.0(@tuwaio/siwx-core@0.3.0)(immer@11.1.18)(react@19.2.8)(zustand@5.0.15(@types/react@19.2.18)(immer@11.1.18)(react@19.2.8)(use-sync-external-store@1.4.0(react@19.2.8))))(@tuwaio/siwx-server@0.3.0(@tuwaio/siwx-core@0.3.0))(ofetch@1.5.1)':
+  '@tuwaio/quasar-sdk@0.1.11(@tuwaio/pulsar-core@0.7.0(@tuwaio/orbit-core@0.3.0)(dayjs@1.11.23)(immer@11.1.18)(zustand@5.0.15(@types/react@19.2.18)(immer@11.1.18)(react@19.2.8)(use-sync-external-store@1.4.0(react@19.2.8))))(@tuwaio/siwx-core@0.3.0)(@tuwaio/siwx-react@0.3.0(@tuwaio/siwx-core@0.3.0)(immer@11.1.18)(react@19.2.8)(zustand@5.0.15(@types/react@19.2.18)(immer@11.1.18)(react@19.2.8)(use-sync-external-store@1.4.0(react@19.2.8))))(@tuwaio/siwx-server@0.3.0(@tuwaio/siwx-core@0.3.0))(ofetch@1.5.1)':
     dependencies:
       '@tuwaio/pulsar-core': 0.7.0(@tuwaio/orbit-core@0.3.0)(dayjs@1.11.23)(immer@11.1.18)(zustand@5.0.15(@types/react@19.2.18)(immer@11.1.18)(react@19.2.8)(use-sync-external-store@1.4.0(react@19.2.8)))
       ofetch: 1.5.1
