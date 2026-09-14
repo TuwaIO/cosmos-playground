@@ -11,7 +11,35 @@ export const appConfig = {
   appUrl: 'https://custom-style.tuwa.io/',
 };
 
-export const appEVMChains = [monad, mainnet, arbitrum, sepolia, monadTestnet] as readonly [Chain, ...Chain[]];
+const alchemyKey = import.meta.env.VITE_ALCHEMY_KEY;
+
+export const appEVMChains = [
+  monad,
+  alchemyKey
+    ? {
+        ...mainnet,
+        rpcUrls: {
+          ...mainnet.rpcUrls,
+          default: {
+            http: [`https://eth-mainnet.g.alchemy.com/v2/${alchemyKey}`],
+          },
+        },
+      }
+    : mainnet,
+  arbitrum,
+  alchemyKey
+    ? {
+        ...sepolia,
+        rpcUrls: {
+          ...sepolia.rpcUrls,
+          default: {
+            http: [`https://eth-sepolia.g.alchemy.com/v2/${alchemyKey}`],
+          },
+        },
+      }
+    : sepolia,
+  monadTestnet,
+] as readonly [Chain, ...Chain[]];
 
 export const wagmiConfig = createConfig({
   connectors: [

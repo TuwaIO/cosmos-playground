@@ -96,7 +96,7 @@ NEXT_PUBLIC_WALLET_PROJECT_ID=your_project_id
 # Optional: Gelato API key for sponsoring transactions
 NEXT_PUBLIC_GELATO_API_KEY=your_project_key
 
-# Optional: Alchemy API key for solana mainnet RPC URL
+# Optional: Alchemy API key for RPC URLs
 NEXT_PUBLIC_ALCHEMY_KEY=your_alchemy_key
 ```
 

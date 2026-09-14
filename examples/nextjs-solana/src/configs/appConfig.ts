@@ -1,4 +1,6 @@
+const alchemyKey = process.env.NEXT_PUBLIC_ALCHEMY_KEY;
+
 export const solanaRPCUrls = {
-  mainnet: `https://solana-mainnet.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_KEY}`,
+  mainnet: alchemyKey ? `https://solana-mainnet.g.alchemy.com/v2/${alchemyKey}` : 'https://api.mainnet-beta.solana.com',
   devnet: 'https://api.devnet.solana.com',
 };

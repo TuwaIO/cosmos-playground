@@ -11,6 +11,7 @@ This example is part of the [Cosmos Playground](https://github.com/TuwaIO/cosmos
 ## 🏛️ Overview
 
 This template demonstrates multi-chain Vite integration using the TUWA Ecosystem SDKs:
+
 - **Client**: Multi-chain connection via `@tuwaio/sdk/satellite` and `@tuwaio/solana-sdk/satellite`, Nova UI via `@tuwaio/sdk/nova-connect`, and Pulsar tracking via `@tuwaio/sdk/pulsar`.
 
 ---
@@ -94,7 +95,7 @@ VITE_WALLET_PROJECT_ID=your_project_id
 # Optional: Pimlico API key for ERC-4337 UserOperation bundler transactions
 VITE_PIMLICO_API_KEY=your_pimlico_api_key
 
-# Optional: Alchemy API key for solana mainnet RPC URL
+# Optional: Alchemy API key for RPC URLs
 VITE_ALCHEMY_KEY=your_alchemy_key
 ```
 

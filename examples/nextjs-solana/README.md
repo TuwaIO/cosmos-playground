@@ -11,6 +11,7 @@ This example is part of the [Cosmos Playground](https://github.com/TuwaIO/cosmos
 ## 🏛️ Overview
 
 This template demonstrates clean Solana integration using the TUWA Ecosystem SDKs:
+
 - **Client**: Solana wallet connection via `@tuwaio/solana-sdk/satellite`, Nova UI via `@tuwaio/sdk/nova-connect`, and Pulsar tracking via `@tuwaio/solana-sdk/pulsar`.
 
 ---

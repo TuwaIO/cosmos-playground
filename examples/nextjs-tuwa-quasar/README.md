@@ -11,6 +11,7 @@ This example is part of the [Cosmos Playground](https://github.com/TuwaIO/cosmos
 ## 🏛️ Overview
 
 This reference template demonstrates full-stack Web3 application integration using the TUWA Ecosystem SDKs:
+
 - **Client**: Multi-chain connection via `@tuwaio/sdk/satellite`, Nova UI components via `@tuwaio/sdk/nova-connect`, and CAIP-122 Sign-In With X via `@tuwaio/sdk/siwx`.
 - **Server**: Server-side payload verification via `@tuwaio/sdk/siwx/server-next` and Cloud Transaction Sync via `@tuwaio/quasar-sdk`.
 
@@ -57,6 +58,9 @@ NEXT_PUBLIC_QUASAR_BASE_URL=https://api.tuwa.io
 
 # Optional: Pimlico API key for ERC-4337 UserOperation bundler
 NEXT_PUBLIC_PIMLICO_API_KEY=your_pimlico_api_key
+
+# Optional: Alchemy API key for RPC URLs
+NEXT_PUBLIC_ALCHEMY_KEY=your_alchemy_key
 
 # Required for verifying incoming Quasar webhook deliveries
 QUASAR_WEBHOOK_SECRET=whsec_...

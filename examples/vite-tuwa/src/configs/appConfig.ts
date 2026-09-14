@@ -24,14 +24,36 @@ export const appConfig = {
   appUrl: 'https://demo.tuwa.io/',
 };
 
+const alchemyKey = import.meta.env.VITE_ALCHEMY_KEY;
+
 export const solanaRPCUrls = {
-  // mainnet: `https://solana-mainnet.g.alchemy.com/v2/${process.env.VITE_ALCHEMY_KEY}`,
+  mainnet: alchemyKey ? `https://solana-mainnet.g.alchemy.com/v2/${alchemyKey}` : 'https://api.mainnet-beta.solana.com',
   devnet: 'https://api.devnet.solana.com',
 };
 
 export const appEVMChains = [
-  mainnet,
-  sepolia,
+  alchemyKey
+    ? {
+        ...mainnet,
+        rpcUrls: {
+          ...mainnet.rpcUrls,
+          default: {
+            http: [`https://eth-mainnet.g.alchemy.com/v2/${alchemyKey}`],
+          },
+        },
+      }
+    : mainnet,
+  alchemyKey
+    ? {
+        ...sepolia,
+        rpcUrls: {
+          ...sepolia.rpcUrls,
+          default: {
+            http: [`https://eth-sepolia.g.alchemy.com/v2/${alchemyKey}`],
+          },
+        },
+      }
+    : sepolia,
   polygon,
   polygonZkEvm,
   arbitrum,

@@ -11,6 +11,7 @@ This example is part of the [Cosmos Playground](https://github.com/TuwaIO/cosmos
 ## 🏛️ Overview
 
 This template demonstrates custom styling integration using the TUWA Ecosystem SDKs:
+
 - **Client**: Multi-chain connection via `@tuwaio/sdk/satellite`, custom-styled Nova UI components via `@tuwaio/sdk/nova-connect`, and Pulsar tracking via `@tuwaio/sdk/pulsar`.
 
 ---

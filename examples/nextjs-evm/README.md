@@ -11,6 +11,7 @@ This example is part of the [Cosmos Playground](https://github.com/TuwaIO/cosmos
 ## 🏛️ Overview
 
 This template demonstrates clean EVM integration using the TUWA Ecosystem SDKs:
+
 - **Client**: EVM wallet connection via `@tuwaio/evm-sdk/satellite`, Nova UI via `@tuwaio/sdk/nova-connect`, and CAIP-122 Sign-In With X via `@tuwaio/sdk/siwx`.
 - **Server**: Server-side payload verification via `@tuwaio/sdk/siwx/server-next`.
 
@@ -25,7 +26,7 @@ pnpm install
 # Start development server
 pnpm dev
 # Open http://localhost:3000 in your browser
-````
+```
 
 ## 📦 What's Included
 
@@ -103,7 +104,7 @@ NEXT_PUBLIC_WALLET_PROJECT_ID=your_project_id
 # Optional: Pimlico API key for ERC-4337 UserOperation bundler transactions
 NEXT_PUBLIC_PIMLICO_API_KEY=your_pimlico_api_key
 
-# Optional: Alchemy API key for sepolia RPC URL
+# Optional: Alchemy API key for RPC URLs
 NEXT_PUBLIC_ALCHEMY_KEY=your_alchemy_key
 
 # Server-only: Signing secret for stateless demo session profile (minimum 32 characters)
@@ -118,7 +119,6 @@ This template utilizes the **Stateless Demo Profile** (`createStatelessDemoSiwxH
 
 - **Stateless Verification**: Uses HMAC-SHA256 authenticated cookies (`siwx-demo-session`) to sign in without a local Redis or database instance.
 - **Production Standard**: Production applications with persistent user accounts, session revocation, and multi-replica horizontal scaling should deploy a durable storage adapter (`createSiwxApiHandler` with Redis or PostgreSQL). See the [SIWX Documentation](https://siwx.docs.tuwa.io/) for details.
-
 
 ## 🚀 Deployment
 
