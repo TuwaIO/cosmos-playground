@@ -1,6 +1,6 @@
 import { createDefaultTransports, safeSdkOptions } from '@tuwaio/evm-sdk/satellite';
 import { safe, walletConnect } from '@wagmi/connectors';
-import { createConfig, injected } from '@wagmi/core';
+import { createConfig, hydrate, injected } from '@wagmi/core';
 import {
   arbitrum,
   arbitrumSepolia,
@@ -86,3 +86,8 @@ export const wagmiConfig = createConfig({
   ssr: true,
   syncConnectedChain: true,
 });
+
+// There is no `WagmiProvider`, so the app hydrates the wagmi config in the browser itself, as `WagmiProvider` would.
+// With `ssr: true`, hydration adds the installed wallets found through EIP-6963 (MetaMask, Rabby, …) to the
+// connectors. Satellite Connect reconnects the last wallet, so wagmi does not (`reconnectOnMount: false`).
+if (typeof window !== 'undefined') void hydrate(wagmiConfig, { reconnectOnMount: false }).onMount();
