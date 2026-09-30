@@ -28,7 +28,13 @@ import {
   type ReadonlyUint8Array,
   type WritableAccount,
 } from '@solana/kit';
-import { getAccountMetaFactory, type ResolvedInstructionAccount } from '@solana/kit/program-client-core';
+import {
+  getAccountMetaFactory,
+  type InstructionAccountInput,
+  type InstructionAccountInputAddress,
+  type ResolvedInstructionAccount,
+  type ResolvedInstructionAccountMeta,
+} from '@solana/kit/program-client-core';
 import { SOLANATEST_PROGRAM_ADDRESS } from '../programs';
 
 export const DECREMENT_DISCRIMINATOR: ReadonlyUint8Array = new Uint8Array([106, 227, 168, 59, 248, 27, 150, 101]);
@@ -72,30 +78,38 @@ export function getDecrementInstructionDataCodec(): FixedSizeCodec<
   return combineCodec(getDecrementInstructionDataEncoder(), getDecrementInstructionDataDecoder());
 }
 
-export type DecrementInput<TAccountSolanatest extends string = string> = {
-  solanatest: Address<TAccountSolanatest>;
+export type DecrementInput<TAccountSolanatest extends InstructionAccountInput = InstructionAccountInput> = {
+  solanatest: TAccountSolanatest;
 };
 
 export function getDecrementInstruction<
-  TAccountSolanatest extends string,
+  TAccountSolanatest extends InstructionAccountInput,
   TProgramAddress extends Address = typeof SOLANATEST_PROGRAM_ADDRESS,
 >(
   input: DecrementInput<TAccountSolanatest>,
   config?: { programAddress?: TProgramAddress },
-): DecrementInstruction<TProgramAddress, TAccountSolanatest> {
+): DecrementInstruction<
+  TProgramAddress,
+  ResolvedInstructionAccountMeta<TAccountSolanatest, InstructionAccountInputAddress<TAccountSolanatest>>
+> {
   // Program address.
   const programAddress = config?.programAddress ?? SOLANATEST_PROGRAM_ADDRESS;
 
+  // Account meta helper.
+  const getAccountMeta = getAccountMetaFactory(programAddress, 'programId');
+
   // Original accounts.
-  const originalAccounts = { solanatest: { value: input.solanatest ?? null, isWritable: true } };
+  const originalAccounts = { solanatest: { value: input.solanatest ?? null, isSigner: false, isWritable: true } };
   const accounts = originalAccounts as Record<keyof typeof originalAccounts, ResolvedInstructionAccount>;
 
-  const getAccountMeta = getAccountMetaFactory(programAddress, 'programId');
   return Object.freeze({
     accounts: [getAccountMeta('solanatest', accounts.solanatest)],
     data: getDecrementInstructionDataEncoder().encode({}),
     programAddress,
-  } as DecrementInstruction<TProgramAddress, TAccountSolanatest>);
+  } as DecrementInstruction<
+    TProgramAddress,
+    ResolvedInstructionAccountMeta<TAccountSolanatest, InstructionAccountInputAddress<TAccountSolanatest>>
+  >);
 }
 
 export type ParsedDecrementInstruction<

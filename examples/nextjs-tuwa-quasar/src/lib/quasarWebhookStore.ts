@@ -1,13 +1,14 @@
+// Body of a Quasar webhook delivery, see https://docs.tuwa.io/quasar/webhooks
 export type QuasarWebhookPayload = {
-  txKey?: string;
+  txKey: string;
   hash?: string;
-  status?: string;
-  action?: string;
-  txType?: string;
-  chainId?: string | number;
-  timestamp?: number;
-  payload?: Record<string, unknown>;
-  [key: string]: unknown;
+  status: 'Success' | 'Failed' | 'Replaced';
+  action: string;
+  txType: string;
+  chainId: string;
+  timestamp: number;
+  // The `payload` of the Pulsar transaction
+  metadata: Record<string, unknown>;
 };
 
 export type QuasarWebhookEvent = {

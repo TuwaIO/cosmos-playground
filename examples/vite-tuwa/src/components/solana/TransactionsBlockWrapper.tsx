@@ -1,5 +1,3 @@
-'use client';
-
 import { address } from '@solana/kit';
 import { useSatelliteConnectStore } from '@tuwaio/sdk/nova-connect/satellite';
 import { textCenterEllipsis } from '@tuwaio/sdk/nova-core';
@@ -110,7 +108,7 @@ export const TransactionsBlockWrapper = () => {
                       <span>Loading...</span>
                     </div>
                   ) : (
-                    Object.values(accounts).length - 1
+                    sortedAccounts.length
                   )}
                 </h3>
               </div>

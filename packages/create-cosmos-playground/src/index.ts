@@ -155,13 +155,13 @@ async function main() {
 
     console.log(`\n✅ Done! Next steps:`);
     console.log(`cd ./${projectName}`);
+    console.log(`cp .env.example .env   # then fill in the values you need (see README.md)`);
     console.log(`${devCommand}`);
 
     console.log(`\n---------------------------------------------------------`);
     console.log(`💡 Troubleshooting:`);
-    console.log(`If you find that the downloaded files are "Read-only" and you cannot edit them,`);
-    console.log(`please change the directory permissions by running:`);
-    console.log(`sudo chmod -R 777 ./`);
+    console.log(`If the downloaded files are read-only, make them writable for your user:`);
+    console.log(`chmod -R u+w "${projectPath}"`);
 
     console.log(`\n❤️  Support us:`);
     console.log(`If you enjoy using TUWA, please give us a star on GitHub:`);

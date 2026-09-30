@@ -1,5 +1,3 @@
-'use client';
-
 import { pulsarEvmAdapter } from '@tuwaio/evm-sdk/pulsar';
 import { createBoundedUseStore, createPulsarStore } from '@tuwaio/sdk/pulsar';
 

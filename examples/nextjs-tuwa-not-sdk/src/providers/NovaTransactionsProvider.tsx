@@ -1,3 +1,5 @@
+'use client';
+
 import { useSatelliteConnectStore } from '@tuwaio/nova-connect/satellite';
 import { NovaTransactionsProvider as NTP } from '@tuwaio/nova-transactions/providers';
 import { getAdapterFromConnectorType } from '@tuwaio/orbit-core';
@@ -5,15 +7,17 @@ import { useInitializeTransactionsPool } from '@tuwaio/pulsar-react';
 
 import { usePulsarStore } from '@/hooks/pulsarStoreHook';
 
+// The modals and toasts of Nova Transactions, fed by the Pulsar store
 export function NovaTransactionsProvider() {
-  const getAdapter = usePulsarStore((state) => state.getAdapter);
+  const transactionsPool = usePulsarStore((state) => state.transactionsPool);
   const initialTx = usePulsarStore((state) => state.initialTx);
   const closeTxTrackedModal = usePulsarStore((state) => state.closeTxTrackedModal);
-  const transactionsPool = usePulsarStore((state) => state.transactionsPool);
   const executeTxAction = usePulsarStore((state) => state.executeTxAction);
   const initializeTransactionsPool = usePulsarStore((state) => state.initializeTransactionsPool);
+  const getAdapter = usePulsarStore((state) => state.getAdapter);
   const activeConnection = useSatelliteConnectStore((state) => state.activeConnection);
 
+  // Restarts the trackers of pending transactions after a page reload
   useInitializeTransactionsPool({ initializeTransactionsPool });
 
   return (

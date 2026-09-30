@@ -1,6 +1,4 @@
-// Custom Styled Transactions Block (just for testing)
-
-'use client';
+// The counter contract block of the other templates, restyled for this theme
 
 import { createViemClient } from '@tuwaio/evm-sdk/orbit';
 import { useSatelliteConnectStore } from '@tuwaio/sdk/nova-connect/satellite';

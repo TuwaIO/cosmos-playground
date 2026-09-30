@@ -1,7 +1,3 @@
-// JUST for test
-
-'use client';
-
 import { createViemClient } from '@tuwaio/evm-sdk/orbit';
 import { useSatelliteConnectStore } from '@tuwaio/sdk/nova-connect/satellite';
 import { TxActionButton } from '@tuwaio/sdk/nova-transactions';

@@ -6,9 +6,10 @@ import { arbitrum, Chain, mainnet, monad, monadTestnet, sepolia } from 'viem/cha
 export const appConfig = {
   appName: 'Satellite EVM Test App',
   appDescription: 'TUWA Custom Style Demo App',
-  projectId: '147ee28e5b18bd6d3302da6dd90a9cf1',
+  projectId: import.meta.env.VITE_WALLET_PROJECT_ID || '147ee28e5b18bd6d3302da6dd90a9cf1',
   appLogoUrl: 'https://cdn.jsdelivr.net/gh/TuwaIO/workflows@main/preview/preview-logo.png',
-  appUrl: 'https://custom-style.tuwa.io/',
+  // The origin the app runs at, for the WalletConnect metadata
+  appUrl: window.location.origin,
 };
 
 const alchemyKey = import.meta.env.VITE_ALCHEMY_KEY;

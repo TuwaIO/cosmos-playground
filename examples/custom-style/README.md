@@ -1,115 +1,97 @@
-# Pulsar & Cosmos SDK: Vite + Custom Style Example
+# TUWA SDK: Custom Style
 
-[![License](https://img.shields.io/npm/l/@tuwaio/sdk.svg)](./LICENSE)
+[![License: MIT-0](https://img.shields.io/badge/license-MIT--0-blue.svg)](./LICENSE)
 
-A minimal example demonstrating how to integrate the **Pulsar Transaction Tracking Engine** and **Nova UI Kit** into a React application using Vite with custom styling overrides.
-
-This example is part of the [Cosmos Playground](https://github.com/TuwaIO/cosmos-playground) monorepo.
+A Vite React app for EVM chains that restyles Nova Connect and Nova Transactions with its own theme: the `--tuwa-*` CSS variables for the colors, and the `customization` props for classes and extra content. Built on the TUWA SDK (`@tuwaio/sdk` with `@tuwaio/evm-sdk`); the build contains no Solana code of TUWA. It is a template of [Cosmos Playground](https://github.com/TuwaIO/cosmos-playground).
 
 ---
 
-## 🏛️ Overview
-
-This template demonstrates custom styling integration using the TUWA Ecosystem SDKs:
-
-- **Client**: Multi-chain connection via `@tuwaio/sdk/satellite`, custom-styled Nova UI components via `@tuwaio/sdk/nova-connect`, and Pulsar tracking via `@tuwaio/sdk/pulsar`.
-
----
-
-## 💾 Installation & Quick Start
+## 🚀 Quick Start
 
 ```bash
-# Install dependencies
-pnpm install
-
-# Start development server
+npx @tuwaio/create-cosmos-playground   # choose custom-style
+cd my-app
+cp .env.example .env
 pnpm dev
-# Open http://localhost:5173 in your browser
 ```
 
-## 📦 What's Included
+Open [http://localhost:5173](http://localhost:5173). Node.js 20.19 or newer is required; every variable in `.env` is optional for local development.
 
-- **React 19** with TypeScript
-- **Vite** for a blazing-fast development experience
-- **Satellite Connect** for wallet connection
-- **Pulsar Engine** for core tracking logic
-- **Nova UI Kit** for pre-built React components
-- **TailwindCSS** for styling
+---
 
-## 🎯 Features Demonstrated
+## 🎨 How the Theme Is Built
 
-- ✅ Wallet connection with Satellite Connect
-- ✅ Real-time, multi-chain transaction tracking
-- ✅ Comprehensive transaction history modal
-- ✅ Automatic toast notifications for transaction status
-- ✅ Support for standard EVM transactions and custom styling overrides
+| File                                        | What it changes                                                                                                                                                    |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `src/styles/app.css`                        | The `--tuwa-*` variables (text, background, border and status colors), scrollbars and a few Nova classes                                                           |
+| `src/styles/customization/shared_styles.ts` | Class sets reused by the other customization files                                                                                                                 |
+| `src/styles/customization/*.ts(x)`          | The `customization` objects of `ConnectButton`, the connect and connected modals, balances, the chain list, the transaction history and `NovaTransactionsProvider` |
+| `src/components/connect-wallet/`            | Extra content of the connected modal: ERC-20 balances (`renderExtraBalances`) and a custom link (`renderCustomContent`)                                            |
 
-## 🛠️ Available Scripts
+The connect modal also shows the `legal` links of `NovaConnectProvider`; replace them with the documents of your app. The variables and every `customization` option are described on the [Theming page](https://stories.tuwa.io/?path=/docs/theming--docs) of the Nova UI Kit Storybook.
 
-```bash
-pnpm dev        # Start development server
-pnpm build      # Build for production
-pnpm preview    # Preview production build
-pnpm type-check # Run TypeScript checks
-```
+---
+
+## 🎯 What It Shows
+
+- **Wallet connection** with the restyled Nova Connect modals, through wagmi connectors: injected wallets, WalletConnect, Safe{Wallet} and a read-only impersonated wallet. Chains: Monad, Ethereum, Arbitrum, Sepolia and Monad Testnet.
+- **ERC-20 balances** (USDC, USDT0) in the connected modal, read from the chain and cached in a Zustand store.
+- **A tracked transaction** with Pulsar and the restyled Nova Transactions modals and toasts: a counter contract on Sepolia.
+
+---
+
+## 🔧 Environment Variables
+
+Vite exposes only variables prefixed with `VITE_`, and inlines them into the bundle: put no secrets here.
+
+| Variable                 | Description                                                                                                  |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| `VITE_WALLET_PROJECT_ID` | WalletConnect project ID from [dashboard.reown.com](https://dashboard.reown.com); use your own in production |
+| `VITE_ALCHEMY_KEY`       | Alchemy key for the Ethereum Mainnet and Sepolia RPC URLs. Default: public RPC URLs                          |
+
+---
 
 ## 📁 Project Structure
 
 ```
 src/
-├── abis/          # Smart contract ABIs
-├── components/    # Application-specific React components
-├── configs/       # Wagmi and chain configurations
-├── constants.ts   # Shared constants
-├── hooks/         # Custom React hooks
-├── providers/     # React Context providers, including NovaProvider setup
-├── styles/        # Global CSS and Tailwind styles
-└── transactions/  # Logic for defining transaction actions and callbacks
+├── abis/          # ABI of the counter contract
+├── components/    # Header, home page, the transaction block, extra content of the connected modal
+├── configs/       # wagmi config, EVM chains, the ERC-20 tokens of each chain
+├── constants.ts   # Address of the counter contract
+├── hooks/         # Pulsar store, ERC-20 balance hook
+├── providers/     # Satellite Connect, Nova Connect and Nova Transactions providers with the customization
+├── styles/        # The theme: CSS variables and the customization objects
+├── transactions/  # The transaction action and its type
+├── App.tsx
+└── main.tsx
 ```
 
-## ⚡ Prerequisites
+---
 
-Make sure you have the following installed:
+## 🛠️ Scripts
 
-- **Node.js** \>= 20.0.0
-- **pnpm** \>= 9.0.0
+| Script            | Description                             |
+| ----------------- | --------------------------------------- |
+| `pnpm dev`        | Start the development server            |
+| `pnpm build`      | Build the static site into `dist/`      |
+| `pnpm preview`    | Serve the build                         |
+| `pnpm type-check` | Check the types with TypeScript         |
+| `pnpm lint`       | Check the code with ESLint and Prettier |
+| `pnpm lint:fix`   | Fix what ESLint and Prettier can fix    |
 
-<!-- end list -->
-
-```bash
-# Install pnpm globally if you haven't already
-npm install -g pnpm
-```
-
-## 🔧 Environment Variables
-
-Create a `.env` file in the project root:
-
-```env
-# Required: Get a Project ID from [https://cloud.walletconnect.com](https://cloud.walletconnect.com)
-VITE_WALLET_PROJECT_ID=your_project_id
-
-# Optional: Alchemy API key for RPC URLs
-VITE_ALCHEMY_KEY=your_alchemy_key
-```
-
-_Note: Vite requires environment variables to be prefixed with `VITE_`.\_
+---
 
 ## 📖 Learn More
 
-For detailed documentation and advanced usage:
+- [Nova UI Kit Storybook](https://stories.tuwa.io/): the [Theming](https://stories.tuwa.io/?path=/docs/theming--docs) page and the `customization` props of every component
+- [TUWA SDK](https://sdk.docs.tuwa.io/): the subpaths of `@tuwaio/sdk` and `@tuwaio/evm-sdk`
+- [All starter templates](https://docs.tuwa.io/guides/starter-templates)
 
-- [Orbit Documentation](https://orbit.docs.tuwa.io/)
-- [Satellite Documentation](https://satellite.docs.tuwa.io/)
-- [Pulsar Documentation](https://pulsar.docs.tuwa.io/)
-- [Nova Documentation](https://stories.tuwa.io/?path=/docs/introduction--docs)
-- [Vite Documentation](https://vitejs.dev/)
-- [Wagmi Documentation](https://wagmi.sh/)
+---
 
 ## 🤝 Contributing & Support
 
-Contributions are welcome! Please read our main **[Contribution Guidelines](https://github.com/TuwaIO/workflows/blob/main/CONTRIBUTING.md)**.
-
-If you find this library useful, please consider supporting its development. Every contribution helps!
+Contributions are welcome! Please read the **[Contribution Guidelines](https://github.com/TuwaIO/workflows/blob/main/CONTRIBUTING.md)**.
 
 [**➡️ View Support Options**](https://github.com/TuwaIO/workflows/blob/main/Donation.md)

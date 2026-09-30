@@ -1,5 +1,3 @@
-// JUST for test
-
 'use client';
 
 import { useSatelliteConnectStore } from '@tuwaio/nova-connect/satellite';

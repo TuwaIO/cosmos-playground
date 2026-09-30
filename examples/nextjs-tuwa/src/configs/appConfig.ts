@@ -19,9 +19,10 @@ import {
 export const appConfig = {
   appName: 'Satellite EVM Test App',
   appDescription: 'TUWA Demo App',
-  projectId: process.env.NEXT_PUBLIC_WALLET_PROJECT_ID ?? '9077e559e63e099f496b921a027d0f04',
+  projectId: process.env.NEXT_PUBLIC_WALLET_PROJECT_ID || '9077e559e63e099f496b921a027d0f04',
   appLogoUrl: 'https://cdn.jsdelivr.net/gh/TuwaIO/workflows@main/preview/preview-logo.png',
-  appUrl: process.env.NODE_ENV === 'development' ? 'http://localhost:3000/' : 'https://demo.tuwa.io/',
+  // The origin users open the app at, for the WalletConnect metadata
+  appUrl: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
 };
 
 const alchemyKey = process.env.NEXT_PUBLIC_ALCHEMY_KEY;

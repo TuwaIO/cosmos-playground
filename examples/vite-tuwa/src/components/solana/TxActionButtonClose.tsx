@@ -1,5 +1,3 @@
-'use client';
-
 import type { Address } from '@solana/kit';
 import { useWalletAccountTransactionSendingSigner } from '@solana/react';
 import { Connection } from '@tuwaio/sdk/nova-connect/satellite';

@@ -19,9 +19,10 @@ import {
 export const appConfig = {
   appName: 'Satellite EVM Test App',
   appDescription: 'TUWA Demo App',
-  projectId: '9077e559e63e099f496b921a027d0f04',
+  projectId: import.meta.env.VITE_WALLET_PROJECT_ID || '9077e559e63e099f496b921a027d0f04',
   appLogoUrl: 'https://cdn.jsdelivr.net/gh/TuwaIO/workflows@main/preview/preview-logo.png',
-  appUrl: 'https://demo.tuwa.io/',
+  // The origin the app runs at, for the WalletConnect metadata
+  appUrl: window.location.origin,
 };
 
 const alchemyKey = import.meta.env.VITE_ALCHEMY_KEY;

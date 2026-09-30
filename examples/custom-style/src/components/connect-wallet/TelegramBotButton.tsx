@@ -6,7 +6,7 @@ import { SHARED_STYLES } from '../../styles/customization/shared_styles';
 export const TelegramBotButton = () => {
   return (
     <a
-      href="https://www.google.com/"
+      href="https://telegram.org/"
       target="_blank"
       rel="noopener noreferrer"
       className={cn(

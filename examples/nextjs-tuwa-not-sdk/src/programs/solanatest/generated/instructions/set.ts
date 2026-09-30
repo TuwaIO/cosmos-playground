@@ -30,7 +30,13 @@ import {
   type ReadonlyUint8Array,
   type WritableAccount,
 } from '@solana/kit';
-import { getAccountMetaFactory, type ResolvedInstructionAccount } from '@solana/kit/program-client-core';
+import {
+  getAccountMetaFactory,
+  type InstructionAccountInput,
+  type InstructionAccountInputAddress,
+  type ResolvedInstructionAccount,
+  type ResolvedInstructionAccountMeta,
+} from '@solana/kit/program-client-core';
 import { SOLANATEST_PROGRAM_ADDRESS } from '../programs';
 
 export const SET_DISCRIMINATOR: ReadonlyUint8Array = new Uint8Array([198, 51, 53, 241, 116, 29, 126, 194]);
@@ -77,34 +83,42 @@ export function getSetInstructionDataCodec(): FixedSizeCodec<SetInstructionDataA
   return combineCodec(getSetInstructionDataEncoder(), getSetInstructionDataDecoder());
 }
 
-export type SetInput<TAccountSolanatest extends string = string> = {
-  solanatest: Address<TAccountSolanatest>;
+export type SetInput<TAccountSolanatest extends InstructionAccountInput = InstructionAccountInput> = {
+  solanatest: TAccountSolanatest;
   value: SetInstructionDataArgs['value'];
 };
 
 export function getSetInstruction<
-  TAccountSolanatest extends string,
+  TAccountSolanatest extends InstructionAccountInput,
   TProgramAddress extends Address = typeof SOLANATEST_PROGRAM_ADDRESS,
 >(
   input: SetInput<TAccountSolanatest>,
   config?: { programAddress?: TProgramAddress },
-): SetInstruction<TProgramAddress, TAccountSolanatest> {
+): SetInstruction<
+  TProgramAddress,
+  ResolvedInstructionAccountMeta<TAccountSolanatest, InstructionAccountInputAddress<TAccountSolanatest>>
+> {
   // Program address.
   const programAddress = config?.programAddress ?? SOLANATEST_PROGRAM_ADDRESS;
 
+  // Account meta helper.
+  const getAccountMeta = getAccountMetaFactory(programAddress, 'programId');
+
   // Original accounts.
-  const originalAccounts = { solanatest: { value: input.solanatest ?? null, isWritable: true } };
+  const originalAccounts = { solanatest: { value: input.solanatest ?? null, isSigner: false, isWritable: true } };
   const accounts = originalAccounts as Record<keyof typeof originalAccounts, ResolvedInstructionAccount>;
 
   // Original args.
   const args = { ...input };
 
-  const getAccountMeta = getAccountMetaFactory(programAddress, 'programId');
   return Object.freeze({
     accounts: [getAccountMeta('solanatest', accounts.solanatest)],
     data: getSetInstructionDataEncoder().encode(args as SetInstructionDataArgs),
     programAddress,
-  } as SetInstruction<TProgramAddress, TAccountSolanatest>);
+  } as SetInstruction<
+    TProgramAddress,
+    ResolvedInstructionAccountMeta<TAccountSolanatest, InstructionAccountInputAddress<TAccountSolanatest>>
+  >);
 }
 
 export type ParsedSetInstruction<

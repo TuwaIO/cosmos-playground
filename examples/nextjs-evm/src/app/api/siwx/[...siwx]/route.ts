@@ -3,23 +3,21 @@ import { createStatelessDemoSiwxHandler } from '@tuwaio/sdk/siwx/server-next';
 import { appConfig, appEVMChains } from '@/configs/appConfig';
 import { DEMO_SIGNING_SECRET } from '@/lib/authConfig';
 
-const parsedAppUrl = new URL(appConfig.appUrl);
+const appUrl = new URL(appConfig.appUrl);
 
-const handler = createStatelessDemoSiwxHandler({
+// Serves /api/siwx/nonce, /verify, /session and /logout. The session is a signed token in an HttpOnly cookie
+// (stateless demo profile, see the README for its limits).
+export const { GET, POST, DELETE } = createStatelessDemoSiwxHandler({
   signingSecret: DEMO_SIGNING_SECRET,
   policy: {
-    expectedDomain: [parsedAppUrl.host, parsedAppUrl.hostname, 'localhost:3000', 'demo.tuwa.io'],
-    expectedUri: [appConfig.appUrl, 'http://localhost:3000', 'https://demo.tuwa.io'],
-    allowedChainIds: appEVMChains.flatMap((c) => [String(c.id), `eip155:${c.id}`]),
+    expectedDomain: appUrl.host,
+    expectedUri: appUrl.origin,
+    allowedChainIds: appEVMChains.flatMap((chain) => [String(chain.id), `eip155:${chain.id}`]),
     requireExpirationTime: true,
     maxIssuedAtAgeSeconds: 300,
     maxSessionLifetimeSeconds: 1800, // 30 minutes
     clockSkewSeconds: 60,
   },
-  cookieOptions: {
-    name: 'siwx-demo-session',
-    secure: process.env.NODE_ENV === 'production',
-  },
+  // HTTPS-only cookie in production; `next dev` serves http://localhost
+  cookieOptions: { secure: process.env.NODE_ENV === 'production' },
 });
-
-export const { GET, POST, DELETE } = handler;

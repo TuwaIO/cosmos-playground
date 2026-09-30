@@ -1,5 +1,3 @@
-'use client';
-
 import { ArrowUpIcon } from '@heroicons/react/24/solid';
 import type { Address } from '@solana/kit';
 import { useWalletAccountTransactionSendingSigner } from '@solana/react';

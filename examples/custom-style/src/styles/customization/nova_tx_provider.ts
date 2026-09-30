@@ -1,6 +1,7 @@
 import { cn } from '@tuwaio/sdk/nova-core';
 import { NovaTransactionsProviderProps } from '@tuwaio/sdk/nova-transactions/providers';
 
+import { TransactionUnion } from '../../transactions';
 import {
   BUTTON_STYLES,
   CARD_STYLES,
@@ -12,8 +13,7 @@ import {
 } from './shared_styles';
 import { transactions_history_customization } from './tx_history';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const nova_tx_provider_customization: NovaTransactionsProviderProps<any>['customization'] = {
+export const nova_tx_provider_customization: NovaTransactionsProviderProps<TransactionUnion>['customization'] = {
   // ========== Toast Close Button Customization ==========
   toastCloseButton: {
     className: MODAL_STYLES.closeButton,

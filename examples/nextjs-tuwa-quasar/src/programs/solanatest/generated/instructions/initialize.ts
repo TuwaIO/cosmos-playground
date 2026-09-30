@@ -28,10 +28,16 @@ import {
   type InstructionWithData,
   type ReadonlyAccount,
   type ReadonlyUint8Array,
-  type TransactionSigner,
   type WritableSignerAccount,
 } from '@solana/kit';
-import { getAccountMetaFactory, type ResolvedInstructionAccount } from '@solana/kit/program-client-core';
+import {
+  getAccountMetaFactory,
+  type InstructionAccountInput,
+  type InstructionAccountInputAddress,
+  type InstructionSignerInput,
+  type ResolvedInstructionAccount,
+  type ResolvedInstructionAccountMeta,
+} from '@solana/kit/program-client-core';
 import { SOLANATEST_PROGRAM_ADDRESS } from '../programs';
 
 export const INITIALIZE_DISCRIMINATOR: ReadonlyUint8Array = new Uint8Array([175, 175, 109, 31, 13, 152, 155, 237]);
@@ -84,32 +90,40 @@ export function getInitializeInstructionDataCodec(): FixedSizeCodec<
 }
 
 export type InitializeInput<
-  TAccountPayer extends string = string,
-  TAccountSolanatest extends string = string,
-  TAccountSystemProgram extends string = string,
+  TAccountPayer extends InstructionSignerInput = InstructionSignerInput,
+  TAccountSolanatest extends InstructionSignerInput = InstructionSignerInput,
+  TAccountSystemProgram extends InstructionAccountInput = InstructionAccountInput,
 > = {
-  payer: TransactionSigner<TAccountPayer>;
-  solanatest: TransactionSigner<TAccountSolanatest>;
-  systemProgram?: Address<TAccountSystemProgram>;
+  payer: TAccountPayer;
+  solanatest: TAccountSolanatest;
+  systemProgram?: TAccountSystemProgram;
 };
 
 export function getInitializeInstruction<
-  TAccountPayer extends string,
-  TAccountSolanatest extends string,
-  TAccountSystemProgram extends string,
+  TAccountPayer extends InstructionSignerInput,
+  TAccountSolanatest extends InstructionSignerInput,
+  TAccountSystemProgram extends InstructionAccountInput,
   TProgramAddress extends Address = typeof SOLANATEST_PROGRAM_ADDRESS,
 >(
   input: InitializeInput<TAccountPayer, TAccountSolanatest, TAccountSystemProgram>,
   config?: { programAddress?: TProgramAddress },
-): InitializeInstruction<TProgramAddress, TAccountPayer, TAccountSolanatest, TAccountSystemProgram> {
+): InitializeInstruction<
+  TProgramAddress,
+  ResolvedInstructionAccountMeta<TAccountPayer, InstructionAccountInputAddress<TAccountPayer>>,
+  ResolvedInstructionAccountMeta<TAccountSolanatest, InstructionAccountInputAddress<TAccountSolanatest>>,
+  ResolvedInstructionAccountMeta<TAccountSystemProgram, InstructionAccountInputAddress<TAccountSystemProgram>>
+> {
   // Program address.
   const programAddress = config?.programAddress ?? SOLANATEST_PROGRAM_ADDRESS;
 
+  // Account meta helper.
+  const getAccountMeta = getAccountMetaFactory(programAddress, 'programId');
+
   // Original accounts.
   const originalAccounts = {
-    payer: { value: input.payer ?? null, isWritable: true },
-    solanatest: { value: input.solanatest ?? null, isWritable: true },
-    systemProgram: { value: input.systemProgram ?? null, isWritable: false },
+    payer: { value: input.payer ?? null, isSigner: true, isWritable: true },
+    solanatest: { value: input.solanatest ?? null, isSigner: true, isWritable: true },
+    systemProgram: { value: input.systemProgram ?? null, isSigner: false, isWritable: false },
   };
   const accounts = originalAccounts as Record<keyof typeof originalAccounts, ResolvedInstructionAccount>;
 
@@ -118,7 +132,6 @@ export function getInitializeInstruction<
     accounts.systemProgram.value = '11111111111111111111111111111111' as Address<'11111111111111111111111111111111'>;
   }
 
-  const getAccountMeta = getAccountMetaFactory(programAddress, 'programId');
   return Object.freeze({
     accounts: [
       getAccountMeta('payer', accounts.payer),
@@ -127,7 +140,12 @@ export function getInitializeInstruction<
     ],
     data: getInitializeInstructionDataEncoder().encode({}),
     programAddress,
-  } as InitializeInstruction<TProgramAddress, TAccountPayer, TAccountSolanatest, TAccountSystemProgram>);
+  } as InitializeInstruction<
+    TProgramAddress,
+    ResolvedInstructionAccountMeta<TAccountPayer, InstructionAccountInputAddress<TAccountPayer>>,
+    ResolvedInstructionAccountMeta<TAccountSolanatest, InstructionAccountInputAddress<TAccountSolanatest>>,
+    ResolvedInstructionAccountMeta<TAccountSystemProgram, InstructionAccountInputAddress<TAccountSystemProgram>>
+  >);
 }
 
 export type ParsedInitializeInstruction<

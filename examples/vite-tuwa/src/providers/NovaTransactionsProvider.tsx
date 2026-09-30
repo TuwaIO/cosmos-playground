@@ -5,15 +5,17 @@ import { useInitializeTransactionsPool } from '@tuwaio/sdk/pulsar';
 
 import { usePulsarStore } from '../hooks/pulsarStoreHook';
 
+// The modals and toasts of Nova Transactions, fed by the Pulsar store
 export function NovaTransactionsProvider() {
-  const getAdapter = usePulsarStore((state) => state.getAdapter);
+  const transactionsPool = usePulsarStore((state) => state.transactionsPool);
   const initialTx = usePulsarStore((state) => state.initialTx);
   const closeTxTrackedModal = usePulsarStore((state) => state.closeTxTrackedModal);
-  const transactionsPool = usePulsarStore((state) => state.transactionsPool);
   const executeTxAction = usePulsarStore((state) => state.executeTxAction);
   const initializeTransactionsPool = usePulsarStore((state) => state.initializeTransactionsPool);
+  const getAdapter = usePulsarStore((state) => state.getAdapter);
   const activeConnection = useSatelliteConnectStore((state) => state.activeConnection);
 
+  // Restarts the trackers of pending transactions after a page reload
   useInitializeTransactionsPool({ initializeTransactionsPool });
 
   return (

@@ -1,5 +1,3 @@
-'use client';
-
 import { ConnectButton } from '@tuwaio/sdk/nova-connect/components';
 
 import { usePulsarStore } from '../hooks/pulsarStoreHook';

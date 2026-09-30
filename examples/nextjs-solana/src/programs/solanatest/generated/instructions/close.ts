@@ -27,11 +27,17 @@ import {
   type InstructionWithAccounts,
   type InstructionWithData,
   type ReadonlyUint8Array,
-  type TransactionSigner,
   type WritableAccount,
   type WritableSignerAccount,
 } from '@solana/kit';
-import { getAccountMetaFactory, type ResolvedInstructionAccount } from '@solana/kit/program-client-core';
+import {
+  getAccountMetaFactory,
+  type InstructionAccountInput,
+  type InstructionAccountInputAddress,
+  type InstructionSignerInput,
+  type ResolvedInstructionAccount,
+  type ResolvedInstructionAccountMeta,
+} from '@solana/kit/program-client-core';
 import { SOLANATEST_PROGRAM_ADDRESS } from '../programs';
 
 export const CLOSE_DISCRIMINATOR: ReadonlyUint8Array = new Uint8Array([98, 165, 201, 177, 108, 65, 206, 96]);
@@ -76,35 +82,48 @@ export function getCloseInstructionDataCodec(): FixedSizeCodec<CloseInstructionD
   return combineCodec(getCloseInstructionDataEncoder(), getCloseInstructionDataDecoder());
 }
 
-export type CloseInput<TAccountPayer extends string = string, TAccountSolanatest extends string = string> = {
-  payer: TransactionSigner<TAccountPayer>;
-  solanatest: Address<TAccountSolanatest>;
+export type CloseInput<
+  TAccountPayer extends InstructionSignerInput = InstructionSignerInput,
+  TAccountSolanatest extends InstructionAccountInput = InstructionAccountInput,
+> = {
+  payer: TAccountPayer;
+  solanatest: TAccountSolanatest;
 };
 
 export function getCloseInstruction<
-  TAccountPayer extends string,
-  TAccountSolanatest extends string,
+  TAccountPayer extends InstructionSignerInput,
+  TAccountSolanatest extends InstructionAccountInput,
   TProgramAddress extends Address = typeof SOLANATEST_PROGRAM_ADDRESS,
 >(
   input: CloseInput<TAccountPayer, TAccountSolanatest>,
   config?: { programAddress?: TProgramAddress },
-): CloseInstruction<TProgramAddress, TAccountPayer, TAccountSolanatest> {
+): CloseInstruction<
+  TProgramAddress,
+  ResolvedInstructionAccountMeta<TAccountPayer, InstructionAccountInputAddress<TAccountPayer>>,
+  ResolvedInstructionAccountMeta<TAccountSolanatest, InstructionAccountInputAddress<TAccountSolanatest>>
+> {
   // Program address.
   const programAddress = config?.programAddress ?? SOLANATEST_PROGRAM_ADDRESS;
 
+  // Account meta helper.
+  const getAccountMeta = getAccountMetaFactory(programAddress, 'programId');
+
   // Original accounts.
   const originalAccounts = {
-    payer: { value: input.payer ?? null, isWritable: true },
-    solanatest: { value: input.solanatest ?? null, isWritable: true },
+    payer: { value: input.payer ?? null, isSigner: true, isWritable: true },
+    solanatest: { value: input.solanatest ?? null, isSigner: false, isWritable: true },
   };
   const accounts = originalAccounts as Record<keyof typeof originalAccounts, ResolvedInstructionAccount>;
 
-  const getAccountMeta = getAccountMetaFactory(programAddress, 'programId');
   return Object.freeze({
     accounts: [getAccountMeta('payer', accounts.payer), getAccountMeta('solanatest', accounts.solanatest)],
     data: getCloseInstructionDataEncoder().encode({}),
     programAddress,
-  } as CloseInstruction<TProgramAddress, TAccountPayer, TAccountSolanatest>);
+  } as CloseInstruction<
+    TProgramAddress,
+    ResolvedInstructionAccountMeta<TAccountPayer, InstructionAccountInputAddress<TAccountPayer>>,
+    ResolvedInstructionAccountMeta<TAccountSolanatest, InstructionAccountInputAddress<TAccountSolanatest>>
+  >);
 }
 
 export type ParsedCloseInstruction<

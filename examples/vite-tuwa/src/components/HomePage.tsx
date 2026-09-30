@@ -1,12 +1,10 @@
-'use client';
-
 import { WalletIcon } from '@heroicons/react/24/outline';
 import { useSatelliteConnectStore } from '@tuwaio/sdk/nova-connect/satellite';
 import { cn } from '@tuwaio/sdk/nova-core';
 import { getAdapterFromConnectorType, OrbitAdapter } from '@tuwaio/sdk/orbit';
 import { motion } from 'framer-motion';
 
-import { TransactionsBlockWrapper as TransactionsBlockRainbowKit } from './evm/TransactionsBlockWrapper';
+import { TransactionsBlockWrapper as TransactionsBlockEVM } from './evm/TransactionsBlockWrapper';
 import { TransactionsBlockWrapper as TransactionsBlockSolana } from './solana/TransactionsBlockWrapper';
 
 export default function HomePage() {
@@ -16,9 +14,7 @@ export default function HomePage() {
     <div className="w-full flex justify-center items-center bg-gradient-to-br from-[var(--tuwa-bg-secondary)] to-[var(--tuwa-bg-muted)] gap-4 flex-wrap relative min-h-[calc(100dvh-65px)]">
       {activeConnection ? (
         <>
-          {getAdapterFromConnectorType(activeConnection.connectorType) === OrbitAdapter.EVM && (
-            <TransactionsBlockRainbowKit />
-          )}
+          {getAdapterFromConnectorType(activeConnection.connectorType) === OrbitAdapter.EVM && <TransactionsBlockEVM />}
           {getAdapterFromConnectorType(activeConnection.connectorType) === OrbitAdapter.SOLANA && (
             <TransactionsBlockSolana />
           )}

@@ -1,5 +1,3 @@
-'use client';
-
 import { createContext, useContext } from 'react';
 import { StoreApi, useStore as uS } from 'zustand';
 

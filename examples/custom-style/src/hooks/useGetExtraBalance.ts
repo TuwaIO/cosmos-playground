@@ -2,8 +2,6 @@
  * Global balance cache store and hook for fetching ERC20 token balances.
  * Uses zustand for global caching that persists across component unmounts.
  */
-'use client';
-
 import { createViemClient } from '@tuwaio/evm-sdk/orbit';
 import { NativeBalanceResult } from '@tuwaio/sdk/nova-connect';
 import { useSatelliteConnectStore } from '@tuwaio/sdk/nova-connect/satellite';

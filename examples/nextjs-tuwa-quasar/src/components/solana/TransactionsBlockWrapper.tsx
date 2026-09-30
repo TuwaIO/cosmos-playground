@@ -109,7 +109,7 @@ export const TransactionsBlockWrapper = () => {
                     <span>Loading...</span>
                   </div>
                 ) : (
-                  Object.values(accounts).length - 1
+                  sortedAccounts.length
                 )}
               </h3>
             </div>

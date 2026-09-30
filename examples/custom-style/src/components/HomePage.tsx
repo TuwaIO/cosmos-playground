@@ -1,5 +1,3 @@
-'use client';
-
 import { WalletIcon } from '@heroicons/react/24/outline';
 import { useSatelliteConnectStore } from '@tuwaio/sdk/nova-connect/satellite';
 import { cn } from '@tuwaio/sdk/nova-core';

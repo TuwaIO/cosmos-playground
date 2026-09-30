@@ -1,72 +1,54 @@
 'use client';
 
 import { pulsarEvmAdapter } from '@tuwaio/evm-sdk/pulsar';
-import { preFlightTxCheck } from '@tuwaio/quasar-sdk';
-import { createBoundedUseStore, createPulsarStore, createTxInMemoryStore } from '@tuwaio/sdk/pulsar';
+import { preFlightTxCheck } from '@tuwaio/quasar-sdk/react';
+import {
+  createBoundedUseStore,
+  createPulsarStore,
+  createTxInMemoryStore,
+  type TxInMemoryPagination,
+} from '@tuwaio/sdk/pulsar';
 import { pulsarSolanaAdapter } from '@tuwaio/solana-sdk/pulsar';
 
 import { getHistory, syncTransaction } from '@/app/actions';
-import { appConfig, appEVMChains, solanaRPCUrls, wagmiConfig } from '@/configs/appConfig';
-import { QUASAR_BASE_URL } from '@/constants';
+import { appEVMChains, solanaRPCUrls, wagmiConfig } from '@/configs/appConfig';
 import { TransactionUnion } from '@/transactions';
 
-const storageName = 'transactions-tracking-storage-example';
-
-const initialStore = createPulsarStore<TransactionUnion>({
-  name: storageName,
-  adapter: [
-    pulsarEvmAdapter(wagmiConfig, appEVMChains),
-    pulsarSolanaAdapter({
-      rpcUrls: solanaRPCUrls,
-    }),
-  ],
-  beforeTxProcess: async () => {
-    await preFlightTxCheck(QUASAR_BASE_URL);
-  },
+const pulsarStore = createPulsarStore<TransactionUnion>({
+  name: 'transactions-tracking-storage-example',
+  adapter: [pulsarEvmAdapter(wagmiConfig, appEVMChains), pulsarSolanaAdapter({ rpcUrls: solanaRPCUrls })],
+  // Stops the transaction before the wallet prompt when the user is not signed in or Quasar does not respond
+  beforeTxProcess: () => preFlightTxCheck(process.env.NEXT_PUBLIC_QUASAR_BASE_URL),
+  // Throwing keeps the transaction marked as unsynced, so Pulsar sends it again later
   onRemoteCreate: async (tx) => {
-    try {
-      await syncTransaction(tx);
-    } catch (err) {
-      console.error('[PulsarHook] Remote sync failed:', err);
-      throw err; // Rethrow to inform pulsar-core that sync failed
-    }
+    const result = await syncTransaction(tx);
+    if (!result.success) throw new Error(result.error);
   },
 });
 
-export const usePulsarStore = createBoundedUseStore(initialStore);
+export const usePulsarStore = createBoundedUseStore(pulsarStore);
 
-const pulsarInMemoryStore = createTxInMemoryStore<TransactionUnion>({
-  localTransactionsPool: initialStore.getState().transactionsPool,
-  reconcileUnsyncedTransactions: initialStore.getState().reconcileUnsyncedTransactions,
-
+// The local transactions together with the pages of the Quasar history
+const historyStore = createTxInMemoryStore<TransactionUnion>({
+  localTransactionsPool: pulsarStore.getState().transactionsPool,
+  reconcileUnsyncedTransactions: pulsarStore.getState().reconcileUnsyncedTransactions,
   getHistory: async ({ page, walletAddress }) => {
-    try {
-      const history = await getHistory({
-        walletAddress,
-        page,
-        limit: 10,
-        appName: appConfig.appName,
-      });
-
-      if (!history) {
-        return null;
-      }
-
-      return {
-        ...history,
-        docs: history.docs as TransactionUnion[],
-      };
-    } catch (error) {
-      console.error('[PulsarHook] Failed to fetch history:', error);
-      throw error;
-    }
+    const history = await getHistory({ walletAddress, page });
+    return history && { ...history, docs: history.docs as TransactionUnion[] };
   },
-
-  onHistoryFetched: async (remoteTxs) => {
-    await initialStore.getState().injectExternalPendingTxs(remoteTxs);
-  },
+  // Pending transactions sent from another device continue to be tracked here
+  onHistoryFetched: (remoteTxs) => pulsarStore.getState().injectExternalPendingTxs(remoteTxs),
 });
 
-initialStore.subscribe((state) => pulsarInMemoryStore.getState().syncWithLocalPool(state.transactionsPool));
+pulsarStore.subscribe((state) => historyStore.getState().syncWithLocalPool(state.transactionsPool));
 
-export const usePulsarInMemoryStore = createBoundedUseStore(pulsarInMemoryStore);
+export const useHistoryStore = createBoundedUseStore(historyStore);
+
+export function useHistoryPagination(): TxInMemoryPagination {
+  const isLoading = useHistoryStore((state) => state.isLoading);
+  const isError = useHistoryStore((state) => state.isError);
+  const currentPage = useHistoryStore((state) => state.currentPage);
+  const hasMore = useHistoryStore((state) => state.hasMore);
+  const fetchNextPage = useHistoryStore((state) => state.fetchNextPage);
+  return { isLoading, isError, currentPage, hasMore, fetchNextPage };
+}

@@ -1,10 +1,8 @@
-// just for test
-
 'use client';
 
 import { createSolanaRPC } from '@tuwaio/solana-sdk/orbit';
 import { produce } from 'immer';
-import { PropsWithChildren, useMemo } from 'react';
+import { PropsWithChildren, useState } from 'react';
 import { createStore } from 'zustand/vanilla';
 
 import { solanaRPCUrls } from '@/configs/appConfig';
@@ -12,28 +10,21 @@ import { PROGRAM_ID } from '@/constants';
 import { Store, StoreContext } from '@/hooks/storeHook';
 import { getSolanatestProgramAccounts } from '@/programs';
 
+// The counter accounts of the demo Solana program on devnet, shown by the Solana block
 export function StoreProvider({ children }: PropsWithChildren) {
-  const store = useMemo(() => {
-    return createStore<Store>()((set) => ({
+  const [store] = useState(() =>
+    createStore<Store>()((set) => ({
       accounts: {},
       accountsLoading: true,
       getAccounts: async () => {
-        const accountsInfo = (await getSolanatestProgramAccounts(
+        const counters = await getSolanatestProgramAccounts(
           createSolanaRPC({ rpcUrlOrMoniker: 'devnet', rpcUrls: solanaRPCUrls }),
           PROGRAM_ID,
-        )) as never as {
-          address: string;
-          data: { count: number };
-          executable: boolean;
-          exists: boolean;
-          lamports: bigint;
-          programAddress: string;
-          space: bigint;
-        }[];
+        );
         set((state) =>
           produce(state, (draft) => {
-            accountsInfo.forEach((account) => {
-              draft.accounts[account.address] = account.data.count;
+            counters.forEach((counter) => {
+              draft.accounts[counter.address] = counter.data.count;
             });
             draft.accountsLoading = false;
           }),
@@ -46,7 +37,8 @@ export function StoreProvider({ children }: PropsWithChildren) {
           }),
         );
       },
-    }));
-  }, []);
+    })),
+  );
+
   return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>;
 }

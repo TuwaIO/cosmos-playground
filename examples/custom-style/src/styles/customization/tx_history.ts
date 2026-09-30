@@ -1,14 +1,14 @@
 import { cn } from '@tuwaio/sdk/nova-core';
 import { TransactionsHistoryCustomization } from '@tuwaio/sdk/nova-transactions';
 
+import { TransactionUnion } from '../../transactions';
 import { ICON_BUTTON_STYLES, SHARED_STYLES } from './shared_styles';
 
 /**
  * Custom theme customization for TransactionsHistory.
  * This can be used both in ConnectedModal and standalone NovaTransactionsProvider.
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const transactions_history_customization: TransactionsHistoryCustomization<any> = {
+export const transactions_history_customization: TransactionsHistoryCustomization<TransactionUnion> = {
   classNames: {
     // Container
     container: 'flex flex-col gap-y-3',

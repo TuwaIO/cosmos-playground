@@ -2,47 +2,55 @@
 
 import { EVMConnectorsWatcher } from '@tuwaio/evm-sdk/nova-connect';
 import { satelliteEVMAdapter } from '@tuwaio/evm-sdk/satellite';
-import { NovaConnectProvider, NovaConnectProviderProps } from '@tuwaio/sdk/nova-connect';
+import { NovaConnectProvider, type NovaConnectProviderProps } from '@tuwaio/sdk/nova-connect';
 import { SatelliteConnectProvider } from '@tuwaio/sdk/nova-connect/satellite';
-import { useSiwxSessionStore } from '@tuwaio/sdk/siwx';
+import { type ReactNode } from 'react';
 
 import { appEVMChains, wagmiConfig } from '@/configs/appConfig';
 import { usePulsarStore } from '@/hooks/pulsarStoreHook';
 import { NovaTransactionsProvider } from '@/providers/NovaTransactionsProvider';
 
-export function SatelliteConnectProviders({ children }: { children: React.ReactNode }) {
-  const siwxSession = useSiwxSessionStore((s) => s.session);
-  const transactionPool = usePulsarStore((state) => state.transactionsPool);
+// Created once: a new adapter on every render would make the provider update its store each time
+const satelliteAdapter = satelliteEVMAdapter(wagmiConfig, appEVMChains);
+
+// Sign-in against the routes of src/app/api/siwx/[...siwx]/route.ts
+const siwx: NovaConnectProviderProps['siwx'] = {
+  expirationSeconds: 1800,
+  getNonce: async () => {
+    const res = await fetch('/api/siwx/nonce');
+    return ((await res.json()) as { nonce: string }).nonce;
+  },
+  verifier: async (payload) => {
+    const res = await fetch('/api/siwx/verify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    return res.ok ? res.json() : null;
+  },
+  destroyer: async () => {
+    await fetch('/api/siwx/logout', { method: 'POST' });
+  },
+  onError: (error) => {
+    console.warn('[SIWX Auth Error]', error);
+  },
+};
+
+export function SatelliteConnectProviders({ children }: { children: ReactNode }) {
+  const transactionsPool = usePulsarStore((state) => state.transactionsPool);
   const getAdapter = usePulsarStore((state) => state.getAdapter);
 
   return (
-    <SatelliteConnectProvider adapter={[satelliteEVMAdapter(wagmiConfig, appEVMChains)]} autoConnect={true}>
-      <EVMConnectorsWatcher wagmiConfig={wagmiConfig} siwx={siwxSession ?? undefined} />
+    <SatelliteConnectProvider adapter={satelliteAdapter} autoConnect>
+      <EVMConnectorsWatcher wagmiConfig={wagmiConfig} />
       <NovaTransactionsProvider />
       <NovaConnectProvider
         appChains={appEVMChains}
-        transactionPool={transactionPool}
+        transactionPool={transactionsPool}
         pulsarAdapter={getAdapter() as NovaConnectProviderProps['pulsarAdapter']}
-        withImpersonated
+        siwx={siwx}
         withBalance
         withChain
-        siwx={{
-          expirationSeconds: 1800,
-          verifier: async (payload) => {
-            const res = await fetch('/api/siwx/verify', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(payload),
-            });
-            return res.ok ? res.json() : null;
-          },
-          destroyer: async () => {
-            await fetch('/api/siwx/logout', { method: 'POST' });
-          },
-          onError: (error) => {
-            console.warn('[SIWX Auth Error]', error);
-          },
-        }}
       >
         {children}
       </NovaConnectProvider>

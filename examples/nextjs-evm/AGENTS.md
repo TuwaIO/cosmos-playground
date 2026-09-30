@@ -1,16 +1,17 @@
-# 🤖 Agent Context: TUWA Integration
+# AGENTS.md: nextjs-evm
 
-> **⚠️ ACTION REQUIRED FOR DEVELOPER:**
-> To give your AI Assistant (Cursor, Copilot, etc.) full context about the TUWA Ecosystem, please:
-> 1. Go to the **[Integration Standard (TUWA_AGENT.md)](https://raw.githubusercontent.com/TuwaIO/workflows/refs/heads/main/TUWA_AGENT.md)**.
-> 2. Copy the **Raw Content**.
-> 3. Paste it here, replacing this text.
+This app is a Next.js App Router app on the TUWA SDK for EVM chains, with SIWX sign-in and tracked transactions. It comes from the `nextjs-evm` template of [Cosmos Playground](https://github.com/TuwaIO/cosmos-playground); `README.md` describes its features, environment variables and files.
 
----
+Before changing TUWA code, read the TUWA integration guide for agents: https://raw.githubusercontent.com/TuwaIO/workflows/main/TUWA_AGENTS.md. It lists the packages and their import paths, working code for every part of this app, and the full list of rules.
 
-### Why do this?
-This file is the "Brain" for your AI. Once populated, your AI will understand:
-* How to connect wallets using **Satellite**.
-* How to track transactions using **Pulsar**.
-* How to use UI components from **Nova**.
-* Strict coding standards (Tailwind v4, React 19, Type Safety).
+## Commands
+
+`pnpm dev`, `pnpm build`, `pnpm lint:fix`.
+
+## Rules
+
+- Create the wagmi config, the Satellite adapters and the Pulsar store once, at module level, never inside components.
+- Send blockchain writes through `executeTxAction` of the Pulsar store and read their status from the store.
+- Pass `siwx` only to `NovaConnectProvider`, with `getNonce`: the `/api/siwx` routes accept only nonces they issued.
+- Server code reads the SIWX session from the cookie with `getSiwxServerSession`; never accept a session object from the browser.
+- Keep strict TypeScript without `any`; run `pnpm lint:fix` after changes.

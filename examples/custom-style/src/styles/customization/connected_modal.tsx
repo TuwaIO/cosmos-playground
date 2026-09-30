@@ -30,9 +30,6 @@ export const connected_modal_customization: ConnectedModalCustomization = {
     // Title styling
     dialogTitle: () => MODAL_STYLES.headerTitle,
 
-    // Back button
-    backButton: () => MODAL_STYLES.closeButton,
-
     // Close button
     closeButton: () => MODAL_STYLES.closeButton,
 

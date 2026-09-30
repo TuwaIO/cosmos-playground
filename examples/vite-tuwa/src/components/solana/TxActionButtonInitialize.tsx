@@ -1,5 +1,3 @@
-'use client';
-
 import { DocumentDuplicateIcon } from '@heroicons/react/24/solid';
 import { generateKeyPairSigner } from '@solana/kit';
 import { useWalletAccountTransactionSendingSigner } from '@solana/react';

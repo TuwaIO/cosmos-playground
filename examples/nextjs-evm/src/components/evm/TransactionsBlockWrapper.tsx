@@ -1,5 +1,3 @@
-// JUST for test
-
 'use client';
 
 import { createViemClient } from '@tuwaio/evm-sdk/orbit';

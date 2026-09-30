@@ -1,136 +1,100 @@
-# Pulsar & Cosmos SDK: Next.js + Solana/EVM Example
+# TUWA SDK: Next.js, EVM and Solana
 
-[![License](https://img.shields.io/npm/l/@tuwaio/sdk.svg)](./LICENSE)
+[![License: MIT-0](https://img.shields.io/badge/license-MIT--0-blue.svg)](./LICENSE)
 
-A minimal example demonstrating how to integrate the **Pulsar Transaction Tracking Engine** and **Nova UI Kit** into a Next.js application, supporting both **Solana** and **EVM** transactions. Wallet connections are handled by `@tuwaio/sdk`.
-
-This example is part of the [Cosmos Playground](https://github.com/TuwaIO/cosmos-playground) monorepo.
+A Next.js app with EVM and Solana wallets in one connect modal and tracked transactions on both networks, built on the TUWA SDK (`@tuwaio/sdk` with `@tuwaio/evm-sdk` and `@tuwaio/solana-sdk`). It is a template of [Cosmos Playground](https://github.com/TuwaIO/cosmos-playground); the [Full-Stack React guide](https://docs.tuwa.io/guides/full-stack-react#-evm-and-solana-together) builds the same setup step by step.
 
 ---
 
-## 🏛️ Overview
-
-This template demonstrates multi-chain EVM and Solana integration using the TUWA Ecosystem SDKs:
-
-- **Client**: Multi-chain connection via `@tuwaio/sdk/satellite` and `@tuwaio/solana-sdk/satellite`, Nova UI via `@tuwaio/sdk/nova-connect`, and Pulsar tracking via `@tuwaio/sdk/pulsar`.
-
----
-
-## 💾 Installation & Quick Start
+## 🚀 Quick Start
 
 ```bash
-# Install dependencies
-pnpm install
-
-# Start development server
+npx @tuwaio/create-cosmos-playground   # choose nextjs-tuwa
+cd my-app
+cp .env.example .env
 pnpm dev
-# Open http://localhost:3000 in your browser
 ```
 
-## 📦 What's Included
+Open [http://localhost:3000](http://localhost:3000). Node.js 20.9 or newer is required; every variable in `.env` is optional for local development.
 
-- **React 19** with TypeScript
-- **Next.js 16** with App Directory
-- **Solana** and **EVM** for wallet connections
-- **Pulsar Engine** for core tracking logic
-- **Nova UI Kit** for pre-built React components
-- **TailwindCSS** for styling
-- **Nova Connect** for Web3 interactions on EVM and Solana
+---
 
-## 🎯 Features Demonstrated
+## 🎯 What It Shows
 
-- ✅ Wallet connection for both **Solana** and **EVM**
-- ✅ Real-time, multi-chain transaction tracking
-- ✅ Comprehensive transaction history modal
-- ✅ Automatic toast notifications for transaction status
-- ✅ Support for standard EVM, Safe, and Pimlico ERC-4337 transactions
-- ✅ Server-side rendering compatibility
+- **Wallet connection** with the Nova Connect modals on Satellite Connect: EVM wallets through wagmi connectors (injected, WalletConnect, Safe{Wallet}, a read-only impersonated wallet) and Solana wallets through Wallet Standard. Satellite Connect reconnects the last browser wallet after a page reload.
+- **Tracked transactions** with Pulsar and the Nova Transactions modals and toasts:
+  - EVM: a counter contract on Sepolia, called directly and as an ERC-4337 UserOperation through Pimlico;
+  - Solana: a counter program on devnet (create, increment, decrement and close counter accounts).
+- **Transaction history** saved to `localStorage`, with tracking that resumes after a reload.
 
-## 🛠️ Available Scripts
+---
 
-```bash
-pnpm dev # Start development server
-pnpm build # Build for production
-pnpm start # Start production server
-```
+## 📦 TUWA Packages
+
+| Import                                                                            | Used for                                                                  |
+| --------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `@tuwaio/sdk/nova-connect`, `/nova-connect/components`, `/nova-connect/satellite` | `NovaConnectProvider`, `ConnectButton`, the Satellite Connect store       |
+| `@tuwaio/sdk/nova-transactions`, `/nova-transactions/providers`                   | `NovaTransactionsProvider`, `TxActionButton`, `HashLink`                  |
+| `@tuwaio/sdk/pulsar`, `@tuwaio/sdk/orbit`                                         | The Pulsar store and the network helpers                                  |
+| `@tuwaio/evm-sdk/*`                                                               | The EVM adapters of Satellite and Pulsar, `EVMConnectorsWatcher`, Pimlico |
+| `@tuwaio/solana-sdk/*`                                                            | The Solana adapters, `SolanaConnectorsWatcher`, `signAndSendSolanaTx`     |
+
+---
+
+## 🔧 Environment Variables
+
+| Variable                        | Description                                                                                                  |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `NEXT_PUBLIC_APP_URL`           | Origin of the app, for the WalletConnect metadata. Default: `http://localhost:3000`                          |
+| `NEXT_PUBLIC_WALLET_PROJECT_ID` | WalletConnect project ID from [dashboard.reown.com](https://dashboard.reown.com); use your own in production |
+| `NEXT_PUBLIC_ALCHEMY_KEY`       | Alchemy key for the Ethereum Mainnet, Sepolia and Solana Mainnet RPC URLs. Default: public RPC URLs          |
+| `NEXT_PUBLIC_PIMLICO_API_KEY`   | Pimlico key for the ERC-4337 transaction                                                                     |
+
+---
 
 ## 📁 Project Structure
 
 ```
 src/
-├── abis/          # Smart contract ABIs
-├── app/           # Next.js App Directory (pages and layouts)
-├── components/    # Application-specific React components
-├── configs/       # Wagmi and chain configurations
-├── constants.ts   # Shared constants
-├── hooks/         # Custom React hooks
-├── providers/     # React Context providers, including NovaProvider setup
-├── programs/      # Solana Program generated client
-├── styles/        # Global CSS and Tailwind styles
-├── targets/       # Solana Program IDL
-└── transactions/  # Logic for defining transaction actions and callbacks
+├── abis/          # ABI of the EVM counter contract
+├── app/           # Next.js App Router: layout and page
+├── components/    # Header, home page, the EVM and Solana transaction blocks
+├── configs/       # wagmi config, EVM chains and Solana RPC URLs
+├── constants.ts   # Addresses of the counter contract and program
+├── hooks/         # Pulsar store, store of the Solana counter accounts
+├── programs/      # Codama client of the Solana program (generated/ is rebuilt by `pnpm generate:solana`)
+├── providers/     # Satellite Connect, Nova Connect and Nova Transactions providers
+├── styles/        # Tailwind CSS v4 and the Nova stylesheets
+├── targets/       # Anchor IDL of the Solana program
+└── transactions/  # The transaction actions and their types
 ```
 
-## ⚡ Prerequisites
+---
 
-Make sure you have the following installed:
+## 🛠️ Scripts
 
-- **Node.js** \>= 20.0.0
-- **pnpm** \>= 9.0.0
+| Script                 | Description                                      |
+| ---------------------- | ------------------------------------------------ |
+| `pnpm dev`             | Start the development server                     |
+| `pnpm build`           | Build for production                             |
+| `pnpm start`           | Serve the production build                       |
+| `pnpm lint`            | Check the code with ESLint and Prettier          |
+| `pnpm lint:fix`        | Fix what ESLint and Prettier can fix             |
+| `pnpm generate:solana` | Regenerate the Codama client from the Anchor IDL |
 
-<!-- end list -->
-
-```bash
-# Install pnpm globally if you haven't already
-npm install -g pnpm
-```
-
-## 🔧 Environment Variables
-
-Create a `.env` file in the project root:
-
-```env
-# Required: Get a Project ID from [https://cloud.walletconnect.com](https://cloud.walletconnect.com)
-NEXT_PUBLIC_WALLET_PROJECT_ID=your_project_id
-
-# Optional: Pimlico API key for ERC-4337 UserOperation bundler
-NEXT_PUBLIC_PIMLICO_API_KEY=your_pimlico_api_key
-
-# Optional: Alchemy API key for RPC URLs
-NEXT_PUBLIC_ALCHEMY_KEY=your_alchemy_key
-```
-
-## 🚀 Deployment
-
-### Vercel (Recommended)
-
-The easiest way to deploy this Next.js example is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
-
-### Other Platforms
-
-```bash
-# Build the application
-pnpm build
-# The output will be in the .next directory.
-# Deploy the contents of this directory to your hosting provider.
-```
+---
 
 ## 📖 Learn More
 
-For detailed documentation and advanced usage:
+- [Full-Stack React guide](https://docs.tuwa.io/guides/full-stack-react) and [React transaction tracking guide](https://docs.tuwa.io/guides/react-transaction-tracking)
+- [TUWA SDK](https://sdk.docs.tuwa.io/): the subpaths of `@tuwaio/sdk`, `@tuwaio/evm-sdk` and `@tuwaio/solana-sdk`
+- [Nova UI Kit Storybook](https://stories.tuwa.io/): the components, their props and theming
+- [All starter templates](https://docs.tuwa.io/guides/starter-templates)
 
-- [Orbit Documentation](https://orbit.docs.tuwa.io/)
-- [Satellite Documentation](https://satellite.docs.tuwa.io/)
-- [Pulsar Documentation](https://pulsar.docs.tuwa.io/)
-- [Nova Documentation](https://stories.tuwa.io/?path=/docs/introduction--docs)
-- [Next.js Documentation](https://nextjs.org/docs)
-- [Wagmi Documentation](https://wagmi.sh/)
-- [Solana Kit Documentation](https://github.com/anza-xyz/kit)
+---
 
 ## 🤝 Contributing & Support
 
-Contributions are welcome! Please read our main **[Contribution Guidelines](https://github.com/TuwaIO/workflows/blob/main/CONTRIBUTING.md)**.
-
-If you find this library useful, please consider supporting its development. Every contribution helps!
+Contributions are welcome! Please read the **[Contribution Guidelines](https://github.com/TuwaIO/workflows/blob/main/CONTRIBUTING.md)**.
 
 [**➡️ View Support Options**](https://github.com/TuwaIO/workflows/blob/main/Donation.md)

@@ -1,16 +1,17 @@
-# 🤖 Agent Context: TUWA Integration
+# AGENTS.md: vite-tuwa
 
-> **⚠️ ACTION REQUIRED FOR DEVELOPER:**
-> To give your AI Assistant (Cursor, Copilot, etc.) full context about the TUWA Ecosystem, please:
-> 1. Go to the **[Integration Standard (TUWA_AGENT.md)](https://raw.githubusercontent.com/TuwaIO/workflows/refs/heads/main/TUWA_AGENT.md)**.
-> 2. Copy the **Raw Content**.
-> 3. Paste it here, replacing this text.
+This app is a client-side Vite React app on the TUWA SDK with EVM and Solana wallets and tracked transactions. It comes from the `vite-tuwa` template of [Cosmos Playground](https://github.com/TuwaIO/cosmos-playground); `README.md` describes its features, environment variables and files.
 
----
+Before changing TUWA code, read the TUWA integration guide for agents: https://raw.githubusercontent.com/TuwaIO/workflows/main/TUWA_AGENTS.md. It lists the packages and their import paths, working code for every part of this app, and the full list of rules.
 
-### Why do this?
-This file is the "Brain" for your AI. Once populated, your AI will understand:
-* How to connect wallets using **Satellite**.
-* How to track transactions using **Pulsar**.
-* How to use UI components from **Nova**.
-* Strict coding standards (Tailwind v4, React 19, Type Safety).
+## Commands
+
+`pnpm dev`, `pnpm build`, `pnpm type-check`, `pnpm lint:fix`, `pnpm generate:solana` (after changing the Anchor IDL in `src/targets`).
+
+## Rules
+
+- Create the wagmi config, the Satellite adapters and the Pulsar store once, at module level, never inside components.
+- Send blockchain writes through `executeTxAction` of the Pulsar store and read their status from the store.
+- Everything runs in the browser: `VITE_*` variables are public, so never put secrets in them.
+- Never edit `src/programs/solanatest/generated`: regenerate it with `pnpm generate:solana`.
+- Keep strict TypeScript without `any`; run `pnpm lint:fix` after changes.
