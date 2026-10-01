@@ -30,7 +30,7 @@
     "@solana/kit": "^8.4.0",
     "@solana/react": "^8.4.0",
     "@solana/webcrypto-ed25519-polyfill": "^8.4.0",
-    "@tuwaio/sdk": "^0.2.0",
+    "@tuwaio/sdk": "^0.2.1",
     "@tuwaio/solana-sdk": "^0.2.0",
     "@wallet-standard/app": "^1.1.1",
     "@wallet-standard/base": "^1.1.1",
@@ -40,7 +40,7 @@
     "@wallet-standard/ui-registry": "^1.1.1",
     "framer-motion": "^13.4.6",
     "immer": "^11.1.18",
-    "next": "16.3.7",
+    "next": "16.3.8",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "zustand": "^5.0.15"

@@ -36,8 +36,8 @@
     "@solana/kit": "^8.4.0",
     "@solana/react": "^8.4.0",
     "@solana/webcrypto-ed25519-polyfill": "^8.4.0",
-    "@tuwaio/evm-sdk": "^0.2.0",
-    "@tuwaio/sdk": "^0.2.0",
+    "@tuwaio/evm-sdk": "^0.2.1",
+    "@tuwaio/sdk": "^0.2.1",
     "@tuwaio/solana-sdk": "^0.2.0",
     "@wagmi/connectors": "^8.2.0",
     "@wagmi/core": "^3.6.5",
@@ -52,7 +52,7 @@
     "immer": "^11.1.18",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
-    "viem": "^2.57.1",
+    "viem": "^2.57.2",
     "zustand": "^5.0.15"
   },
   "devDependencies": {
