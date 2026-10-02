@@ -32,8 +32,8 @@
     "@heroicons/react": "^2.2.0",
     "@safe-global/safe-apps-provider": "^0.18.6",
     "@safe-global/safe-apps-sdk": "^9.1.0",
-    "@tuwaio/evm-sdk": "^0.2.1",
-    "@tuwaio/sdk": "^0.2.1",
+    "@tuwaio/evm-sdk": "^0.2.2",
+    "@tuwaio/sdk": "^0.2.3",
     "@wagmi/connectors": "^8.2.0",
     "@wagmi/core": "^3.6.5",
     "@walletconnect/ethereum-provider": "^2.25.0",
@@ -55,11 +55,11 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.7",
     "eslint-plugin-simple-import-sort": "^14.0.0",
-    "globals": "^17.12.0",
+    "globals": "^17.13.0",
     "prettier": "^3.9.9",
     "tailwindcss": "^4.3.3",
     "typescript": "6.0.3",
     "typescript-eslint": "^8.71.0",
-    "vite": "^8.3.1"
+    "vite": "^8.3.2"
   }
 }

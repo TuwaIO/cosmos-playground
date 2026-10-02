@@ -5,13 +5,13 @@ allowBuilds:
   '@reown/appkit': false
   esbuild: false
 minimumReleaseAgeExclude:
-  - '@tuwaio/nova-connect@0.6.0 || 0.7.0 || 0.7.2 || 0.7.3'
-  - '@tuwaio/nova-core@0.6.0 || 0.7.0 || 0.7.1 || 0.7.2'
-  - '@tuwaio/nova-transactions@0.6.0 || 0.7.0 || 0.7.2 || 0.7.3'
+  - '@tuwaio/nova-connect@0.6.0 || 0.7.0 || 0.7.2 || 0.7.3 || 0.7.4'
+  - '@tuwaio/nova-core@0.6.0 || 0.7.0 || 0.7.1 || 0.7.2 || 0.7.3'
+  - '@tuwaio/nova-transactions@0.6.0 || 0.7.0 || 0.7.2 || 0.7.3 || 0.7.4'
   - '@tuwaio/orbit-core@0.3.0'
   - '@tuwaio/orbit-evm@0.3.0 || 0.3.2'
   - '@tuwaio/orbit-solana@0.3.0 || 0.3.3'
-  - '@tuwaio/pulsar-core@0.7.0 || 0.8.2'
+  - '@tuwaio/pulsar-core@0.7.0 || 0.8.2 || 0.8.3'
   - '@tuwaio/pulsar-evm@0.6.0 || 0.7.2'
   - '@tuwaio/pulsar-react@0.5.0 || 0.6.1'
   - '@tuwaio/pulsar-solana@0.7.0 || 0.8.3'
@@ -19,15 +19,15 @@ minimumReleaseAgeExclude:
   - '@tuwaio/satellite-evm@0.5.0 || 0.6.1 || 0.6.2'
   - '@tuwaio/satellite-react@0.5.0 || 0.6.2 || 0.6.3'
   - '@tuwaio/satellite-solana@0.5.0 || 0.6.1'
-  - '@tuwaio/evm-sdk@0.1.14 || 0.2.0 || 0.2.1'
-  - '@tuwaio/quasar-sdk@0.1.12 || 0.2.0'
-  - '@tuwaio/sdk@0.1.14 || 0.2.0 || 0.2.1'
-  - '@tuwaio/siwx-core@0.3.0'
-  - '@tuwaio/siwx-evm@0.3.0 || 0.4.1'
-  - '@tuwaio/siwx-react@0.3.0'
-  - '@tuwaio/siwx-server@0.3.0 || 0.4.1'
-  - '@tuwaio/siwx-solana@0.3.0 || 0.4.1'
-  - '@tuwaio/solana-sdk@0.1.15 || 0.2.0'
+  - '@tuwaio/evm-sdk@0.1.14 || 0.2.0 || 0.2.1 || 0.2.2'
+  - '@tuwaio/quasar-sdk@0.1.12 || 0.2.0 || 0.2.1'
+  - '@tuwaio/sdk@0.1.14 || 0.2.0 || 0.2.1 || 0.2.2 || 0.2.3'
+  - '@tuwaio/siwx-core@0.3.0 || 0.4.1'
+  - '@tuwaio/siwx-evm@0.3.0 || 0.4.1 || 0.4.2'
+  - '@tuwaio/siwx-react@0.3.0 || 0.4.1'
+  - '@tuwaio/siwx-server@0.3.0 || 0.4.1 || 0.4.3'
+  - '@tuwaio/siwx-solana@0.3.0 || 0.4.1 || 0.4.2'
+  - '@tuwaio/solana-sdk@0.1.15 || 0.2.0 || 0.2.1'
   - '@types/node@26.5.0'
   - '@typescript-eslint/eslint-plugin@8.70.0'
   - '@typescript-eslint/parser@8.70.0'
@@ -40,8 +40,8 @@ minimumReleaseAgeExclude:
   - '@typescript-eslint/utils@8.70.0'
   - '@typescript-eslint/visitor-keys@8.70.0'
   - typescript-eslint@8.70.0
-  - framer-motion@13.4.6
-  - motion-dom@13.4.5
+  - framer-motion@13.4.6 || 13.5.1
+  - motion-dom@13.4.5 || 13.5.1
   - viem@2.57.0 || 2.57.1 || 2.57.2
   - '@next/env@16.3.7 || 16.3.8'
   - '@next/swc-darwin-arm64@16.3.7 || 16.3.8'
