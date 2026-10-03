@@ -1,3 +1,4 @@
+import { SOLANA_CHAIN_IDS } from '@tuwaio/sdk/orbit';
 import { createStatelessDemoSiwxHandler } from '@tuwaio/sdk/siwx/server-next';
 
 import { appConfig, appEVMChains } from '@/configs/appConfig';
@@ -14,10 +15,9 @@ export const { GET, POST, DELETE } = createStatelessDemoSiwxHandler({
     expectedUri: appUrl.origin,
     allowedChainIds: [
       ...appEVMChains.flatMap((chain) => [String(chain.id), `eip155:${chain.id}`]),
-      'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp',
-      'solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1',
-      'solana:mainnet',
-      'solana:devnet',
+      // Genesis-hash chain IDs; sessions signed for `solana:mainnet` and `solana:devnet` match them too
+      SOLANA_CHAIN_IDS.mainnet,
+      SOLANA_CHAIN_IDS.devnet,
     ],
     requireExpirationTime: true,
     maxIssuedAtAgeSeconds: 300,

@@ -2,7 +2,7 @@ import { address } from '@solana/kit';
 import { useSatelliteConnectStore } from '@tuwaio/sdk/nova-connect/satellite';
 import { textCenterEllipsis } from '@tuwaio/sdk/nova-core';
 import { HashLink } from '@tuwaio/sdk/nova-transactions';
-import { OrbitAdapter, selectAdapterByKey } from '@tuwaio/sdk/orbit';
+import { OrbitAdapter, selectAdapterByKey, SOLANA_CHAIN_IDS } from '@tuwaio/sdk/orbit';
 import { SolanaConnection } from '@tuwaio/solana-sdk/satellite';
 import { useEffect } from 'react';
 
@@ -33,8 +33,13 @@ export const TransactionsBlockWrapper = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // The counter program is deployed on devnet: its explorer links name the cluster, whatever the wallet is on
   const openSolscan = () => {
-    window.open(foundAdapter?.getExplorerUrl(`/account/${PROGRAM_ID}`), '_blank', 'noopener,noreferrer');
+    window.open(
+      foundAdapter?.getExplorerUrl(`/account/${PROGRAM_ID}`, SOLANA_CHAIN_IDS.devnet),
+      '_blank',
+      'noopener,noreferrer',
+    );
   };
 
   const sortedAccounts = Object.entries(accounts).sort(([, countA], [, countB]) => countB - countA);
@@ -137,7 +142,10 @@ export const TransactionsBlockWrapper = () => {
 
                         <div className="text-right flex-shrink-0">
                           <div className="text-sm text-[var(--tuwa-text-secondary)] leading-tight">Account</div>
-                          <HashLink hash={key} explorerUrl={foundAdapter?.getExplorerUrl(`/address/${key}`)} />
+                          <HashLink
+                            hash={key}
+                            explorerUrl={foundAdapter?.getExplorerUrl(`/address/${key}`, SOLANA_CHAIN_IDS.devnet)}
+                          />
                         </div>
                       </div>
 

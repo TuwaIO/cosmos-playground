@@ -10,12 +10,21 @@ import {
   ExclamationTriangleIcon,
   ShieldCheckIcon,
 } from '@heroicons/react/24/outline';
-import { textCenterEllipsis } from '@tuwaio/sdk/nova-core';
+import { getChainName, textCenterEllipsis } from '@tuwaio/sdk/nova-core';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { usePulsarStore } from '@/hooks/pulsarStoreHook';
 import type { QuasarWebhookEvent } from '@/lib/quasarWebhookStore';
 import { TRANSACTION_SUCCESS_EVENT, type TransactionSuccessDetail } from '@/lib/webhookMonitorEvents';
+
+// Quasar sends EVM chains as numbers or numeric strings and Solana clusters as CAIP-2 chain IDs with the genesis hash
+function formatWebhookChain(chainId: string | number): string {
+  const id = typeof chainId === 'string' && /^\d+$/.test(chainId) ? Number(chainId) : chainId;
+  const { name } = getChainName(id);
+  const raw = String(chainId);
+  const shortId = raw.length > 20 ? textCenterEllipsis(raw, 10, 6) : raw;
+  return name === 'Unknown' ? shortId : `${name} (${shortId})`;
+}
 
 type WebhookResponse = {
   latest: QuasarWebhookEvent | null;
@@ -251,8 +260,11 @@ export function QuasarWebhookMonitor() {
               {activeWebhook.payload.chainId && (
                 <div className="flex flex-wrap items-center justify-between gap-1">
                   <span className="text-[var(--tuwa-text-tertiary)]">Chain ID</span>
-                  <span className="font-mono text-[var(--tuwa-text-primary)]">
-                    {String(activeWebhook.payload.chainId)}
+                  <span
+                    className="font-mono text-[var(--tuwa-text-primary)] break-all"
+                    title={String(activeWebhook.payload.chainId)}
+                  >
+                    {formatWebhookChain(activeWebhook.payload.chainId)}
                   </span>
                 </div>
               )}
