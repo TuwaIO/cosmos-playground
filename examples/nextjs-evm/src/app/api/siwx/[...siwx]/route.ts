@@ -1,3 +1,4 @@
+import { toCaip2ChainId } from '@tuwaio/sdk/orbit';
 import { createStatelessDemoSiwxHandler } from '@tuwaio/sdk/siwx/server-next';
 
 import { appConfig, appEVMChains } from '@/configs/appConfig';
@@ -12,7 +13,8 @@ export const { GET, POST, DELETE } = createStatelessDemoSiwxHandler({
   policy: {
     expectedDomain: appUrl.host,
     expectedUri: appUrl.origin,
-    allowedChainIds: appEVMChains.flatMap((chain) => [String(chain.id), `eip155:${chain.id}`]),
+    // CAIP-2 chain IDs (`eip155:1`), the form of the chain ID in every SIWX message
+    allowedChainIds: appEVMChains.flatMap((chain) => toCaip2ChainId(chain.id) ?? []),
     requireExpirationTime: true,
     maxIssuedAtAgeSeconds: 300,
     maxSessionLifetimeSeconds: 1800, // 30 minutes

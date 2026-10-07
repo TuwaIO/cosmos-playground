@@ -1,4 +1,4 @@
-import { SOLANA_CHAIN_IDS } from '@tuwaio/sdk/orbit';
+import { SOLANA_CHAIN_IDS, toCaip2ChainId } from '@tuwaio/sdk/orbit';
 import { createStatelessDemoSiwxHandler } from '@tuwaio/sdk/siwx/server-next';
 
 import { appConfig, appEVMChains } from '@/configs/appConfig';
@@ -14,7 +14,8 @@ export const { GET, POST, DELETE } = createStatelessDemoSiwxHandler({
     expectedDomain: appUrl.host,
     expectedUri: appUrl.origin,
     allowedChainIds: [
-      ...appEVMChains.flatMap((chain) => [String(chain.id), `eip155:${chain.id}`]),
+      // CAIP-2 chain IDs (`eip155:1`), the form of the chain ID in every SIWX message
+      ...appEVMChains.flatMap((chain) => toCaip2ChainId(chain.id) ?? []),
       // Genesis-hash chain IDs; sessions signed for `solana:mainnet` and `solana:devnet` match them too
       SOLANA_CHAIN_IDS.mainnet,
       SOLANA_CHAIN_IDS.devnet,
