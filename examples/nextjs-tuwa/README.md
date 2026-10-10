@@ -31,13 +31,13 @@ Open [http://localhost:3000](http://localhost:3000). Node.js 20.9 or newer is re
 
 ## 📦 TUWA Packages
 
-| Import                                                                            | Used for                                                                  |
-| --------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| `@tuwaio/sdk/nova-connect`, `/nova-connect/components`, `/nova-connect/satellite` | `NovaConnectProvider`, `ConnectButton`, the Satellite Connect store       |
-| `@tuwaio/sdk/nova-transactions`, `/nova-transactions/providers`                   | `NovaTransactionsProvider`, `TxActionButton`, `HashLink`                  |
-| `@tuwaio/sdk/pulsar`, `@tuwaio/sdk/orbit`                                         | The Pulsar store and the network helpers                                  |
-| `@tuwaio/evm-sdk/*`                                                               | The EVM adapters of Satellite and Pulsar, `EVMConnectorsWatcher`, Pimlico |
-| `@tuwaio/solana-sdk/*`                                                            | The Solana adapters, `SolanaConnectorsWatcher`, `signAndSendSolanaTx`     |
+| Import                                                                            | Used for                                                                                                      |
+| --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `@tuwaio/sdk/nova-connect`, `/nova-connect/components`, `/nova-connect/satellite` | `NovaConnectProvider`, `ConnectButton`, the Satellite Connect store                                           |
+| `@tuwaio/sdk/nova-transactions`, `/nova-transactions/providers`                   | `NovaTransactionsProvider`, `TxActionButton`, `HashLink`                                                      |
+| `@tuwaio/sdk/pulsar`, `@tuwaio/sdk/orbit`                                         | The Pulsar store and the network helpers                                                                      |
+| `@tuwaio/evm-sdk/*`                                                               | The EVM adapters of Satellite and Pulsar, `EVMConnectorsWatcher`, Pimlico                                     |
+| `@tuwaio/solana-sdk/*`                                                            | The Solana adapters, `SolanaConnectorsWatcher`, `signAndSendSolanaTx`, `createSolanaTransactionSendingSigner` |
 
 ---
 

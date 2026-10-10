@@ -42,15 +42,15 @@ Node.js 20.9 or newer is required. To receive webhooks on `localhost`, see [Webh
 
 ## 📦 TUWA Packages
 
-| Import                                                                            | Used for                                                                          |
-| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| `@tuwaio/quasar-sdk`                                                              | `Quasar`: `syncCreate` and `getHistory` in the Server Actions                     |
-| `@tuwaio/quasar-sdk/react`                                                        | `preFlightTxCheck` in `beforeTxProcess` of the Pulsar store                       |
-| `@tuwaio/sdk/siwx`, `/siwx/server`, `/siwx/server-next`                           | The SIWX session in the browser, `getSiwxServerSession`, the `/api/siwx/*` routes |
-| `@tuwaio/sdk/pulsar`                                                              | The Pulsar store and the history store (`createTxInMemoryStore`)                  |
-| `@tuwaio/sdk/nova-connect`, `/nova-connect/components`, `/nova-connect/satellite` | `NovaConnectProvider` with the `siwx` option, `ConnectButton`                     |
-| `@tuwaio/sdk/nova-transactions`, `/nova-transactions/providers`                   | `NovaTransactionsProvider` with pagination, `TxActionButton`                      |
-| `@tuwaio/evm-sdk/*`, `@tuwaio/solana-sdk/*`                                       | The adapters of Satellite and Pulsar and the watchers of each network             |
+| Import                                                                            | Used for                                                                                          |
+| --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `@tuwaio/quasar-sdk`                                                              | `Quasar`: `syncCreate` and `getHistory` in the Server Actions                                     |
+| `@tuwaio/quasar-sdk/react`                                                        | `preFlightTxCheck` in `beforeTxProcess` of the Pulsar store                                       |
+| `@tuwaio/sdk/siwx`, `/siwx/server`, `/siwx/server-next`                           | The SIWX session in the browser, `getSiwxServerSession`, the `/api/siwx/*` routes                 |
+| `@tuwaio/sdk/pulsar`                                                              | The Pulsar store and the history store (`createTxInMemoryStore`)                                  |
+| `@tuwaio/sdk/nova-connect`, `/nova-connect/components`, `/nova-connect/satellite` | `NovaConnectProvider` with the `siwx` option, `ConnectButton`                                     |
+| `@tuwaio/sdk/nova-transactions`, `/nova-transactions/providers`                   | `NovaTransactionsProvider` with pagination, `TxActionButton`                                      |
+| `@tuwaio/evm-sdk/*`, `@tuwaio/solana-sdk/*`                                       | The adapters of Satellite and Pulsar, the watchers of each network, the Solana transaction signer |
 
 ---
 

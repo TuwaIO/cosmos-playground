@@ -1,13 +1,11 @@
 'use client';
 
 import type { Address } from '@solana/kit';
-import { useWalletAccountTransactionSendingSigner } from '@solana/react';
 import { Connection } from '@tuwaio/sdk/nova-connect/satellite';
 import { TxActionButton as TAB } from '@tuwaio/sdk/nova-transactions';
 import { OrbitAdapter } from '@tuwaio/sdk/orbit';
-import { createSolanaClientWithCache } from '@tuwaio/solana-sdk/orbit';
+import { createSolanaClientWithCache, createSolanaTransactionSendingSigner } from '@tuwaio/solana-sdk/orbit';
 import { SolanaConnection } from '@tuwaio/solana-sdk/satellite';
-import { UiWalletAccount } from '@wallet-standard/react';
 import React from 'react';
 
 import { usePulsarStore } from '@/hooks/pulsarStoreHook';
@@ -27,19 +25,15 @@ export const TxActionButtonClose = ({
   const getAccounts = useStore((state) => state.getAccounts);
   const removeAccFromStore = useStore((state) => state.removeAccFromStore);
 
-  const activeWalletSolana = activeWallet as SolanaConnection;
-
-  const signer = useWalletAccountTransactionSendingSigner(
-    activeWalletSolana.connectedAccount as UiWalletAccount,
-    `${OrbitAdapter.SOLANA}:${activeWallet?.chainId ?? 'devnet'}`,
-  );
-
   const handleClose = async () => {
+    const { connectedAccount } = activeWallet as SolanaConnection;
+    if (!connectedAccount) return;
     await executeTxAction({
       actionFunction: () =>
         txActions.closeSolana({
           client: createSolanaClientWithCache({ rpcUrlOrMoniker: 'devnet' }),
-          signer,
+          // Asks the connected wallet to sign and send the transaction on devnet, where the counter program is deployed
+          signer: createSolanaTransactionSendingSigner(connectedAccount, 'devnet'),
           contractAddress: solanatest,
         }),
       onSuccess: async () => {

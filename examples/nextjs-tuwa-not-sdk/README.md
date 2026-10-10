@@ -37,7 +37,7 @@ Open [http://localhost:3000](http://localhost:3000). Node.js 20.9 or newer is re
 | `@tuwaio/nova-transactions`, `@tuwaio/nova-core`                                             | `NovaTransactionsProvider`, `TxActionButton`, `HashLink`, `cn`                            |
 | `@tuwaio/satellite-evm`, `@tuwaio/satellite-solana`                                          | The Satellite adapters, `createDefaultTransports`, `impersonated`, `safeSdkOptions`       |
 | `@tuwaio/pulsar-core`, `@tuwaio/pulsar-evm`, `@tuwaio/pulsar-solana`, `@tuwaio/pulsar-react` | The Pulsar store, adapters and `useInitializeTransactionsPool`                            |
-| `@tuwaio/orbit-core`, `@tuwaio/orbit-evm`, `@tuwaio/orbit-solana`                            | The network helpers, the viem and Solana clients, Pimlico                                 |
+| `@tuwaio/orbit-core`, `@tuwaio/orbit-evm`, `@tuwaio/orbit-solana`                            | The network helpers, the viem and Solana clients, the Solana transaction signer, Pimlico  |
 
 `@tuwaio/satellite-core`, `@tuwaio/satellite-react`, `@tuwaio/siwx-core` and `@tuwaio/siwx-react` are installed as peer dependencies of Nova Connect.
 

@@ -2,14 +2,12 @@
 
 import { DocumentDuplicateIcon } from '@heroicons/react/24/solid';
 import { generateKeyPairSigner } from '@solana/kit';
-import { useWalletAccountTransactionSendingSigner } from '@solana/react';
 import { install as installEd25519 } from '@solana/webcrypto-ed25519-polyfill';
 import { Connection } from '@tuwaio/nova-connect/satellite';
 import { TxActionButton as TAB } from '@tuwaio/nova-transactions';
 import { OrbitAdapter } from '@tuwaio/orbit-core';
-import { createSolanaClientWithCache } from '@tuwaio/orbit-solana';
+import { createSolanaClientWithCache, createSolanaTransactionSendingSigner } from '@tuwaio/orbit-solana';
 import { SolanaConnection } from '@tuwaio/satellite-solana';
-import { UiWalletAccount } from '@wallet-standard/react';
 import React from 'react';
 
 import { usePulsarStore } from '@/hooks/pulsarStoreHook';
@@ -25,20 +23,16 @@ export const TxActionButtonInitialize = ({ activeWallet }: { activeWallet: Conne
   const getLastTxKey = usePulsarStore((state) => state.getLastTxKey);
   const getAccounts = useStore((state) => state.getAccounts);
 
-  const activeWalletSolana = activeWallet as SolanaConnection;
-
-  const signer = useWalletAccountTransactionSendingSigner(
-    activeWalletSolana.connectedAccount as UiWalletAccount,
-    `${OrbitAdapter.SOLANA}:${activeWallet?.chainId ?? 'devnet'}`,
-  );
-
   const handleInitialize = async () => {
+    const { connectedAccount } = activeWallet as SolanaConnection;
+    if (!connectedAccount) return;
     const solanatest = await generateKeyPairSigner();
     await executeTxAction({
       actionFunction: () =>
         txActions.initializeSolana({
           client: createSolanaClientWithCache({ rpcUrlOrMoniker: 'devnet' }),
-          signer,
+          // Asks the connected wallet to sign and send the transaction on devnet, where the counter program is deployed
+          signer: createSolanaTransactionSendingSigner(connectedAccount, 'devnet'),
           contractAddress: solanatest,
         }),
       onSuccess: async () => await getAccounts(),

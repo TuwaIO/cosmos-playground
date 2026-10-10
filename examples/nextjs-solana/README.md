@@ -29,14 +29,14 @@ Open [http://localhost:3000](http://localhost:3000) with a Solana wallet extensi
 
 ## 📦 TUWA Packages
 
-| Import                                                                            | Used for                                                              |
-| --------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| `@tuwaio/sdk/nova-connect`, `/nova-connect/components`, `/nova-connect/satellite` | `NovaConnectProvider`, `ConnectButton`, the Satellite Connect store   |
-| `@tuwaio/sdk/nova-transactions`, `/nova-transactions/providers`                   | `NovaTransactionsProvider`, `TxActionButton`, `HashLink`              |
-| `@tuwaio/sdk/pulsar`, `@tuwaio/sdk/orbit`                                         | The Pulsar store and the network helpers                              |
-| `@tuwaio/solana-sdk/*`                                                            | The Solana adapters, `SolanaConnectorsWatcher`, `signAndSendSolanaTx` |
+| Import                                                                            | Used for                                                                                                      |
+| --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `@tuwaio/sdk/nova-connect`, `/nova-connect/components`, `/nova-connect/satellite` | `NovaConnectProvider`, `ConnectButton`, the Satellite Connect store                                           |
+| `@tuwaio/sdk/nova-transactions`, `/nova-transactions/providers`                   | `NovaTransactionsProvider`, `TxActionButton`, `HashLink`                                                      |
+| `@tuwaio/sdk/pulsar`, `@tuwaio/sdk/orbit`                                         | The Pulsar store and the network helpers                                                                      |
+| `@tuwaio/solana-sdk/*`                                                            | The Solana adapters, `SolanaConnectorsWatcher`, `signAndSendSolanaTx`, `createSolanaTransactionSendingSigner` |
 
-The transaction signer comes from `@solana/react` (`useWalletAccountTransactionSendingSigner`).
+The transaction signer is `createSolanaTransactionSendingSigner`: it asks the connected Wallet Standard wallet to sign and send each transaction, so the app needs no `@solana/react`.
 
 ---
 
