@@ -1,3 +1,8 @@
+export const appConfig = {
+  // The origin users open the app at: the only domain the SIWX server accepts
+  appUrl: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
+};
+
 const alchemyKey = process.env.NEXT_PUBLIC_ALCHEMY_KEY;
 
 export const solanaRPCUrls = {
