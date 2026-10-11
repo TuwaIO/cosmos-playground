@@ -15,7 +15,7 @@ cp .env.example .env
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). Node.js 20.9 or newer is required. For local development every variable in `.env` is optional; `pnpm build` and `pnpm start` need `SIWX_DEMO_SIGNING_SECRET`.
+Open [http://localhost:3000](http://localhost:3000). Node.js 20.19+, 22.13+ or 24+ is required (the `engines` range of ESLint 10). For local development every variable in `.env` is optional; `pnpm build` and `pnpm start` need `SIWX_DEMO_SIGNING_SECRET`.
 
 ---
 

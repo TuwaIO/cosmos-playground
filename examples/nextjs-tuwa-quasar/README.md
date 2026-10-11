@@ -23,7 +23,7 @@ The full-stack template: EVM and Solana wallets, SIWX sign-in (CAIP-122) with se
    pnpm dev
    ```
 
-Node.js 20.9 or newer is required. To receive webhooks on `localhost`, see [Webhooks](#-webhooks).
+Node.js 20.19+, 22.13+ or 24+ is required (the `engines` range of ESLint 10). To receive webhooks on `localhost`, see [Webhooks](#-webhooks).
 
 ---
 

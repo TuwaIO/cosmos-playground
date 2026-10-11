@@ -15,7 +15,7 @@ cp .env.example .env
 pnpm dev
 ```
 
-Open [http://localhost:5173](http://localhost:5173). Node.js 20.19 or newer is required; every variable in `.env` is optional for local development.
+Open [http://localhost:5173](http://localhost:5173). Node.js 20.19+, 22.13+ or 24+ is required (the `engines` range of ESLint 10); every variable in `.env` is optional for local development.
 
 ---
 

@@ -17,6 +17,9 @@
   ],
   "author": "Oleksandr Tkach",
   "license": "MIT-0",
+  "engines": {
+    "node": "^20.19.0 || ^22.13.0 || >=24"
+  },
   "packageManager": "pnpm@12.8.1",
   "scripts": {
     "dev": "next dev --turbopack",
