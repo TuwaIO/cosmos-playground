@@ -1,4 +1,4 @@
-import { cn } from '@tuwaio/sdk/nova-core';
+import { cn } from '@tuwaio/sdk/nova-core/utils';
 import { NovaTransactionsProviderProps } from '@tuwaio/sdk/nova-transactions/providers';
 
 import { TransactionUnion } from '../../transactions';

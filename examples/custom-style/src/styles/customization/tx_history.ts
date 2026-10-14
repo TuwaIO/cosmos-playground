@@ -1,4 +1,4 @@
-import { cn } from '@tuwaio/sdk/nova-core';
+import { cn } from '@tuwaio/sdk/nova-core/utils';
 import { TransactionsHistoryCustomization } from '@tuwaio/sdk/nova-transactions';
 
 import { TransactionUnion } from '../../transactions';

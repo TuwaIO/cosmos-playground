@@ -1,4 +1,4 @@
-import { cn } from '@tuwaio/sdk/nova-core';
+import { cn } from '@tuwaio/sdk/nova-core/utils';
 import React from 'react';
 
 import { SHARED_STYLES } from '../../styles/customization/shared_styles';
