@@ -34,7 +34,7 @@ The connect modal also shows the `legal` links of `NovaConnectProvider`; replace
 
 ## 🎯 What It Shows
 
-- **Wallet connection** with the restyled Nova Connect modals, through wagmi connectors: injected wallets, WalletConnect, Safe{Wallet} and a read-only impersonated wallet. Chains: Monad, Ethereum, Arbitrum, Sepolia and Monad Testnet.
+- **Wallet connection** with the restyled Nova Connect modals, through wagmi connectors: injected wallets, Safe{Wallet} and a read-only impersonated wallet. Chains: Monad, Ethereum, Arbitrum, Sepolia and Monad Testnet. WalletConnect is not included: to offer it, add `walletConnect` from `@wagmi/connectors` with your own Reown project ID.
 - **ERC-20 balances** (USDC, USDT0) in the connected modal, read from the chain and cached in a Zustand store.
 - **A tracked transaction** with Pulsar and the restyled Nova Transactions modals and toasts: a counter contract on Sepolia.
 
@@ -44,10 +44,9 @@ The connect modal also shows the `legal` links of `NovaConnectProvider`; replace
 
 Vite exposes only variables prefixed with `VITE_`, and inlines them into the bundle: put no secrets here.
 
-| Variable                 | Description                                                                                                  |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------ |
-| `VITE_WALLET_PROJECT_ID` | WalletConnect project ID from [dashboard.reown.com](https://dashboard.reown.com); use your own in production |
-| `VITE_ALCHEMY_KEY`       | Alchemy key for the Ethereum Mainnet and Sepolia RPC URLs. Default: public RPC URLs                          |
+| Variable           | Description                                                                         |
+| ------------------ | ----------------------------------------------------------------------------------- |
+| `VITE_ALCHEMY_KEY` | Alchemy key for the Ethereum Mainnet and Sepolia RPC URLs. Default: public RPC URLs |
 
 ---
 

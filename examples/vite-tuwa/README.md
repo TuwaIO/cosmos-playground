@@ -21,7 +21,7 @@ Open [http://localhost:5173](http://localhost:5173). Node.js 20.19+, 22.13+ or 2
 
 ## 🎯 What It Shows
 
-- **Wallet connection** with the Nova Connect modals on Satellite Connect: EVM wallets through wagmi connectors (injected, WalletConnect, Safe{Wallet}, a read-only impersonated wallet) and Solana wallets through Wallet Standard. Satellite Connect reconnects the last browser wallet after a page reload.
+- **Wallet connection** with the Nova Connect modals on Satellite Connect: EVM wallets through wagmi connectors (injected, Safe{Wallet}, a read-only impersonated wallet) and Solana wallets through Wallet Standard. Satellite Connect reconnects the last browser wallet after a page reload. WalletConnect is not included: to offer it, add `walletConnect` from `@wagmi/connectors` with your own Reown project ID.
 - **Tracked transactions** with Pulsar and the Nova Transactions modals and toasts:
   - EVM: a counter contract on Sepolia, called directly and as an ERC-4337 UserOperation through Pimlico;
   - Solana: a counter program on devnet (create, increment, decrement and close counter accounts).
@@ -45,11 +45,10 @@ Open [http://localhost:5173](http://localhost:5173). Node.js 20.19+, 22.13+ or 2
 
 Vite exposes only variables prefixed with `VITE_`, and inlines them into the bundle: put no secrets here.
 
-| Variable                 | Description                                                                                                  |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------ |
-| `VITE_WALLET_PROJECT_ID` | WalletConnect project ID from [dashboard.reown.com](https://dashboard.reown.com); use your own in production |
-| `VITE_ALCHEMY_KEY`       | Alchemy key for the Ethereum Mainnet, Sepolia and Solana Mainnet RPC URLs. Default: public RPC URLs          |
-| `VITE_PIMLICO_API_KEY`   | Pimlico key for the ERC-4337 transaction                                                                     |
+| Variable               | Description                                                                                         |
+| ---------------------- | --------------------------------------------------------------------------------------------------- |
+| `VITE_ALCHEMY_KEY`     | Alchemy key for the Ethereum Mainnet, Sepolia and Solana Mainnet RPC URLs. Default: public RPC URLs |
+| `VITE_PIMLICO_API_KEY` | Pimlico key for the ERC-4337 transaction                                                            |
 
 ---
 

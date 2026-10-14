@@ -29,7 +29,7 @@ Node.js 20.19+, 22.13+ or 24+ is required (the `engines` range of ESLint 10). To
 
 ## 🎯 What It Shows
 
-- **Wallet connection** with the Nova Connect modals on Satellite Connect: EVM wallets through wagmi connectors (injected, WalletConnect, Safe{Wallet}) and Solana wallets through Wallet Standard.
+- **Wallet connection** with the Nova Connect modals on Satellite Connect: EVM wallets through wagmi connectors (injected, Safe{Wallet}) and Solana wallets through Wallet Standard. WalletConnect is not included: to offer it, add `walletConnect` from `@wagmi/connectors` with your own Reown project ID.
 - **SIWX sign-in:** Nova Connect asks every connected wallet to sign a CAIP-122 message with a nonce from the server; the server verifies it and keeps the session in an `HttpOnly` cookie. A wallet that refuses to sign is disconnected.
 - **Transactions synced to Quasar:**
   - before the wallet prompt, `preFlightTxCheck` stops the transaction when the user is not signed in or Quasar does not respond;
@@ -56,16 +56,15 @@ Node.js 20.19+, 22.13+ or 24+ is required (the `engines` range of ESLint 10). To
 
 ## 🔧 Environment Variables
 
-| Variable                        | Description                                                                                                  |
-| ------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `QUASAR_SECRET_KEY`             | Secret key of your Quasar app (`sk_live_…` or `sk_test_…`). Server only                                      |
-| `QUASAR_WEBHOOK_SECRET`         | Signing secret of the webhook endpoint (`whsec_…`). Server only                                              |
-| `SIWX_DEMO_SIGNING_SECRET`      | Signs the session cookies, at least 32 characters (`openssl rand -base64 32`). Required in production        |
-| `NEXT_PUBLIC_QUASAR_BASE_URL`   | URL of a [self-hosted](https://docs.tuwa.io/quasar/self-hosting) Quasar API. Default: Quasar Cloud           |
-| `NEXT_PUBLIC_APP_URL`           | Origin of the app: the only domain the SIWX server accepts. Default: `http://localhost:3000`                 |
-| `NEXT_PUBLIC_WALLET_PROJECT_ID` | WalletConnect project ID from [dashboard.reown.com](https://dashboard.reown.com); use your own in production |
-| `NEXT_PUBLIC_ALCHEMY_KEY`       | Alchemy key for the Ethereum Mainnet, Sepolia and Solana Mainnet RPC URLs. Default: public RPC URLs          |
-| `NEXT_PUBLIC_PIMLICO_API_KEY`   | Pimlico key for the ERC-4337 transaction                                                                     |
+| Variable                      | Description                                                                                           |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `QUASAR_SECRET_KEY`           | Secret key of your Quasar app (`sk_live_…` or `sk_test_…`). Server only                               |
+| `QUASAR_WEBHOOK_SECRET`       | Signing secret of the webhook endpoint (`whsec_…`). Server only                                       |
+| `SIWX_DEMO_SIGNING_SECRET`    | Signs the session cookies, at least 32 characters (`openssl rand -base64 32`). Required in production |
+| `NEXT_PUBLIC_QUASAR_BASE_URL` | URL of a [self-hosted](https://docs.tuwa.io/quasar/self-hosting) Quasar API. Default: Quasar Cloud    |
+| `NEXT_PUBLIC_APP_URL`         | Origin of the app: the only domain the SIWX server accepts. Default: `http://localhost:3000`          |
+| `NEXT_PUBLIC_ALCHEMY_KEY`     | Alchemy key for the Ethereum Mainnet, Sepolia and Solana Mainnet RPC URLs. Default: public RPC URLs   |
+| `NEXT_PUBLIC_PIMLICO_API_KEY` | Pimlico key for the ERC-4337 transaction                                                              |
 
 ---
 

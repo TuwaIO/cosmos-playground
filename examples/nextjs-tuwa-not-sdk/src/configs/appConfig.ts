@@ -1,5 +1,5 @@
 import { createDefaultTransports, impersonated, safeSdkOptions } from '@tuwaio/satellite-evm';
-import { safe, walletConnect } from '@wagmi/connectors';
+import { safe } from '@wagmi/connectors';
 import { createConfig, injected } from '@wagmi/core';
 import {
   arbitrum,
@@ -18,11 +18,6 @@ import {
 
 export const appConfig = {
   appName: 'Satellite EVM Test App',
-  appDescription: 'TUWA Demo App',
-  projectId: process.env.NEXT_PUBLIC_WALLET_PROJECT_ID || '9077e559e63e099f496b921a027d0f04',
-  appLogoUrl: 'https://cdn.jsdelivr.net/gh/TuwaIO/workflows@main/preview/preview-logo.png',
-  // The origin users open the app at, for the WalletConnect metadata
-  appUrl: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
 };
 
 const alchemyKey = process.env.NEXT_PUBLIC_ALCHEMY_KEY;
@@ -72,23 +67,12 @@ export const wagmiConfig = createConfig({
     safe({
       ...safeSdkOptions,
     }),
-    ...(typeof window !== 'undefined'
-      ? [
-          walletConnect({
-            projectId: appConfig.projectId,
-            metadata: {
-              name: appConfig.appName,
-              description: appConfig.appDescription,
-              url: appConfig.appUrl,
-              icons: [appConfig.appLogoUrl],
-            },
-          }),
-        ]
-      : []),
     impersonated({}),
   ],
   transports: createDefaultTransports(appEVMChains),
   chains: appEVMChains,
   ssr: true,
   syncConnectedChain: true,
+  // Satellite Connect remembers the last wallet; wagmi keeps nothing in the browser
+  storage: null,
 });
