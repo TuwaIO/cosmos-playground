@@ -63,7 +63,6 @@
     "@wallet-standard/ui": "^1.0.3",
     "@wallet-standard/ui-core": "^1.0.1",
     "@wallet-standard/ui-registry": "^1.1.1",
-    "@walletconnect/ethereum-provider": "^2.25.0",
     "@web3icons/common": "^0.11.53",
     "@web3icons/react": "^4.1.24",
     "clsx": "^2.1.1",

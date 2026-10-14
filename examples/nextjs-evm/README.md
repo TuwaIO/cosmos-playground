@@ -21,7 +21,7 @@ Open [http://localhost:3000](http://localhost:3000). Node.js 20.19+, 22.13+ or 2
 
 ## 🎯 What It Shows
 
-- **Wallet connection** with the Nova Connect modals on Satellite Connect, through wagmi connectors: injected wallets, WalletConnect and Safe{Wallet}.
+- **Wallet connection** with the Nova Connect modals on Satellite Connect, through wagmi connectors: injected wallets and Safe{Wallet}. WalletConnect is not included: to offer it, add `walletConnect` from `@wagmi/connectors` with your own Reown project ID.
 - **SIWX sign-in:** Nova Connect asks every connected wallet to sign a CAIP-122 message with a nonce from the server; the server verifies it and keeps the session in an `HttpOnly` cookie. A wallet that refuses to sign is disconnected.
 - **Tracked transactions** with Pulsar and the Nova Transactions modals and toasts: a counter contract on Sepolia, called directly and as an ERC-4337 UserOperation through Pimlico.
 - **Transaction history** saved to `localStorage`, with tracking that resumes after a reload.
@@ -42,13 +42,12 @@ Open [http://localhost:3000](http://localhost:3000). Node.js 20.19+, 22.13+ or 2
 
 ## 🔧 Environment Variables
 
-| Variable                        | Description                                                                                                  |
-| ------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `SIWX_DEMO_SIGNING_SECRET`      | Signs the session cookies, at least 32 characters (`openssl rand -base64 32`). Required in production        |
-| `NEXT_PUBLIC_APP_URL`           | Origin of the app: the only domain the SIWX server accepts. Default: `http://localhost:3000`                 |
-| `NEXT_PUBLIC_WALLET_PROJECT_ID` | WalletConnect project ID from [dashboard.reown.com](https://dashboard.reown.com); use your own in production |
-| `NEXT_PUBLIC_ALCHEMY_KEY`       | Alchemy key for the Ethereum Mainnet and Sepolia RPC URLs. Default: public RPC URLs                          |
-| `NEXT_PUBLIC_PIMLICO_API_KEY`   | Pimlico key for the ERC-4337 transaction                                                                     |
+| Variable                      | Description                                                                                           |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `SIWX_DEMO_SIGNING_SECRET`    | Signs the session cookies, at least 32 characters (`openssl rand -base64 32`). Required in production |
+| `NEXT_PUBLIC_APP_URL`         | Origin of the app: the only domain the SIWX server accepts. Default: `http://localhost:3000`          |
+| `NEXT_PUBLIC_ALCHEMY_KEY`     | Alchemy key for the Ethereum Mainnet and Sepolia RPC URLs. Default: public RPC URLs                   |
+| `NEXT_PUBLIC_PIMLICO_API_KEY` | Pimlico key for the ERC-4337 transaction                                                              |
 
 ---
 

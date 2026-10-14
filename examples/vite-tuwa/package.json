@@ -49,7 +49,6 @@
     "@wallet-standard/react": "^1.0.3",
     "@wallet-standard/ui": "^1.0.3",
     "@wallet-standard/ui-registry": "^1.1.1",
-    "@walletconnect/ethereum-provider": "^2.25.0",
     "framer-motion": "14.0.0",
     "immer": "^11.1.21",
     "react": "^19.3.0",

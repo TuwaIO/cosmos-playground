@@ -1,5 +1,5 @@
 import { createDefaultTransports, safeSdkOptions } from '@tuwaio/evm-sdk/satellite';
-import { safe, walletConnect } from '@wagmi/connectors';
+import { safe } from '@wagmi/connectors';
 import { createConfig, injected } from '@wagmi/core';
 import {
   arbitrum,
@@ -18,10 +18,7 @@ import {
 
 export const appConfig = {
   appName: 'Pulsar & Quasar Cloud Sync Demo',
-  appDescription: 'Next.js Demo App with Pulsar and Quasar SDK Integration',
-  projectId: process.env.NEXT_PUBLIC_WALLET_PROJECT_ID || '9077e559e63e099f496b921a027d0f04',
-  appLogoUrl: 'https://cdn.jsdelivr.net/gh/TuwaIO/workflows@main/preview/preview-logo.png',
-  // The origin users open the app at: WalletConnect metadata and the domain the SIWX server accepts
+  // The origin users open the app at: the only domain the SIWX server accepts
   appUrl: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
 };
 
@@ -72,22 +69,11 @@ export const wagmiConfig = createConfig({
     safe({
       ...safeSdkOptions,
     }),
-    ...(typeof window !== 'undefined'
-      ? [
-          walletConnect({
-            projectId: appConfig.projectId,
-            metadata: {
-              name: appConfig.appName,
-              description: appConfig.appDescription,
-              url: appConfig.appUrl,
-              icons: [appConfig.appLogoUrl],
-            },
-          }),
-        ]
-      : []),
   ],
   transports: createDefaultTransports(appEVMChains),
   chains: appEVMChains,
   ssr: true,
   syncConnectedChain: true,
+  // Satellite Connect remembers the last wallet; wagmi keeps nothing in the browser
+  storage: null,
 });
