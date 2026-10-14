@@ -1,0 +1,21 @@
+{
+  "short_name": "Quasar Payments Shop",
+  "name": "Quasar Payments: Next.js Shop",
+  "description": "A Next.js shop that sells with Quasar Payments and the Nova Payments checkout",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "https://cdn.jsdelivr.net/gh/TuwaIO/workflows@main/favicon/icon0.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "https://cdn.jsdelivr.net/gh/TuwaIO/workflows@main/favicon/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
