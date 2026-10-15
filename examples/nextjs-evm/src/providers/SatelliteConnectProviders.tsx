@@ -41,7 +41,9 @@ export function SatelliteConnectProviders({ children }: { children: ReactNode })
   const getAdapter = usePulsarStore((state) => state.getAdapter);
 
   return (
-    <SatelliteConnectProvider adapter={satelliteAdapter} autoConnect>
+    // rememberWallet={false}: the wallet is reconnected only until the tab closes, unless the user ticks
+    // "Remember this wallet" in the connect modal
+    <SatelliteConnectProvider adapter={satelliteAdapter} autoConnect rememberWallet={false}>
       <EVMConnectorsWatcher wagmiConfig={wagmiConfig} />
       <NovaTransactionsProvider />
       <NovaConnectProvider

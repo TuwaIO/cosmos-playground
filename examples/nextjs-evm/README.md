@@ -21,7 +21,7 @@ Open [http://localhost:3000](http://localhost:3000). Node.js 20.19+, 22.13+ or 2
 
 ## 🎯 What It Shows
 
-- **Wallet connection** with the Nova Connect modals on Satellite Connect, through wagmi connectors: injected wallets and Safe{Wallet}. WalletConnect is not included: to offer it, add `walletConnect` from `@wagmi/connectors` with your own Reown project ID.
+- **Wallet connection** with the Nova Connect modals on Satellite Connect, through wagmi connectors: injected wallets and Safe{Wallet}. The last wallet is reconnected after a page reload until the tab closes, or until the user disconnects it if they tick "Remember this wallet" in the connect modal (`rememberWallet={false}` in `src/providers/SatelliteConnectProviders.tsx`). WalletConnect is not included: to offer it, add `walletConnect` from `@wagmi/connectors` with your own Reown project ID.
 - **SIWX sign-in:** Nova Connect asks every connected wallet to sign a CAIP-122 message with a nonce from the server; the server verifies it and keeps the session in an `HttpOnly` cookie. A wallet that refuses to sign is disconnected.
 - **Tracked transactions** with Pulsar and the Nova Transactions modals and toasts: a counter contract on Sepolia, called directly and as an ERC-4337 UserOperation through Pimlico.
 - **Transaction history** saved to `localStorage`, with tracking that resumes after a reload.
