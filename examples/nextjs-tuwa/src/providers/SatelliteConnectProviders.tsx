@@ -37,6 +37,7 @@ export function SatelliteConnectProviders({ children }: { children: ReactNode })
         withImpersonated
         withBalance
         withChain
+        legal={{ termsUrl: 'https://tuwa.io/terms', privacyUrl: 'https://tuwa.io/privacy' }}
       >
         {children}
       </NovaConnectProvider>
