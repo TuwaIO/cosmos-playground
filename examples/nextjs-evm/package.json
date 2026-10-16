@@ -34,7 +34,7 @@
     "@safe-global/safe-apps-provider": "^0.18.6",
     "@safe-global/safe-apps-sdk": "^9.1.0",
     "@tuwaio/evm-sdk": "^0.6.0",
-    "@tuwaio/sdk": "^0.6.0",
+    "@tuwaio/sdk": "^0.6.1",
     "@wagmi/connectors": "^8.2.0",
     "@wagmi/core": "^3.6.5",
     "framer-motion": "14.3.0",
