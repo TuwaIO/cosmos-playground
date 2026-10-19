@@ -21,7 +21,9 @@ export function SatelliteConnectProviders({ children }: { children: ReactNode })
   const getAdapter = usePulsarStore((state) => state.getAdapter);
 
   return (
-    <SatelliteConnectProvider adapter={satelliteAdapters} autoConnect>
+    // rememberWallet={false}: the wallet is reconnected only until the tab closes, unless the user ticks
+    // "Remember this wallet" in the connect modal
+    <SatelliteConnectProvider adapter={satelliteAdapters} autoConnect rememberWallet={false}>
       <EVMConnectorsWatcher wagmiConfig={wagmiConfig} />
       <SolanaConnectorsWatcher />
       <NovaTransactionsProvider />
@@ -33,6 +35,7 @@ export function SatelliteConnectProviders({ children }: { children: ReactNode })
         withImpersonated
         withBalance
         withChain
+        legal={{ termsUrl: 'https://tuwa.io/terms', privacyUrl: 'https://tuwa.io/privacy' }}
       >
         {children}
       </NovaConnectProvider>

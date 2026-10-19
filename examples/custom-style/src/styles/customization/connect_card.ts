@@ -1,5 +1,5 @@
 import { ConnectCardCustomization } from '@tuwaio/sdk/nova-connect/components';
-import { cn } from '@tuwaio/sdk/nova-core';
+import { cn } from '@tuwaio/sdk/nova-core/utils';
 
 import { SHARED_STYLES } from './shared_styles';
 

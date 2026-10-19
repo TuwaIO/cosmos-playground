@@ -34,7 +34,7 @@ The connect modal also shows the `legal` links of `NovaConnectProvider`; replace
 
 ## 🎯 What It Shows
 
-- **Wallet connection** with the restyled Nova Connect modals, through wagmi connectors: injected wallets, Safe{Wallet} and a read-only impersonated wallet. Chains: Monad, Ethereum, Arbitrum, Sepolia and Monad Testnet. WalletConnect is not included: to offer it, add `walletConnect` from `@wagmi/connectors` with your own Reown project ID.
+- **Wallet connection** with the restyled Nova Connect modals, through wagmi connectors: injected wallets, Safe{Wallet} and a read-only impersonated wallet. Chains: Monad, Ethereum, Arbitrum, Sepolia and Monad Testnet. The last wallet is reconnected after a page reload until the tab closes, or until the user disconnects it if they tick "Remember this wallet" in the connect modal (`rememberWallet={false}` in `src/providers/SatelliteConnectProviders.tsx`). WalletConnect is not included: to offer it, add `walletConnect` from `@wagmi/connectors` with your own Reown project ID.
 - **ERC-20 balances** (USDC, USDT0) in the connected modal, read from the chain and cached in a Zustand store.
 - **A tracked transaction** with Pulsar and the restyled Nova Transactions modals and toasts: a counter contract on Sepolia.
 

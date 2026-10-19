@@ -1,6 +1,6 @@
 import { createDefaultTransports, impersonated, safeSdkOptions } from '@tuwaio/satellite-evm';
 import { safe } from '@wagmi/connectors';
-import { createConfig, injected } from '@wagmi/core';
+import { createConfig, createStorage, injected, noopStorage } from '@wagmi/core';
 import {
   arbitrum,
   arbitrumSepolia,
@@ -73,6 +73,8 @@ export const wagmiConfig = createConfig({
   chains: appEVMChains,
   ssr: true,
   syncConnectedChain: true,
-  // Satellite Connect remembers the last wallet; wagmi keeps nothing in the browser
-  storage: null,
+  // Satellite Connect remembers the last wallet; wagmi keeps nothing in the browser. A storage that saves
+  // nothing, not `null`: without a storage wagmi cannot hydrate a config with `ssr: true` and never lists the
+  // installed wallets (EIP-6963)
+  storage: createStorage({ storage: noopStorage }),
 });

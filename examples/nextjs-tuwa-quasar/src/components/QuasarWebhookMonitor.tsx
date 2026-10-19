@@ -10,7 +10,7 @@ import {
   ExclamationTriangleIcon,
   ShieldCheckIcon,
 } from '@heroicons/react/24/outline';
-import { getChainName, textCenterEllipsis } from '@tuwaio/sdk/nova-core';
+import { getChainName, textCenterEllipsis } from '@tuwaio/sdk/nova-core/utils';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { usePulsarStore } from '@/hooks/pulsarStoreHook';

@@ -1,6 +1,6 @@
 {
   "name": "@tuwaio/create-cosmos-playground",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "description": "L8 CLI of the TUWA SDK: scaffolds a Next.js or Vite starter app with the TUWA stack for EVM, Solana or both, with or without Quasar sync.",
   "keywords": [
     "cli",
@@ -29,13 +29,13 @@
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
-    "@types/node": "^26.6.4",
+    "@types/node": "^26.6.5",
     "@types/prompts": "^2.4.9",
     "typescript": "6.0.3"
   },
   "dependencies": {
     "degit": "^3.10.0",
-    "execa": "^10.1.0",
+    "execa": "^10.1.1",
     "fs-extra": "^11.4.1",
     "prompts": "^2.4.2"
   },

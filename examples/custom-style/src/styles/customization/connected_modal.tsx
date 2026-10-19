@@ -1,5 +1,5 @@
 import { ConnectedModalCustomization } from '@tuwaio/sdk/nova-connect/components';
-import { cn } from '@tuwaio/sdk/nova-core';
+import { cn } from '@tuwaio/sdk/nova-core/utils';
 import React from 'react';
 
 import { ExtraBalancesSection } from '../../components/connect-wallet/ExtraBalances';

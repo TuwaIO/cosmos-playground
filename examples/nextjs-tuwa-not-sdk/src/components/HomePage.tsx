@@ -2,7 +2,7 @@
 
 import { WalletIcon } from '@heroicons/react/24/outline';
 import { useSatelliteConnectStore } from '@tuwaio/nova-connect/satellite';
-import { cn } from '@tuwaio/nova-core';
+import { cn } from '@tuwaio/nova-core/utils';
 import { getAdapterFromConnectorType, OrbitAdapter } from '@tuwaio/orbit-core';
 import { motion } from 'framer-motion';
 

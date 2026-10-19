@@ -21,7 +21,7 @@ Open [http://localhost:3000](http://localhost:3000). Node.js 20.19+, 22.13+ or 2
 
 ## 🎯 What It Shows
 
-- **Wallet connection** with the Nova Connect modals on Satellite Connect: EVM wallets through wagmi connectors (injected, Safe{Wallet}, a read-only impersonated wallet) and Solana wallets through Wallet Standard. Satellite Connect reconnects the last browser wallet after a page reload. WalletConnect is not included: to offer it, add `walletConnect` from `@wagmi/connectors` with your own Reown project ID.
+- **Wallet connection** with the Nova Connect modals on Satellite Connect: EVM wallets through wagmi connectors (injected, Safe{Wallet}, a read-only impersonated wallet) and Solana wallets through Wallet Standard. Satellite Connect reconnects the last browser wallet after a page reload: until the tab closes, or until the user disconnects it if they tick "Remember this wallet" in the connect modal (`rememberWallet={false}` in `src/providers/SatelliteConnectProviders.tsx`). WalletConnect is not included: to offer it, add `walletConnect` from `@wagmi/connectors` with your own Reown project ID. The connect modal links the Terms of Service and Privacy Policy of TUWA (`legal` of `NovaConnectProvider` in `src/providers/SatelliteConnectProviders.tsx`); replace them with the documents of your app.
 - **Tracked transactions** with Pulsar and the Nova Transactions modals and toasts:
   - EVM: a counter contract on Sepolia, called directly, as an ERC-4337 UserOperation through Pimlico, and through the Gelato relay (deprecated in Pulsar, kept to test its tracker);
   - Solana: a counter program on devnet (create, increment, decrement and close counter accounts).
