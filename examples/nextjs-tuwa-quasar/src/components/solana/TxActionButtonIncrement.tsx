@@ -10,8 +10,6 @@ import { SolanaConnection } from '@tuwaio/solana-sdk/satellite';
 import React from 'react';
 
 import { usePulsarStore } from '@/hooks/pulsarStoreHook';
-import { useStore } from '@/hooks/storeHook';
-import { notifyTransactionSuccess } from '@/lib/webhookMonitorEvents';
 import { txActions, TxType } from '@/transactions';
 
 export const TxActionButtonIncrement = ({
@@ -26,7 +24,6 @@ export const TxActionButtonIncrement = ({
   const executeTxAction = usePulsarStore((state) => state.executeTxAction);
   const transactionsPool = usePulsarStore((state) => state.transactionsPool);
   const getLastTxKey = usePulsarStore((state) => state.getLastTxKey);
-  const getAccounts = useStore((state) => state.getAccounts);
 
   const handleIncrement = async () => {
     const { connectedAccount } = activeWallet as SolanaConnection;
@@ -39,10 +36,6 @@ export const TxActionButtonIncrement = ({
           signer: createSolanaTransactionSendingSigner(connectedAccount, 'devnet'),
           contractAddress: solanatest,
         }),
-      onSuccess: async (tx) => {
-        await getAccounts();
-        notifyTransactionSuccess({ txKey: tx?.txKey });
-      },
       params: {
         type: TxType.increment,
         adapter: OrbitAdapter.SOLANA,

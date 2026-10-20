@@ -12,6 +12,7 @@ Before changing TUWA code, read the TUWA integration guide for agents: https://r
 
 - Create the wagmi config, the Satellite adapters and the Pulsar store once, at module level, never inside components.
 - Send blockchain writes through `executeTxAction` of the Pulsar store and read their status from the store.
+- Refetch data a transaction changes (balances, lists) in `useTxFinished` (`@tuwaio/sdk/pulsar`) with the store's `subscribeTxFinished`: it also runs for a transaction restored after a page reload, which has lost the `onSuccess`, `onError` and `onReplaced` of `executeTxAction`. Keep those callbacks for reactions of the page that sent the transaction.
 - The theme lives in `src/styles`: `app.css` overrides the `--tuwa-*` variables, `customization/` holds the `customization` objects of the Nova components. Change styles there, not in the components.
 - Do not add Solana packages: the app has no Solana network.
 - Keep strict TypeScript without `any`; run `pnpm lint:fix` after changes.

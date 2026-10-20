@@ -9,7 +9,6 @@ import { SolanaConnection } from '@tuwaio/solana-sdk/satellite';
 import React from 'react';
 
 import { usePulsarStore } from '../../hooks/pulsarStoreHook';
-import { useStore } from '../../hooks/storeHook';
 import { txActions, TxType } from '../../transactions';
 
 // polyfill ed25519 for browsers (to allow `generateKeyPairSigner` to work)
@@ -19,7 +18,6 @@ export const TxActionButtonInitialize = ({ activeWallet }: { activeWallet: Conne
   const executeTxAction = usePulsarStore((state) => state.executeTxAction);
   const transactionsPool = usePulsarStore((state) => state.transactionsPool);
   const getLastTxKey = usePulsarStore((state) => state.getLastTxKey);
-  const getAccounts = useStore((state) => state.getAccounts);
 
   const handleInitialize = async () => {
     const { connectedAccount } = activeWallet as SolanaConnection;
@@ -33,7 +31,6 @@ export const TxActionButtonInitialize = ({ activeWallet }: { activeWallet: Conne
           signer: createSolanaTransactionSendingSigner(connectedAccount, 'devnet'),
           contractAddress: solanatest,
         }),
-      onSuccess: async () => await getAccounts(),
       params: {
         type: TxType.initialize,
         adapter: OrbitAdapter.SOLANA,

@@ -4,7 +4,7 @@ import { createViemClient } from '@tuwaio/evm-sdk/orbit';
 import { useSatelliteConnectStore } from '@tuwaio/sdk/nova-connect/satellite';
 import { TxActionButton } from '@tuwaio/sdk/nova-transactions';
 import { OrbitAdapter } from '@tuwaio/sdk/orbit';
-import { TransactionTracker } from '@tuwaio/sdk/pulsar';
+import { TransactionStatus, TransactionTracker, useTxFinished } from '@tuwaio/sdk/pulsar';
 import { useEffect, useState } from 'react';
 import { Client } from 'viem';
 import { readContract } from 'viem/actions';
@@ -14,7 +14,6 @@ import { CounterAbi } from '@/abis/CounterAbi';
 import { appEVMChains } from '@/configs/appConfig';
 import { COUNTER_ADDRESS } from '@/constants';
 import { usePulsarStore } from '@/hooks/pulsarStoreHook';
-import { notifyTransactionSuccess } from '@/lib/webhookMonitorEvents';
 import { txActions, TxType } from '@/transactions';
 
 export const TransactionsBlockWrapper = () => {
@@ -22,6 +21,7 @@ export const TransactionsBlockWrapper = () => {
   const executeTxAction = usePulsarStore((state) => state.executeTxAction);
   const transactionsPool = usePulsarStore((state) => state.transactionsPool);
   const getLastTxKey = usePulsarStore((state) => state.getLastTxKey);
+  const subscribeTxFinished = usePulsarStore((state) => state.subscribeTxFinished);
 
   const [currentCount, setCurrentCount] = useState<number | null>(null);
   const [isLoadingCount, setIsLoadingCount] = useState(true);
@@ -52,19 +52,23 @@ export const TransactionsBlockWrapper = () => {
     fetchCurrentCount();
   }, []);
 
+  // Refreshes the counter after every successful increment, also one restored after a page reload, which has lost the
+  // callbacks of executeTxAction
+  useTxFinished({
+    subscribeTxFinished,
+    onFinished: (tx) => {
+      if (tx.adapter === OrbitAdapter.EVM && tx.type === TxType.increment && tx.status === TransactionStatus.Success) {
+        // Gives the RPC node time to serve the new state
+        setTimeout(() => fetchCurrentCount(), 2000);
+      }
+    },
+  });
+
   const handleIncrement = async () => {
     if (currentCount === null) return;
 
     await executeTxAction({
       actionFunction: txActions.incrementEvm,
-      onSuccess: (tx) => {
-        if (tx.type === TxType.increment) {
-          setTimeout(() => fetchCurrentCount(), 2000);
-          const hash = 'hash' in tx && typeof tx.hash === 'string' ? tx.hash : undefined;
-          notifyTransactionSuccess({ txKey: tx.txKey, hash });
-          console.log(`Increment tx succeed, ${currentCount}`);
-        }
-      },
       params: {
         type: TxType.increment,
         adapter: OrbitAdapter.EVM,
@@ -91,14 +95,6 @@ export const TransactionsBlockWrapper = () => {
 
     await executeTxAction({
       actionFunction: txActions.incrementPimlico,
-      onSuccess: (tx) => {
-        if (tx.type === TxType.increment) {
-          setTimeout(() => fetchCurrentCount(), 2000);
-          const hash = 'hash' in tx && typeof tx.hash === 'string' ? tx.hash : undefined;
-          notifyTransactionSuccess({ txKey: tx.txKey, hash });
-          console.log(`Increment Pimlico tx succeed, ${currentCount}`);
-        }
-      },
       params: {
         type: TxType.increment,
         adapter: OrbitAdapter.EVM,

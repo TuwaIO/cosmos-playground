@@ -12,6 +12,7 @@ Before changing TUWA code, read the TUWA integration guide for agents: https://r
 
 - Create the wagmi config, the Satellite adapters and the Pulsar store once, at module level, never inside components.
 - Send blockchain writes through `executeTxAction` of the Pulsar store and read their status from the store.
+- Refetch data a transaction changes (balances, lists) in `useTxFinished` (`@tuwaio/sdk/pulsar`) with the store's `subscribeTxFinished`: it also runs for a transaction restored after a page reload, which has lost the `onSuccess`, `onError` and `onReplaced` of `executeTxAction`. Keep those callbacks for reactions of the page that sent the transaction.
 - Pass `siwx` only to `NovaConnectProvider`, with `getNonce`: the `/api/siwx` routes accept only nonces they issued.
 - The Server Actions in `src/app/actions.ts` read the session from the cookie and check `isSessionMatchingTarget` before calling Quasar; keep that check in every new action.
 - `onRemoteCreate` must throw when the sync fails, so Pulsar retries it. Import `preFlightTxCheck` from `@tuwaio/quasar-sdk/react`.
