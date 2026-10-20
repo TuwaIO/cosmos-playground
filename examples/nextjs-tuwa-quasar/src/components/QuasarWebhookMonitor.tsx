@@ -11,11 +11,11 @@ import {
   ShieldCheckIcon,
 } from '@heroicons/react/24/outline';
 import { getChainName, textCenterEllipsis } from '@tuwaio/sdk/nova-core/utils';
+import { TransactionStatus, useTxFinished } from '@tuwaio/sdk/pulsar';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { usePulsarStore } from '@/hooks/pulsarStoreHook';
 import type { QuasarWebhookEvent } from '@/lib/quasarWebhookStore';
-import { TRANSACTION_SUCCESS_EVENT, type TransactionSuccessDetail } from '@/lib/webhookMonitorEvents';
 
 // Quasar sends EVM chains as numbers or numeric strings and Solana clusters as CAIP-2 chain IDs with the genesis hash
 function formatWebhookChain(chainId: string | number): string {
@@ -35,6 +35,7 @@ type WebhookResponse = {
 
 export function QuasarWebhookMonitor() {
   const transactionsPool = usePulsarStore((state) => state.transactionsPool);
+  const subscribeTxFinished = usePulsarStore((state) => state.subscribeTxFinished);
 
   const [webhookData, setWebhookData] = useState<WebhookResponse>({
     latest: null,
@@ -110,26 +111,17 @@ export function QuasarWebhookMonitor() {
     };
   }, [targetTxKey]);
 
-  // Listen for real-time transaction completion events and fast-retry polling
-  useEffect(() => {
-    const handleTxSuccess = (event: Event) => {
-      const customEvent = event as CustomEvent<TransactionSuccessDetail>;
-      const txKey = customEvent.detail?.txKey;
-
-      const timer1 = setTimeout(() => void fetchWebhooks(txKey), 2_000);
-      const timer2 = setTimeout(() => void fetchWebhooks(txKey), 5_000);
-      const timer3 = setTimeout(() => void fetchWebhooks(txKey), 10_000);
-
-      return () => {
-        clearTimeout(timer1);
-        clearTimeout(timer2);
-        clearTimeout(timer3);
-      };
-    };
-
-    window.addEventListener(TRANSACTION_SUCCESS_EVENT, handleTxSuccess);
-    return () => window.removeEventListener(TRANSACTION_SUCCESS_EVENT, handleTxSuccess);
-  }, [fetchWebhooks]);
+  // Quasar delivers the webhook a moment after a transaction succeeds, so it is fetched a few times after the store
+  // reports the success, also for a transaction restored after a page reload
+  useTxFinished({
+    subscribeTxFinished,
+    onFinished: (tx) => {
+      if (tx.status !== TransactionStatus.Success) return;
+      for (const delay of [2_000, 5_000, 10_000]) {
+        setTimeout(() => void fetchWebhooks(tx.txKey), delay);
+      }
+    },
+  });
 
   // Resolve webhook for the latest transaction, falling back to latest stored webhook
   const activeWebhook = useMemo(() => {
