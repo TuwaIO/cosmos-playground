@@ -4,6 +4,7 @@ import { QuasarSDKError } from '@tuwaio/quasar-sdk';
 
 import { appConfig } from '@/configs/appConfig';
 import { CURRENCY, findProduct, PLAN } from '@/lib/catalog';
+import { type AcceptedMethods, canChargeAutomatically, NO_AUTO_CHARGE_METHOD, NO_METHODS } from '@/lib/methods';
 import { attachInvoice, attachSubscription, createOrder, getOrderBook, removeOrder } from '@/lib/orders';
 import type { OrderBook } from '@/lib/orderTypes';
 import { getQuasar } from '@/lib/quasar';
@@ -29,12 +30,36 @@ function returnLinks(orderId: string) {
 }
 
 /**
+ * The active payment methods of your Quasar app, in their order: the page shows what the buyer can pay with, or why
+ * nothing can be bought yet. Only what the page shows leaves the server.
+ */
+export async function readAcceptedMethods(): Promise<AcceptedMethods> {
+  try {
+    const { data } = await getQuasar().payments.listMethods();
+    return {
+      ok: true,
+      methods: data.map(({ id, name, symbol, chainId, assetId }) => ({ id, name, symbol, chainId, assetId })),
+    };
+  } catch (error) {
+    return { ok: false, error: describe(error) };
+  }
+}
+
+/** The methods to sell with. Quasar issues an invoice even when the app has none, but nobody could pay it. */
+async function sellableMethods(): Promise<AcceptedMethods> {
+  const accepted = await readAcceptedMethods();
+  return accepted.ok && accepted.methods.length === 0 ? { ok: false, error: NO_METHODS } : accepted;
+}
+
+/**
  * Issues the invoice of a product. The order ID goes to the metadata: the webhooks bring it back, and the idempotency
  * key makes a retry return the same invoice instead of a second one.
  */
 export async function buyProduct(productId: string): Promise<CheckoutStart> {
   const product = findProduct(productId);
   if (!product) return { ok: false, error: `Unknown product ${productId}` };
+  const accepted = await sellableMethods();
+  if (!accepted.ok) return accepted;
   const order = createOrder({
     id: crypto.randomUUID(),
     kind: 'product',
@@ -68,6 +93,12 @@ export async function buyProduct(productId: string): Promise<CheckoutStart> {
  * method, "Automatic charges" on in Checkout and the app's Pimlico key in Compliance & gas.
  */
 export async function subscribe(collection: 'send_invoice' | 'auto_charge'): Promise<CheckoutStart> {
+  const accepted = await sellableMethods();
+  if (!accepted.ok) return accepted;
+  // Automatic charges are offered for one method: the first EVM token here; Quasar checks it is a stablecoin
+  const preferredMethodId =
+    collection === 'auto_charge' ? accepted.methods.find(canChargeAutomatically)?.id : undefined;
+  if (collection === 'auto_charge' && !preferredMethodId) return { ok: false, error: NO_AUTO_CHARGE_METHOD };
   const order = createOrder({
     id: crypto.randomUUID(),
     kind: 'subscription',
@@ -76,15 +107,7 @@ export async function subscribe(collection: 'send_invoice' | 'auto_charge'): Pro
     currency: CURRENCY,
   });
   try {
-    const quasar = getQuasar();
-    // Automatic charges are offered for one method: the first EVM token here; Quasar checks it is a stablecoin
-    const preferredMethodId =
-      collection === 'auto_charge'
-        ? (await quasar.payments.listMethods()).data.find(
-            (method) => method.chainId.startsWith('eip155:') && method.assetId?.includes('/erc20:'),
-          )?.id
-        : undefined;
-    const { subscription, invoice, checkoutToken, payUrl } = await quasar.payments.createSubscription(
+    const { subscription, invoice, checkoutToken, payUrl } = await getQuasar().payments.createSubscription(
       {
         currency: CURRENCY,
         lineItems: [{ name: PLAN.name, description: PLAN.description, unitPrice: PLAN.price }],

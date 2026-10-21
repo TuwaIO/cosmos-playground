@@ -8,10 +8,11 @@ import { Orders } from '@/components/Orders';
 import { Shop, type ShopAction } from '@/components/Shop';
 import { WebhookLog } from '@/components/WebhookLog';
 import { useOrderBook } from '@/hooks/useOrderBook';
+import type { AcceptedMethods } from '@/lib/methods';
 
 type OpenCheckout = { token: string; payUrl: string | null };
 
-export function HomePage({ highlight }: { highlight: string | null }) {
+export function HomePage({ highlight, methods }: { highlight: string | null; methods: AcceptedMethods }) {
   const { book, refresh } = useOrderBook();
   const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -59,7 +60,7 @@ export function HomePage({ highlight }: { highlight: string | null }) {
           </p>
         )}
 
-        <Shop busy={busy} onBuy={(action, key) => void onBuy(action, key)} />
+        <Shop methods={methods} busy={busy} onBuy={(action, key) => void onBuy(action, key)} />
 
         <div className="grid gap-6 lg:grid-cols-2">
           <Orders
