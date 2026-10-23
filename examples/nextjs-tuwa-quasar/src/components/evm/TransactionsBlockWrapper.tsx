@@ -81,7 +81,7 @@ export const TransactionsBlockWrapper = () => {
           'Transaction replaced. Please take a look details in your wallet.',
         ],
         payload: {
-          value: currentCount,
+          value: currentCount + 1,
           contractAddress: COUNTER_ADDRESS,
         },
         withTrackedModal: true,

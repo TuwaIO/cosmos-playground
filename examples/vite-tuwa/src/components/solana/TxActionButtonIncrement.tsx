@@ -49,7 +49,7 @@ export const TxActionButtonIncrement = ({
         ],
         payload: {
           contractAddress: solanatest,
-          value: currentCount,
+          value: currentCount + 1,
         },
         withTrackedModal: true,
       },

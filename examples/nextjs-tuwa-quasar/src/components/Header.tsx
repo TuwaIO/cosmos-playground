@@ -2,6 +2,7 @@
 
 import { ConnectButton } from '@tuwaio/sdk/nova-connect/components';
 
+import { ThemeToggle } from '@/components/ThemeToggle';
 import { appConfig } from '@/configs/appConfig';
 import { usePulsarStore } from '@/hooks/pulsarStoreHook';
 
@@ -14,7 +15,10 @@ export function Header() {
         {appConfig.appName}
       </a>
 
-      <ConnectButton transactionPool={transactionPool} />
+      <div className="flex items-center gap-2">
+        <ConnectButton transactionPool={transactionPool} />
+        <ThemeToggle />
+      </div>
     </header>
   );
 }
