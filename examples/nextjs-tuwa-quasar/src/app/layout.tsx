@@ -5,6 +5,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import { ReactNode } from 'react';
 
 import { Header } from '@/components/Header';
+import { themeScript } from '@/configs/theme';
 import { Providers } from '@/providers';
 
 const geistSans = Geist({
@@ -36,7 +37,11 @@ export default async function RootLayout({
   children: ReactNode;
 }>) {
   return (
+    // suppressHydrationWarning: themeScript adds the `dark` class before React hydrates
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Providers>
           <Header />

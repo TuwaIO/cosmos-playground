@@ -36,6 +36,7 @@ Node.js 20.19+, 22.13+ or 24+ is required (the `engines` range of ESLint 10). To
   - each new transaction goes to the `syncTransaction` Server Action, which checks that the signed-in wallet sent it and calls Quasar with the secret key. A failed sync is retried later.
 - **History from Quasar:** after the sign-in, the Nova modals show the transactions of the wallet from every device, page by page (`getHistory` Server Action, only for the signed-in wallet).
 - **Webhooks:** `POST /api/webhooks/quasar` verifies the `x-quasar-signature` HMAC and keeps the last deliveries in memory; the panel under the transaction block shows the delivery of the latest transaction.
+- **Light and dark themes:** the page follows the system theme; the button in the header switches it and saves the choice. `themeScript` (`src/configs/theme.ts`) sets the `dark` class of the Nova themes in the root layout before the first paint, so a reload never flashes the other theme.
 - **Transactions:** a counter contract on Sepolia (directly and as an ERC-4337 UserOperation through Pimlico) and a counter program on Solana devnet.
 
 ---
