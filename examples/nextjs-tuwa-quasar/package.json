@@ -41,7 +41,7 @@
     "@tuwaio/evm-sdk": "^0.6.2",
     "@tuwaio/quasar-sdk": "^0.7.2",
     "@tuwaio/sdk": "^0.6.3",
-    "@tuwaio/solana-sdk": "^0.6.2",
+    "@tuwaio/solana-sdk": "^0.6.3",
     "@wagmi/connectors": "^8.2.0",
     "@wagmi/core": "^3.6.5",
     "@wallet-standard/app": "^1.1.1",

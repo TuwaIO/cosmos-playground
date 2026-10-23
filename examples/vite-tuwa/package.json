@@ -40,7 +40,7 @@
     "@solana/webcrypto-ed25519-polyfill": "^8.5.0",
     "@tuwaio/evm-sdk": "^0.6.2",
     "@tuwaio/sdk": "^0.6.3",
-    "@tuwaio/solana-sdk": "^0.6.2",
+    "@tuwaio/solana-sdk": "^0.6.3",
     "@wagmi/connectors": "^8.2.0",
     "@wagmi/core": "^3.6.5",
     "@wallet-standard/app": "^1.1.1",
