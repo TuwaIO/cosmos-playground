@@ -36,7 +36,7 @@
     "@solana/kit": "^8.5.0",
     "@solana/webcrypto-ed25519-polyfill": "^8.5.0",
     "@tuwaio/evm-sdk": "^0.6.2",
-    "@tuwaio/sdk": "^0.6.5",
+    "@tuwaio/sdk": "^0.6.6",
     "@tuwaio/solana-sdk": "^0.6.3",
     "@wagmi/connectors": "^8.2.2",
     "@wagmi/core": "^3.6.7",

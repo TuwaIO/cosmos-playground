@@ -1,59 +1,59 @@
 packages:
-  - 'examples/*'
-  - 'packages/*'
+  - "examples/*"
+  - "packages/*"
 allowBuilds:
-  '@reown/appkit': false
+  "@reown/appkit": false
   esbuild: false
 minimumReleaseAgeExclude:
-  - '@tuwaio/nova-connect@0.6.0 || 0.7.0 || 0.7.2 || 0.7.3 || 0.7.4 || 0.8.0 || 0.8.1 || 0.9.0 || 0.9.1 || 0.9.2 || 0.10.0 || 0.10.1 || 0.10.2 || 0.10.3 || 0.10.4 || 0.10.5'
-  - '@tuwaio/nova-core@0.6.0 || 0.7.0 || 0.7.1 || 0.7.2 || 0.7.3 || 0.8.0 || 0.8.1 || 0.9.0 || 0.9.1 || 0.9.2 || 0.9.3 || 0.10.0 || 0.10.1 || 0.10.2'
-  - '@tuwaio/nova-transactions@0.6.0 || 0.7.0 || 0.7.2 || 0.7.3 || 0.7.4 || 0.8.0 || 0.8.1 || 0.9.0 || 0.9.1 || 0.10.0 || 0.10.1 || 0.10.2 || 0.10.3 || 0.10.4'
-  - '@tuwaio/orbit-core@0.3.0 || 0.4.0 || 0.5.0 || 0.5.1 || 0.6.0'
-  - '@tuwaio/orbit-evm@0.3.0 || 0.3.2 || 0.3.3 || 0.3.4 || 0.4.0'
-  - '@tuwaio/orbit-solana@0.3.0 || 0.3.3 || 0.4.0 || 0.5.0 || 0.6.0 || 0.7.1'
-  - '@tuwaio/pulsar-core@0.7.0 || 0.8.2 || 0.8.3 || 0.9.0 || 0.9.1 || 0.10.0 || 0.10.1 || 0.10.2 || 0.11.0'
-  - '@tuwaio/pulsar-evm@0.6.0 || 0.7.2 || 0.8.0 || 0.8.1 || 0.9.0 || 0.9.1 || 0.10.0'
-  - '@tuwaio/pulsar-react@0.5.0 || 0.6.1 || 0.6.2 || 0.7.0'
-  - '@tuwaio/pulsar-solana@0.7.0 || 0.8.3 || 0.9.0 || 0.9.1 || 0.10.0 || 0.10.1 || 0.10.3 || 0.10.4'
-  - '@tuwaio/satellite-core@0.5.0 || 0.6.2 || 0.7.0 || 0.8.0 || 0.9.0 || 0.10.0 || 0.11.0'
-  - '@tuwaio/satellite-evm@0.5.0 || 0.6.1 || 0.6.2 || 0.7.0 || 0.8.0 || 0.9.0 || 0.10.0'
-  - '@tuwaio/satellite-react@0.5.0 || 0.6.2 || 0.6.3 || 0.7.0 || 0.8.0 || 0.9.0 || 0.10.0'
-  - '@tuwaio/satellite-solana@0.5.0 || 0.6.1 || 0.7.0 || 0.8.0 || 0.9.0 || 0.10.0 || 0.11.0'
-  - '@tuwaio/evm-sdk@0.1.14 || 0.2.0 || 0.2.1 || 0.2.2 || 0.3.0 || 0.4.0 || 0.5.0 || 0.6.0 || 0.6.1 || 0.6.2'
-  - '@tuwaio/quasar-sdk@0.1.12 || 0.2.0 || 0.2.1 || 0.3.0 || 0.4.0 || 0.5.0 || 0.6.0 || 0.7.0 || 0.7.1 || 0.7.2'
-  - '@tuwaio/sdk@0.1.14 || 0.2.0 || 0.2.1 || 0.2.2 || 0.2.3 || 0.3.0 || 0.4.0 || 0.5.0 || 0.5.1 || 0.6.0 || 0.6.1 || 0.6.2 || 0.6.3 || 0.6.5'
-  - '@tuwaio/siwx-core@0.3.0 || 0.4.1 || 0.5.0 || 0.6.0 || 0.7.0 || 0.7.1'
-  - '@tuwaio/siwx-evm@0.3.0 || 0.4.1 || 0.4.2 || 0.4.3 || 0.5.0 || 0.5.1 || 0.5.2'
-  - '@tuwaio/siwx-react@0.3.0 || 0.4.1 || 0.5.0 || 0.5.1 || 0.6.0 || 0.6.2 || 0.6.4'
-  - '@tuwaio/siwx-server@0.3.0 || 0.4.1 || 0.4.3 || 0.5.0 || 0.5.1 || 0.6.0 || 0.7.0 || 0.7.2 || 0.8.0'
-  - '@tuwaio/siwx-solana@0.3.0 || 0.4.1 || 0.4.2 || 0.4.3 || 0.5.0 || 0.6.0 || 0.6.1 || 0.6.2 || 0.7.0'
-  - '@tuwaio/solana-sdk@0.1.15 || 0.2.0 || 0.2.1 || 0.3.0 || 0.4.0 || 0.5.0 || 0.6.0 || 0.6.1 || 0.6.2 || 0.6.3'
-  - '@types/node@26.5.0'
-  - '@typescript-eslint/eslint-plugin@8.70.0'
-  - '@typescript-eslint/parser@8.70.0'
-  - '@typescript-eslint/project-service@8.70.0'
-  - '@typescript-eslint/scope-manager@8.70.0'
-  - '@typescript-eslint/tsconfig-utils@8.70.0'
-  - '@typescript-eslint/type-utils@8.70.0'
-  - '@typescript-eslint/types@8.70.0'
-  - '@typescript-eslint/typescript-estree@8.70.0'
-  - '@typescript-eslint/utils@8.70.0'
-  - '@typescript-eslint/visitor-keys@8.70.0'
+  - "@tuwaio/nova-connect@0.6.0 || 0.7.0 || 0.7.2 || 0.7.3 || 0.7.4 || 0.8.0 || 0.8.1 || 0.9.0 || 0.9.1 || 0.9.2 || 0.10.0 || 0.10.1 || 0.10.2 || 0.10.3 || 0.10.4 || 0.10.5"
+  - "@tuwaio/nova-core@0.6.0 || 0.7.0 || 0.7.1 || 0.7.2 || 0.7.3 || 0.8.0 || 0.8.1 || 0.9.0 || 0.9.1 || 0.9.2 || 0.9.3 || 0.10.0 || 0.10.1 || 0.10.2 || 0.10.3"
+  - "@tuwaio/nova-transactions@0.6.0 || 0.7.0 || 0.7.2 || 0.7.3 || 0.7.4 || 0.8.0 || 0.8.1 || 0.9.0 || 0.9.1 || 0.10.0 || 0.10.1 || 0.10.2 || 0.10.3 || 0.10.4"
+  - "@tuwaio/orbit-core@0.3.0 || 0.4.0 || 0.5.0 || 0.5.1 || 0.6.0"
+  - "@tuwaio/orbit-evm@0.3.0 || 0.3.2 || 0.3.3 || 0.3.4 || 0.4.0"
+  - "@tuwaio/orbit-solana@0.3.0 || 0.3.3 || 0.4.0 || 0.5.0 || 0.6.0 || 0.7.1"
+  - "@tuwaio/pulsar-core@0.7.0 || 0.8.2 || 0.8.3 || 0.9.0 || 0.9.1 || 0.10.0 || 0.10.1 || 0.10.2 || 0.11.0"
+  - "@tuwaio/pulsar-evm@0.6.0 || 0.7.2 || 0.8.0 || 0.8.1 || 0.9.0 || 0.9.1 || 0.10.0"
+  - "@tuwaio/pulsar-react@0.5.0 || 0.6.1 || 0.6.2 || 0.7.0"
+  - "@tuwaio/pulsar-solana@0.7.0 || 0.8.3 || 0.9.0 || 0.9.1 || 0.10.0 || 0.10.1 || 0.10.3 || 0.10.4"
+  - "@tuwaio/satellite-core@0.5.0 || 0.6.2 || 0.7.0 || 0.8.0 || 0.9.0 || 0.10.0 || 0.11.0"
+  - "@tuwaio/satellite-evm@0.5.0 || 0.6.1 || 0.6.2 || 0.7.0 || 0.8.0 || 0.9.0 || 0.10.0"
+  - "@tuwaio/satellite-react@0.5.0 || 0.6.2 || 0.6.3 || 0.7.0 || 0.8.0 || 0.9.0 || 0.10.0"
+  - "@tuwaio/satellite-solana@0.5.0 || 0.6.1 || 0.7.0 || 0.8.0 || 0.9.0 || 0.10.0 || 0.11.0"
+  - "@tuwaio/evm-sdk@0.1.14 || 0.2.0 || 0.2.1 || 0.2.2 || 0.3.0 || 0.4.0 || 0.5.0 || 0.6.0 || 0.6.1 || 0.6.2"
+  - "@tuwaio/quasar-sdk@0.1.12 || 0.2.0 || 0.2.1 || 0.3.0 || 0.4.0 || 0.5.0 || 0.6.0 || 0.7.0 || 0.7.1 || 0.7.2"
+  - "@tuwaio/sdk@0.1.14 || 0.2.0 || 0.2.1 || 0.2.2 || 0.2.3 || 0.3.0 || 0.4.0 || 0.5.0 || 0.5.1 || 0.6.0 || 0.6.1 || 0.6.2 || 0.6.3 || 0.6.5 || 0.6.6"
+  - "@tuwaio/siwx-core@0.3.0 || 0.4.1 || 0.5.0 || 0.6.0 || 0.7.0 || 0.7.1"
+  - "@tuwaio/siwx-evm@0.3.0 || 0.4.1 || 0.4.2 || 0.4.3 || 0.5.0 || 0.5.1 || 0.5.2"
+  - "@tuwaio/siwx-react@0.3.0 || 0.4.1 || 0.5.0 || 0.5.1 || 0.6.0 || 0.6.2 || 0.6.4"
+  - "@tuwaio/siwx-server@0.3.0 || 0.4.1 || 0.4.3 || 0.5.0 || 0.5.1 || 0.6.0 || 0.7.0 || 0.7.2 || 0.8.0"
+  - "@tuwaio/siwx-solana@0.3.0 || 0.4.1 || 0.4.2 || 0.4.3 || 0.5.0 || 0.6.0 || 0.6.1 || 0.6.2 || 0.7.0"
+  - "@tuwaio/solana-sdk@0.1.15 || 0.2.0 || 0.2.1 || 0.3.0 || 0.4.0 || 0.5.0 || 0.6.0 || 0.6.1 || 0.6.2 || 0.6.3"
+  - "@types/node@26.5.0"
+  - "@typescript-eslint/eslint-plugin@8.70.0"
+  - "@typescript-eslint/parser@8.70.0"
+  - "@typescript-eslint/project-service@8.70.0"
+  - "@typescript-eslint/scope-manager@8.70.0"
+  - "@typescript-eslint/tsconfig-utils@8.70.0"
+  - "@typescript-eslint/type-utils@8.70.0"
+  - "@typescript-eslint/types@8.70.0"
+  - "@typescript-eslint/typescript-estree@8.70.0"
+  - "@typescript-eslint/utils@8.70.0"
+  - "@typescript-eslint/visitor-keys@8.70.0"
   - typescript-eslint@8.70.0
   - framer-motion@13.4.6 || 13.5.1 || 14.0.0 || 14.3.0
   - motion-dom@13.4.5 || 13.5.1 || 14.0.0 || 14.3.0
   - motion-utils@14.0.0
   - viem@2.57.0 || 2.57.1 || 2.57.2
-  - '@next/env@16.3.7 || 16.3.8'
-  - '@next/swc-darwin-arm64@16.3.7 || 16.3.8'
-  - '@next/swc-darwin-x64@16.3.7 || 16.3.8'
-  - '@next/swc-linux-arm64-gnu@16.3.7 || 16.3.8'
-  - '@next/swc-linux-arm64-musl@16.3.7 || 16.3.8'
-  - '@next/swc-linux-x64-gnu@16.3.7 || 16.3.8'
-  - '@next/swc-linux-x64-musl@16.3.7 || 16.3.8'
-  - '@next/swc-win32-arm64-msvc@16.3.7 || 16.3.8'
-  - '@next/swc-win32-x64-msvc@16.3.7 || 16.3.8'
+  - "@next/env@16.3.7 || 16.3.8"
+  - "@next/swc-darwin-arm64@16.3.7 || 16.3.8"
+  - "@next/swc-darwin-x64@16.3.7 || 16.3.8"
+  - "@next/swc-linux-arm64-gnu@16.3.7 || 16.3.8"
+  - "@next/swc-linux-arm64-musl@16.3.7 || 16.3.8"
+  - "@next/swc-linux-x64-gnu@16.3.7 || 16.3.8"
+  - "@next/swc-linux-x64-musl@16.3.7 || 16.3.8"
+  - "@next/swc-win32-arm64-msvc@16.3.7 || 16.3.8"
+  - "@next/swc-win32-x64-msvc@16.3.7 || 16.3.8"
   - next@16.3.7 || 16.3.8
-  - '@web3icons/common@0.11.52'
-  - '@web3icons/react@4.1.23'
-  - '@codama/renderers-js@2.7.0'
+  - "@web3icons/common@0.11.52"
+  - "@web3icons/react@4.1.23"
+  - "@codama/renderers-js@2.7.0"
