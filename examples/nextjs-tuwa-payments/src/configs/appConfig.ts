@@ -7,7 +7,7 @@ export const appConfig = {
   appName: 'Quasar Payments Shop',
   appDescription: 'Next.js shop that sells with Quasar Payments',
   projectId: process.env.NEXT_PUBLIC_WALLET_PROJECT_ID || '9077e559e63e099f496b921a027d0f04',
-  appLogoUrl: 'https://cdn.jsdelivr.net/gh/TuwaIO/workflows@main/preview/preview-logo.png',
+  appLogoUrl: 'https://tuwa.io/brand/preview-logo.png',
   // The origin users open the shop at: WalletConnect metadata and the links the checkout returns to
   appUrl: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3012',
 };

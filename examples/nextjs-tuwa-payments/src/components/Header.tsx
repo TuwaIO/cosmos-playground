@@ -15,7 +15,7 @@ export function Header() {
           width={126}
           height={40}
           className="w-[126px] h-[40px]"
-          src="https://cdn.jsdelivr.net/gh/TuwaIO/workflows@main/preview/logo_v2.svg"
+          src="https://tuwa.io/brand/logo_v2.svg"
           alt="TUWA Logo"
         />
       </a>

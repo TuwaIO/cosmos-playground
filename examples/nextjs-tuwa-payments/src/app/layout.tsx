@@ -26,9 +26,9 @@ export const metadata: Metadata = {
     title: 'Quasar Payments Shop',
   },
   icons: {
-    icon: 'https://cdn.jsdelivr.net/gh/TuwaIO/workflows@main/favicon/icon0.svg',
-    shortcut: 'https://cdn.jsdelivr.net/gh/TuwaIO/workflows@main/favicon/web-app-manifest-512x512.png',
-    apple: 'https://cdn.jsdelivr.net/gh/TuwaIO/workflows@main/favicon/web-app-manifest-512x512.png',
+    icon: 'https://tuwa.io/brand/icon0.svg',
+    shortcut: 'https://tuwa.io/brand/web-app-manifest-512x512.png',
+    apple: 'https://tuwa.io/brand/web-app-manifest-512x512.png',
   },
 };
 
