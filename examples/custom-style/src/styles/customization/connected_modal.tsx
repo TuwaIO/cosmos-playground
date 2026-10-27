@@ -287,7 +287,7 @@ export const connected_modal_customization: ConnectedModalCustomization = {
         pulsarRequiredContainer: () =>
           cn('flex flex-col items-center justify-center text-center gap-4 p-6', SHARED_STYLES.bgBase),
         pulsarRequiredIconContainer: () =>
-          'w-12 h-12 p-2 rounded-full bg-gradient-to-r from-[var(--tuwa-text-accent)] to-[var(--tuwa-bg-muted)] text-[var(--tuwa-text-primary)]',
+          'w-12 h-12 p-2 rounded-full bg-[var(--tuwa-bg-muted)] text-[var(--tuwa-text-accent)]',
         pulsarRequiredIcon: () => 'w-full h-full',
         pulsarRequiredContent: () => 'space-y-2',
         pulsarRequiredTitle: () => cn('text-lg', SHARED_STYLES.textForeground),

@@ -14,7 +14,7 @@ export default function HomePage() {
   const activeConnection = useSatelliteConnectStore((store) => store.activeConnection);
 
   return (
-    <div className="flex min-h-[calc(100dvh-65px)] w-full items-center justify-center bg-gradient-to-br from-[var(--tuwa-bg-secondary)] to-[var(--tuwa-bg-muted)] px-4 py-6">
+    <div className="flex min-h-[calc(100dvh-65px)] w-full items-center justify-center bg-[var(--tuwa-bg-secondary)] px-4 py-6">
       <div className="flex w-full max-w-md flex-col items-center gap-3">
         {activeConnection ? (
           <>
@@ -36,7 +36,7 @@ export default function HomePage() {
               'bg-[var(--tuwa-bg-primary)] ring-1 ring-[var(--tuwa-border-primary)]',
             )}
           >
-            <div className="w-12 h-12 p-2 rounded-full mb-4 bg-gradient-to-r from-[var(--tuwa-button-gradient-from)] to-[var(--tuwa-button-gradient-to)] text-[var(--tuwa-text-on-accent)]">
+            <div className="w-12 h-12 p-2 rounded-full mb-4 bg-[var(--tuwa-bg-muted)] text-[var(--tuwa-text-primary)] border border-[var(--tuwa-border-primary)]">
               <WalletIcon className="w-full h-full" />
             </div>
             <h2 className="text-xl font-bold text-[var(--tuwa-text-primary)] mb-2">Wallet Required</h2>

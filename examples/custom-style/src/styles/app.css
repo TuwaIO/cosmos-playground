@@ -14,6 +14,12 @@
   --tuwa-text-accent: #1ad699;
   --tuwa-text-on-accent: #05291d;
 
+  /* --- Button Colors --- */
+  --tuwa-button-gradient-from: #1ad699;
+  --tuwa-button-gradient-to: #1ad699;
+  --tuwa-button-gradient-from-hover: #15b884;
+  --tuwa-button-gradient-to-hover: #15b884;
+
   /* --- Background Colors --- */
   --tuwa-bg-primary: #000000;
   --tuwa-bg-secondary: #171717;
