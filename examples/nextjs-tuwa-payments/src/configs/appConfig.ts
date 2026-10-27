@@ -1,14 +1,11 @@
-import { createDefaultTransports } from '@tuwaio/satellite-evm';
-import { walletConnect } from '@wagmi/connectors';
-import { createConfig, injected } from '@wagmi/core';
+import { createDefaultTransports, safeSdkOptions } from '@tuwaio/satellite-evm';
+import { safe } from '@wagmi/connectors';
+import { createConfig, createStorage, injected, noopStorage } from '@wagmi/core';
 import { base, baseSepolia, Chain, mainnet, sepolia } from 'viem/chains';
 
 export const appConfig = {
   appName: 'Quasar Payments Shop',
-  appDescription: 'Next.js shop that sells with Quasar Payments',
-  projectId: process.env.NEXT_PUBLIC_WALLET_PROJECT_ID || '9077e559e63e099f496b921a027d0f04',
-  appLogoUrl: 'https://tuwa.io/brand/preview-logo.png',
-  // The origin users open the shop at: WalletConnect metadata and the links the checkout returns to
+  // The origin users open the shop at: the links the checkout returns to
   appUrl: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3012',
 };
 
@@ -43,22 +40,16 @@ export const appEVMChains = [
 export const wagmiConfig = createConfig({
   connectors: [
     injected(),
-    ...(typeof window !== 'undefined'
-      ? [
-          walletConnect({
-            projectId: appConfig.projectId,
-            metadata: {
-              name: appConfig.appName,
-              description: appConfig.appDescription,
-              url: appConfig.appUrl,
-              icons: [appConfig.appLogoUrl],
-            },
-          }),
-        ]
-      : []),
+    safe({
+      ...safeSdkOptions,
+    }),
   ],
   transports: createDefaultTransports(appEVMChains),
   chains: appEVMChains,
   ssr: true,
   syncConnectedChain: true,
+  // Satellite Connect remembers the last wallet; wagmi keeps nothing in the browser. A storage that saves
+  // nothing, not `null`: without a storage wagmi cannot hydrate a config with `ssr: true` and never lists the
+  // installed wallets (EIP-6963)
+  storage: createStorage({ storage: noopStorage }),
 });

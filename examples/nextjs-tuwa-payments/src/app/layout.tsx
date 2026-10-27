@@ -1,21 +1,11 @@
 import '@/styles/app.css';
 
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
 import { ReactNode } from 'react';
 
 import { Header } from '@/components/Header';
+import { themeScript } from '@/configs/theme';
 import { Providers } from '@/providers';
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-});
 
 export const metadata: Metadata = {
   title: 'Quasar Payments: Next.js Shop',
@@ -26,9 +16,7 @@ export const metadata: Metadata = {
     title: 'Quasar Payments Shop',
   },
   icons: {
-    icon: 'https://tuwa.io/brand/icon0.svg',
-    shortcut: 'https://tuwa.io/brand/web-app-manifest-512x512.png',
-    apple: 'https://tuwa.io/brand/web-app-manifest-512x512.png',
+    icon: '/icon.svg',
   },
 };
 
@@ -38,8 +26,12 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
+    // suppressHydrationWarning: themeScript adds the `dark` class before React hydrates
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+      <body className="antialiased">
         <Providers>
           <Header />
           {children}

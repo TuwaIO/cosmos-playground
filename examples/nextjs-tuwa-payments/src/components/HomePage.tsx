@@ -40,7 +40,7 @@ export function HomePage({ highlight, methods }: { highlight: string | null; met
   };
 
   return (
-    <main className="min-h-[calc(100dvh-57px)] bg-[var(--tuwa-bg-secondary)] px-4 py-8">
+    <main className="min-h-[calc(100dvh-65px)] bg-[var(--tuwa-bg-secondary)] px-4 py-8">
       <div className="mx-auto flex max-w-5xl flex-col gap-6">
         <div>
           <h1 className="m-0 text-2xl font-bold text-[var(--tuwa-text-primary)]">Quasar Payments shop</h1>

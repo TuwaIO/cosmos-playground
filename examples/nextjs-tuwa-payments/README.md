@@ -18,7 +18,7 @@ cp .env.example .env                   # then fill in the keys of your Quasar Pa
 pnpm dev
 ```
 
-Open [http://localhost:3012](http://localhost:3012). The shop runs on port 3012 because a local Quasar node takes 3000 (dashboard) and 3001 (engine). Node.js 20.19+, 22.13+ or 24+ is required.
+Open [http://localhost:3012](http://localhost:3012). The shop runs on port 3012 because a local Quasar node takes 3000 (dashboard) and 3001 (engine). Node.js 24 LTS, 24.22.1 or newer, is required (the `engines` field; 24.22.1 is the October 2026 security release).
 
 ---
 
@@ -27,9 +27,10 @@ Open [http://localhost:3012](http://localhost:3012). The shop runs on port 3012 
 - **The methods of your Quasar app.** The page reads them on the server with `payments.listMethods()` and shows the tokens and networks the buyer can pay with. While the app has none, the buttons are off and say why: Quasar would issue an invoice that nobody can pay, so the Server Actions refuse too. Automatic payments also need a token method on an EVM network.
 - **Invoices issued on the server.** "Buy with crypto" calls a Server Action that issues a Quasar invoice (line items in USD, the order ID in the metadata, an idempotency key, a return link) and passes only its checkout token to the page. The secret key never reaches the browser.
 - **The Nova Payments checkout** in a modal: the order with its lines, the methods of your Quasar app (network and token), the rate locked for a quote, then the payment from the connected wallet, gasless when the token and the wallet allow it, or with a QR code (Solana Pay, or the payment page on a phone). It follows the invoice until Quasar confirms it and shows the outcome: paid with the receipt, underpaid, held for review, expired.
-- **Wallets** through Nova Connect on Satellite Connect: EVM wallets through wagmi (injected, WalletConnect) and Solana wallets through Wallet Standard. "Connect wallet" in the checkout opens the Nova Connect modal for the family of the chosen method.
+- **Wallets** through Nova Connect on Satellite Connect: EVM wallets through wagmi connectors (injected, Safe{Wallet}) and Solana wallets through Wallet Standard. "Connect wallet" in the checkout opens the Nova Connect modal for the family of the chosen method. The last wallet is reconnected after a page reload until the tab closes, or until the user disconnects it if they tick "Remember this wallet" in the connect modal (`rememberWallet={false}` in `src/providers/SatelliteConnectProviders.tsx`). WalletConnect is not included: to offer it, add `walletConnect` from `@wagmi/connectors` with your own Reown project ID. The connect modal links the Terms of Service and Privacy Policy of TUWA (`legal` of `NovaConnectProvider`); replace them with the documents of your shop.
 - **Payments after closing.** A payment the wallet sends after the buyer closed the checkout goes to the Pulsar store: Nova Transactions shows its toast and tracks it.
 - **Subscriptions.** The plan bills every day (the shortest period, so you can watch a renewal on a testnet): either the buyer pays each invoice, or after the first payment the checkout offers automatic payments, an ERC-7715 permission of the buyer's EVM wallet, payable only to you.
+- **Light and dark themes:** the page follows the system theme; the button in the header switches it and saves the choice. `themeScript` (`src/configs/theme.ts`) sets the `dark` class of the Nova themes in the root layout before the first paint, so a reload never flashes the other theme.
 - **Webhooks that fulfil orders.** `src/app/api/webhooks/quasar/route.ts` verifies each delivery with `verifyWebhook`, acts on each event once and marks the order fulfilled on `invoice.paid`. The page shows the orders and the webhooks it received.
 
 ---
@@ -117,14 +118,13 @@ NEXT_PUBLIC_QUASAR_BASE_URL=http://localhost:3001
 
 ## 🔧 Environment Variables
 
-| Variable                        | Description                                                                                                            |
-| ------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `QUASAR_SECRET_KEY`             | Secret key of your Quasar Payments app (`sk_test_…` or `sk_live_…`). Server only                                       |
-| `QUASAR_WEBHOOK_SECRET`         | Signing secret of the app's webhook endpoint (`whsec_…`). Server only                                                  |
-| `NEXT_PUBLIC_QUASAR_BASE_URL`   | The Quasar API of your node (`http://localhost:3001` locally). Empty: Quasar Cloud                                     |
-| `NEXT_PUBLIC_APP_URL`           | Origin of the shop: the WalletConnect metadata and the links the checkout returns to. Default: `http://localhost:3012` |
-| `NEXT_PUBLIC_WALLET_PROJECT_ID` | WalletConnect project ID from [dashboard.reown.com](https://dashboard.reown.com); use your own in production           |
-| `NEXT_PUBLIC_ALCHEMY_KEY`       | Alchemy key for the RPC URLs of the checkout (balances and fees). Default: public RPC URLs                             |
+| Variable                      | Description                                                                                |
+| ----------------------------- | ------------------------------------------------------------------------------------------ |
+| `QUASAR_SECRET_KEY`           | Secret key of your Quasar Payments app (`sk_test_…` or `sk_live_…`). Server only           |
+| `QUASAR_WEBHOOK_SECRET`       | Signing secret of the app's webhook endpoint (`whsec_…`). Server only                      |
+| `NEXT_PUBLIC_QUASAR_BASE_URL` | The Quasar API of your node (`http://localhost:3001` locally). Empty: Quasar Cloud         |
+| `NEXT_PUBLIC_APP_URL`         | Origin of the shop: the links the checkout returns to. Default: `http://localhost:3012`    |
+| `NEXT_PUBLIC_ALCHEMY_KEY`     | Alchemy key for the RPC URLs of the checkout (balances and fees). Default: public RPC URLs |
 
 With Quasar Cloud, a webhook endpoint with a `localhost` URL receives its deliveries through `pnpm webhooks` (`quasar-sdk listen`), without a tunnel.
 
@@ -143,8 +143,11 @@ src/
 │   ├── HomePage.tsx               # The shop, the orders, the webhooks and the PaymentCheckout modal
 │   ├── Shop.tsx                   # The accepted methods, the products and the plan
 │   ├── Orders.tsx                 # Orders with their invoices
+│   ├── ThemeToggle.tsx            # Switches the light and dark themes
 │   └── WebhookLog.tsx             # Verified webhook deliveries
-├── configs/appConfig.ts           # Chains, RPC URLs, the wagmi config, the Quasar API
+├── configs/
+│   ├── appConfig.ts               # Chains, RPC URLs, the wagmi config, the Quasar API
+│   └── theme.ts                   # The saved theme, applied before the first paint
 ├── hooks/                         # The Pulsar store, polling of the orders
 ├── lib/
 │   ├── catalog.ts                 # What the shop sells
@@ -154,6 +157,35 @@ src/
 ├── providers/                     # Satellite Connect, Nova Connect, Nova Payments, Nova Transactions
 └── styles/app.css                 # The Nova stylesheets and Tailwind CSS
 ```
+
+---
+
+## 🛠️ Scripts
+
+| Script          | Description                                    |
+| --------------- | ---------------------------------------------- |
+| `pnpm dev`      | Start the development server on port 3012      |
+| `pnpm build`    | Build for production                           |
+| `pnpm start`    | Serve the production build on port 3012        |
+| `pnpm webhooks` | Relay the webhooks of the `localhost` endpoint |
+| `pnpm lint`     | Check the code with ESLint and Prettier        |
+| `pnpm lint:fix` | Fix what ESLint and Prettier can fix           |
+
+---
+
+## 📖 Learn More
+
+- [Quasar documentation](https://docs.tuwa.io/quasar): apps and keys, webhooks, self-hosting and the API reference
+- [`@tuwaio/quasar-sdk`](https://sdk.docs.tuwa.io/packages/quasar-sdk) and the [Nova UI Kit](https://stories.tuwa.io/) components
+- [All starter templates](https://docs.tuwa.io/guides/starter-templates)
+
+---
+
+## 🤝 Contributing & Support
+
+Contributions are welcome! Please read the **[Contribution Guidelines](https://github.com/TuwaIO/workflows/blob/main/CONTRIBUTING.md)**.
+
+[**➡️ View Support Options**](https://github.com/TuwaIO/workflows/blob/main/Donation.md)
 
 ---
 

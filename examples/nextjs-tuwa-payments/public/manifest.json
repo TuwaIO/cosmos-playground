@@ -8,14 +8,9 @@
   "background_color": "#ffffff",
   "icons": [
     {
-      "src": "https://tuwa.io/brand/icon0.svg",
+      "src": "/icon.svg",
       "sizes": "any",
       "type": "image/svg+xml"
-    },
-    {
-      "src": "https://tuwa.io/brand/web-app-manifest-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png"
     }
   ]
 }
