@@ -166,7 +166,7 @@ export const TransactionsBlockWrapper = () => {
                   action={handleIncrement}
                   transactionsPool={transactionsPool}
                   getLastTxKey={getLastTxKey}
-                  className="from-[var(--tuwa-text-accent)] to-[var(--tuwa-text-accent)] w-full h-full bg-[var(--tuwa-text-accent)] hover:opacity-90 text-[var(--tuwa-text-on-accent)] font-medium rounded-[var(--tuwa-rounded-corners)] transition-all duration-200 ease-in-out flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] select-none"
+                  className="bg-none w-full h-full bg-[var(--tuwa-text-accent)] hover:opacity-90 text-[var(--tuwa-text-on-accent)] font-medium rounded-[var(--tuwa-rounded-corners)] transition-all duration-200 ease-in-out flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] select-none"
                   disabled={currentCount === null}
                   walletAddress={address}
                 >

@@ -156,10 +156,10 @@ export const TransactionsBlockWrapper = () => {
   return (
     <div className="p-4 relative">
       <div className="m-auto w-full max-w-md h-auto min-h-[680px] bg-[var(--tuwa-bg-primary)] rounded-[var(--tuwa-rounded-corners)] shadow-2xl border border-[var(--tuwa-border-primary)] overflow-hidden flex flex-col relative">
-        <div className="bg-gradient-to-r from-[var(--tuwa-button-gradient-from)] to-[var(--tuwa-button-gradient-to)] p-6 flex-shrink-0">
+        <div className="bg-[var(--tuwa-bg-secondary)] border-b border-[var(--tuwa-border-primary)] p-6 flex-shrink-0">
           <div className="flex-1 pr-4">
-            <h1 className="text-2xl font-bold text-[var(--tuwa-text-on-accent)] mb-1 leading-tight">EVM Demo</h1>
-            <p className="text-blue-100 text-sm leading-tight">Transaction Tracking Example</p>
+            <h1 className="text-2xl font-bold text-[var(--tuwa-text-primary)] mb-1 leading-tight">EVM Demo</h1>
+            <p className="text-[var(--tuwa-text-secondary)] text-sm leading-tight">Transaction Tracking Example</p>
           </div>
         </div>
 
@@ -193,7 +193,7 @@ export const TransactionsBlockWrapper = () => {
                   <div className="text-sm text-[var(--tuwa-text-secondary)] leading-tight">Contract</div>
                   <button
                     onClick={openEtherscan}
-                    className="text-xs font-mono text-[var(--tuwa-text-accent)] hover:text-[var(--tuwa-button-gradient-from-hover)] leading-tight cursor-pointer transition-colors duration-200 underline hover:no-underline"
+                    className="text-xs font-mono text-[var(--tuwa-text-accent)] hover:opacity-80 leading-tight cursor-pointer transition-opacity duration-200 underline hover:no-underline"
                   >
                     {COUNTER_ADDRESS.slice(0, 6)}...{COUNTER_ADDRESS.slice(-4)}
                   </button>
@@ -222,7 +222,7 @@ export const TransactionsBlockWrapper = () => {
                   action={handleIncrement}
                   transactionsPool={transactionsPool}
                   getLastTxKey={getLastTxKey}
-                  className="w-full h-full bg-gradient-to-r from-[var(--tuwa-button-gradient-from)] to-[var(--tuwa-button-gradient-to)] hover:from-[var(--tuwa-button-gradient-from-hover)] hover:to-[var(--tuwa-button-gradient-to-hover)] text-[var(--tuwa-text-on-accent)] font-semibold rounded-[var(--tuwa-rounded-corners)] transition-all duration-200 ease-in-out hover:shadow-lg flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] select-none"
+                  className="w-full h-full bg-[var(--tuwa-button-gradient-from)] hover:bg-[var(--tuwa-button-gradient-from-hover)] text-[var(--tuwa-text-on-accent)] font-semibold rounded-[var(--tuwa-rounded-corners)] transition-all duration-200 ease-in-out hover:shadow-md flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] select-none"
                   disabled={currentCount === null}
                   walletAddress={address}
                 >
@@ -236,7 +236,7 @@ export const TransactionsBlockWrapper = () => {
                   action={handleIncrementPimlico}
                   transactionsPool={transactionsPool}
                   getLastTxKey={getLastTxKey}
-                  className="w-full h-full bg-gradient-to-r from-[var(--tuwa-button-gradient-from)] to-[var(--tuwa-button-gradient-to)] hover:from-[var(--tuwa-button-gradient-from-hover)] hover:to-[var(--tuwa-button-gradient-to-hover)] text-[var(--tuwa-text-on-accent)] font-semibold rounded-[var(--tuwa-rounded-corners)] transition-all duration-200 ease-in-out hover:shadow-lg flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] select-none"
+                  className="w-full h-full bg-[var(--tuwa-button-gradient-from)] hover:bg-[var(--tuwa-button-gradient-from-hover)] text-[var(--tuwa-text-on-accent)] font-semibold rounded-[var(--tuwa-rounded-corners)] transition-all duration-200 ease-in-out hover:shadow-md flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] select-none"
                   disabled={currentCount === null}
                   walletAddress={address}
                 >

@@ -141,9 +141,6 @@ export function QuasarWebhookMonitor() {
 
   return (
     <section className="relative w-full max-w-md overflow-hidden rounded-[var(--tuwa-rounded-corners)] border border-[var(--tuwa-border-primary)] bg-[var(--tuwa-bg-primary)] shadow-2xl backdrop-blur-xl transition-all duration-300">
-      {/* Top glowing ambient gradient line */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-[var(--tuwa-button-gradient-from)] via-[var(--tuwa-button-gradient-to)] to-[var(--tuwa-button-gradient-from)] opacity-80" />
-
       {/* Header bar */}
       <div className="flex items-center justify-between border-b border-[var(--tuwa-border-secondary)] bg-[var(--tuwa-bg-secondary)]/50 px-4 sm:px-5 py-3.5 gap-3">
         <div className="flex items-center gap-3 min-w-0 flex-1">
@@ -273,7 +270,7 @@ export function QuasarWebhookMonitor() {
               <div className="flex items-center justify-between px-3 py-2 bg-[var(--tuwa-bg-secondary)]/50 border-b border-[var(--tuwa-border-secondary)]">
                 <button
                   onClick={() => setIsPayloadOpen(!isPayloadOpen)}
-                  className="flex items-center gap-1.5 text-xs font-medium text-[var(--tuwa-text-accent)] hover:text-[var(--tuwa-button-gradient-to)] transition-colors cursor-pointer"
+                  className="flex items-center gap-1.5 text-xs font-medium text-[var(--tuwa-text-accent)] hover:opacity-80 transition-opacity cursor-pointer"
                 >
                   <span>{isPayloadOpen ? '▼ Hide Payload' : '▶ Show Payload'}</span>
                 </button>
