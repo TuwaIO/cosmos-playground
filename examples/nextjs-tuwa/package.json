@@ -35,9 +35,9 @@
     "@safe-global/safe-apps-sdk": "^9.1.0",
     "@solana/kit": "^8.5.0",
     "@solana/webcrypto-ed25519-polyfill": "^8.5.0",
-    "@tuwaio/evm-sdk": "^0.6.3",
-    "@tuwaio/sdk": "^0.6.7",
-    "@tuwaio/solana-sdk": "^0.6.4",
+    "@tuwaio/evm-sdk": "^0.6.4",
+    "@tuwaio/sdk": "^0.6.8",
+    "@tuwaio/solana-sdk": "^0.6.5",
     "@wagmi/connectors": "^8.2.2",
     "@wagmi/core": "^3.6.7",
     "@wallet-standard/app": "^1.1.1",
@@ -46,12 +46,12 @@
     "@wallet-standard/react": "^1.0.3",
     "@wallet-standard/ui": "^1.0.3",
     "@wallet-standard/ui-registry": "^1.1.1",
-    "framer-motion": "14.6.0",
+    "framer-motion": "14.7.1",
     "immer": "^11.2.9",
     "next": "16.4.3",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
-    "viem": "^2.57.11",
+    "viem": "^2.57.12",
     "zustand": "^5.0.16"
   },
   "devDependencies": {
@@ -69,10 +69,10 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-simple-import-sort": "^14.0.0",
     "globals": "^17.13.0",
-    "postcss": "^8.5.31",
+    "postcss": "^8.5.32",
     "prettier": "^3.9.10",
     "tailwindcss": "^4.3.3",
     "typescript": "6.0.3",
-    "typescript-eslint": "^8.72.0"
+    "typescript-eslint": "^8.72.1"
   }
 }
