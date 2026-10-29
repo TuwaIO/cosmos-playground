@@ -9,7 +9,9 @@ let client: Quasar | undefined;
 export function getQuasar(): Quasar {
   const secretKey = process.env.QUASAR_SECRET_KEY;
   if (!secretKey) {
-    throw new Error('QUASAR_SECRET_KEY is not set: copy the secret key of your Quasar Payments app into .env');
+    throw new Error(
+      'QUASAR_SECRET_KEY is not set: copy the secret key of your Quasar Payments app into .env (or set SHOP_DEMO_MODE=true to try the shop without Quasar)',
+    );
   }
   client ??= new Quasar({ secretKey, baseUrl: process.env.NEXT_PUBLIC_QUASAR_BASE_URL || undefined });
   return client;

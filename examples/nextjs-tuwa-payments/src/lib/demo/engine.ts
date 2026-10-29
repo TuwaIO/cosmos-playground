@@ -1,0 +1,868 @@
+import type {
+  Invoice,
+  InvoiceSettlement,
+  InvoiceStatus,
+  PaymentMethod,
+  PaymentWebhookEvent,
+  PaymentWebhookEventType,
+  Refund,
+  Subscription,
+  SubscriptionInterval,
+} from '@tuwaio/quasar-sdk';
+import type { CheckoutQuote, CheckoutView } from '@tuwaio/quasar-sdk/checkout';
+
+import { CURRENCY } from '@/lib/catalog';
+import { textPdf } from '@/lib/demo/pdf';
+import { applyPaymentEvent, attachInvoice, attachSubscription, createOrder } from '@/lib/orders';
+
+// Demo mode (`SHOP_DEMO_MODE=true`): a small, in-memory imitation of the Quasar Payments API, so the shop runs, and can
+// be filmed, without a Quasar node or keys. It issues invoices and subscriptions, answers the checkout of
+// `PaymentCheckout` (through `api`), "receives" a Solana Pay QR payment a few seconds after the quote, and makes the
+// `payments.v1` events Quasar would send, which go through the same `applyPaymentEvent` as verified webhooks. Nothing
+// is sent on-chain: wallet payments are refused, and the transaction hashes are made up.
+
+/** Why a demo call is refused, as the checkout shows it (the `code` of a Quasar refusal). */
+export class DemoRefusal extends Error {
+  constructor(
+    readonly code: string,
+    message: string,
+  ) {
+    super(message);
+  }
+}
+
+type DemoInvoice = {
+  invoice: Invoice;
+  /** The quote locked in the checkout. */
+  quote: CheckoutQuote | null;
+  /** When the simulated payment is seen and confirmed (ms since the epoch). */
+  seenAt: number | null;
+  confirmAt: number | null;
+};
+
+type DemoState = {
+  invoices: Map<string, DemoInvoice>;
+  tokens: Map<string, string>;
+  subscriptions: Map<string, Subscription>;
+  refunds: Map<string, Refund & { confirmAt: number }>;
+  seq: number;
+  seeded: boolean;
+  ticker: ReturnType<typeof setInterval> | null;
+};
+
+const state: DemoState = ((globalThis as { __paymentsShopDemo?: DemoState }).__paymentsShopDemo ??= {
+  invoices: new Map(),
+  tokens: new Map(),
+  subscriptions: new Map(),
+  refunds: new Map(),
+  seq: 0,
+  seeded: false,
+  ticker: null,
+});
+
+const SOLANA_DEVNET = 'solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1';
+const BASE_SEPOLIA = 'eip155:84532';
+const SEPOLIA = 'eip155:11155111';
+
+const method = (fields: Pick<PaymentMethod, 'id' | 'name' | 'symbol' | 'chainId' | 'assetId' | 'decimals'>) =>
+  ({
+    object: 'payment_method',
+    recipient: '',
+    minAmount: null,
+    maxAmount: null,
+    markup: null,
+    discount: null,
+    finality: 'default',
+    gasless: 'off',
+    featured: fields.symbol === 'USDC',
+    ...fields,
+  }) satisfies PaymentMethod;
+
+/** The methods of the demo app: the testnet presets of the Quasar dev seed. */
+export const DEMO_METHODS: PaymentMethod[] = [
+  method({
+    id: 'pm_demo_usdc_base_sepolia',
+    name: 'USDC on Base Sepolia',
+    symbol: 'USDC',
+    chainId: BASE_SEPOLIA,
+    assetId: `${BASE_SEPOLIA}/erc20:0x036CbD53842c5426634e7929541eC2318f3dCF7e`,
+    decimals: 6,
+  }),
+  method({
+    id: 'pm_demo_eth_base_sepolia',
+    name: 'ETH on Base Sepolia',
+    symbol: 'ETH',
+    chainId: BASE_SEPOLIA,
+    assetId: `${BASE_SEPOLIA}/slip44:60`,
+    decimals: 18,
+  }),
+  method({
+    id: 'pm_demo_usdc_sepolia',
+    name: 'USDC on Sepolia',
+    symbol: 'USDC',
+    chainId: SEPOLIA,
+    assetId: `${SEPOLIA}/erc20:0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238`,
+    decimals: 6,
+  }),
+  method({
+    id: 'pm_demo_usdc_solana_devnet',
+    name: 'USDC on Solana Devnet',
+    symbol: 'USDC',
+    chainId: SOLANA_DEVNET,
+    assetId: `${SOLANA_DEVNET}/token:4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU`,
+    decimals: 6,
+  }),
+  method({
+    id: 'pm_demo_sol_devnet',
+    name: 'SOL on Solana Devnet',
+    symbol: 'SOL',
+    chainId: SOLANA_DEVNET,
+    assetId: `${SOLANA_DEVNET}/slip44:501`,
+    decimals: 9,
+  }),
+];
+
+/** USD per token: fixed rates of the simulation. */
+const RATES: Record<string, number> = { USDC: 1, ETH: 2500, SOL: 150 };
+
+const BASE58 = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
+
+function randomBytes(length: number): Uint8Array {
+  return crypto.getRandomValues(new Uint8Array(length));
+}
+
+function base58(bytes: Uint8Array): string {
+  let value = BigInt(`0x${Buffer.from(bytes).toString('hex') || '0'}`);
+  let text = '';
+  while (value > 0n) {
+    text = BASE58[Number(value % 58n)] + text;
+    value /= 58n;
+  }
+  return text.padStart(bytes.length === 32 ? 43 : 0, '1');
+}
+
+const hex = (length: number) => `0x${Buffer.from(randomBytes(length)).toString('hex')}`;
+const nextId = (prefix: string) => `${prefix}_demo_${(++state.seq).toString(36).padStart(4, '0')}`;
+const pad = (value: number) => String(value).padStart(4, '0');
+
+/** A made-up transaction of a method's network: a hash for EVM, a signature for Solana. */
+function fakeTx(chainId: string): { txHash: string; payer: string } {
+  return chainId.startsWith('solana:')
+    ? { txHash: base58(randomBytes(64)), payer: base58(randomBytes(32)) }
+    : { txHash: hex(32), payer: hex(20) };
+}
+
+/** Base units of a USD amount in a method's token, at the fixed rate. */
+function baseUnits(usd: string, found: PaymentMethod): string {
+  const tokens = Number(usd) / (RATES[found.symbol] ?? 1);
+  // 6 significant decimals are enough for the simulation; pad to the token's decimals
+  const fixed = tokens.toFixed(Math.min(found.decimals, 6));
+  const [whole, fraction = ''] = fixed.split('.');
+  return BigInt(whole + fraction.padEnd(found.decimals, '0')).toString();
+}
+
+function findMethod(id: string | null): PaymentMethod {
+  return DEMO_METHODS.find((item) => item.id === id) ?? DEMO_METHODS[0];
+}
+
+const INTERVAL_MS: Record<SubscriptionInterval, number> = {
+  day: 86_400_000,
+  week: 7 * 86_400_000,
+  month: 30 * 86_400_000,
+  year: 365 * 86_400_000,
+};
+
+export type DemoLine = { name: string; description?: string; quantity?: string; unitPrice: string };
+
+function issueInvoice(params: {
+  lines: readonly DemoLine[];
+  metadata: Record<string, unknown> | null;
+  successUrl?: string | null;
+  cancelUrl?: string | null;
+  subscriptionId?: string;
+  period?: number;
+  at?: Date;
+}): DemoInvoice {
+  const at = params.at ?? new Date();
+  const id = nextId('inv');
+  const lineItems = params.lines.map((line) => {
+    const quantity = line.quantity ?? '1';
+    return {
+      name: line.name,
+      ...(line.description && { description: line.description }),
+      quantity,
+      unitPrice: line.unitPrice,
+      taxCategory: 'O' as const,
+      taxRate: '0',
+      net: (Number(line.unitPrice) * Number(quantity)).toFixed(2),
+    };
+  });
+  const total = lineItems.reduce((sum, line) => sum + Math.round(Number(line.net) * 100), 0);
+  const token = `ct_demo_${Buffer.from(randomBytes(12)).toString('hex')}`;
+  const invoice: Invoice = {
+    id,
+    object: 'invoice',
+    number: `TEST-2026-${pad(state.invoices.size + 1)}`,
+    status: 'open',
+    environment: 'test',
+    currency: CURRENCY,
+    locale: 'en',
+    issuedAt: at.toISOString(),
+    supplyDate: at.toISOString().slice(0, 10),
+    dueAt: new Date(at.getTime() + 60 * 60_000).toISOString(),
+    seller: { tradingName: 'Cosmos Store' },
+    buyer: null,
+    expectedPayer: null,
+    buyerReference: null,
+    orderReference: null,
+    lineItems,
+    pricesIncludeTax: false,
+    subtotal: (total / 100).toFixed(2),
+    taxTotal: '0.00',
+    rounding: '0.00',
+    total: (total / 100).toFixed(2),
+    taxBreakdown: [],
+    notes: null,
+    reverseCharge: null,
+    taxExemptionReason: null,
+    metadata: params.metadata,
+    successUrl: params.successUrl ?? null,
+    cancelUrl: params.cancelUrl ?? null,
+    checkoutToken: token,
+    payUrl: null,
+    quote: null,
+    settlement: null,
+    reviewReason: null,
+    aml: null,
+    receiptNumber: null,
+    eInvoiceSkipped: ['buyer.country'],
+    refundedTotal: '0.00',
+    replaces: null,
+    replacedBy: null,
+    subscriptionId: params.subscriptionId ?? null,
+    period: params.period ?? null,
+    createdAt: at.toISOString(),
+    updatedAt: at.toISOString(),
+  };
+  const record: DemoInvoice = { invoice, quote: null, seenAt: null, confirmAt: null };
+  state.invoices.set(id, record);
+  state.tokens.set(token, id);
+  return record;
+}
+
+/** Makes the event Quasar would send and applies it to the order book, as a verified webhook would be. */
+function emit(
+  type: PaymentWebhookEventType,
+  data: PaymentWebhookEvent['data'],
+  at: Date = new Date(),
+  receivedAt?: Date,
+) {
+  applyPaymentEvent(
+    {
+      id: nextId('evt'),
+      object: 'event',
+      apiVersion: 'payments.v1',
+      type,
+      createdAt: at.toISOString(),
+      sentAt: at.toISOString(),
+      environment: 'test',
+      data,
+    },
+    { source: 'demo', receivedAt: (receivedAt ?? at).toISOString() },
+  );
+}
+
+function setStatus(record: DemoInvoice, status: InvoiceStatus, at: Date) {
+  const payable = status === 'open' || status === 'processing' || status === 'underpaid';
+  record.invoice = {
+    ...record.invoice,
+    status,
+    checkoutToken: payable ? record.invoice.checkoutToken : null,
+    updatedAt: at.toISOString(),
+  };
+}
+
+/** Settles an invoice with a made-up payment of its method and sends `invoice.paid` (and the subscription's state). */
+function settle(record: DemoInvoice, at: Date, methodId?: string) {
+  const found = findMethod(methodId ?? record.quote?.methodId ?? null);
+  const { txHash, payer } = fakeTx(found.chainId);
+  const settlement: InvoiceSettlement = {
+    methodId: found.id,
+    chainId: found.chainId,
+    txHash,
+    blockRef: String(Math.floor(at.getTime() / 400)),
+    amountPaid: record.quote?.cryptoAmountExpected ?? baseUnits(record.invoice.total, found),
+    originWallet: record.quote?.payer?.split(':').pop() ?? payer,
+    paidAt: at.toISOString(),
+    overpaid: '0',
+  };
+  setStatus(record, 'paid', at);
+  record.invoice = {
+    ...record.invoice,
+    settlement,
+    receiptNumber: `TEST-R-${pad(state.seq)}`,
+  };
+  const subscription = record.invoice.subscriptionId
+    ? state.subscriptions.get(record.invoice.subscriptionId)
+    : undefined;
+  if (subscription && subscription.status === 'incomplete') {
+    subscription.status = 'active';
+  }
+  emit('invoice.paid', { invoice: record.invoice, settlement, ...(subscription && { subscription }) }, at);
+}
+
+/** Moves the simulated payments on: seen 4 s after the QR quote, confirmed 5 s later; refunds confirm after 3 s. */
+function advance() {
+  const now = Date.now();
+  for (const record of state.invoices.values()) {
+    if (record.seenAt !== null && now >= record.seenAt && record.invoice.status === 'open') {
+      record.seenAt = null;
+      setStatus(record, 'processing', new Date());
+      emit('invoice.processing', { invoice: record.invoice });
+    }
+    if (record.confirmAt !== null && now >= record.confirmAt && record.invoice.status === 'processing') {
+      record.confirmAt = null;
+      settle(record, new Date());
+    }
+  }
+  for (const refund of state.refunds.values()) {
+    if (refund.status === 'submitted' && now >= refund.confirmAt) confirmRefund(refund, new Date());
+  }
+}
+
+/** Starts the clock of the simulation, once per server process. */
+function ensureTicker() {
+  if (state.ticker) return;
+  state.ticker = setInterval(() => {
+    try {
+      advance();
+    } catch (error) {
+      console.warn('[Demo] advance failed', error);
+    }
+  }, 1000);
+  state.ticker.unref?.();
+}
+
+function confirmRefund(refund: Refund & { confirmAt: number }, at: Date) {
+  const record = state.invoices.get(refund.invoiceId);
+  refund.status = 'confirmed';
+  refund.confirmedAt = at.toISOString();
+  refund.creditNoteNumber = `TEST-CN-${pad(state.refunds.size)}`;
+  refund.txHash = fakeTx(refund.chainId).txHash;
+  if (!record) return;
+  emit('refund.confirmed', { refund, invoice: record.invoice }, at);
+  setStatus(record, 'refunded', at);
+  record.invoice = { ...record.invoice, refundedTotal: refund.amount };
+  emit('invoice.refunded', { invoice: record.invoice, refund }, at);
+}
+
+// ---------------------------------------------------------------------------------------------------------------
+// What the server actions of the shop call (the subset of `quasar.payments` the shop uses)
+
+export function demoIssueInvoice(params: {
+  lines: readonly DemoLine[];
+  metadata: Record<string, unknown>;
+  successUrl: string;
+  cancelUrl: string;
+}): Invoice {
+  ensureDemo();
+  const record = issueInvoice(params);
+  emit('invoice.issued', { invoice: record.invoice });
+  return record.invoice;
+}
+
+export function demoStartSubscription(params: {
+  lines: readonly DemoLine[];
+  interval: SubscriptionInterval;
+  cycles: number;
+  collection: 'send_invoice' | 'auto_charge';
+  metadata: Record<string, unknown>;
+  successUrl: string;
+  cancelUrl: string;
+}): { subscription: Subscription; invoice: Invoice } {
+  ensureDemo();
+  const subscription = makeSubscription({ ...params, at: new Date() });
+  const record = issueInvoice({ ...params, subscriptionId: subscription.id, period: 1 });
+  emit('subscription.created', { subscription, invoice: record.invoice });
+  emit('invoice.issued', { invoice: record.invoice, subscription });
+  return { subscription, invoice: record.invoice };
+}
+
+function makeSubscription(params: {
+  lines: readonly DemoLine[];
+  interval: SubscriptionInterval;
+  cycles: number;
+  collection: 'send_invoice' | 'auto_charge';
+  metadata: Record<string, unknown>;
+  at: Date;
+}): Subscription {
+  const subscription: Subscription = {
+    id: nextId('sub'),
+    object: 'subscription',
+    status: 'incomplete',
+    environment: 'test',
+    buyer: null,
+    expectedPayer: null,
+    lineItems: params.lines.map((line) => ({
+      name: line.name,
+      description: line.description,
+      unitPrice: line.unitPrice,
+    })),
+    currency: CURRENCY,
+    interval: params.interval,
+    intervalCount: 1,
+    trialDays: 0,
+    collection: params.collection,
+    preferredMethodId: null,
+    permission: null,
+    graceDays: 0,
+    currentPeriod: 1,
+    currentPeriodStart: params.at.toISOString(),
+    currentPeriodEnd: new Date(params.at.getTime() + INTERVAL_MS[params.interval]).toISOString(),
+    cycles: params.cycles,
+    endsAt: null,
+    cancelAtPeriodEnd: false,
+    canceledAt: null,
+    cancellationReason: null,
+    pausedAt: null,
+    endedAt: null,
+    metadata: params.metadata,
+    createdAt: params.at.toISOString(),
+  };
+  state.subscriptions.set(subscription.id, subscription);
+  return subscription;
+}
+
+/** The invoice a checkout token opens. */
+export function demoInvoiceIdOfToken(token: string): string | undefined {
+  return state.tokens.get(token);
+}
+
+export function demoInvoice(invoiceId: string): Invoice | undefined {
+  ensureDemo();
+  return state.invoices.get(invoiceId)?.invoice;
+}
+
+/** The made-up documents of an invoice: the invoice, and the receipt once paid. */
+export function demoDocument(invoiceId: string, kind: 'invoice' | 'receipt' | 'credit-note'): Uint8Array | null {
+  const record = state.invoices.get(invoiceId);
+  if (!record) return null;
+  const { invoice } = record;
+  if (kind === 'receipt' && !invoice.receiptNumber) return null;
+  const refund = [...state.refunds.values()].find((item) => item.invoiceId === invoiceId && item.creditNoteNumber);
+  if (kind === 'credit-note' && !refund) return null;
+  const title =
+    kind === 'invoice'
+      ? `Invoice ${invoice.number}`
+      : kind === 'receipt'
+        ? `Receipt ${invoice.receiptNumber}`
+        : `Credit note ${refund?.creditNoteNumber}`;
+  return textPdf(title, [
+    'DEMO MODE - not a tax document. Quasar issues the real documents.',
+    '',
+    'Cosmos Store',
+    `Issued ${invoice.issuedAt?.slice(0, 10) ?? ''}`,
+    '',
+    ...invoice.lineItems.map((line) => `${line.quantity} x ${line.name}   ${line.net} ${invoice.currency}`),
+    '',
+    `Total ${invoice.total} ${invoice.currency}`,
+    ...(invoice.settlement ? [`Paid ${invoice.settlement.paidAt?.slice(0, 19).replace('T', ' ')} UTC`] : []),
+    ...(refund ? [`Refunded ${refund.amount} ${refund.currency}`] : []),
+  ]);
+}
+
+export type SubscriptionControl = 'pause' | 'resume' | 'cancel' | 'undo-cancel';
+
+/** Pauses, resumes, cancels at the period end, or takes the cancellation back, with the events Quasar would send. */
+export function demoControlSubscription(subscriptionId: string, action: SubscriptionControl) {
+  ensureDemo();
+  const subscription = state.subscriptions.get(subscriptionId);
+  if (!subscription) throw new DemoRefusal('subscription_not_found', 'No such subscription');
+  const now = new Date();
+  let invoice: Invoice | null = null;
+  if (action === 'pause') {
+    subscription.status = 'paused';
+    subscription.pausedAt = now.toISOString();
+    for (const record of state.invoices.values()) {
+      if (record.invoice.subscriptionId === subscriptionId && record.invoice.status === 'open') {
+        setStatus(record, 'cancelled', now);
+        emit('invoice.cancelled', { invoice: record.invoice, subscription });
+      }
+    }
+    emit('subscription.paused', { subscription });
+  } else if (action === 'resume') {
+    subscription.status = 'incomplete';
+    subscription.pausedAt = null;
+    subscription.currentPeriod += 1;
+    subscription.currentPeriodStart = now.toISOString();
+    subscription.currentPeriodEnd = new Date(now.getTime() + INTERVAL_MS[subscription.interval]).toISOString();
+    const record = issueInvoice({
+      lines: subscription.lineItems,
+      metadata: subscription.metadata,
+      subscriptionId,
+      period: subscription.currentPeriod,
+    });
+    invoice = record.invoice;
+    emit('subscription.resumed', { subscription, invoice });
+    emit('invoice.issued', { invoice, subscription });
+  } else if (action === 'cancel') {
+    subscription.cancelAtPeriodEnd = true;
+    emit('subscription.cancel_scheduled', { subscription });
+  } else {
+    subscription.cancelAtPeriodEnd = false;
+    emit('subscription.cancel_unscheduled', { subscription });
+  }
+  return { subscription, invoice };
+}
+
+/** Refunds a paid invoice in full: `submitted` now, confirmed (credit note, webhooks) 3 s later. */
+export function demoRefund(invoiceId: string): Refund {
+  ensureDemo();
+  return startRefund(invoiceId);
+}
+
+function startRefund(invoiceId: string): Refund & { confirmAt: number } {
+  const record = state.invoices.get(invoiceId);
+  if (!record || record.invoice.status !== 'paid') {
+    throw new DemoRefusal('invoice_not_refundable', 'Only a paid invoice can be refunded');
+  }
+  const settlement = record.invoice.settlement;
+  const found = findMethod(settlement?.methodId ?? null);
+  const refund: Refund & { confirmAt: number } = {
+    id: nextId('re'),
+    object: 'refund',
+    invoiceId,
+    status: 'submitted',
+    amount: record.invoice.total,
+    currency: record.invoice.currency,
+    mode: 'fiat_value',
+    cryptoAmount: settlement?.amountPaid ?? '0',
+    assetId: found.assetId ?? '',
+    chainId: found.chainId,
+    to: settlement?.originWallet ?? '',
+    txHash: null,
+    from: null,
+    reason: 'Refunded from the demo shop',
+    failureReason: null,
+    creditNoteNumber: null,
+    createdAt: new Date().toISOString(),
+    confirmedAt: null,
+    confirmAt: Date.now() + 3000,
+  };
+  state.refunds.set(refund.id, refund);
+  return refund;
+}
+
+// ---------------------------------------------------------------------------------------------------------------
+// The checkout API of an invoice (`CheckoutApi`), for `PaymentCheckout` in demo mode
+
+function recordOf(token: string): DemoInvoice {
+  ensureDemo();
+  const id = state.tokens.get(token);
+  const record = id ? state.invoices.get(id) : undefined;
+  if (!record) throw new DemoRefusal('checkout_not_found', 'This checkout link does not exist (demo mode)');
+  return record;
+}
+
+export function demoCheckoutView(token: string): CheckoutView {
+  const record = recordOf(token);
+  const { invoice } = record;
+  const subscription = invoice.subscriptionId ? state.subscriptions.get(invoice.subscriptionId) : undefined;
+  const totalMinor = String(Math.round(Number(invoice.total) * 100));
+  return {
+    object: 'checkout',
+    merchant: {
+      name: 'Cosmos Store',
+      website: null,
+      supportEmail: null,
+      logo: false,
+      seller: null,
+      links: { terms: null, refundPolicy: null, privacy: null },
+      fundingUrl: null,
+    },
+    theme: { mode: 'system', accentColor: null },
+    invoice: {
+      id: invoice.id,
+      number: invoice.number,
+      status: invoice.status,
+      environment: 'test',
+      currency: invoice.currency,
+      total: invoice.total,
+      totalMinor,
+      lineItems: invoice.lineItems.map((line) => ({
+        name: line.name,
+        ...(line.description && { description: line.description }),
+        quantity: line.quantity,
+        unitPrice: line.unitPrice,
+        taxCategory: line.taxCategory,
+        taxRate: line.taxRate,
+        netMinor: String(Math.round(Number(line.net) * 100)),
+      })),
+      locale: invoice.locale,
+      dueAt: invoice.dueAt,
+      successUrl: invoice.successUrl,
+      cancelUrl: invoice.cancelUrl,
+      amountPaid: invoice.settlement?.amountPaid ?? null,
+      review: null,
+      refundedTotalMinor: String(Math.round(Number(invoice.refundedTotal) * 100)),
+      replacedBy: null,
+      subscription:
+        subscription && invoice.period !== null
+          ? {
+              status: subscription.status,
+              interval: subscription.interval,
+              intervalCount: subscription.intervalCount,
+              period: invoice.period,
+              periodStart: subscription.currentPeriodStart ?? invoice.createdAt,
+              periodEnd: subscription.currentPeriodEnd ?? invoice.createdAt,
+              cycles: subscription.cycles,
+              endsAt: subscription.endsAt,
+              cancelAtPeriodEnd: subscription.cancelAtPeriodEnd,
+            }
+          : null,
+    },
+    buyer: { collect: 'off', required: false, companyInvoice: false },
+    consent: null,
+    amlScreening: false,
+    methods: DEMO_METHODS.map((item) => ({
+      id: item.id,
+      name: item.name,
+      symbol: item.symbol,
+      chainId: item.chainId,
+      assetId: item.assetId,
+      decimals: item.decimals,
+      gasless: 'off',
+      featured: item.featured,
+      markupBps: 0,
+      discountBps: 0,
+    })),
+    quoteTtlSeconds: 600,
+    quote: record.quote,
+    autoCharge: null,
+  };
+}
+
+/**
+ * Locks a quote. A QR quote (no payer) of a Solana method is "paid" by the simulation a few seconds later; a wallet is
+ * never asked to send anything in demo mode, so a quote for a connected wallet is refused with a note.
+ */
+export function demoCheckoutQuote(token: string, body: { methodId: string; payer?: string }): CheckoutQuote {
+  const record = recordOf(token);
+  if (record.invoice.status !== 'open') throw new DemoRefusal('invoice_not_open', 'This invoice is not open');
+  if (body.payer) {
+    throw new DemoRefusal(
+      'demo_wallet_payment',
+      'Demo mode takes no wallet payments: choose a Solana method and its QR code, and the demo pays it in a few seconds.',
+    );
+  }
+  const found = findMethod(body.methodId);
+  if (!found.chainId.startsWith('solana:')) {
+    throw new DemoRefusal('demo_wallet_payment', 'Demo mode pays Solana methods by QR code only.');
+  }
+  const amount = baseUnits(record.invoice.total, found);
+  const reference = base58(randomBytes(32));
+  const recipient = base58(randomBytes(32));
+  const decimal = (Number(amount) / 10 ** found.decimals).toString();
+  const mint = found.assetId?.split('/token:')[1];
+  const now = Date.now();
+  const quote: CheckoutQuote = {
+    object: 'checkout_quote',
+    methodId: found.id,
+    payer: null,
+    cryptoAmountExpected: amount,
+    amountToSend: amount,
+    transferFee: null,
+    decimals: found.decimals,
+    symbol: found.symbol,
+    lockedAt: new Date(now).toISOString(),
+    expiresAt: new Date(now + 600_000).toISOString(),
+    reference,
+    rates: null,
+    markupBps: 0,
+    discountBps: 0,
+    instructions: {
+      family: 'solana',
+      chainId: found.chainId,
+      to: recipient,
+      token: mint ?? 'native',
+      amount,
+      decimals: found.decimals,
+      symbol: found.symbol,
+      reference,
+      solanaPayUrl: `solana:${recipient}?amount=${decimal}${mint ? `&spl-token=${mint}` : ''}&reference=${reference}&label=Cosmos%20Store%20(demo)`,
+    },
+    gasless: null,
+  };
+  record.quote = quote;
+  record.seenAt = now + 4000;
+  record.confirmAt = now + 9000;
+  ensureTicker();
+  return quote;
+}
+
+export function demoCheckoutLocale(token: string, locale: Invoice['locale']) {
+  const record = recordOf(token);
+  record.invoice = { ...record.invoice, locale };
+}
+
+// ---------------------------------------------------------------------------------------------------------------
+// Sample orders, so a fresh demo shows a store that has been selling for a while
+
+/** Fixed IDs of the sample orders. */
+export const DEMO_ORDER_IDS = {
+  paid: '7c1f3a52-94de-4b0a-8f5e-2d6b1c9e4a70',
+  subscription: 'b84e2c19-0f6a-4d37-9c51-6e2f8a3d7b14',
+  refunded: '3e9d7f60-2a1b-48c5-b7e4-91f0c6d2a853',
+  expired: 'e25a8b4c-7d3f-4e19-a6c0-5b8f2d1e9c37',
+  open: 'a6f04d2e-1b7c-4985-8e3a-c2d9f5b70e16',
+} as const;
+
+const ago = (minutes: number) => new Date(Date.now() - minutes * 60_000);
+
+function seed() {
+  const links = { successUrl: null, cancelUrl: null };
+
+  // A hoodie paid with USDC on Base Sepolia
+  createOrder({
+    id: DEMO_ORDER_IDS.paid,
+    kind: 'product',
+    title: 'Cosmos hoodie',
+    lines: [{ productId: 'hoodie', name: 'Cosmos hoodie', quantity: 1, unitPrice: '2.00' }],
+    price: '2.00',
+    currency: CURRENCY,
+    createdAt: ago(42).toISOString(),
+  });
+  const hoodie = issueInvoice({
+    lines: [{ name: 'Cosmos hoodie', unitPrice: '2.00' }],
+    metadata: { orderId: DEMO_ORDER_IDS.paid },
+    at: ago(42),
+    ...links,
+  });
+  attachInvoice(DEMO_ORDER_IDS.paid, hoodie.invoice, { checkoutToken: null, payUrl: null });
+  emit('invoice.issued', { invoice: hoodie.invoice }, ago(42));
+  setStatus(hoodie, 'processing', ago(40));
+  emit('invoice.processing', { invoice: hoodie.invoice }, ago(40));
+  settle(hoodie, ago(39.5), 'pm_demo_usdc_base_sepolia');
+
+  // The weekly Pro plan in its second period
+  createOrder({
+    id: DEMO_ORDER_IDS.subscription,
+    kind: 'subscription',
+    title: 'Pro plan, weekly',
+    lines: [{ productId: 'pro', name: 'Pro plan', quantity: 1, unitPrice: '5.00' }],
+    price: '5.00',
+    currency: CURRENCY,
+    createdAt: ago(8 * 1440).toISOString(),
+  });
+  const subscription = makeSubscription({
+    lines: [{ name: 'Pro plan', description: 'Billed weekly', unitPrice: '5.00' }],
+    interval: 'week',
+    cycles: 12,
+    collection: 'send_invoice',
+    metadata: { orderId: DEMO_ORDER_IDS.subscription },
+    at: ago(8 * 1440),
+  });
+  attachSubscription(DEMO_ORDER_IDS.subscription, subscription);
+  const first = issueInvoice({
+    lines: [{ name: 'Pro plan', description: 'Billed weekly', unitPrice: '5.00' }],
+    metadata: { orderId: DEMO_ORDER_IDS.subscription },
+    subscriptionId: subscription.id,
+    period: 1,
+    at: ago(8 * 1440),
+  });
+  emit('subscription.created', { subscription, invoice: first.invoice }, ago(8 * 1440));
+  emit('invoice.issued', { invoice: first.invoice, subscription }, ago(8 * 1440));
+  settle(first, ago(8 * 1440 - 3), 'pm_demo_usdc_solana_devnet');
+  subscription.currentPeriod = 2;
+  subscription.currentPeriodStart = ago(1440).toISOString();
+  subscription.currentPeriodEnd = new Date(ago(1440).getTime() + INTERVAL_MS.week).toISOString();
+  const second = issueInvoice({
+    lines: [{ name: 'Pro plan', description: 'Billed weekly', unitPrice: '5.00' }],
+    metadata: { orderId: DEMO_ORDER_IDS.subscription },
+    subscriptionId: subscription.id,
+    period: 2,
+    at: ago(1440),
+  });
+  emit('subscription.renewed', { subscription, invoice: second.invoice }, ago(1440));
+  emit('invoice.issued', { invoice: second.invoice, subscription }, ago(1440));
+  settle(second, ago(1440 - 12), 'pm_demo_usdc_solana_devnet');
+
+  // A poster paid with SOL on devnet, then refunded
+  createOrder({
+    id: DEMO_ORDER_IDS.refunded,
+    kind: 'product',
+    title: 'Quasar poster',
+    lines: [{ productId: 'poster', name: 'Quasar poster', quantity: 1, unitPrice: '1.00' }],
+    price: '1.00',
+    currency: CURRENCY,
+    createdAt: ago(180).toISOString(),
+  });
+  const poster = issueInvoice({
+    lines: [{ name: 'Quasar poster', unitPrice: '1.00' }],
+    metadata: { orderId: DEMO_ORDER_IDS.refunded },
+    at: ago(180),
+    ...links,
+  });
+  attachInvoice(DEMO_ORDER_IDS.refunded, poster.invoice, { checkoutToken: null, payUrl: null });
+  emit('invoice.issued', { invoice: poster.invoice }, ago(180));
+  settle(poster, ago(176), 'pm_demo_sol_devnet');
+  confirmRefund(startRefund(poster.invoice.id), ago(95));
+
+  // A notebook that was never paid
+  createOrder({
+    id: DEMO_ORDER_IDS.expired,
+    kind: 'product',
+    title: 'Dot-grid notebook',
+    lines: [{ productId: 'notebook', name: 'Dot-grid notebook', quantity: 1, unitPrice: '0.80' }],
+    price: '0.80',
+    currency: CURRENCY,
+    createdAt: ago(300).toISOString(),
+  });
+  const notebook = issueInvoice({
+    lines: [{ name: 'Dot-grid notebook', unitPrice: '0.80' }],
+    metadata: { orderId: DEMO_ORDER_IDS.expired },
+    at: ago(300),
+    ...links,
+  });
+  attachInvoice(DEMO_ORDER_IDS.expired, notebook.invoice, { checkoutToken: null, payUrl: null });
+  emit('invoice.issued', { invoice: notebook.invoice }, ago(300));
+  setStatus(notebook, 'expired', ago(240));
+  emit('invoice.expired', { invoice: notebook.invoice }, ago(240));
+
+  // A cart waiting to be paid: two sticker packs and a mug
+  createOrder({
+    id: DEMO_ORDER_IDS.open,
+    kind: 'product',
+    title: 'Sticker pack + 1 more',
+    lines: [
+      { productId: 'stickers', name: 'Sticker pack', quantity: 2, unitPrice: '0.50' },
+      { productId: 'mug', name: 'Orbit mug', quantity: 1, unitPrice: '1.20' },
+    ],
+    price: '2.20',
+    currency: CURRENCY,
+    createdAt: ago(2).toISOString(),
+  });
+  const cart = issueInvoice({
+    lines: [
+      { name: 'Sticker pack', quantity: '2', unitPrice: '0.50' },
+      { name: 'Orbit mug', quantity: '1', unitPrice: '1.20' },
+    ],
+    metadata: { orderId: DEMO_ORDER_IDS.open },
+    at: ago(2),
+    ...links,
+  });
+  attachInvoice(DEMO_ORDER_IDS.open, cart.invoice, { checkoutToken: cart.invoice.checkoutToken, payUrl: null });
+  emit('invoice.issued', { invoice: cart.invoice }, ago(2));
+}
+
+/** Seeds the sample orders once per server process and starts the clock of the simulation. */
+export function ensureDemo() {
+  ensureTicker();
+  if (state.seeded) return;
+  state.seeded = true;
+  try {
+    seed();
+  } catch (error) {
+    console.warn('[Demo] seeding failed', error);
+  }
+}

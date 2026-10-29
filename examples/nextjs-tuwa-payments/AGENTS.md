@@ -6,7 +6,7 @@ Before changing TUWA code, read the TUWA integration guide for agents: https://r
 
 ## Commands
 
-`pnpm dev` (port 3012), `pnpm build`, `pnpm lint:fix`, `pnpm webhooks` (relays webhooks of a `localhost` endpoint from Quasar Cloud).
+`pnpm dev` (port 3012), `pnpm build`, `pnpm lint:fix`, `pnpm webhooks` (relays webhooks of a `localhost` endpoint from Quasar Cloud). `SHOP_DEMO_MODE=true pnpm dev` runs the shop without Quasar (`src/lib/demo/engine.ts`).
 
 ## Rules
 
@@ -16,4 +16,7 @@ Before changing TUWA code, read the TUWA integration guide for agents: https://r
 - Create the wagmi config, the Satellite and Nova Payments adapters and the Pulsar store once, at module level, never inside components.
 - Keep `NovaPaymentsProvider` inside `NovaConnectProvider`, so the checkout opens the Nova Connect modal to connect a wallet.
 - Import from the TUWA packages (`@tuwaio/nova-payments`, `@tuwaio/nova-connect/evm`, …); add each new package with its peer dependencies.
+- Keep the merchant controls (`src/app/merchantActions.ts`: refunds, subscription changes) behind `SHOP_MERCHANT_MODE`, checked in every action; a real shop puts them behind its admin sign-in.
+- Keep demo mode honest: it never asks a wallet to send anything, and the page says it is a simulation.
+- Style with the `--tuwa-*` variables and the one radius (`rounded-shop`, the Nova `--tuwa-rounded-corners`); no gradients. Never give the `font-mono` class to text that wraps: nova-core sets its line height to 1.
 - Keep strict TypeScript without `any`; run `pnpm lint:fix` after changes.

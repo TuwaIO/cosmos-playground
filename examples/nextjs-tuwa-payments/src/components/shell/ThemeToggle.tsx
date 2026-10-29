@@ -32,9 +32,9 @@ export function ThemeToggle() {
       type="button"
       onClick={toggleTheme}
       aria-label={isDark ? 'Switch to the light theme' : 'Switch to the dark theme'}
-      className="inline-flex h-[42px] w-[42px] shrink-0 cursor-pointer items-center justify-center rounded-[var(--tuwa-rounded-corners)] border border-[var(--tuwa-border-primary)] bg-[var(--tuwa-bg-secondary)] text-[var(--tuwa-text-secondary)] transition-all duration-200 hover:scale-[1.02] hover:text-[var(--tuwa-text-primary)] active:scale-[0.98]"
+      className="inline-flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-shop border border-[var(--tuwa-border-primary)] bg-[var(--tuwa-bg-primary)] text-[var(--tuwa-text-secondary)] transition-colors hover:bg-[var(--tuwa-bg-muted)] hover:text-[var(--tuwa-text-primary)]"
     >
-      {isDark ? <SunIcon className="h-5 w-5" /> : <MoonIcon className="h-5 w-5" />}
+      {isDark ? <SunIcon className="h-5 w-5" aria-hidden /> : <MoonIcon className="h-5 w-5" aria-hidden />}
     </button>
   );
 }

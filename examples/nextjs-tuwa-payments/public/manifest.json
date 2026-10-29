@@ -1,6 +1,6 @@
 {
-  "short_name": "Quasar Payments Shop",
-  "name": "Quasar Payments: Next.js Shop",
+  "short_name": "Cosmos Store",
+  "name": "Cosmos Store \u00b7 Quasar Payments",
   "description": "A Next.js shop that sells with Quasar Payments and the Nova Payments checkout",
   "start_url": "/",
   "display": "standalone",

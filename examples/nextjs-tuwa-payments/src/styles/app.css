@@ -4,35 +4,142 @@
 @import '@tuwaio/nova-payments/dist/index.css';
 @import 'tailwindcss';
 
-/* Nova UI Kit leaves the page of the app alone: the font of the page and its scrollbar gutter are set here */
-html {
-  scrollbar-gutter: stable;
+/* The `dark` class of the Nova themes (set before the first paint by `themeScript`) drives `dark:` too */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Geist and Geist Mono come with nova-core (embedded, no font host) */
+@theme {
+  --font-sans: var(--tuwa-font-sans);
+  --font-mono: var(--tuwa-font-mono);
 }
 
-body {
-  font-family: var(--tuwa-font-sans);
+/* The one radius of the shop: the Nova variable (4px) */
+@utility rounded-shop {
+  border-radius: var(--tuwa-rounded-corners);
 }
 
+/* The neutral palette of the templates: a zinc accent, solid buttons (no gradient) */
 :root {
   --tuwa-text-accent: #27272a;
   --tuwa-text-on-accent: #ffffff;
   --tuwa-button-gradient-from: #27272a;
-  --tuwa-button-gradient-to: #27272a;
+  --tuwa-button-gradient-to: var(--tuwa-button-gradient-from);
   --tuwa-button-gradient-from-hover: #3f3f46;
-  --tuwa-button-gradient-to-hover: #3f3f46;
+  --tuwa-button-gradient-to-hover: var(--tuwa-button-gradient-from-hover);
   --tuwa-info-bg: #f4f4f5;
   --tuwa-info-text: #27272a;
   --tuwa-info-icon: #52525b;
+
+  /* Shop-only tokens: text that stays AA (4.5:1) on the muted surfaces and in the status badges */
+  --shop-text-label: #4b5563;
+  --shop-success-text: #047857;
+  --shop-pending-text: #92400e;
+  --shop-error-text: #b91c1c;
 }
 
 .dark {
   --tuwa-text-accent: #e4e4e7;
   --tuwa-text-on-accent: #18181b;
   --tuwa-button-gradient-from: #e4e4e7;
-  --tuwa-button-gradient-to: #e4e4e7;
+  --tuwa-button-gradient-to: var(--tuwa-button-gradient-from);
   --tuwa-button-gradient-from-hover: #d4d4d8;
-  --tuwa-button-gradient-to-hover: #d4d4d8;
+  --tuwa-button-gradient-to-hover: var(--tuwa-button-gradient-from-hover);
   --tuwa-info-bg: #27272a;
   --tuwa-info-text: #e4e4e7;
   --tuwa-info-icon: #a1a1aa;
+
+  --shop-text-label: #d1d5db;
+  --shop-success-text: var(--tuwa-success-text);
+  --shop-pending-text: var(--tuwa-pending-text);
+  --shop-error-text: var(--tuwa-error-text);
+}
+
+@layer base {
+  html {
+    background: var(--tuwa-bg-secondary);
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    background: var(--tuwa-bg-secondary);
+    color: var(--tuwa-text-primary);
+    font-size: 14px;
+  }
+
+  /* Headings in Geist Mono, as in the Quasar dashboard */
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-mono);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--tuwa-text-accent);
+    outline-offset: 2px;
+  }
+}
+
+/* The status dot of the live events: a soft pulse while connected, none where motion is reduced */
+@keyframes shop-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.shop-pulse {
+  animation: shop-pulse 2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shop-pulse {
+    animation: none;
+  }
+}
+
+/* Drawers: a sheet from the bottom on phones, a panel from the right from 768px; no motion where it is reduced */
+@keyframes shop-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes shop-slide-up {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes shop-slide-left {
+  from {
+    transform: translateX(100%);
+  }
+}
+
+.shop-overlay[data-state='open'] {
+  animation: shop-fade-in 160ms ease-out;
+}
+
+.shop-drawer[data-state='open'] {
+  animation: shop-slide-up 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@media (min-width: 768px) {
+  .shop-drawer[data-state='open'] {
+    animation-name: shop-slide-left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shop-overlay[data-state='open'],
+  .shop-drawer[data-state='open'] {
+    animation: none;
+  }
 }
