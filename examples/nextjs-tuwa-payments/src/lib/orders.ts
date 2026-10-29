@@ -145,6 +145,14 @@ export function attachRefund(orderId: string, refund: Refund) {
   changed();
 }
 
+/** Forgets every order and webhook (the reset of demo mode). */
+export function resetOrderBook() {
+  book.orders.clear();
+  book.webhooks.length = 0;
+  book.processed.clear();
+  changed();
+}
+
 export function removeOrder(orderId: string) {
   book.orders.delete(orderId);
   changed();
@@ -264,6 +272,11 @@ export function applyPaymentEvent(
     type: event.type,
     environment: event.environment,
     invoiceNumber: event.data.invoice?.number ?? null,
+    amount: event.data.refund
+      ? { value: event.data.refund.amount, currency: event.data.refund.currency, refund: true }
+      : event.data.invoice
+        ? { value: event.data.invoice.total, currency: event.data.invoice.currency, refund: false }
+        : null,
     orderId: order?.id ?? null,
     orderTitle: order?.title ?? null,
     createdAt: event.createdAt,

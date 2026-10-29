@@ -172,7 +172,8 @@ export function OrdersPage({ methods }: { methods: ShopMethod[] }) {
             label="Show orders"
             value={filter}
             onChange={setFilter}
-            className="w-full flex-wrap md:w-auto md:self-start"
+            arrows
+            className="w-full md:w-auto md:self-start"
             options={FILTERS.map((item) => ({
               ...item,
               count: orders.filter((order) => matchesFilter(order, item.value)).length,

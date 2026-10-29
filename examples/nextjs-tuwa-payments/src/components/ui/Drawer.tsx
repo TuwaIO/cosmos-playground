@@ -39,7 +39,7 @@ export function Drawer({
             'md:inset-y-0 md:right-0 md:left-auto md:h-full md:max-h-none md:w-[420px] md:rounded-none md:border-t-0 md:border-l',
           )}
         >
-          <div className="flex items-start justify-between gap-3 border-b border-[var(--tuwa-border-primary)] px-5 py-4">
+          <div className="flex items-center justify-between gap-3 border-b border-[var(--tuwa-border-primary)] px-5 py-4">
             <div className="min-w-0">
               <Dialog.Title className="m-0 truncate font-mono text-lg font-bold tracking-tight">{title}</Dialog.Title>
               {description ? (

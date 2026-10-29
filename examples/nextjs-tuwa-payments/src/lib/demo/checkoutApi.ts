@@ -23,6 +23,8 @@ export function demoCheckoutApi(token: string): CheckoutApi {
     submit: async () => refusal(),
     relay: async () => refusal(),
     permission: async () => refusal(),
-    url: (route) => (route === 'receipt' ? `/api/demo/receipt/${encodeURIComponent(token)}` : ''),
+    // The receipt of the simulation, and the store mark as the merchant's logo
+    url: (route) =>
+      route === 'receipt' ? `/api/demo/receipt/${encodeURIComponent(token)}` : route === 'logo' ? '/icon.svg' : '',
   };
 }

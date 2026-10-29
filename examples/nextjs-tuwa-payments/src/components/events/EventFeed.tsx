@@ -11,6 +11,7 @@ import { EmptyState } from '@/components/ui/EmptyState';
 import { Segmented } from '@/components/ui/Segmented';
 import { STATUS_TONES, StatusBadge } from '@/components/ui/StatusBadge';
 import { Time } from '@/components/ui/Time';
+import { money } from '@/lib/format';
 import type { WebhookLogEntry } from '@/lib/orderTypes';
 import { type EventFamily, eventFamily, eventTone, shortOrderId } from '@/lib/status';
 
@@ -40,8 +41,99 @@ function Detail({ label, children }: { label: string; children: ReactNode }) {
   );
 }
 
+/** What an event is worth: the invoice total, or a refund as a negative amount. */
+export function EventAmount({ entry, className }: { entry: WebhookLogEntry; className?: string }) {
+  if (!entry.amount) return null;
+  const { value, currency, refund } = entry.amount;
+  return (
+    <span className={cn('font-mono tabular-nums whitespace-nowrap', className)}>
+      {refund ? `\u2212${money(value, currency)}` : money(value, currency)}
+    </span>
+  );
+}
+
+// The tokens of `JSON.stringify(…, null, 2)`: a key, a string, a number, or true, false and null
+const JSON_TOKEN = /("(?:\\.|[^"\\])*")(\s*:)?|\b(?:true|false|null)\b|-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?/g;
+
+/** Pretty-printed JSON with its keys, strings, numbers and literals told apart by colour (neutral tones). */
+export function JsonView({ json, className }: { json: string; className?: string }) {
+  const parts: ReactNode[] = [];
+  let last = 0;
+  for (const match of json.matchAll(JSON_TOKEN)) {
+    const at = match.index ?? 0;
+    if (at > last) parts.push(json.slice(last, at));
+    const [token, string, colon] = match;
+    const tone = string
+      ? colon
+        ? 'text-[var(--tuwa-text-primary)] font-semibold'
+        : 'text-[var(--shop-success-text)]'
+      : /^[tfn]/.test(token)
+        ? 'text-[var(--shop-error-text)]'
+        : 'text-[var(--shop-pending-text)]';
+    parts.push(
+      <span key={at} className={tone}>
+        {string ?? token}
+      </span>,
+    );
+    if (colon) parts.push(colon);
+    last = at + token.length;
+  }
+  parts.push(json.slice(last));
+  return (
+    <pre
+      // Geist Mono by style, not the `font-mono` class: nova-core forces that class to a line height of 1
+      style={{ fontFamily: 'var(--tuwa-font-mono)' }}
+      className={cn(
+        'm-0 overflow-auto rounded-shop border border-[var(--tuwa-border-primary)] bg-[var(--tuwa-bg-secondary)] p-3 text-[11.5px] leading-relaxed text-[var(--tuwa-text-secondary)]',
+        className,
+      )}
+    >
+      {parts}
+    </pre>
+  );
+}
+
+/** The details of a delivery: its IDs and times, how the shop checked it, and its trimmed body. */
+export function EventDetails({ entry, wide = false }: { entry: WebhookLogEntry; wide?: boolean }) {
+  return (
+    <div className={cn('grid gap-3', wide && 'lg:grid-cols-[minmax(0,320px)_minmax(0,1fr)] lg:gap-6')}>
+      <div className="flex min-w-0 flex-col gap-3">
+        <dl className="m-0 flex flex-col gap-1.5 text-[12.5px]">
+          <Detail label="Event ID">{entry.id}</Detail>
+          <Detail label="Environment">{entry.environment}</Detail>
+          <Detail label="Sent at">
+            <Time iso={entry.sentAt} format="date" />
+          </Detail>
+          <Detail label="Received at">
+            <Time iso={entry.receivedAt} format="clock" />
+          </Detail>
+          {entry.orderId && (
+            <Detail label="Order">
+              <Link href={`/orders/${entry.orderId}`} className="underline hover:no-underline">
+                {shortOrderId(entry.orderId)}
+              </Link>
+            </Detail>
+          )}
+        </dl>
+        <p className="m-0 inline-flex items-center gap-1.5 text-[12.5px] font-semibold text-[var(--shop-success-text)]">
+          {entry.source === 'webhook' ? (
+            <>
+              <CheckBadgeIcon className="h-4 w-4" aria-hidden /> Signature verified with verifyWebhook
+            </>
+          ) : (
+            <span className="inline-flex items-center gap-1.5 text-[var(--tuwa-text-secondary)]">
+              <CpuChipIcon className="h-4 w-4" aria-hidden /> Simulated in demo mode
+            </span>
+          )}
+        </p>
+      </div>
+      <JsonView json={entry.summary} className={wide ? 'max-h-80' : 'max-h-64'} />
+    </div>
+  );
+}
+
 /** One delivery of the log: time, type, invoice and marks; expands to the event's details and its trimmed body. */
-function EventRow({ entry }: { entry: WebhookLogEntry }) {
+export function EventRow({ entry }: { entry: WebhookLogEntry }) {
   const [open, setOpen] = useState(false);
   const panelId = useId();
   return (
@@ -78,7 +170,7 @@ function EventRow({ entry }: { entry: WebhookLogEntry }) {
         <span className="flex min-w-0 flex-wrap items-center gap-1.5 text-[12.5px] text-[var(--tuwa-text-secondary)]">
           {entry.invoiceNumber && <span className="font-mono tabular-nums">{entry.invoiceNumber}</span>}
           {entry.orderTitle && <span className="min-w-0 truncate">· {entry.orderTitle}</span>}
-          {entry.environment === 'test' && <StatusBadge label="Test" />}
+          <EventAmount entry={entry} className="ml-auto text-[var(--tuwa-text-primary)]" />
           {!entry.firstDelivery && <StatusBadge label="Repeat, ignored" tone="pending" />}
           {!entry.orderId && <StatusBadge label="No order" tone="error" />}
         </span>
@@ -93,42 +185,8 @@ function EventRow({ entry }: { entry: WebhookLogEntry }) {
             transition={{ duration: 0.18 }}
             className="overflow-hidden"
           >
-            <div className="flex flex-col gap-3 px-4 pb-4">
-              <dl className="m-0 flex flex-col gap-1.5 text-[12.5px]">
-                <Detail label="Event ID">{entry.id}</Detail>
-                <Detail label="Environment">{entry.environment}</Detail>
-                <Detail label="Sent at">
-                  <Time iso={entry.sentAt} format="date" />
-                </Detail>
-                <Detail label="Received at">
-                  <Time iso={entry.receivedAt} format="clock" />
-                </Detail>
-                {entry.orderId && (
-                  <Detail label="Order">
-                    <Link href={`/orders/${entry.orderId}`} className="underline hover:no-underline">
-                      {shortOrderId(entry.orderId)}
-                    </Link>
-                  </Detail>
-                )}
-              </dl>
-              <p className="m-0 inline-flex items-center gap-1.5 text-[12.5px] font-semibold text-[var(--shop-success-text)]">
-                {entry.source === 'webhook' ? (
-                  <>
-                    <CheckBadgeIcon className="h-4 w-4" aria-hidden /> Signature verified with verifyWebhook
-                  </>
-                ) : (
-                  <span className="inline-flex items-center gap-1.5 text-[var(--tuwa-text-secondary)]">
-                    <CpuChipIcon className="h-4 w-4" aria-hidden /> Simulated in demo mode
-                  </span>
-                )}
-              </p>
-              <pre
-                // Geist Mono by style, not the `font-mono` class: nova-core forces that class to a line height of 1
-                style={{ fontFamily: 'var(--tuwa-font-mono)' }}
-                className="m-0 max-h-64 overflow-auto rounded-shop border border-[var(--tuwa-border-primary)] bg-[var(--tuwa-bg-secondary)] p-3 text-[11.5px] leading-relaxed text-[var(--tuwa-text-primary)]"
-              >
-                {entry.summary}
-              </pre>
+            <div className="px-4 pb-4">
+              <EventDetails entry={entry} />
             </div>
           </motion.div>
         )}

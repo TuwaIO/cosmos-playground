@@ -3,7 +3,7 @@
 import type { InvoiceLocale } from '@tuwaio/quasar-sdk';
 import type { CheckoutQuote, CheckoutView } from '@tuwaio/quasar-sdk/checkout';
 
-import { demoCheckoutLocale, demoCheckoutQuote, demoCheckoutView, DemoRefusal } from '@/lib/demo/engine';
+import { demoCheckoutLocale, demoCheckoutQuote, demoCheckoutView, DemoRefusal, resetDemo } from '@/lib/demo/engine';
 import { isDemoMode } from '@/lib/mode';
 import { type ActionResult, ok, refused } from '@/lib/result';
 
@@ -34,6 +34,14 @@ export async function demoQuote(
 export async function demoLocale(token: string, locale: InvoiceLocale): Promise<ActionResult<null>> {
   return run(() => {
     demoCheckoutLocale(token, locale);
+    return null;
+  });
+}
+
+/** Demo mode: forgets every order and event and seeds the sample orders again, for a clean take. */
+export async function resetDemoStore(): Promise<ActionResult<null>> {
+  return run(() => {
+    resetDemo();
     return null;
   });
 }

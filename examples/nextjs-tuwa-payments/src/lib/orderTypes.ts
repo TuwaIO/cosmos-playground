@@ -97,6 +97,8 @@ export type WebhookLogEntry = {
   type: PaymentWebhookEventType;
   environment: 'live' | 'test';
   invoiceNumber: string | null;
+  /** What the event is worth: the invoice total, or the amount of a refund event (`refund: true`). */
+  amount: { value: string; currency: string; refund: boolean } | null;
   orderId: string | null;
   orderTitle: string | null;
   /** When Quasar recorded the event. */

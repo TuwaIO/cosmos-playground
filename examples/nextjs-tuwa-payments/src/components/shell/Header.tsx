@@ -13,9 +13,8 @@ import { ThemeToggle } from '@/components/shell/ThemeToggle';
 import { buttonClass } from '@/components/ui/Button';
 import { CountBadge } from '@/components/ui/CountBadge';
 import { Segmented } from '@/components/ui/Segmented';
-import { StatusBadge } from '@/components/ui/StatusBadge';
 import { usePulsarStore } from '@/hooks/pulsarStoreHook';
-import { cartStore } from '@/lib/cartStore';
+import { cartItemCount, cartStore, itemsLabel } from '@/lib/cartStore';
 
 type Section = 'shop' | 'orders' | 'events';
 
@@ -25,10 +24,9 @@ function sectionOf(pathname: string): Section {
   return 'shop';
 }
 
-/** Shop · Orders · Events, as a segmented control of links. */
+/** Shop · Orders · Events, as a segmented control of links (the count of events is on the events button and rail). */
 function Navigation({ className }: { className?: string }) {
   const pathname = usePathname();
-  const { book } = useShop();
   return (
     <nav aria-label="Main" className={className}>
       <Segmented
@@ -38,7 +36,7 @@ function Navigation({ className }: { className?: string }) {
         options={[
           { value: 'shop', label: 'Shop', href: '/' },
           { value: 'orders', label: 'Orders', href: '/orders' },
-          { value: 'events', label: 'Events', href: '/events', count: book.webhooks.length },
+          { value: 'events', label: 'Events', href: '/events' },
         ]}
       />
     </nav>
@@ -50,12 +48,15 @@ function HeaderButton({
   label,
   icon,
   count,
+  countText,
   onClick,
   className,
 }: {
   label: string;
   icon: ReactNode;
   count: number;
+  /** The count in words, for screen readers: `4 items`. */
+  countText: string;
   onClick: () => void;
   className?: string;
 }) {
@@ -63,7 +64,7 @@ function HeaderButton({
     <button
       type="button"
       onClick={onClick}
-      aria-label={`${label}, ${count} ${count === 1 ? 'item' : 'items'}`}
+      aria-label={`${label}, ${countText}`}
       className={buttonClass('secondary', 'md', cn('w-10 px-0 lg:w-auto lg:px-3.5', className))}
     >
       <span className="[&>svg]:h-5 [&>svg]:w-5" aria-hidden>
@@ -85,13 +86,15 @@ function HeaderButton({
 
 /**
  * The header: the store mark, the sections (centred from 1024 px, in a second row below), the live events (a drawer
- * below 1280 px, where the rail is not shown), the cart, the wallet (Nova Connect) and the theme.
+ * below 1280 px, where the rail is not shown, and not on the Events page itself), the cart, the wallet (Nova Connect)
+ * and the theme. The modes of the shop are in the strip under the header.
  */
 export function Header() {
   const transactionPool = usePulsarStore((state) => state.transactionsPool);
-  const { book, mode, setCartOpen, setEventsOpen } = useShop();
+  const pathname = usePathname();
+  const { book, setCartOpen, setEventsOpen } = useShop();
   const cart = useSyncExternalStore(cartStore.subscribe, cartStore.getSnapshot, cartStore.getServerSnapshot);
-  const cartCount = cart.reduce((total, line) => total + line.quantity, 0);
+  const cartCount = cartItemCount(cart);
 
   return (
     <header className="sticky top-0 z-40 border-b border-[var(--tuwa-border-primary)] bg-[var(--tuwa-bg-primary)]">
@@ -102,19 +105,27 @@ export function Header() {
             Cosmos Store
           </span>
         </Link>
-        {mode.merchant && <StatusBadge label="Merchant mode" tone="pending" className="hidden xl:inline-flex" />}
 
         <Navigation className="hidden flex-1 justify-center lg:flex [&>div]:w-auto" />
 
         <div className="ml-auto flex items-center gap-2 lg:ml-0">
+          {sectionOf(pathname) !== 'events' && (
+            <HeaderButton
+              label="Events"
+              icon={<BoltIcon />}
+              count={book.webhooks.length}
+              countText={`${book.webhooks.length} ${book.webhooks.length === 1 ? 'event' : 'events'}`}
+              onClick={() => setEventsOpen(true)}
+              className="xl:hidden"
+            />
+          )}
           <HeaderButton
-            label="Events"
-            icon={<BoltIcon />}
-            count={book.webhooks.length}
-            onClick={() => setEventsOpen(true)}
-            className="xl:hidden"
+            label="Cart"
+            icon={<ShoppingBagIcon />}
+            count={cartCount}
+            countText={itemsLabel(cartCount)}
+            onClick={() => setCartOpen(true)}
           />
-          <HeaderButton label="Cart" icon={<ShoppingBagIcon />} count={cartCount} onClick={() => setCartOpen(true)} />
           <ConnectButton transactionPool={transactionPool} />
           <ThemeToggle />
         </div>

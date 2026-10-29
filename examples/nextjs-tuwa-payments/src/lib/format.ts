@@ -3,15 +3,31 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 
 dayjs.extend(relativeTime);
 
-/** A time as `14:05:09` today, else `27 Oct 14:05`, in the viewer's time zone. */
-export function clockTime(iso: string): string {
-  const time = dayjs(iso);
-  return time.isSame(dayjs(), 'day') ? time.format('HH:mm:ss') : time.format('D MMM HH:mm');
+// One date style, the Quasar dashboard's: the short date and the 24-hour time in en-US, in the viewer's time zone
+const DATE_TIME = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: '2-digit',
+  hour: '2-digit',
+  minute: '2-digit',
+  hourCycle: 'h23',
+});
+const CLOCK = new Intl.DateTimeFormat('en-US', {
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit',
+  hourCycle: 'h23',
+});
+
+/** A date and time as the dashboard shows it: `Oct 29, 2026, 14:05`. */
+export function dateTime(iso: string): string {
+  return DATE_TIME.format(new Date(iso));
 }
 
-/** A date and time as `29 Oct, 14:05`. */
-export function dateTime(iso: string): string {
-  return dayjs(iso).format('D MMM, HH:mm');
+/** A time of the log: `14:05:09` today, else the date and time as {@link dateTime}. */
+export function clockTime(iso: string): string {
+  const time = dayjs(iso);
+  return time.isSame(dayjs(), 'day') ? CLOCK.format(time.toDate()) : dateTime(iso);
 }
 
 /** How long ago, as `3 minutes ago`, from `now`. */

@@ -107,19 +107,23 @@ function ProductCard({
     setTimeout(() => setAdded(false), 1500);
   };
   return (
-    <Card as="article" className="flex flex-col gap-4 p-5">
-      <ProductArt art={product.art} className="aspect-[4/3] w-full rounded-shop" />
-      <div className="flex flex-1 flex-col gap-1.5">
+    // Phones: the art beside the name and price, the buttons under them; from 640 px a column of art, text, buttons
+    <Card
+      as="article"
+      className="grid grid-cols-[96px_minmax(0,1fr)] gap-x-4 gap-y-4 p-4 sm:flex sm:flex-col sm:gap-4 sm:p-5"
+    >
+      <ProductArt art={product.art} className="aspect-square w-full rounded-shop sm:aspect-[4/3]" />
+      <div className="flex min-w-0 flex-1 flex-col gap-1.5">
         <h3 className="m-0 font-sans text-base font-semibold">{product.name}</h3>
-        <p className="m-0 line-clamp-2 text-sm leading-relaxed text-[var(--tuwa-text-secondary)]">
+        <p className="m-0 line-clamp-2 text-[13px] leading-relaxed text-[var(--tuwa-text-secondary)] sm:text-sm">
           {product.description}
         </p>
+        <p className="m-0 mt-auto flex items-baseline gap-1.5 pt-1 sm:pt-3">
+          <span className="font-mono text-lg font-bold tabular-nums sm:text-xl">{product.price}</span>
+          <span className="text-[12px] font-semibold text-[var(--tuwa-text-secondary)]">{CURRENCY}</span>
+        </p>
       </div>
-      <p className="m-0 flex items-baseline gap-1.5">
-        <span className="font-mono text-xl font-bold tabular-nums">{product.price}</span>
-        <span className="text-[12px] font-semibold text-[var(--tuwa-text-secondary)]">{CURRENCY}</span>
-      </p>
-      <div className="flex gap-2">
+      <div className="col-span-2 flex gap-2">
         <Button className="flex-1" disabled={disabled} onClick={onBuy} aria-busy={busy}>
           {/* Both labels take the same room: the button never changes width */}
           <span className="grid [&>*]:col-start-1 [&>*]:row-start-1">
@@ -227,7 +231,7 @@ function PlanCard({
           )}
         </div>
         <Button
-          className="mt-auto w-full sm:w-auto sm:self-start"
+          className="mt-auto w-full"
           disabled={!sellable || busy}
           aria-busy={busy}
           onClick={() => onSubscribe(collection, interval)}

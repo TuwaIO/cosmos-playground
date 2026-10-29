@@ -11,7 +11,7 @@ import { Button, Spinner } from '@/components/ui/Button';
 import { Drawer } from '@/components/ui/Drawer';
 import { EmptyState } from '@/components/ui/EmptyState';
 import { Notice } from '@/components/ui/Notice';
-import { cartStore } from '@/lib/cartStore';
+import { cartItemCount, cartStore, itemsLabel } from '@/lib/cartStore';
 import { CURRENCY, findProduct, MAX_QUANTITY, sumPrices } from '@/lib/catalog';
 import { money } from '@/lib/format';
 
@@ -49,7 +49,7 @@ export function CartDrawer() {
       open={cartOpen}
       onOpenChange={setCartOpen}
       title="Cart"
-      description={items.length ? `${items.length} ${items.length === 1 ? 'product' : 'products'}` : undefined}
+      description={items.length ? itemsLabel(cartItemCount(items)) : undefined}
       phone="full"
       footer={
         items.length > 0 && (

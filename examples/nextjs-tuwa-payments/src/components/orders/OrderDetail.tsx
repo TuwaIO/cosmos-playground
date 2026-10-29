@@ -13,13 +13,13 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import { cn } from '@tuwaio/nova-core';
-import { formatTokenAmount, RefundButton, shortAddress } from '@tuwaio/nova-payments';
+import { formatTokenAmount, RefundDialog, shortAddress } from '@tuwaio/nova-payments';
 import { createRefundStore, type RefundStore } from '@tuwaio/quasar-sdk/checkout';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { type ReactNode, useEffect, useMemo, useState } from 'react';
 
-import { controlSubscription, readRefund, requestRefund, simulateRefund, submitRefund } from '@/app/merchantActions';
+import { controlSubscription, readRefund, requestRefund, submitRefund } from '@/app/merchantActions';
 import { EventTypeChip } from '@/components/events/EventFeed';
 import { MethodLabel } from '@/components/orders/MethodLabel';
 import { useShop } from '@/components/shell/ShopProvider';
@@ -31,9 +31,10 @@ import { StatusBadge, type StatusTone } from '@/components/ui/StatusBadge';
 import { Time } from '@/components/ui/Time';
 import { cartStore } from '@/lib/cartStore';
 import type { SubscriptionControl } from '@/lib/demo/engine';
+import { createDemoRefundStore } from '@/lib/demo/refundStore';
 import { money } from '@/lib/format';
 import { explorerTxUrl, type ShopMethod } from '@/lib/methods';
-import type { Order, OrderInvoice } from '@/lib/orderTypes';
+import type { Order, OrderInvoice, OrderRefund } from '@/lib/orderTypes';
 import { INVOICE_STATUS, PAYABLE, shortOrderId, SUBSCRIPTION_STATUS } from '@/lib/status';
 import { unwrap } from '@/lib/unwrap';
 
@@ -121,18 +122,48 @@ function HeroBlock({ order }: { order: Order }) {
           </span>
         </p>
       </div>
-      {order.fulfilledAt && (
-        <StatusBadge
-          label={
-            <>
-              Fulfilled <Time iso={order.fulfilledAt} format="clock" />
-            </>
-          }
-          tone="success"
-          icon={<CheckIcon className="h-3 w-3" />}
-        />
-      )}
+      <OutcomeBadge order={order} />
     </Card>
+  );
+}
+
+/**
+ * Where the order ended up, beside the headline: fulfilled (with the time of the `invoice.paid` webhook), or refunded
+ * (with the time of the last confirmed refund) once a refund took the money back.
+ */
+function OutcomeBadge({ order }: { order: Order }) {
+  const status = order.invoices[0]?.status;
+  const refundedAt = order.refunds
+    .map((refund) => refund.confirmedAt)
+    .filter((at): at is string => Boolean(at))
+    .sort()
+    .at(-1);
+  const className = 'self-start sm:self-center';
+  if ((status === 'refunded' || status === 'partially_refunded') && refundedAt) {
+    return (
+      <StatusBadge
+        label={
+          <>
+            {status === 'refunded' ? 'Refunded' : 'Part refunded'} <Time iso={refundedAt} format="clock" />
+          </>
+        }
+        icon={<ArrowUturnLeftIcon className="h-3 w-3" />}
+        className={className}
+      />
+    );
+  }
+  if (!order.fulfilledAt) return null;
+  return (
+    <StatusBadge
+      label={
+        <>
+          Fulfilled <Time iso={order.fulfilledAt} format="clock" />
+        </>
+      }
+      tone="success"
+      icon={<CheckIcon className="h-3 w-3" />}
+      className={className}
+    />
   );
 }
 
@@ -162,7 +193,7 @@ function EventsCard({ order }: { order: Order }) {
               )}
               <time
                 dateTime={event.receivedAt}
-                className="w-[92px] shrink-0 font-mono text-[12px] tabular-nums text-[var(--tuwa-text-secondary)]"
+                className="min-w-[64px] shrink-0 whitespace-nowrap font-mono text-[12px] tabular-nums text-[var(--tuwa-text-secondary)]"
               >
                 <Time iso={event.receivedAt} format="clock" />
               </time>
@@ -441,38 +472,57 @@ function SubscriptionCard({ order, onPay }: { order: Order; onPay: (invoice: Ord
   );
 }
 
-/** One refund store per invoice: it keeps the refund while the window is closed. */
-function useRefundStore(invoiceId: string | undefined): RefundStore | null {
+/**
+ * One refund store per invoice: it keeps the refund while the window is closed. Demo mode uses the demo store, which
+ * simulates the merchant's transfer instead of asking a wallet.
+ */
+function useRefundStore(invoiceId: string | undefined, demo: boolean): RefundStore | null {
   return useMemo(
     () =>
-      invoiceId
-        ? createRefundStore({
-            request: async (id, params) => unwrap(await requestRefund(id, params)),
-            submit: async (id, params) => unwrap(await submitRefund(id, params)),
-            get: async (id) => unwrap(await readRefund(id)),
-          })
-        : null,
-    [invoiceId],
+      !invoiceId
+        ? null
+        : demo
+          ? createDemoRefundStore()
+          : createRefundStore({
+              request: async (id, params) => unwrap(await requestRefund(id, params)),
+              submit: async (id, params) => unwrap(await submitRefund(id, params)),
+              get: async (id) => unwrap(await readRefund(id)),
+            }),
+    [invoiceId, demo],
   );
 }
 
-/** Merchant mode: refund the paid invoice from the merchant's wallet (Nova Payments), and the refunds so far. */
+/** A row the shop adds to the last step of the refund window, as Nova draws its own rows (name left, value right). */
+function DialogRow({ name, children }: { name: string; children: ReactNode }) {
+  return (
+    <div className="flex items-baseline justify-between gap-3 py-2 text-xs">
+      <dt className="shrink-0 text-[var(--tuwa-text-secondary)]">{name}</dt>
+      <dd className="m-0 min-w-0 text-right font-mono">{children}</dd>
+    </div>
+  );
+}
+
+const REFUND_TONE: Record<OrderRefund['status'], StatusTone> = {
+  requested: 'pending',
+  submitted: 'pending',
+  confirmed: 'success',
+  failed: 'error',
+};
+
+/**
+ * Merchant mode: the refunds so far, and Nova's refund window for the paid invoice (`RefundDialog`): from the
+ * merchant's wallet, or in demo mode with the transfer simulated. The window stays open on its last step when the
+ * webhooks mark the invoice refunded.
+ */
 function RefundCard({ order }: { order: Order }) {
   const { mode, refresh } = useShop();
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [open, setOpen] = useState(false);
   const paid = order.invoices.find((invoice) => invoice.status === 'paid' || invoice.status === 'partially_refunded');
-  const store = useRefundStore(paid?.id);
+  // The invoice the window refunds: kept while it is open, though the invoice is no longer refundable after it
+  const [target, setTarget] = useState<OrderInvoice | null>(null);
+  const invoice = (open && target) || paid || target;
+  const store = useRefundStore(invoice?.id, mode.demo);
   const refundable = paid ? (Number(paid.total) - Number(paid.refundedTotal)).toFixed(2) : '0.00';
-
-  const simulate = async () => {
-    setBusy(true);
-    setError(null);
-    const result = await simulateRefund(order.id);
-    if (!result.ok) setError(result.message);
-    await refresh();
-    setBusy(false);
-  };
 
   return (
     <DetailCard
@@ -480,7 +530,7 @@ function RefundCard({ order }: { order: Order }) {
       icon={<ArrowUturnLeftIcon />}
       description={
         mode.demo
-          ? 'Demo mode refunds in full and sends the webhooks Quasar would send.'
+          ? 'Demo mode: the refund window of Nova Payments with the wallet transfer simulated. The webhooks and the credit note follow as from Quasar.'
           : 'Sent from your connected wallet to the payer; Quasar confirms it and issues the credit note.'
       }
     >
@@ -488,40 +538,51 @@ function RefundCard({ order }: { order: Order }) {
         <ul className="m-0 flex list-none flex-col gap-2 p-0">
           {order.refunds.map((refund) => (
             <li key={refund.id} className="flex items-center justify-between gap-3 text-[13.5px]">
-              <span className="font-mono tabular-nums">{money(refund.amount, refund.currency)}</span>
-              <StatusBadge
-                label={refund.status}
-                tone={refund.status === 'confirmed' ? 'success' : refund.status === 'failed' ? 'error' : 'pending'}
-              />
+              <span className="flex min-w-0 flex-col">
+                <span className="font-mono tabular-nums">{money(refund.amount, refund.currency)}</span>
+                {refund.creditNoteNumber && (
+                  <span className="font-mono text-[12px] text-[var(--tuwa-text-secondary)]">
+                    {refund.creditNoteNumber}
+                  </span>
+                )}
+              </span>
+              <StatusBadge label={refund.status} tone={REFUND_TONE[refund.status]} />
             </li>
           ))}
         </ul>
       )}
-      {!paid ? (
+      {paid ? (
+        <Button
+          variant="secondary"
+          className="w-full"
+          onClick={() => {
+            setTarget(paid);
+            setOpen(true);
+          }}
+        >
+          <ArrowUturnLeftIcon className="h-4 w-4" aria-hidden />
+          Refund up to {money(refundable, paid.currency)}
+        </Button>
+      ) : (
         <p className="m-0 text-[13.5px] text-[var(--tuwa-text-secondary)]">
           {order.refunds.some((refund) => refund.status === 'confirmed')
             ? 'Refunded: nothing is left to refund.'
             : 'A refund is possible once the invoice is paid.'}
         </p>
-      ) : mode.demo ? (
-        <Button variant="secondary" disabled={busy} onClick={() => void simulate()}>
-          {busy && <Spinner />}
-          Simulate refund of {money(refundable, paid.currency)}
-        </Button>
-      ) : (
-        store && (
-          <RefundButton
-            store={store}
-            invoiceId={paid.id}
-            invoice={paid.number ?? undefined}
-            currency={paid.currency}
-            refundable={money(refundable, paid.currency)}
-            onRefunded={() => void refresh()}
-            className={buttonClass('secondary', 'md')}
-          />
-        )
       )}
-      {error && <Notice tone="error">{error}</Notice>}
+      {store && invoice && (
+        <RefundDialog
+          open={open}
+          onOpenChange={setOpen}
+          store={store}
+          invoiceId={invoice.id}
+          invoice={invoice.number ?? undefined}
+          currency={invoice.currency}
+          refundable={money(refundable, invoice.currency)}
+          onRefunded={() => void refresh()}
+          details={mode.demo ? { done: <DialogRow name="Transfer">Simulated, demo mode</DialogRow> } : undefined}
+        />
+      )}
     </DetailCard>
   );
 }

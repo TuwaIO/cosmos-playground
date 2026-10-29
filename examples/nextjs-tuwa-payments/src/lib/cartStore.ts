@@ -37,6 +37,16 @@ function write(lines: CartLine[]) {
   listeners.forEach((listener) => listener());
 }
 
+/** How many items the cart holds: every unit of every product, the one count the header and the cart show. */
+export function cartItemCount(lines: readonly CartLine[]): number {
+  return lines.reduce((total, line) => total + line.quantity, 0);
+}
+
+/** "1 item", "4 items". */
+export function itemsLabel(count: number): string {
+  return `${count} ${count === 1 ? 'item' : 'items'}`;
+}
+
 export const cartStore = {
   subscribe(listener: () => void) {
     listeners.add(listener);

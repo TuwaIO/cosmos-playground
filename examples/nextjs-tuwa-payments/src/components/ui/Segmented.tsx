@@ -1,5 +1,6 @@
 'use client';
 
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import { cn } from '@tuwaio/nova-core';
 import Link from 'next/link';
 import { useLayoutEffect, useRef, useState } from 'react';
@@ -29,6 +30,7 @@ export function Segmented<T extends string>({
   value,
   onChange,
   size = 'md',
+  arrows = false,
   className,
 }: {
   label: string;
@@ -36,9 +38,12 @@ export function Segmented<T extends string>({
   value: T;
   onChange?: (value: T) => void;
   size?: 'md' | 'sm';
+  /** A row wider than its room scrolls sideways, with an arrow on each side that has more (the dashboard's filters). */
+  arrows?: boolean;
   className?: string;
 }) {
   const rowRef = useRef<HTMLDivElement>(null);
+  const [more, setMore] = useState({ left: false, right: false });
   const pillRef = useRef<HTMLSpanElement>(null);
   const [placed, setPlaced] = useState(false);
   const first = useRef(true);
@@ -64,9 +69,30 @@ export function Segmented<T extends string>({
       first.current = false;
       setPlaced(true);
     }
-    const observer = new ResizeObserver(() => place(false));
+    const edges = () => {
+      const left = row.scrollLeft > 1;
+      const right = row.scrollLeft + row.clientWidth < row.scrollWidth - 1;
+      setMore((current) => (current.left === left && current.right === right ? current : { left, right }));
+    };
+    edges();
+    // The chosen option comes into view when it is off the row
+    const chosen = row.querySelector<HTMLElement>(':scope > [data-chosen="true"]');
+    if (
+      chosen &&
+      (chosen.offsetLeft < row.scrollLeft || chosen.offsetLeft + chosen.offsetWidth > row.scrollLeft + row.clientWidth)
+    ) {
+      row.scrollTo({ left: chosen.offsetLeft - 24 });
+    }
+    const observer = new ResizeObserver(() => {
+      place(false);
+      edges();
+    });
     observer.observe(row);
-    return () => observer.disconnect();
+    row.addEventListener('scroll', edges, { passive: true });
+    return () => {
+      observer.disconnect();
+      row.removeEventListener('scroll', edges);
+    };
   }, [value, options.length]);
 
   const itemClass = (chosen: boolean) =>
@@ -79,14 +105,14 @@ export function Segmented<T extends string>({
         : 'text-[var(--shop-text-label)] hover:text-[var(--tuwa-text-primary)]',
     );
 
-  return (
+  const row = (
     <div
       ref={rowRef}
       role="group"
       aria-label={label}
       className={cn(
-        'relative inline-flex max-w-full gap-0.5 overflow-x-auto rounded-shop border border-[var(--tuwa-border-primary)] bg-[var(--tuwa-bg-muted)] p-1 [scrollbar-width:none]',
-        className,
+        'relative inline-flex max-w-full gap-0.5 overflow-x-auto rounded-shop border border-[var(--tuwa-border-primary)] bg-[var(--tuwa-bg-muted)] p-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
+        arrows ? 'w-full' : className,
       )}
     >
       <span
@@ -138,6 +164,40 @@ export function Segmented<T extends string>({
           </button>
         );
       })}
+    </div>
+  );
+  if (!arrows) return row;
+
+  const scroll = (direction: -1 | 1) =>
+    rowRef.current?.scrollBy({
+      left: direction * Math.max(120, (rowRef.current.clientWidth ?? 0) * 0.6),
+      behavior: 'smooth',
+    });
+  return (
+    <div className={cn('relative max-w-full', className)}>
+      {row}
+      {(['left', 'right'] as const).map(
+        (side) =>
+          more[side] && (
+            <button
+              key={side}
+              type="button"
+              // The options are reachable by Tab (focus scrolls them in): the arrows are for pointers only
+              tabIndex={-1}
+              aria-hidden
+              onClick={() => scroll(side === 'left' ? -1 : 1)}
+              className={cn(
+                // A solid end of the track (no fade): the dashboard's scroll arrows
+                'absolute inset-y-px z-[2] flex w-8 cursor-pointer items-center justify-center border-[var(--tuwa-border-primary)] bg-[var(--tuwa-bg-muted)] text-[var(--tuwa-text-primary)] hover:bg-[var(--tuwa-bg-secondary)]',
+                side === 'left'
+                  ? 'left-px rounded-l-[var(--tuwa-rounded-corners)] border-r'
+                  : 'right-px rounded-r-[var(--tuwa-rounded-corners)] border-l',
+              )}
+            >
+              {side === 'left' ? <ChevronLeftIcon className="h-4 w-4" /> : <ChevronRightIcon className="h-4 w-4" />}
+            </button>
+          ),
+      )}
     </div>
   );
 }

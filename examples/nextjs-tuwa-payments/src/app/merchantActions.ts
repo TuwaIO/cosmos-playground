@@ -8,7 +8,13 @@ import {
   type SubmitRefundParams,
 } from '@tuwaio/quasar-sdk';
 
-import { demoControlSubscription, demoRefund, DemoRefusal, type SubscriptionControl } from '@/lib/demo/engine';
+import {
+  demoControlSubscription,
+  demoReadRefund,
+  demoRefund,
+  DemoRefusal,
+  type SubscriptionControl,
+} from '@/lib/demo/engine';
 import { isDemoMode, isMerchantMode } from '@/lib/mode';
 import { attachInvoice, attachRefund, attachSubscription, findOrder, findOrderByInvoice } from '@/lib/orders';
 import { getQuasar } from '@/lib/quasar';
@@ -29,14 +35,16 @@ function failure(error: unknown): ActionResult<never> {
   return refused('request_failed', error instanceof Error ? error.message : String(error));
 }
 
-/** Asks Quasar for the refund of a paid invoice of the shop (the `request` of `createRefundStore`). */
+/**
+ * Asks Quasar for the refund of a paid invoice of the shop (the `request` of `createRefundStore`). In demo mode the
+ * simulation takes it, with the merchant's transfer simulated (see `createDemoRefundStore`).
+ */
 export async function requestRefund(invoiceId: string, params: RefundParams): Promise<ActionResult<RefundStart>> {
   if (!isMerchantMode()) return MERCHANT_MODE_OFF;
-  if (isDemoMode()) return refused('demo_mode', 'Demo mode sends no refunds from a wallet: use "Simulate refund".');
   const order = findOrderByInvoice(invoiceId);
   if (!order) return refused('invoice_not_found', 'This invoice is not an order of the shop');
   try {
-    const start = await getQuasar().payments.refund(invoiceId, params);
+    const start = isDemoMode() ? demoRefund(invoiceId, params) : await getQuasar().payments.refund(invoiceId, params);
     attachRefund(order.id, start.refund);
     return ok(start);
   } catch (error) {
@@ -47,6 +55,7 @@ export async function requestRefund(invoiceId: string, params: RefundParams): Pr
 /** Hands Quasar the refund transaction the merchant's wallet sent (the `submit` of `createRefundStore`). */
 export async function submitRefund(refundId: string, params: SubmitRefundParams): Promise<ActionResult<Refund>> {
   if (!isMerchantMode()) return MERCHANT_MODE_OFF;
+  if (isDemoMode()) return refused('demo_mode', 'Demo mode sends nothing from a wallet: the transfer is simulated');
   try {
     const refund = await getQuasar().payments.submitRefund(refundId, params);
     const order = findOrderByInvoice(refund.invoiceId);
@@ -61,7 +70,7 @@ export async function submitRefund(refundId: string, params: SubmitRefundParams)
 export async function readRefund(refundId: string): Promise<ActionResult<Refund>> {
   if (!isMerchantMode()) return MERCHANT_MODE_OFF;
   try {
-    return ok(await getQuasar().payments.getRefund(refundId));
+    return ok(isDemoMode() ? demoReadRefund(refundId) : await getQuasar().payments.getRefund(refundId));
   } catch (error) {
     return failure(error);
   }
@@ -94,20 +103,6 @@ export async function controlSubscription(orderId: string, action: SubscriptionC
             : await payments.undoSubscriptionCancel(subscriptionId);
       attachSubscription(order.id, subscription);
     }
-    return ok(null);
-  } catch (error) {
-    return failure(error);
-  }
-}
-
-/** Demo mode: refunds the paid invoice of an order in full, with the webhooks Quasar would send. */
-export async function simulateRefund(orderId: string): Promise<ActionResult<null>> {
-  if (!isMerchantMode()) return MERCHANT_MODE_OFF;
-  if (!isDemoMode()) return refused('not_demo', 'Refunds are sent from your wallet outside demo mode');
-  const invoice = findOrder(orderId)?.invoices.find((item) => item.status === 'paid');
-  if (!invoice) return refused('invoice_not_refundable', 'This order has no paid invoice');
-  try {
-    attachRefund(orderId, demoRefund(invoice.id));
     return ok(null);
   } catch (error) {
     return failure(error);
