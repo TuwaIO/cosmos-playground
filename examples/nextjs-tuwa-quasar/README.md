@@ -135,7 +135,7 @@ src/
 
 - [Quasar transaction sync guide](https://docs.tuwa.io/guides/quasar-transaction-sync) and [Full-Stack React guide](https://docs.tuwa.io/guides/full-stack-react)
 - [Quasar documentation](https://docs.tuwa.io/quasar): apps and keys, quotas, webhooks, self-hosting and the API reference
-- [`@tuwaio/quasar-sdk`](https://sdk.docs.tuwa.io/packages/quasar-sdk) and the other [TUWA SDK](https://sdk.docs.tuwa.io/) packages
+- [`@tuwaio/quasar-sdk`](https://payments.docs.tuwa.io/?path=/docs/packages-quasar-sdk-overview--docs) and the other [TUWA SDK](https://sdk.docs.tuwa.io/) packages
 - [All starter templates](https://docs.tuwa.io/guides/starter-templates)
 
 ---

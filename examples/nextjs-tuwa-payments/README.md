@@ -212,7 +212,7 @@ The orders live in the memory of the server: a restart forgets them, and every v
 ## 📖 Learn More
 
 - [Quasar documentation](https://docs.tuwa.io/quasar): apps and keys, webhooks, self-hosting and the API reference
-- [`@tuwaio/quasar-sdk`](https://sdk.docs.tuwa.io/packages/quasar-sdk) and the [Nova UI Kit](https://stories.tuwa.io/) components
+- [`@tuwaio/quasar-sdk`](https://payments.docs.tuwa.io/?path=/docs/packages-quasar-sdk-overview--docs) and the [Nova UI Kit](https://stories.tuwa.io/) components
 - [All starter templates](https://docs.tuwa.io/guides/starter-templates)
 
 ---
