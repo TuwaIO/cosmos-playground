@@ -76,7 +76,7 @@ Run your Quasar node as its `docs/QUICKSTART_LOCAL.md` describes (Postgres and R
 
 ### 2. Create the Payments app
 
-**With the dev seed of Quasar.** After `pnpm seed`, `pnpm seed:dev` in the Quasar repository creates the app **Test Shop** in the admin's workspace: test environment, USDC and ETH on Base Sepolia, USDC on Sepolia, USDC and SOL on Solana devnet, subscriptions, and a webhook to this shop with every payment event. Set in the Quasar `.env` before running it:
+**With the dev seed of Quasar.** After `pnpm seed`, `pnpm seed:dev` in the Quasar repository creates the app **Cosmos Store** in the TUWA organization: test environment, USDC and ETH on Base Sepolia, USDC and ETH on Sepolia, USDC and SOL on Solana devnet, subscriptions, and a webhook to this shop with every payment event. The organization has one webhook slot on `localhost`: the seed stops on another `localhost` webhook left there. Set in the Quasar `.env` before running it:
 
 | Variable                         | Value                                                                                                                    |
 | :------------------------------- | :----------------------------------------------------------------------------------------------------------------------- |
