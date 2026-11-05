@@ -271,8 +271,6 @@ export const connected_modal_customization: ConnectedModalCustomization = {
       classNames: {
         container: () => cn('flex flex-col items-center justify-center p-4', SHARED_STYLES.bgBase),
         loadingContainer: () => cn('flex flex-col items-center justify-center p-8 gap-4', SHARED_STYLES.bgBase),
-        loadingSpinner: () =>
-          cn('animate-spin rounded-full h-8 w-8 border-2', 'border-[var(--tuwa-text-accent)] border-t-transparent'),
         loadingText: () => cn('text-sm', SHARED_STYLES.textSecondary),
         errorContainer: () =>
           cn('flex flex-col items-center justify-center text-center gap-4 p-6', SHARED_STYLES.bgBase),

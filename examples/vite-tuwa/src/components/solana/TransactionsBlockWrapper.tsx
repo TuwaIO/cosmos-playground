@@ -1,5 +1,6 @@
 import { address } from '@solana/kit';
 import { useSatelliteConnectStore } from '@tuwaio/sdk/nova-connect/satellite';
+import { QuasarLoader } from '@tuwaio/sdk/nova-core';
 import { textCenterEllipsis } from '@tuwaio/sdk/nova-core/utils';
 import { HashLink } from '@tuwaio/sdk/nova-transactions';
 import { OrbitAdapter, selectAdapterByKey, SOLANA_CHAIN_IDS } from '@tuwaio/sdk/orbit';
@@ -126,7 +127,7 @@ export const TransactionsBlockWrapper = () => {
                 <h3 className="text-lg text-[var(--tuwa-text-primary)] font-bold">
                   {accountsLoading ? (
                     <div className="flex items-center space-x-2 text-[var(--tuwa-text-secondary)]">
-                      <div className="w-4 h-4 border-2 border-t-2 border-[var(--tuwa-border-primary)] rounded-full animate-spin"></div>
+                      <QuasarLoader size={16} />
                       <span>Loading...</span>
                     </div>
                   ) : (
@@ -138,7 +139,7 @@ export const TransactionsBlockWrapper = () => {
               <div className="grid gap-4 overflow-y-auto max-h-[320px] p-2 -m-2">
                 {accountsLoading ? (
                   <div className="flex flex-col items-center justify-center h-40">
-                    <div className="w-8 h-8 border-4 border-t-4 border-[var(--tuwa-border-primary)] rounded-full animate-spin mb-4"></div>
+                    <QuasarLoader size={32} className="mb-4" />
                     <p className="text-lg text-[var(--tuwa-text-secondary)]">Fetching accounts...</p>
                   </div>
                 ) : accountsError ? (

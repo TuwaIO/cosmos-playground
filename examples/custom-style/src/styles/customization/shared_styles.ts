@@ -231,7 +231,7 @@ export const STATUS_STYLES = {
     success: 'text-[var(--tuwa-text-accent)]',
     error: 'text-[var(--tuwa-error-icon)]',
     warning: 'text-[var(--tuwa-pending-icon)]',
-    pending: 'text-[var(--tuwa-text-accent)] animate-spin',
+    pending: 'text-[var(--tuwa-text-accent)]',
     initializing: 'text-[var(--tuwa-pending-icon)] animate-pulse',
     disabled: 'text-[var(--text-disabled)]',
   },

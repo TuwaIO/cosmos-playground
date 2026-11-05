@@ -13,6 +13,7 @@ export function NovaTransactionsProvider() {
   const executeTxAction = usePulsarStore((state) => state.executeTxAction);
   const initializeTransactionsPool = usePulsarStore((state) => state.initializeTransactionsPool);
   const getAdapter = usePulsarStore((state) => state.getAdapter);
+  const removeTxFromPool = usePulsarStore((state) => state.removeTxFromPool);
   const activeConnection = useSatelliteConnectStore((state) => state.activeConnection);
 
   // Restarts the trackers of pending transactions after a page reload
@@ -27,6 +28,7 @@ export function NovaTransactionsProvider() {
       connectedWalletAddress={activeConnection?.isConnected ? activeConnection.address : undefined}
       connectedAdapterType={getAdapterFromConnectorType(activeConnection?.connectorType ?? 'evm:')}
       adapter={getAdapter()}
+      removeTxFromPool={removeTxFromPool}
     />
   );
 }
