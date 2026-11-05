@@ -5,7 +5,7 @@ import { NovaTransactionsProvider as NTP } from '@tuwaio/sdk/nova-transactions/p
 import { getAdapterFromConnectorType } from '@tuwaio/sdk/orbit';
 import { useInitializeTransactionsPool } from '@tuwaio/sdk/pulsar';
 
-import { useHistoryPagination, useHistoryStore, usePulsarStore } from '@/hooks/pulsarStoreHook';
+import { removeTx, useHistoryPagination, useHistoryStore, usePulsarStore } from '@/hooks/pulsarStoreHook';
 
 // The modals and toasts of Nova Transactions, fed by the local transactions and the Quasar history
 export function NovaTransactionsProvider() {
@@ -31,6 +31,7 @@ export function NovaTransactionsProvider() {
       connectedWalletAddress={activeConnection?.isConnected ? activeConnection.address : undefined}
       connectedAdapterType={getAdapterFromConnectorType(activeConnection?.connectorType ?? 'evm:')}
       adapter={getAdapter()}
+      removeTxFromPool={removeTx}
     />
   );
 }

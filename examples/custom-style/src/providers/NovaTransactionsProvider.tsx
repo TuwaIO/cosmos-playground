@@ -8,6 +8,7 @@ import { nova_tx_provider_customization } from '../styles/customization/nova_tx_
 
 export function NovaTransactionsProvider() {
   const getAdapter = usePulsarStore((state) => state.getAdapter);
+  const removeTxFromPool = usePulsarStore((state) => state.removeTxFromPool);
   const initialTx = usePulsarStore((state) => state.initialTx);
   const closeTxTrackedModal = usePulsarStore((state) => state.closeTxTrackedModal);
   const transactionsPool = usePulsarStore((state) => state.transactionsPool);
@@ -26,6 +27,7 @@ export function NovaTransactionsProvider() {
       connectedWalletAddress={activeConnection?.isConnected ? activeConnection.address : undefined}
       connectedAdapterType={getAdapterFromConnectorType(activeConnection?.connectorType ?? 'evm:')}
       adapter={getAdapter()}
+      removeTxFromPool={removeTxFromPool}
       customization={nova_tx_provider_customization}
     />
   );
