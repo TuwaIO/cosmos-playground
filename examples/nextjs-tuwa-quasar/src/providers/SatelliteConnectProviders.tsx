@@ -10,7 +10,7 @@ import { satelliteSolanaAdapter } from '@tuwaio/solana-sdk/satellite';
 import { type ReactNode, useEffect } from 'react';
 
 import { appEVMChains, solanaRPCUrls, wagmiConfig } from '@/configs/appConfig';
-import { useHistoryPagination, useHistoryStore, usePulsarStore } from '@/hooks/pulsarStoreHook';
+import { removeTx, useHistoryPagination, useHistoryStore, usePulsarStore } from '@/hooks/pulsarStoreHook';
 import { NovaTransactionsProvider } from '@/providers/NovaTransactionsProvider';
 
 // Created once: a new adapter array on every render would make the provider update its store each time
@@ -75,6 +75,7 @@ export function SatelliteConnectProviders({ children }: { children: ReactNode })
         transactionPool={transactionsPool}
         pagination={pagination}
         pulsarAdapter={getAdapter() as NovaConnectProviderProps['pulsarAdapter']}
+        removeTxFromPool={removeTx}
         siwx={siwx}
         withBalance
         withChain

@@ -44,6 +44,16 @@ pulsarStore.subscribe((state) => historyStore.getState().syncWithLocalPool(state
 
 export const useHistoryStore = createBoundedUseStore(historyStore);
 
+/**
+ * Stops tracking a transaction, in both stores: the history store keeps showing a record that only the Pulsar store forgot.
+ *
+ * @param txKey - The key of the transaction.
+ */
+export function removeTx(txKey: string) {
+  pulsarStore.getState().removeTxFromPool(txKey);
+  historyStore.getState().removeTxFromPool(txKey);
+}
+
 export function useHistoryPagination(): TxInMemoryPagination {
   const isLoading = useHistoryStore((state) => state.isLoading);
   const isError = useHistoryStore((state) => state.isError);

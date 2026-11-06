@@ -10,6 +10,7 @@ import {
   ExclamationTriangleIcon,
   ShieldCheckIcon,
 } from '@heroicons/react/24/outline';
+import { QuasarLoader } from '@tuwaio/sdk/nova-core';
 import { getChainName, textCenterEllipsis } from '@tuwaio/sdk/nova-core/utils';
 import { TransactionStatus, useTxFinished } from '@tuwaio/sdk/pulsar';
 import { useCallback, useEffect, useMemo, useState } from 'react';
@@ -187,7 +188,7 @@ export function QuasarWebhookMonitor() {
           title="Refresh webhook status"
           className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[var(--tuwa-rounded-corners)] border border-[var(--tuwa-border-secondary)] bg-[var(--tuwa-bg-secondary)] text-[var(--tuwa-text-secondary)] transition-all duration-200 hover:border-[var(--tuwa-border-primary)] hover:text-[var(--tuwa-text-primary)] disabled:opacity-50 cursor-pointer"
         >
-          <ArrowPathIcon className={`h-3.5 w-3.5 ${isLoading ? 'animate-spin' : ''}`} />
+          {isLoading ? <QuasarLoader size={14} accent="currentColor" /> : <ArrowPathIcon className="h-3.5 w-3.5" />}
         </button>
       </div>
 

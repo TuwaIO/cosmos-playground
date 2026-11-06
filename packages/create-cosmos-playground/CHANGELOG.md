@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.32](https://github.com/TuwaIO/cosmos-playground/compare/create-cosmos-playground-v0.0.31...create-cosmos-playground-v0.0.32) (2026-10-28)
+
+
+### Bug Fixes
+
+* **deps:** TUWA SDK 0.6.8 wave in every template, create-cosmos-playground on degit 3.10.1 and execa 10.2.1 — wallet lists update live ([c67f587](https://github.com/TuwaIO/cosmos-playground/commit/c67f5873105140772c5846f97ef77606ff6e016e))
+
 ## [0.0.31](https://github.com/TuwaIO/cosmos-playground/compare/create-cosmos-playground-v0.0.30...create-cosmos-playground-v0.0.31) (2026-10-15)
 
 
