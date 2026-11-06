@@ -7,7 +7,7 @@ allowBuilds:
 minimumReleaseAgeExclude:
   - "@tuwaio/nova-connect@0.11.0 || 0.11.1 || 1.0.0-feat-payments-alpha.43.35f5bb82"
   - "@tuwaio/nova-core@0.10.6 || 0.11.0 || 1.0.0-feat-payments-alpha.43.35f5bb82"
-  - "@tuwaio/nova-payments@1.0.0-feat-payments-alpha.22.10fa4cc"
+  - "@tuwaio/nova-payments@1.0.0-feat-payments-alpha.23.b89a9da"
   - "@tuwaio/nova-transactions@0.10.5 || 0.11.0 || 1.0.0-feat-payments-alpha.43.35f5bb82"
   - "@tuwaio/orbit-core@0.6.0"
   - "@tuwaio/orbit-evm@0.4.0 || 0.4.1"
@@ -21,7 +21,7 @@ minimumReleaseAgeExclude:
   - "@tuwaio/satellite-react@0.10.2"
   - "@tuwaio/satellite-solana@0.11.2"
   - "@tuwaio/evm-sdk@0.6.6 || 0.6.7"
-  - "@tuwaio/quasar-sdk@0.7.3 || 1.0.0-feat-payments-alpha.22.10fa4cc"
+  - "@tuwaio/quasar-sdk@0.7.3 || 1.0.0-feat-payments-alpha.23.b89a9da"
   - "@tuwaio/sdk@0.6.10 || 0.6.11"
   - "@tuwaio/siwx-core@0.7.1"
   - "@tuwaio/siwx-evm@0.5.3"
