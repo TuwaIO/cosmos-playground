@@ -54,7 +54,6 @@ export const chain_list_customization: ChainSelectorCustomization = {
   },
 
   selectContent: {
-    contentClassName: cn(SHARED_STYLES.bgBase, 'ring-[var(--tuwa-border-primary)]'),
     topButtonCustomization: {
       classNames: {
         button: () => SCROLL_BUTTON_STYLES.buttonTop,
