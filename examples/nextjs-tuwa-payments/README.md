@@ -5,7 +5,7 @@
 A small shop that sells with **Quasar Payments**: the server issues invoices and subscriptions with `@tuwaio/quasar-sdk`, the page opens the checkout of `@tuwaio/nova-payments`, and the buyer pays in crypto from an EVM or Solana wallet or with a QR code. Quasar checks the payment on-chain, issues the receipt and sends the `payments.v1` webhooks that fulfil the order. It is a template of [Cosmos Playground](https://github.com/TuwaIO/cosmos-playground).
 
 > [!NOTE]
-> Quasar Payments is in development: this template uses the alpha releases of `@tuwaio/nova-payments`, `@tuwaio/quasar-sdk` and the Nova packages, and runs against a self-hosted Quasar node with Payments turned on. The checkout has a language menu: English, Spanish, Italian, Ukrainian, Russian and Simplified Chinese.
+> Quasar Payments is in development: this template runs against a self-hosted Quasar node with Payments turned on. The checkout has a language menu: English, Ukrainian, Simplified Chinese, Spanish, Italian and German.
 
 ---
 

@@ -9,7 +9,6 @@ import { decrement } from '@/transactions/solana/decrement';
 import { increment as incrementSolana } from '@/transactions/solana/increment';
 import { initialize } from '@/transactions/solana/initialize';
 
-import { incrementGelato } from './evm/incrementGelato';
 import { incrementPimlico } from './evm/incrementPimlico';
 
 export type BaseTxParams = {
@@ -20,7 +19,6 @@ export type BaseTxParams = {
 
 export const txActions = {
   incrementEvm: () => increment({ wagmiConfig }),
-  incrementGelato: () => incrementGelato(),
   incrementPimlico: () => incrementPimlico({ wagmiConfig }),
   incrementSolana: ({ client, signer, contractAddress }: BaseTxParams) =>
     incrementSolana({ client, signer, contractAddress }),
