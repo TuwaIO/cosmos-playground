@@ -91,32 +91,6 @@ export const TransactionsBlockWrapper = () => {
     });
   };
 
-  const handleIncrementGelato = async () => {
-    if (currentCount === null) return;
-
-    await executeTxAction({
-      actionFunction: txActions.incrementGelato,
-      params: {
-        type: TxType.increment,
-        adapter: OrbitAdapter.EVM,
-        tracker: TransactionTracker.Gelato,
-        desiredChainID: sepolia.id,
-        title: ['Incrementing', 'Incremented', 'Error when increment', 'Increment tx replaced'],
-        description: [
-          `Value after incrementing ${currentCount + 1}`,
-          `Success. Current value is ${currentCount + 1}`,
-          'Something went wrong when increment.',
-          'Transaction replaced. Please take a look details in your wallet.',
-        ],
-        payload: {
-          value: currentCount + 1,
-          contractAddress: COUNTER_ADDRESS,
-        },
-        withTrackedModal: true,
-      },
-    });
-  };
-
   const handleIncrementPimlico = async () => {
     if (currentCount === null) return;
 
@@ -242,21 +216,6 @@ export const TransactionsBlockWrapper = () => {
                 >
                   <span className="text-xl leading-none contents text-[var(--tuwa-text-on-accent)]">+</span>
                   <span className="leading-none">Increment Pimlico Counter</span>
-                </TxActionButton>
-              </div>
-
-              <div className="h-14" title="deprecated">
-                <TxActionButton
-                  action={handleIncrementGelato}
-                  transactionsPool={transactionsPool}
-                  getLastTxKey={getLastTxKey}
-                  className="w-full h-full bg-gray-500/10 text-gray-400 font-semibold rounded-[var(--tuwa-rounded-corners)] border border-gray-600/20 flex items-center justify-center space-x-2 opacity-40 cursor-not-allowed select-none"
-                  disabled={true}
-                  walletAddress={address}
-                  title="deprecated"
-                >
-                  <span className="text-xl leading-none contents text-gray-400">+</span>
-                  <span className="leading-none">Increment Gelato Counter (Deprecated)</span>
                 </TxActionButton>
               </div>
 

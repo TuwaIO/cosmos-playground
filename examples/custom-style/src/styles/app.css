@@ -1,6 +1,15 @@
 @import '@tuwaio/sdk/styles/all.css';
 @import 'tailwindcss';
 
+/* Nova UI Kit leaves the page of the app alone: the font of the page and its scrollbar gutter are set here */
+html {
+  scrollbar-gutter: stable;
+}
+
+body {
+  font-family: var(--tuwa-font-sans);
+}
+
 :root {
   /* ═══════════════════════════════════════════════════════════════════
    * TUWA VARIABLE OVERRIDES - Custom Theme
@@ -19,6 +28,8 @@
   --tuwa-button-gradient-to: #1ad699;
   --tuwa-button-gradient-from-hover: #15b884;
   --tuwa-button-gradient-to-hover: #15b884;
+  --tuwa-standart-button-bg: #292b2e;
+  --tuwa-standart-button-hover: #3a3d41;
 
   /* --- Background Colors --- */
   --tuwa-bg-primary: #000000;

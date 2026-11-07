@@ -11,7 +11,8 @@ import {
   ShieldCheckIcon,
 } from '@heroicons/react/24/outline';
 import { QuasarLoader } from '@tuwaio/sdk/nova-core';
-import { getChainName, textCenterEllipsis } from '@tuwaio/sdk/nova-core/utils';
+import { getChainName } from '@tuwaio/sdk/nova-core/utils';
+import { shortAddress } from '@tuwaio/sdk/orbit';
 import { TransactionStatus, useTxFinished } from '@tuwaio/sdk/pulsar';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
@@ -23,7 +24,7 @@ function formatWebhookChain(chainId: string | number): string {
   const id = typeof chainId === 'string' && /^\d+$/.test(chainId) ? Number(chainId) : chainId;
   const { name } = getChainName(id);
   const raw = String(chainId);
-  const shortId = raw.length > 20 ? textCenterEllipsis(raw, 10, 6) : raw;
+  const shortId = raw.length > 20 ? shortAddress(raw, 10, 6) : raw;
   return name === 'Unknown' ? shortId : `${name} (${shortId})`;
 }
 
@@ -199,14 +200,14 @@ export function QuasarWebhookMonitor() {
             <div className="flex flex-wrap items-center justify-between gap-1">
               <span className="text-[var(--tuwa-text-tertiary)]">Latest Transaction</span>
               <span className="font-mono text-[11px] text-[var(--tuwa-text-accent)] break-all">
-                {textCenterEllipsis(latestTransaction.txKey, 10, 8)}
+                {shortAddress(latestTransaction.txKey, 10, 8)}
               </span>
             </div>
             {'hash' in latestTransaction && typeof latestTransaction.hash === 'string' && (
               <div className="flex flex-wrap items-center justify-between gap-1 text-[11px]">
                 <span className="text-[var(--tuwa-text-tertiary)]">On-Chain Hash</span>
                 <span className="font-mono text-[var(--tuwa-text-primary)] break-all">
-                  {textCenterEllipsis(latestTransaction.hash, 8, 6)}
+                  {shortAddress(latestTransaction.hash, 8, 6)}
                 </span>
               </div>
             )}
@@ -244,7 +245,7 @@ export function QuasarWebhookMonitor() {
               <div className="flex flex-wrap items-center justify-between gap-1">
                 <span className="text-[var(--tuwa-text-tertiary)]">Bound txKey</span>
                 <span className="font-mono text-[var(--tuwa-text-primary)] break-all">
-                  {textCenterEllipsis(activeWebhook.payload.txKey ?? targetTxKey ?? '—', 10, 8)}
+                  {shortAddress(activeWebhook.payload.txKey ?? targetTxKey ?? '—', 10, 8)}
                 </span>
               </div>
               {activeWebhook.payload.chainId && (
