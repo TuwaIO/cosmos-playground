@@ -38,7 +38,7 @@
     "@solana/kit": "^8.6.0",
     "@solana/webcrypto-ed25519-polyfill": "^8.6.0",
     "@tuwaio/nova-connect": "^0.13.0",
-    "@tuwaio/nova-core": "^0.13.0",
+    "@tuwaio/nova-core": "^0.13.1",
     "@tuwaio/nova-transactions": "^0.13.1",
     "@tuwaio/orbit-core": "^0.6.2",
     "@tuwaio/orbit-evm": "^0.4.2",

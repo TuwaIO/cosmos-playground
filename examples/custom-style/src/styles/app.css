@@ -16,11 +16,6 @@ body {
    * Overrides default TUWA design tokens for custom branding
    * ═══════════════════════════════════════════════════════════════════ */
 
-  /* --- Fonts --- */
-  /* The monospace labels of Nova in Geist Mono, as the rest of the theme, not in the monospace font of the system */
-  --novacon-font-mono: var(--tuwa-font-mono);
-  --novatx-font-mono: var(--tuwa-font-mono);
-
   /* --- Text Colors --- */
   --tuwa-text-primary: #ebeff5;
   --tuwa-text-secondary: #c2c6c9;
