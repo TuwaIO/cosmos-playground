@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.33](https://github.com/TuwaIO/cosmos-playground/compare/create-cosmos-playground-v0.0.32...create-cosmos-playground-v0.0.33) (2026-11-07)
+
+
+### Bug Fixes
+
+* **deps:** TUWA SDK 0.7 in every template, the page font, and no Gelato ([#38](https://github.com/TuwaIO/cosmos-playground/issues/38)) ([bd7ba7f](https://github.com/TuwaIO/cosmos-playground/commit/bd7ba7f6d3f14a913ccac5063b431e27ec865927))
+
 ## [0.0.32](https://github.com/TuwaIO/cosmos-playground/compare/create-cosmos-playground-v0.0.31...create-cosmos-playground-v0.0.32) (2026-10-28)
 
 
