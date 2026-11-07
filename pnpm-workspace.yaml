@@ -5,26 +5,5 @@ allowBuilds:
   "@reown/appkit": false
   esbuild: false
 minimumReleaseAgeExclude:
-  - "@tuwaio/nova-connect@0.11.0 || 0.11.1"
-  - "@tuwaio/nova-core@0.10.6 || 0.11.0"
-  - "@tuwaio/nova-transactions@0.10.5 || 0.11.0"
-  - "@tuwaio/orbit-core@0.6.0"
-  - "@tuwaio/orbit-evm@0.4.0 || 0.4.1"
-  - "@tuwaio/orbit-solana@0.7.2"
-  - "@tuwaio/pulsar-core@0.11.1 || 0.12.1"
-  - "@tuwaio/pulsar-evm@0.11.1 || 0.12.0"
-  - "@tuwaio/pulsar-react@0.7.0 || 0.8.0"
-  - "@tuwaio/pulsar-solana@0.10.5 || 0.11.0"
-  - "@tuwaio/satellite-core@0.11.2"
-  - "@tuwaio/satellite-evm@0.10.2 || 0.10.3"
-  - "@tuwaio/satellite-react@0.10.2"
-  - "@tuwaio/satellite-solana@0.11.2"
-  - "@tuwaio/evm-sdk@0.6.6 || 0.6.7"
-  - "@tuwaio/quasar-sdk@0.7.3"
-  - "@tuwaio/sdk@0.6.10 || 0.6.11"
-  - "@tuwaio/siwx-core@0.7.1"
-  - "@tuwaio/siwx-evm@0.5.3"
-  - "@tuwaio/siwx-react@0.6.5"
-  - "@tuwaio/siwx-server@0.8.1"
-  - "@tuwaio/siwx-solana@0.7.1"
-  - "@tuwaio/solana-sdk@0.6.5 || 0.6.7"
+  - "@tuwaio/*"
+  - zustand@5.1.0

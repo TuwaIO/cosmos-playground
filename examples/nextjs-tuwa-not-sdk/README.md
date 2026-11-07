@@ -23,7 +23,7 @@ Open [http://localhost:3000](http://localhost:3000). Node.js 24 LTS, 24.22.1 or 
 
 - **Wallet connection** with the Nova Connect modals on Satellite Connect: EVM wallets through wagmi connectors (injected, Safe{Wallet}, a read-only impersonated wallet) and Solana wallets through Wallet Standard. Satellite Connect reconnects the last browser wallet after a page reload: until the tab closes, or until the user disconnects it if they tick "Remember this wallet" in the connect modal (`rememberWallet={false}` in `src/providers/SatelliteConnectProviders.tsx`). WalletConnect is not included: to offer it, add `walletConnect` from `@wagmi/connectors` with your own Reown project ID. The connect modal links the Terms of Service and Privacy Policy of TUWA (`legal` of `NovaConnectProvider` in `src/providers/SatelliteConnectProviders.tsx`); replace them with the documents of your app.
 - **Tracked transactions** with Pulsar and the Nova Transactions modals and toasts:
-  - EVM: a counter contract on Sepolia, called directly, as an ERC-4337 UserOperation through Pimlico, and through the Gelato relay (deprecated in Pulsar, kept to test its tracker);
+  - EVM: a counter contract on Sepolia, called directly and as an ERC-4337 UserOperation through Pimlico;
   - Solana: a counter program on devnet (create, increment, decrement and close counter accounts).
 - **Transaction history** saved to `localStorage`, with tracking that resumes after a reload.
 
@@ -49,7 +49,6 @@ Open [http://localhost:3000](http://localhost:3000). Node.js 24 LTS, 24.22.1 or 
 | ----------------------------- | --------------------------------------------------------------------------------------------------- |
 | `NEXT_PUBLIC_ALCHEMY_KEY`     | Alchemy key for the Ethereum Mainnet, Sepolia and Solana Mainnet RPC URLs. Default: public RPC URLs |
 | `NEXT_PUBLIC_PIMLICO_API_KEY` | Pimlico key for the ERC-4337 transaction                                                            |
-| `NEXT_PUBLIC_GELATO_API_KEY`  | Gelato key for the relay transaction                                                                |
 
 ---
 
