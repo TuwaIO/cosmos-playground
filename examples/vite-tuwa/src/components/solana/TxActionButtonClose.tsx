@@ -8,6 +8,7 @@ import React from 'react';
 
 import { usePulsarStore } from '../../hooks/pulsarStoreHook';
 import { txActions, TxType } from '../../transactions';
+import { actionClassName, secondaryActionClassName } from '../classNames';
 
 export const TxActionButtonClose = ({
   activeWallet,
@@ -55,18 +56,12 @@ export const TxActionButtonClose = ({
       action={handleClose}
       transactionsPool={transactionsPool}
       getLastTxKey={getLastTxKey}
+      className={actionClassName}
+      classNames={{ idle: secondaryActionClassName }}
       disabled={!activeWallet?.isConnected}
       walletAddress={activeWallet?.address}
-      className={`
-        w-full p-2.5 rounded-[var(--tuwa-rounded-corners)] border border-transparent
-        text-gray-800 font-semibold shadow-sm transition-all duration-200
-        focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400
-        bg-none bg-neutral-200
-        hover:bg-neutral-300 hover:shadow-md
-        disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] select-none
-      `}
     >
-      <span className="text-sm leading-none">Close</span>
+      Close
     </TAB>
   );
 };

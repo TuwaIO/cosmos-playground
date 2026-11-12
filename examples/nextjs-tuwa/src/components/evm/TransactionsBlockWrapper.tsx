@@ -2,6 +2,8 @@
 
 import { createViemClient } from '@tuwaio/evm-sdk/orbit';
 import { useSatelliteConnectStore } from '@tuwaio/sdk/nova-connect/satellite';
+import { cn } from '@tuwaio/sdk/nova-core/utils';
+import { ArrowTopRightOnSquareIcon, PlusIcon } from '@tuwaio/sdk/nova-icons/24/outline';
 import { TxActionButton } from '@tuwaio/sdk/nova-transactions';
 import { OrbitAdapter } from '@tuwaio/sdk/orbit';
 import { TransactionStatus, TransactionTracker, useTxFinished } from '@tuwaio/sdk/pulsar';
@@ -11,6 +13,8 @@ import { readContract } from 'viem/actions';
 import { sepolia } from 'viem/chains';
 
 import { CounterAbi } from '@/abis/CounterAbi';
+import { actionClassName, chipClassName, labelClassName, secondaryActionClassName } from '@/components/classNames';
+import { Panel, PoweredBy } from '@/components/Panel';
 import { appEVMChains } from '@/configs/appConfig';
 import { COUNTER_ADDRESS } from '@/constants';
 import { usePulsarStore } from '@/hooks/pulsarStoreHook';
@@ -118,122 +122,87 @@ export const TransactionsBlockWrapper = () => {
     });
   };
 
-  const openEtherscan = () => {
-    window.open(`https://sepolia.etherscan.io/address/${COUNTER_ADDRESS}`, '_blank', 'noopener,noreferrer');
-  };
+  const contractUrl = `https://sepolia.etherscan.io/address/${COUNTER_ADDRESS}`;
 
   return (
-    <div className="p-4 relative">
-      <div className="m-auto w-full max-w-md h-auto min-h-[680px] bg-[var(--tuwa-bg-primary)] rounded-[var(--tuwa-rounded-corners)] shadow-2xl border border-[var(--tuwa-border-primary)] overflow-hidden flex flex-col relative">
-        <div className="bg-[var(--tuwa-bg-secondary)] border-b border-[var(--tuwa-border-primary)] p-6 flex-shrink-0">
-          <div className="flex-1 pr-4">
-            <h1 className="text-2xl font-bold text-[var(--tuwa-text-primary)] mb-1 leading-tight">EVM Demo</h1>
-            <p className="text-[var(--tuwa-text-secondary)] text-sm leading-tight">Transaction Tracking Example</p>
-          </div>
-        </div>
-
-        <div className="flex-1 p-8 space-y-8">
-          <div className="text-center h-16 flex flex-col justify-center">
-            <h2 className="text-xl font-semibold text-[var(--tuwa-text-primary)] mb-2 leading-tight">
-              Smart Contract Interaction
-            </h2>
-            <p className="text-[var(--tuwa-text-secondary)] text-sm leading-tight">
-              Test transaction tracking with a simple counter contract
-            </p>
-          </div>
-
-          {/* Separator */}
-          <div className="border-t border-[var(--tuwa-border-primary)]"></div>
-
-          {/* Action Section */}
-          <div className="space-y-6 flex-1">
-            <div className="bg-[var(--tuwa-bg-secondary)] rounded-[var(--tuwa-rounded-corners)] p-4 border border-[var(--tuwa-border-secondary)] min-h-[100px] flex flex-col justify-center">
-              <div className="flex items-center justify-between w-full mb-3">
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-[var(--tuwa-info-bg)] rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-[var(--tuwa-text-accent)] font-bold text-lg">#</span>
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <h3 className="font-medium text-[var(--tuwa-text-primary)] leading-tight">Counter Contract</h3>
-                    <p className="text-xs text-[var(--tuwa-text-tertiary)] leading-tight">Sepolia Testnet</p>
-                  </div>
-                </div>
-                <div className="text-right flex-shrink-0">
-                  <div className="text-sm text-[var(--tuwa-text-secondary)] leading-tight">Contract</div>
-                  <button
-                    onClick={openEtherscan}
-                    className="text-xs font-mono text-[var(--tuwa-text-accent)] hover:opacity-80 leading-tight cursor-pointer transition-opacity duration-200 underline hover:no-underline"
-                  >
-                    {COUNTER_ADDRESS.slice(0, 6)}...{COUNTER_ADDRESS.slice(-4)}
-                  </button>
-                </div>
-              </div>
-
-              <div className="flex items-center justify-center pt-2 border-t border-[var(--tuwa-border-secondary)]">
-                <div className="text-center">
-                  <div className="text-xs text-[var(--tuwa-text-tertiary)] mb-1">Current Value</div>
-                  <div className="text-2xl font-bold text-[var(--tuwa-text-accent)]">
-                    {isLoadingCount ? (
-                      <div className="animate-pulse">...</div>
-                    ) : currentCount !== null ? (
-                      currentCount
-                    ) : (
-                      <span className="text-[var(--tuwa-error-text)] text-sm">Error</span>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <div className="h-14">
-                <TxActionButton
-                  action={handleIncrement}
-                  transactionsPool={transactionsPool}
-                  getLastTxKey={getLastTxKey}
-                  className="w-full h-full bg-[var(--tuwa-button-gradient-from)] hover:bg-[var(--tuwa-button-gradient-from-hover)] text-[var(--tuwa-text-on-accent)] font-semibold rounded-[var(--tuwa-rounded-corners)] transition-all duration-200 ease-in-out hover:shadow-md flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] select-none"
-                  disabled={currentCount === null}
-                  walletAddress={address}
-                >
-                  <span className="text-xl leading-none contents text-[var(--tuwa-text-on-accent)]">+</span>
-                  <span className="leading-none">Increment Counter</span>
-                </TxActionButton>
-              </div>
-
-              <div className="h-14">
-                <TxActionButton
-                  action={handleIncrementPimlico}
-                  transactionsPool={transactionsPool}
-                  getLastTxKey={getLastTxKey}
-                  className="w-full h-full bg-[var(--tuwa-button-gradient-from)] hover:bg-[var(--tuwa-button-gradient-from-hover)] text-[var(--tuwa-text-on-accent)] font-semibold rounded-[var(--tuwa-rounded-corners)] transition-all duration-200 ease-in-out hover:shadow-md flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] select-none"
-                  disabled={currentCount === null}
-                  walletAddress={address}
-                >
-                  <span className="text-xl leading-none contents text-[var(--tuwa-text-on-accent)]">+</span>
-                  <span className="leading-none">Increment Pimlico Counter</span>
-                </TxActionButton>
-              </div>
-
-              <div className="h-8 flex items-center justify-center">
-                <p className="text-center text-xs text-[var(--tuwa-text-tertiary)] leading-tight">
-                  This will increment the counter by 1 and track the transaction
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <footer className="bg-[var(--tuwa-bg-secondary)] px-8 py-4 border-t border-[var(--tuwa-border-primary)] flex-shrink-0 h-16 flex items-center justify-center">
-          <div className="flex items-center space-x-2 text-xs text-[var(--tuwa-text-tertiary)]">
-            <span className="leading-none">Powered by</span>
-            <a href="https://github.com/TuwaIO" target="_blank">
-              <span className="font-semibold text-[var(--tuwa-text-accent)] leading-none">TUWA</span>
-            </a>
-            <span className="leading-none">•</span>
-            <span className="leading-none">Web3 Transaction Tracking</span>
-          </div>
-        </footer>
+    <Panel
+      name="EVM demo"
+      aside={<span className={chipClassName}>Sepolia</span>}
+      footer={<PoweredBy />}
+      className="max-w-md"
+    >
+      <div className="border-b border-[var(--tuwa-border-primary)] p-5">
+        <h1 className="font-mono text-xl leading-tight font-bold text-[var(--tuwa-text-primary)]">
+          Smart contract interaction
+        </h1>
+        <p className="mt-1.5 text-sm leading-6 text-[var(--tuwa-text-secondary)]">
+          Test transaction tracking with a simple counter contract.
+        </p>
       </div>
-    </div>
+
+      <dl className="grid grid-cols-2 border-b border-[var(--tuwa-border-primary)]">
+        <div className="border-r border-[var(--tuwa-border-primary)] px-5 py-4">
+          <dt className={cn(labelClassName, 'text-[var(--tuwa-text-secondary)]')}>Counter contract</dt>
+          <dd className="mt-2">
+            <a
+              href={contractUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 font-mono text-sm text-[var(--tuwa-text-primary)] underline underline-offset-4 hover:no-underline"
+            >
+              {COUNTER_ADDRESS.slice(0, 6)}...{COUNTER_ADDRESS.slice(-4)}
+              <ArrowTopRightOnSquareIcon className="h-4 w-4" aria-hidden="true" />
+            </a>
+          </dd>
+        </div>
+        <div className="px-5 py-4">
+          <dt className={cn(labelClassName, 'text-[var(--tuwa-text-secondary)]')}>Current value</dt>
+          <dd className="mt-1 font-mono text-2xl leading-8 font-bold text-[var(--tuwa-text-primary)] tabular-nums">
+            {isLoadingCount ? (
+              <span className="text-[var(--tuwa-text-secondary)]">...</span>
+            ) : currentCount !== null ? (
+              currentCount
+            ) : (
+              <span className="text-sm text-[var(--tuwa-error-text)]">Error</span>
+            )}
+          </dd>
+        </div>
+      </dl>
+
+      <div className="flex flex-col gap-3 p-5">
+        <TxActionButton
+          action={handleIncrement}
+          transactionsPool={transactionsPool}
+          getLastTxKey={getLastTxKey}
+          className={actionClassName}
+          disabled={currentCount === null}
+          walletAddress={address}
+        >
+          <span className="inline-flex items-center gap-2">
+            <PlusIcon className="h-4 w-4" aria-hidden="true" />
+            Increment counter
+          </span>
+        </TxActionButton>
+
+        <TxActionButton
+          action={handleIncrementPimlico}
+          transactionsPool={transactionsPool}
+          getLastTxKey={getLastTxKey}
+          className={actionClassName}
+          classNames={{ idle: secondaryActionClassName }}
+          disabled={currentCount === null}
+          walletAddress={address}
+        >
+          <span className="inline-flex items-center gap-2">
+            <PlusIcon className="h-4 w-4" aria-hidden="true" />
+            Increment with Pimlico (ERC-4337)
+          </span>
+        </TxActionButton>
+
+        <p className="text-xs leading-5 text-[var(--tuwa-text-secondary)]">
+          Each button adds 1 to the counter and tracks the transaction.
+        </p>
+      </div>
+    </Panel>
   );
 };
