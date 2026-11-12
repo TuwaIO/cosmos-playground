@@ -42,7 +42,6 @@ async function main() {
 
   const availableTemplates = [
     'nextjs-tuwa-quasar',
-    'custom-style',
     'nextjs-tuwa',
     'nextjs-solana',
     'nextjs-evm',
