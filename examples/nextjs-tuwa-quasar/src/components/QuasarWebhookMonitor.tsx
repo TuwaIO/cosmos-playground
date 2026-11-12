@@ -1,21 +1,25 @@
 'use client';
 
+import { QuasarLoader } from '@tuwaio/sdk/nova-core';
+import { cn, getChainName } from '@tuwaio/sdk/nova-core/utils';
 import {
   ArrowPathIcon,
   BoltIcon,
   CheckCircleIcon,
   CheckIcon,
+  ChevronDownIcon,
+  ChevronRightIcon,
   ClockIcon,
   DocumentDuplicateIcon,
   ExclamationTriangleIcon,
   ShieldCheckIcon,
-} from '@heroicons/react/24/outline';
-import { QuasarLoader } from '@tuwaio/sdk/nova-core';
-import { getChainName } from '@tuwaio/sdk/nova-core/utils';
+} from '@tuwaio/sdk/nova-icons/24/outline';
 import { shortAddress } from '@tuwaio/sdk/orbit';
 import { TransactionStatus, useTxFinished } from '@tuwaio/sdk/pulsar';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
+import { chipClassName, labelClassName } from '@/components/classNames';
+import { Panel } from '@/components/Panel';
 import { usePulsarStore } from '@/hooks/pulsarStoreHook';
 import type { QuasarWebhookEvent } from '@/lib/quasarWebhookStore';
 
@@ -141,184 +145,194 @@ export function QuasarWebhookMonitor() {
     setTimeout(() => setIsCopied(false), 2000);
   };
 
+  const rowClassName = 'flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 px-5 py-2.5';
+  const rowLabelClassName = cn(labelClassName, 'text-[var(--tuwa-text-secondary)]');
+  const rowValueClassName = 'font-mono text-xs break-all text-[var(--tuwa-text-primary)]';
+
   return (
-    <section className="relative w-full max-w-md overflow-hidden rounded-[var(--tuwa-rounded-corners)] border border-[var(--tuwa-border-primary)] bg-[var(--tuwa-bg-primary)] shadow-2xl backdrop-blur-xl transition-all duration-300">
-      {/* Header bar */}
-      <div className="flex items-center justify-between border-b border-[var(--tuwa-border-secondary)] bg-[var(--tuwa-bg-secondary)]/50 px-4 sm:px-5 py-3.5 gap-3">
-        <div className="flex items-center gap-3 min-w-0 flex-1">
-          <div
-            className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-[var(--tuwa-rounded-corners)] border transition-colors ${
-              activeWebhook
-                ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-400'
-                : hasError
-                  ? 'border-rose-500/30 bg-rose-500/10 text-rose-400'
-                  : 'border-[var(--tuwa-border-secondary)] bg-[var(--tuwa-bg-secondary)] text-[var(--tuwa-text-accent)]'
-            }`}
+    <Panel
+      name="Quasar webhook sync"
+      aside={
+        <div className="flex items-center gap-2">
+          <span className={chipClassName}>Live receiver</span>
+          <button
+            type="button"
+            onClick={() => void fetchWebhooks(targetTxKey)}
+            disabled={isLoading}
+            aria-label="Refresh the webhook status"
+            title="Refresh the webhook status"
+            className="flex h-7 w-7 shrink-0 cursor-pointer items-center justify-center border border-[var(--tuwa-border-strong)] text-[var(--tuwa-text-primary)] hover:bg-[var(--tuwa-standart-button-hover)] disabled:cursor-not-allowed disabled:opacity-50"
           >
-            {activeWebhook ? (
-              <CheckCircleIcon className="h-4.5 w-4.5" />
-            ) : hasError ? (
-              <ExclamationTriangleIcon className="h-4.5 w-4.5" />
+            {isLoading ? (
+              <QuasarLoader size={14} accent="currentColor" />
             ) : (
-              <BoltIcon className="h-4.5 w-4.5" />
+              <ArrowPathIcon className="h-4 w-4" aria-hidden="true" />
             )}
-          </div>
-          <div className="min-w-0 flex-1">
-            <div className="flex flex-wrap items-center gap-1.5">
-              <h2 className="text-sm font-semibold tracking-tight text-[var(--tuwa-text-primary)] leading-tight">
-                Quasar Webhook Sync
-              </h2>
-              <span className="inline-flex items-center gap-1 rounded-[var(--tuwa-rounded-corners)] bg-emerald-400/10 px-1.5 py-0.5 text-[10px] font-medium text-emerald-400 border border-emerald-400/20 shrink-0">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                Live Receiver
-              </span>
-            </div>
-            <p className="text-[11px] text-[var(--tuwa-text-tertiary)] leading-tight mt-0.5">
-              {activeWebhook
-                ? 'Delivery verified & HMAC authenticated'
-                : isLoading
-                  ? 'Checking webhook inbox...'
-                  : 'Awaiting transaction webhook delivery'}
-            </p>
-          </div>
+          </button>
         </div>
-
-        <button
-          onClick={() => void fetchWebhooks(targetTxKey)}
-          disabled={isLoading}
-          title="Refresh webhook status"
-          className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[var(--tuwa-rounded-corners)] border border-[var(--tuwa-border-secondary)] bg-[var(--tuwa-bg-secondary)] text-[var(--tuwa-text-secondary)] transition-all duration-200 hover:border-[var(--tuwa-border-primary)] hover:text-[var(--tuwa-text-primary)] disabled:opacity-50 cursor-pointer"
+      }
+    >
+      {/* The state of the delivery: the mark and one line */}
+      <div className="flex items-center gap-3 border-b border-[var(--tuwa-border-primary)] px-5 py-3.5">
+        <span
+          className={cn(
+            'flex h-8 w-8 shrink-0 items-center justify-center border',
+            activeWebhook
+              ? 'border-[var(--tuwa-success-text)] text-[var(--tuwa-success-text)]'
+              : hasError
+                ? 'border-[var(--tuwa-error-text)] text-[var(--tuwa-error-text)]'
+                : 'border-[var(--tuwa-border-strong)] text-[var(--tuwa-text-primary)]',
+          )}
         >
-          {isLoading ? <QuasarLoader size={14} accent="currentColor" /> : <ArrowPathIcon className="h-3.5 w-3.5" />}
-        </button>
+          {activeWebhook ? (
+            <CheckCircleIcon className="h-5 w-5" aria-hidden="true" />
+          ) : hasError ? (
+            <ExclamationTriangleIcon className="h-5 w-5" aria-hidden="true" />
+          ) : (
+            <BoltIcon className="h-5 w-5" aria-hidden="true" />
+          )}
+        </span>
+        <p className="text-sm text-[var(--tuwa-text-primary)]">
+          {activeWebhook
+            ? 'Delivery verified and HMAC authenticated'
+            : isLoading
+              ? 'Checking the webhook inbox...'
+              : hasError
+                ? 'Could not read the webhook inbox'
+                : 'Awaiting the webhook of a transaction'}
+        </p>
       </div>
 
-      <div className="p-4 sm:p-5 space-y-4">
-        {/* Target Latest Transaction Bar */}
-        {latestTransaction && (
-          <div className="rounded-[var(--tuwa-rounded-corners)] border border-[var(--tuwa-border-secondary)] bg-[var(--tuwa-bg-secondary)]/30 p-2.5 text-xs space-y-1.5">
-            <div className="flex flex-wrap items-center justify-between gap-1">
-              <span className="text-[var(--tuwa-text-tertiary)]">Latest Transaction</span>
-              <span className="font-mono text-[11px] text-[var(--tuwa-text-accent)] break-all">
-                {shortAddress(latestTransaction.txKey, 10, 8)}
-              </span>
+      {latestTransaction && (
+        <dl className="border-b border-[var(--tuwa-border-primary)] py-1.5">
+          <div className={rowClassName}>
+            <dt className={rowLabelClassName}>Latest transaction</dt>
+            <dd className={rowValueClassName}>{shortAddress(latestTransaction.txKey, 10, 8)}</dd>
+          </div>
+          {'hash' in latestTransaction && typeof latestTransaction.hash === 'string' && (
+            <div className={rowClassName}>
+              <dt className={rowLabelClassName}>On-chain hash</dt>
+              <dd className={rowValueClassName}>{shortAddress(latestTransaction.hash, 8, 6)}</dd>
             </div>
-            {'hash' in latestTransaction && typeof latestTransaction.hash === 'string' && (
-              <div className="flex flex-wrap items-center justify-between gap-1 text-[11px]">
-                <span className="text-[var(--tuwa-text-tertiary)]">On-Chain Hash</span>
-                <span className="font-mono text-[var(--tuwa-text-primary)] break-all">
-                  {shortAddress(latestTransaction.hash, 8, 6)}
-                </span>
+          )}
+        </dl>
+      )}
+
+      {activeWebhook ? (
+        <>
+          <dl className="grid grid-cols-1 border-b border-[var(--tuwa-border-primary)] sm:grid-cols-2">
+            <div className="flex items-start gap-2.5 border-b border-[var(--tuwa-border-primary)] px-5 py-3.5 sm:border-r sm:border-b-0">
+              <ShieldCheckIcon className="mt-0.5 h-5 w-5 shrink-0 text-[var(--tuwa-success-text)]" aria-hidden="true" />
+              <div className="min-w-0">
+                <dt className={rowLabelClassName}>Verification</dt>
+                <dd className="mt-1 text-sm text-[var(--tuwa-text-primary)]">HMAC-SHA256 valid</dd>
+              </div>
+            </div>
+            <div className="flex items-start gap-2.5 px-5 py-3.5">
+              <ClockIcon className="mt-0.5 h-5 w-5 shrink-0 text-[var(--tuwa-text-primary)]" aria-hidden="true" />
+              <div className="min-w-0">
+                <dt className={rowLabelClassName}>Pipeline status</dt>
+                <dd className="mt-1 truncate text-sm text-[var(--tuwa-text-primary)] capitalize">
+                  {activeWebhook.payload.status ?? 'Processed'}
+                </dd>
+              </div>
+            </div>
+          </dl>
+
+          <dl className="border-b border-[var(--tuwa-border-primary)] py-1.5">
+            <div className={rowClassName}>
+              <dt className={rowLabelClassName}>Quasar event</dt>
+              <dd className={cn(rowValueClassName, 'font-bold')}>{activeWebhook.event}</dd>
+            </div>
+            <div className={rowClassName}>
+              <dt className={rowLabelClassName}>Bound txKey</dt>
+              <dd className={rowValueClassName}>
+                {shortAddress(activeWebhook.payload.txKey ?? targetTxKey ?? '—', 10, 8)}
+              </dd>
+            </div>
+            {activeWebhook.payload.chainId && (
+              <div className={rowClassName}>
+                <dt className={rowLabelClassName}>Chain ID</dt>
+                <dd className={rowValueClassName} title={String(activeWebhook.payload.chainId)}>
+                  {formatWebhookChain(activeWebhook.payload.chainId)}
+                </dd>
               </div>
             )}
+            <div className={rowClassName}>
+              <dt className={rowLabelClassName}>Delivery time</dt>
+              <dd className={rowValueClassName}>{new Date(activeWebhook.receivedAt).toLocaleTimeString()}</dd>
+            </div>
+          </dl>
+
+          {/* The payload of the webhook, folded or open */}
+          <div>
+            <div className="flex items-center justify-between gap-3 px-5 py-2.5">
+              <button
+                type="button"
+                onClick={() => setIsPayloadOpen(!isPayloadOpen)}
+                aria-expanded={isPayloadOpen}
+                className={cn(
+                  labelClassName,
+                  'flex min-h-6 cursor-pointer items-center gap-1.5 text-[var(--tuwa-text-primary)] hover:underline',
+                )}
+              >
+                {isPayloadOpen ? (
+                  <ChevronDownIcon className="h-4 w-4" aria-hidden="true" />
+                ) : (
+                  <ChevronRightIcon className="h-4 w-4" aria-hidden="true" />
+                )}
+                Payload
+              </button>
+              <button
+                type="button"
+                onClick={handleCopyPayload}
+                className={cn(
+                  labelClassName,
+                  'flex min-h-6 cursor-pointer items-center gap-1.5 text-[var(--tuwa-text-secondary)] hover:text-[var(--tuwa-text-primary)]',
+                )}
+              >
+                {isCopied ? (
+                  <>
+                    <CheckIcon className="h-4 w-4 text-[var(--tuwa-success-text)]" aria-hidden="true" />
+                    <span className="text-[var(--tuwa-success-text)]">Copied</span>
+                  </>
+                ) : (
+                  <>
+                    <DocumentDuplicateIcon className="h-4 w-4" aria-hidden="true" />
+                    Copy JSON
+                  </>
+                )}
+              </button>
+            </div>
+            {isPayloadOpen && (
+              <pre
+                tabIndex={0}
+                className="max-h-48 overflow-auto border-t border-[var(--tuwa-border-primary)] bg-[var(--tuwa-bg-muted)] p-4 font-mono text-[11px] leading-relaxed text-[var(--tuwa-text-primary)]"
+              >
+                {JSON.stringify(activeWebhook.payload, null, 2)}
+              </pre>
+            )}
           </div>
-        )}
-
-        {activeWebhook ? (
-          <div className="space-y-3">
-            {/* Status & Security Metrics Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-              <div className="flex items-center gap-2 rounded-[var(--tuwa-rounded-corners)] border border-emerald-500/20 bg-emerald-500/10 px-3 py-2 text-emerald-400 min-w-0">
-                <ShieldCheckIcon className="h-4 w-4 shrink-0" />
-                <div className="min-w-0 flex-1">
-                  <div className="text-[9px] font-semibold uppercase tracking-wider opacity-75">Verification</div>
-                  <div className="truncate font-medium">HMAC-SHA256 Valid</div>
-                </div>
-              </div>
-              <div className="flex items-center gap-2 rounded-[var(--tuwa-rounded-corners)] border border-[var(--tuwa-border-secondary)] bg-[var(--tuwa-bg-secondary)] px-3 py-2 text-[var(--tuwa-text-primary)] min-w-0">
-                <ClockIcon className="h-4 w-4 shrink-0 text-[var(--tuwa-text-accent)]" />
-                <div className="min-w-0 flex-1">
-                  <div className="text-[9px] font-semibold uppercase tracking-wider text-[var(--tuwa-text-tertiary)]">
-                    Pipeline Status
-                  </div>
-                  <div className="truncate font-medium capitalize">{activeWebhook.payload.status ?? 'Processed'}</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Structured Event Info Details */}
-            <div className="rounded-[var(--tuwa-rounded-corners)] border border-[var(--tuwa-border-secondary)] bg-[var(--tuwa-bg-secondary)]/40 p-3 text-xs space-y-2">
-              <div className="flex flex-wrap items-center justify-between gap-1">
-                <span className="text-[var(--tuwa-text-tertiary)]">Quasar Event</span>
-                <span className="font-mono font-semibold text-[var(--tuwa-text-accent)]">{activeWebhook.event}</span>
-              </div>
-              <div className="flex flex-wrap items-center justify-between gap-1">
-                <span className="text-[var(--tuwa-text-tertiary)]">Bound txKey</span>
-                <span className="font-mono text-[var(--tuwa-text-primary)] break-all">
-                  {shortAddress(activeWebhook.payload.txKey ?? targetTxKey ?? '—', 10, 8)}
-                </span>
-              </div>
-              {activeWebhook.payload.chainId && (
-                <div className="flex flex-wrap items-center justify-between gap-1">
-                  <span className="text-[var(--tuwa-text-tertiary)]">Chain ID</span>
-                  <span
-                    className="font-mono text-[var(--tuwa-text-primary)] break-all"
-                    title={String(activeWebhook.payload.chainId)}
-                  >
-                    {formatWebhookChain(activeWebhook.payload.chainId)}
-                  </span>
-                </div>
-              )}
-              <div className="flex flex-wrap items-center justify-between gap-1">
-                <span className="text-[var(--tuwa-text-tertiary)]">Delivery Time</span>
-                <span className="text-[var(--tuwa-text-primary)]">
-                  {new Date(activeWebhook.receivedAt).toLocaleTimeString()}
-                </span>
-              </div>
-            </div>
-
-            {/* Collapsible JSON Payload Inspector */}
-            <div className="rounded-[var(--tuwa-rounded-corners)] border border-[var(--tuwa-border-secondary)] bg-[var(--tuwa-bg-secondary)]/20 overflow-hidden">
-              <div className="flex items-center justify-between px-3 py-2 bg-[var(--tuwa-bg-secondary)]/50 border-b border-[var(--tuwa-border-secondary)]">
-                <button
-                  onClick={() => setIsPayloadOpen(!isPayloadOpen)}
-                  className="flex items-center gap-1.5 text-xs font-medium text-[var(--tuwa-text-accent)] hover:opacity-80 transition-opacity cursor-pointer"
-                >
-                  <span>{isPayloadOpen ? '▼ Hide Payload' : '▶ Show Payload'}</span>
-                </button>
-                <button
-                  onClick={handleCopyPayload}
-                  className="flex items-center gap-1 text-[11px] text-[var(--tuwa-text-tertiary)] hover:text-[var(--tuwa-text-primary)] transition-colors cursor-pointer"
-                >
-                  {isCopied ? (
-                    <>
-                      <CheckIcon className="h-3.5 w-3.5 text-emerald-400" />
-                      <span className="text-emerald-400">Copied</span>
-                    </>
-                  ) : (
-                    <>
-                      <DocumentDuplicateIcon className="h-3.5 w-3.5" />
-                      <span>Copy JSON</span>
-                    </>
-                  )}
-                </button>
-              </div>
-              {isPayloadOpen && (
-                <pre className="max-h-48 overflow-auto p-3 text-[11px] font-mono leading-relaxed text-[var(--tuwa-text-primary)] bg-black/20 scrollbar-thin">
-                  {JSON.stringify(activeWebhook.payload, null, 2)}
-                </pre>
-              )}
-            </div>
-          </div>
-        ) : (
-          <div className="flex flex-col items-center justify-center rounded-[var(--tuwa-rounded-corners)] border border-dashed border-[var(--tuwa-border-secondary)] bg-[var(--tuwa-bg-secondary)]/30 p-6 text-center text-xs text-[var(--tuwa-text-secondary)]">
-            <div className="mb-2.5 flex h-10 w-10 items-center justify-center rounded-[var(--tuwa-rounded-corners)] bg-[var(--tuwa-bg-secondary)] text-[var(--tuwa-text-accent)]">
-              <ClockIcon className="h-5 w-5 animate-pulse" />
-            </div>
-            <p className="font-medium text-[var(--tuwa-text-primary)] mb-1">
-              {targetTxKey ? 'Waiting for webhook for this transaction' : 'No transactions executed yet'}
+        </>
+      ) : (
+        <div className="flex flex-col items-start gap-3 p-5">
+          <span className="flex h-11 w-11 items-center justify-center border border-[var(--tuwa-border-strong)] text-[var(--tuwa-text-primary)]">
+            <ClockIcon className="h-6 w-6" aria-hidden="true" />
+          </span>
+          <div>
+            <p className="font-mono text-sm font-bold text-[var(--tuwa-text-primary)]">
+              {targetTxKey ? 'Waiting for the webhook of this transaction' : 'No transaction yet'}
             </p>
-            <p className="text-[11px] text-[var(--tuwa-text-tertiary)] max-w-xs mb-3">
-              Execute an EVM or Solana action above. Quasar Cloud will index the on-chain event and deliver a signed
-              webhook to this server.
+            <p className="mt-1.5 text-xs leading-5 text-[var(--tuwa-text-secondary)]">
+              Run an EVM or Solana action above. Quasar Cloud indexes the on-chain event and delivers a signed webhook
+              to this server.
             </p>
-            <div className="inline-flex flex-wrap items-center justify-center gap-1.5 rounded-[var(--tuwa-rounded-corners)] bg-[var(--tuwa-bg-primary)] px-2.5 py-1 font-mono text-[10px] text-[var(--tuwa-text-secondary)] border border-[var(--tuwa-border-secondary)]">
-              <span>Endpoint:</span>
-              <code className="text-[var(--tuwa-text-accent)] break-all">POST /api/webhooks/quasar</code>
-            </div>
           </div>
-        )}
-      </div>
-    </section>
+          <p className="border border-[var(--tuwa-border-primary)] px-2.5 py-1.5 font-mono text-[11px] break-all text-[var(--tuwa-text-secondary)]">
+            Endpoint: <code className="text-[var(--tuwa-text-primary)]">POST /api/webhooks/quasar</code>
+          </p>
+        </div>
+      )}
+    </Panel>
   );
 }

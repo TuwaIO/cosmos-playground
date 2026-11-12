@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.0](https://github.com/TuwaIO/cosmos-playground/compare/create-cosmos-playground-v0.0.33...create-cosmos-playground-v0.1.0) (2026-11-12)
+
+
+### Features
+
+* the templates in paper and ink on TUWA SDK 0.9.1, without custom-style ([#40](https://github.com/TuwaIO/cosmos-playground/issues/40)) ([0b30a98](https://github.com/TuwaIO/cosmos-playground/commit/0b30a98cd669692ef0307ec5765d35a866e1716d))
+
 ## [0.0.33](https://github.com/TuwaIO/cosmos-playground/compare/create-cosmos-playground-v0.0.32...create-cosmos-playground-v0.0.33) (2026-11-07)
 
 
