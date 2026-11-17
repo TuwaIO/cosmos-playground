@@ -7,3 +7,4 @@ allowBuilds:
 minimumReleaseAgeExclude:
   - "@tuwaio/*"
   - zustand@5.1.0
+  - viem@2.58.0
