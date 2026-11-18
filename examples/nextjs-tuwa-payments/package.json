@@ -2,7 +2,7 @@
   "name": "nextjs-tuwa-payments",
   "version": "1.0.0",
   "private": true,
-  "description": "Next.js shop template that sells with Quasar Payments: invoices and subscriptions issued on the server, the Nova Payments checkout for EVM and Solana wallets, and payments.v1 webhooks that fulfil the orders.",
+  "description": "Next.js shop template that sells with Quasar Payments: an invoice issued on the server for every order, the Nova Payments checkout for EVM and Solana wallets, a visitor's own orders read from Quasar, and payments.v1 webhooks that fulfil them.",
   "keywords": [
     "web3",
     "payments",
@@ -10,7 +10,6 @@
     "stablecoins",
     "checkout",
     "invoice",
-    "subscriptions",
     "react",
     "nextjs",
     "quasar",
@@ -37,7 +36,6 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
-    "@heroicons/react": "^2.2.0",
     "@radix-ui/react-dialog": "^1.3.1",
     "@radix-ui/react-select": "^2.4.1",
     "@safe-global/safe-apps-provider": "^0.18.6",
@@ -47,7 +45,8 @@
     "@solana/kit": "^8.6.0",
     "@tuwaio/nova-connect": "^0.16.0",
     "@tuwaio/nova-core": "^0.16.0",
-    "@tuwaio/nova-payments": "^0.0.1",
+    "@tuwaio/nova-icons": "^0.1.3",
+    "@tuwaio/nova-payments": "^0.6.1",
     "@tuwaio/nova-transactions": "^0.16.0",
     "@tuwaio/orbit-core": "^0.6.2",
     "@tuwaio/orbit-evm": "^0.4.3",
@@ -56,7 +55,7 @@
     "@tuwaio/pulsar-evm": "^0.13.4",
     "@tuwaio/pulsar-react": "^0.8.0",
     "@tuwaio/pulsar-solana": "^0.11.3",
-    "@tuwaio/quasar-sdk": "^0.8.0",
+    "@tuwaio/quasar-sdk": "^0.14.1",
     "@tuwaio/satellite-core": "^0.12.1",
     "@tuwaio/satellite-evm": "^0.11.2",
     "@tuwaio/satellite-react": "^0.10.5",
@@ -103,6 +102,6 @@
     "prettier": "^3.10.1",
     "tailwindcss": "^4.3.5",
     "typescript": "6.0.3",
-    "typescript-eslint": "^8.72.2"
+    "typescript-eslint": "^8.73.0"
   }
 }

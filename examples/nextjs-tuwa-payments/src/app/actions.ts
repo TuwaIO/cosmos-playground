@@ -1,211 +1,109 @@
 'use server';
 
-import { QuasarSDKError } from '@tuwaio/quasar-sdk';
-
 import { appConfig } from '@/configs/appConfig';
-import { CURRENCY, findPeriod, findProduct, MAX_QUANTITY, PLAN, sumPrices } from '@/lib/catalog';
-import { DEMO_METHODS, demoIssueInvoice, demoStartSubscription } from '@/lib/demo/engine';
-import { type AcceptedMethods, canChargeAutomatically, NO_AUTO_CHARGE_METHOD, NO_METHODS } from '@/lib/methods';
-import { isDemoMode, prepareDemo } from '@/lib/mode';
-import { attachInvoice, attachSubscription, createOrder, getOrderBook, removeOrder } from '@/lib/orders';
-import type { OrderBook, OrderLine } from '@/lib/orderTypes';
+import { CLUB, CURRENCY, findProduct, MAX_QUANTITY } from '@/lib/catalog';
+import { NO_METHODS } from '@/lib/methods';
+import { listOrders, type OrderKind } from '@/lib/orders';
 import { getQuasar } from '@/lib/quasar';
+import { describeError, readMethods } from '@/lib/shop';
+import { PAYABLE, SETTLED } from '@/lib/status';
+import { ensureVisitor, readVisitor } from '@/lib/visitor';
 
+/** What a purchase returns to the page: the order and the checkout token of its invoice, or why it was not issued. */
 export type CheckoutStart =
   { ok: true; orderId: string; checkoutToken: string; payUrl: string | null } | { ok: false; error: string };
 
-/** The message to show for a refusal of Quasar, with its stable code. */
-function describe(error: unknown): string {
-  if (error instanceof QuasarSDKError) {
-    const reason = typeof error.details?.reason === 'string' ? ` (${error.details.reason})` : '';
-    return `${error.code ?? `HTTP ${error.status ?? '?'}`}${reason}: ${error.message}`;
-  }
-  return error instanceof Error ? error.message : String(error);
-}
-
-/** Where the checkout sends the buyer: the order's confirmation page, or back to the shop. */
-function returnLinks(orderId: string) {
-  return {
-    successUrl: `${appConfig.appUrl}/orders/${encodeURIComponent(orderId)}`,
-    cancelUrl: appConfig.appUrl,
-  };
-}
+type Line = { name: string; description?: string; quantity: number; unitPrice: string };
 
 /**
- * The active payment methods of your Quasar app, in their order: the page shows what the buyer can pay with, or why
- * nothing can be bought yet. Only what the page shows leaves the server.
+ * Issues one invoice for the lines. The buyer's external ID is the visitor ID of the browser, so the shop lists the
+ * order for this browser only; the order ID goes to the metadata, and the webhooks bring it back. The idempotency key
+ * makes a repeated request for the same order return the same invoice instead of a second one.
  */
-export async function readAcceptedMethods(): Promise<AcceptedMethods> {
-  const pick = ({ id, name, symbol, chainId, assetId, decimals }: (typeof DEMO_METHODS)[number]) => ({
-    id,
-    name,
-    symbol,
-    chainId,
-    assetId,
-    decimals,
-  });
-  if (isDemoMode()) return { ok: true, methods: DEMO_METHODS.map(pick) };
-  try {
-    const { data } = await getQuasar().payments.listMethods();
-    return { ok: true, methods: data.map(pick) };
-  } catch (error) {
-    return { ok: false, error: describe(error) };
-  }
-}
-
-/** The methods to sell with. Quasar issues an invoice even when the app has none, but nobody could pay it. */
-async function sellableMethods(): Promise<AcceptedMethods> {
-  const accepted = await readAcceptedMethods();
-  return accepted.ok && accepted.methods.length === 0 ? { ok: false, error: NO_METHODS } : accepted;
-}
-
-/** What the order is called in the lists: the first product, and how many others. */
-function titleOf(lines: OrderLine[]): string {
-  return lines.length === 1 ? lines[0].name : `${lines[0].name} + ${lines.length - 1} more`;
-}
-
-/**
- * Issues one invoice for the lines. The order ID goes to the metadata: the webhooks bring it back, and the idempotency
- * key makes a retry return the same invoice instead of a second one.
- */
-async function issueOrder(lines: OrderLine[]): Promise<CheckoutStart> {
-  const accepted = await sellableMethods();
+async function issueOrder(kind: OrderKind, lines: Line[]): Promise<CheckoutStart> {
+  const accepted = await readMethods();
   if (!accepted.ok) return accepted;
-  const price = sumPrices(lines.map((line) => ({ price: line.unitPrice, quantity: line.quantity })));
-  const order = createOrder({
-    id: crypto.randomUUID(),
-    kind: 'product',
-    title: titleOf(lines),
-    lines,
-    price,
-    currency: CURRENCY,
-  });
-  const lineItems = lines.map((line) => ({
-    name: line.name,
-    description: findProduct(line.productId)?.description,
-    quantity: String(line.quantity),
-    unitPrice: line.unitPrice,
-  }));
+  // Quasar issues an invoice even when the app has no methods, but nobody could pay it
+  if (accepted.methods.length === 0) return { ok: false, error: NO_METHODS };
   try {
-    if (isDemoMode()) {
-      const invoice = demoIssueInvoice({ lines: lineItems, metadata: { orderId: order.id }, ...returnLinks(order.id) });
-      attachInvoice(order.id, invoice, { checkoutToken: invoice.checkoutToken, payUrl: null });
-      return { ok: true, orderId: order.id, checkoutToken: invoice.checkoutToken ?? '', payUrl: null };
-    }
+    const visitorId = await ensureVisitor();
+    const orderId = crypto.randomUUID();
     const { invoice, checkoutToken, payUrl } = await getQuasar().payments.createInvoice(
       {
         currency: CURRENCY,
-        lineItems,
-        metadata: { orderId: order.id },
+        lineItems: lines.map(({ name, description, quantity, unitPrice }) => ({
+          name,
+          description,
+          quantity: String(quantity),
+          unitPrice,
+        })),
+        buyer: { externalId: visitorId },
+        metadata: { orderId, kind },
         expiresInMinutes: 60,
-        ...returnLinks(order.id),
+        // Where the checkout sends the buyer: the page of the order, or back to the shop
+        successUrl: `${appConfig.appUrl}/orders/${orderId}`,
+        cancelUrl: appConfig.appUrl,
       },
-      { idempotencyKey: `order_${order.id}` },
+      { idempotencyKey: `order_${orderId}` },
     );
-    attachInvoice(order.id, invoice, { checkoutToken, payUrl });
     if (!checkoutToken) return { ok: false, error: `Invoice ${invoice.number ?? invoice.id} cannot be paid` };
-    return { ok: true, orderId: order.id, checkoutToken, payUrl };
+    return { ok: true, orderId, checkoutToken, payUrl };
   } catch (error) {
-    removeOrder(order.id);
-    return { ok: false, error: describe(error) };
+    return { ok: false, error: describeError(error) };
   }
 }
 
-/** "Buy now": the invoice of one product, paid in the modal checkout. */
-export async function buyProduct(productId: string): Promise<CheckoutStart> {
-  const product = findProduct(productId);
-  if (!product) return { ok: false, error: `Unknown product ${productId}` };
-  return issueOrder([{ productId: product.id, name: product.name, quantity: 1, unitPrice: product.price }]);
+/** A line of the catalog for a product and a quantity, or what is wrong with them. The prices are the catalog's. */
+function lineOf(productId: unknown, quantity: unknown): Line | string {
+  const product = findProduct(String(productId));
+  if (!product) return `Unknown product ${String(productId)}`;
+  if (typeof quantity !== 'number' || !Number.isInteger(quantity) || quantity < 1 || quantity > MAX_QUANTITY) {
+    return `Choose 1 to ${MAX_QUANTITY} of ${product.name}`;
+  }
+  return { name: product.name, description: product.description, quantity, unitPrice: product.price };
+}
+
+/** "Buy now": the invoice of one product, paid in the checkout at once. */
+export async function buyProduct(productId: string, quantity = 1): Promise<CheckoutStart> {
+  const line = lineOf(productId, quantity);
+  return typeof line === 'string' ? { ok: false, error: line } : issueOrder('product', [line]);
 }
 
 /**
- * Checks out the cart: one invoice with a line per product (the Nova order panel lists them). The page then opens
- * `/checkout?order=…`. The cart comes from the browser, so the products and quantities are checked against the
- * catalog, and the prices are the catalog's.
+ * Checks out the cart: one invoice with a line per product. The cart comes from the browser, so the products and
+ * quantities are checked against the catalog.
  */
-export async function checkoutCart(
-  cart: { productId: string; quantity: number }[],
-): Promise<{ ok: true; orderId: string } | { ok: false; error: string }> {
+export async function checkoutCart(cart: { productId: string; quantity: number }[]): Promise<CheckoutStart> {
   if (!Array.isArray(cart) || cart.length === 0 || cart.length > 20) return { ok: false, error: 'The cart is empty' };
-  const lines: OrderLine[] = [];
-  for (const { productId, quantity } of cart) {
-    const product = findProduct(String(productId));
-    if (!product) return { ok: false, error: `Unknown product ${productId}` };
-    if (!Number.isInteger(quantity) || quantity < 1 || quantity > MAX_QUANTITY) {
-      return { ok: false, error: `Choose 1 to ${MAX_QUANTITY} of ${product.name}` };
-    }
-    if (lines.some((line) => line.productId === product.id)) {
-      return { ok: false, error: `${product.name} is in the cart twice` };
-    }
-    lines.push({ productId: product.id, name: product.name, quantity, unitPrice: product.price });
+  if (new Set(cart.map((item) => item?.productId)).size !== cart.length) {
+    return { ok: false, error: 'A product is in the cart twice' };
   }
-  const result = await issueOrder(lines);
-  return result.ok ? { ok: true, orderId: result.orderId } : result;
+  const lines: Line[] = [];
+  for (const item of cart) {
+    const line = lineOf(item?.productId, item?.quantity);
+    if (typeof line === 'string') return { ok: false, error: line };
+    lines.push(line);
+  }
+  return issueOrder('cart', lines);
 }
 
 /**
- * Starts the plan for the chosen period. `send_invoice`: the buyer pays every period's invoice. `auto_charge`: after the
- * first payment the checkout offers automatic charges (an ERC-7715 permission of the buyer's wallet), which needs an
- * EVM stablecoin method, "Automatic charges" on in Checkout and the app's Pimlico key in Compliance & gas.
+ * Joins Cosmos Club: one invoice, paid once. A browser that is a member already is told so, and one with an unpaid
+ * invoice of the membership gets that invoice again instead of a second one.
  */
-export async function subscribe(collection: 'send_invoice' | 'auto_charge', interval: string): Promise<CheckoutStart> {
-  const period = findPeriod(interval);
-  if (!period) return { ok: false, error: `Unknown billing period ${interval}` };
-  const accepted = await sellableMethods();
-  if (!accepted.ok) return accepted;
-  // Automatic charges are offered for one method: the first EVM token here; Quasar checks it is a stablecoin
-  const preferredMethodId =
-    collection === 'auto_charge' ? accepted.methods.find(canChargeAutomatically)?.id : undefined;
-  if (collection === 'auto_charge' && !preferredMethodId) return { ok: false, error: NO_AUTO_CHARGE_METHOD };
-  const name = `${PLAN.name}, ${period.label.replace(' (testnet)', '').toLowerCase()}`;
-  const order = createOrder({
-    id: crypto.randomUUID(),
-    kind: 'subscription',
-    title: `${name}${collection === 'auto_charge' ? ', automatic payments' : ''}`,
-    lines: [{ productId: PLAN.id, name: PLAN.name, quantity: 1, unitPrice: period.price }],
-    price: period.price,
-    currency: CURRENCY,
-  });
-  const lineItems = [{ name: PLAN.name, description: PLAN.description, unitPrice: period.price }];
+export async function joinClub(): Promise<CheckoutStart> {
   try {
-    if (isDemoMode()) {
-      const { subscription, invoice } = demoStartSubscription({
-        lines: lineItems,
-        interval: period.interval,
-        cycles: period.cycles,
-        collection,
-        metadata: { orderId: order.id },
-        ...returnLinks(order.id),
-      });
-      attachSubscription(order.id, subscription);
-      attachInvoice(order.id, invoice, { checkoutToken: invoice.checkoutToken, payUrl: null });
-      return { ok: true, orderId: order.id, checkoutToken: invoice.checkoutToken ?? '', payUrl: null };
+    const visitorId = await readVisitor();
+    const memberships = visitorId ? (await listOrders(visitorId)).filter((order) => order.kind === 'club') : [];
+    if (memberships.some((order) => SETTLED.includes(order.status))) {
+      return { ok: false, error: 'This browser is a member of Cosmos Club already' };
     }
-    const { subscription, invoice, checkoutToken, payUrl } = await getQuasar().payments.createSubscription(
-      {
-        currency: CURRENCY,
-        lineItems,
-        interval: period.interval,
-        cycles: period.cycles,
-        collection,
-        preferredMethodId,
-        metadata: { orderId: order.id },
-        ...returnLinks(order.id),
-      },
-      { idempotencyKey: `order_${order.id}` },
-    );
-    attachSubscription(order.id, subscription);
-    if (invoice) attachInvoice(order.id, invoice, { checkoutToken, payUrl });
-    if (!checkoutToken) return { ok: false, error: `Subscription ${subscription.id} has no invoice to pay yet` };
-    return { ok: true, orderId: order.id, checkoutToken, payUrl };
+    const unpaid = memberships.find((order) => PAYABLE.includes(order.status) && order.checkoutToken);
+    if (unpaid?.checkoutToken) {
+      return { ok: true, orderId: unpaid.id, checkoutToken: unpaid.checkoutToken, payUrl: unpaid.payUrl };
+    }
   } catch (error) {
-    removeOrder(order.id);
-    return { ok: false, error: describe(error) };
+    return { ok: false, error: describeError(error) };
   }
-}
-
-/** The orders and the webhooks the shop received, for the page (the fallback of `GET /api/events`). */
-export async function readOrderBook(): Promise<OrderBook> {
-  prepareDemo();
-  return getOrderBook();
+  return issueOrder('club', [{ name: CLUB.name, description: CLUB.description, quantity: 1, unitPrice: CLUB.price }]);
 }

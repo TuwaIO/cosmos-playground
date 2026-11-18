@@ -2,22 +2,23 @@
 
 import { useSyncExternalStore } from 'react';
 
-import { ago, clockTime, dateTime } from '@/lib/format';
+import { formatTime, type TimeStyle } from '@/lib/format';
 
 const subscribe = () => () => {};
 
 /**
- * A time in the viewer's time zone (`clock`, `date`) or relative to `now` (`ago`). Written after hydration only: the
- * server's clock and time zone are not the viewer's, so the server renders a placeholder of one figure space.
+ * A moment in the visitor's time zone. The server does not know that zone, so it writes the moment in UTC and says so;
+ * the browser replaces it with the local time once the page is live.
  */
-export function Time({ iso, format, now }: { iso: string; format: 'clock' | 'date' | 'ago'; now?: number }) {
-  const hydrated = useSyncExternalStore(
+export function Time({ iso, style = 'full', className }: { iso: string; style?: TimeStyle; className?: string }) {
+  const text = useSyncExternalStore(
     subscribe,
-    () => true,
-    () => false,
+    () => formatTime(iso, style),
+    () => `${formatTime(iso, style, 'UTC')} UTC`,
   );
-  if (!hydrated) return <>{' '}</>;
   return (
-    <>{format === 'clock' ? clockTime(iso) : format === 'date' ? dateTime(iso) : ago(iso, now ?? Date.parse(iso))}</>
+    <time dateTime={iso} className={className}>
+      {text}
+    </time>
   );
 }

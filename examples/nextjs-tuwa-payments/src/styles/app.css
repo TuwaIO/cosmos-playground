@@ -4,142 +4,980 @@
 @import '@tuwaio/nova-payments/dist/index.css';
 @import 'tailwindcss';
 
-/* The `dark` class of the Nova themes (set before the first paint by `themeScript`) drives `dark:` too */
-@custom-variant dark (&:where(.dark, .dark *));
+/* The look of the shop is the paper and ink of Nova UI Kit, as on tuwa.io: a framed column with cross marks, a bar at the
+   start of each section, monospace headings, lines of 1 px and square forms. The colours are Nova's theme variables, so
+   a theme of your own restyles the shop and the checkout together. */
 
-/* Geist and Geist Mono come with nova-core (embedded, no font host) */
-@theme {
-  --font-sans: var(--tuwa-font-sans);
-  --font-mono: var(--tuwa-font-mono);
-}
-
-/* The one radius of the shop: the Nova variable (4px) */
-@utility rounded-shop {
-  border-radius: var(--tuwa-rounded-corners);
-}
-
-/* The neutral palette of the templates: a zinc accent, solid buttons (no gradient) */
+/* The shop is neutral: ink in place of the accent of Nova, in both themes */
 :root {
-  --tuwa-text-accent: #27272a;
-  --tuwa-text-on-accent: #ffffff;
-  --tuwa-button-gradient-from: #27272a;
-  --tuwa-button-gradient-to: var(--tuwa-button-gradient-from);
-  --tuwa-button-gradient-from-hover: #3f3f46;
-  --tuwa-button-gradient-to-hover: var(--tuwa-button-gradient-from-hover);
-  --tuwa-info-bg: #f4f4f5;
-  --tuwa-info-text: #27272a;
-  --tuwa-info-icon: #52525b;
+  --tuwa-text-accent: #101014;
+  --tuwa-text-on-accent: #faf9f7;
+  --tuwa-button-gradient-from: #101014;
+  --tuwa-button-gradient-to: #101014;
+  --tuwa-button-gradient-from-hover: #2b2c30;
+  --tuwa-button-gradient-to-hover: #2b2c30;
 
-  /* Shop-only tokens: text that stays AA (4.5:1) on the muted surfaces and in the status badges */
-  --shop-text-label: #4b5563;
-  --shop-success-text: #047857;
-  --shop-pending-text: #92400e;
-  --shop-error-text: #b91c1c;
+  /* The surfaces of the page: the paper, a raised surface and a sunken one */
+  --shop-bg: var(--tuwa-bg-secondary);
+  --shop-raised: var(--tuwa-bg-primary);
+  --shop-muted: var(--tuwa-bg-muted);
+  /* Small labels: darker than the tertiary text of Nova, to hold 4.5:1 on the paper */
+  --shop-label: #66656a;
+  --shop-shade: rgb(16 16 20 / 0.55);
+  /* The second tone of the pixel drawings and of Nova's pixel icons: a grey, not an accent */
+  --tuwa-icon-accent: #8e8e90;
 }
 
 .dark {
-  --tuwa-text-accent: #e4e4e7;
-  --tuwa-text-on-accent: #18181b;
-  --tuwa-button-gradient-from: #e4e4e7;
-  --tuwa-button-gradient-to: var(--tuwa-button-gradient-from);
-  --tuwa-button-gradient-from-hover: #d4d4d8;
-  --tuwa-button-gradient-to-hover: var(--tuwa-button-gradient-from-hover);
-  --tuwa-info-bg: #27272a;
-  --tuwa-info-text: #e4e4e7;
-  --tuwa-info-icon: #a1a1aa;
+  --tuwa-text-accent: #f2f1ee;
+  --tuwa-text-on-accent: #101014;
+  --tuwa-button-gradient-from: #f2f1ee;
+  --tuwa-button-gradient-to: #f2f1ee;
+  --tuwa-button-gradient-from-hover: #d6d5d1;
+  --tuwa-button-gradient-to-hover: #d6d5d1;
 
-  --shop-text-label: #d1d5db;
-  --shop-success-text: var(--tuwa-success-text);
-  --shop-pending-text: var(--tuwa-pending-text);
-  --shop-error-text: var(--tuwa-error-text);
+  --shop-bg: var(--tuwa-bg-primary);
+  --shop-raised: var(--tuwa-bg-secondary);
+  --shop-muted: #1b1c20;
+  --shop-label: #8a898d;
+  --shop-shade: rgb(0 0 0 / 0.7);
+  --tuwa-icon-accent: #77767a;
 }
 
-@layer base {
-  html {
-    background: var(--tuwa-bg-secondary);
-    color-scheme: light;
-  }
+/* Nova UI Kit leaves the page of the app alone: the font of the page and its scrollbar gutter are set here */
+html {
+  scrollbar-gutter: stable;
+}
 
-  html.dark {
-    color-scheme: dark;
-  }
+body {
+  font-family: var(--tuwa-font-sans);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--tuwa-text-primary);
+  background-color: var(--shop-bg);
+  background-image: repeating-linear-gradient(0deg, var(--tuwa-scanline) 0 1px, transparent 1px 4px);
+}
 
-  body {
-    background: var(--tuwa-bg-secondary);
-    color: var(--tuwa-text-primary);
-    font-size: 14px;
-  }
+/* ---------- Type ---------- */
+.shop-label {
+  margin: 0;
+  font-family: var(--tuwa-font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--shop-label);
+}
+.shop-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.shop-eyebrow::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  flex: none;
+  background: var(--tuwa-text-primary);
+}
+.shop-h1,
+.shop-h2,
+.shop-h3 {
+  margin: 0;
+  font-family: var(--tuwa-font-mono);
+}
+.shop-h1 {
+  font-size: 58px;
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+}
+.shop-h1.is-page {
+  font-size: 44px;
+}
+.shop-h2 {
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+}
+.shop-h3 {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+.shop-text {
+  margin: 0;
+  color: var(--tuwa-text-secondary);
+}
+.shop-small {
+  margin: 0;
+  font-size: 13px;
+  color: var(--tuwa-text-secondary);
+}
+.shop-mono {
+  font-family: var(--tuwa-font-mono);
+}
+.shop-price {
+  font-family: var(--tuwa-font-mono);
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+.shop-price small {
+  margin-left: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--shop-label);
+}
+.shop-link {
+  text-decoration: underline;
+  text-decoration-color: var(--tuwa-border-strong);
+  text-underline-offset: 4px;
+}
+.shop-link:hover {
+  text-decoration-color: currentColor;
+}
 
-  /* Headings in Geist Mono, as in the Quasar dashboard */
-  h1,
-  h2,
-  h3 {
-    font-family: var(--font-mono);
-  }
+/* ---------- Buttons, chips, tabs ---------- */
+.shop-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1px solid var(--tuwa-button-primary-bg);
+  background: var(--tuwa-button-primary-bg);
+  color: var(--tuwa-text-on-accent);
+  font-family: var(--tuwa-font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s;
+}
+.shop-btn:hover {
+  border-color: var(--tuwa-button-primary-bg-hover);
+  background: var(--tuwa-button-primary-bg-hover);
+}
+.shop-btn.is-2 {
+  border-color: var(--tuwa-border-strong);
+  background: transparent;
+  color: var(--tuwa-text-primary);
+}
+.shop-btn.is-2:hover {
+  background: var(--tuwa-standart-button-hover);
+}
+.shop-btn.is-wide {
+  width: 100%;
+}
+.shop-btn.is-sm {
+  min-height: 36px;
+  padding: 0 12px;
+  font-size: 11px;
+}
+.shop-btn.is-icon {
+  width: 44px;
+  flex: none;
+  padding: 0;
+}
+.shop-btn.is-icon.is-sm {
+  width: 36px;
+}
+.shop-btn:disabled,
+.shop-btn[aria-disabled='true'] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.shop-btn:focus-visible,
+.shop-tab:focus-visible,
+.shop-cart:focus-visible,
+.shop-theme:focus-visible,
+.shop-link:focus-visible,
+.shop-qty button:focus-visible {
+  outline: 2px solid var(--tuwa-text-primary);
+  outline-offset: 2px;
+}
+.shop-icon {
+  width: 16px;
+  height: 16px;
+  flex: none;
+}
+.shop-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 22px;
+  padding: 0 7px;
+  border: 1px solid var(--tuwa-border-strong);
+  font-family: var(--tuwa-font-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--tuwa-text-secondary);
+}
+.shop-chip.is-dot::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  flex: none;
+  background: currentColor;
+}
+.shop-chip.is-ok {
+  border-color: var(--tuwa-success-text);
+  color: var(--tuwa-success-text);
+}
+.shop-chip.is-warn {
+  border-color: var(--tuwa-pending-text);
+  color: var(--tuwa-pending-text);
+}
+.shop-chip.is-bad {
+  border-color: var(--tuwa-error-text);
+  color: var(--tuwa-error-text);
+}
+.shop-chip.is-ink {
+  border-color: var(--tuwa-text-primary);
+  background: var(--tuwa-text-primary);
+  color: var(--shop-bg);
+}
+.shop-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 24px;
+  flex: none;
+  padding: 0 6px;
+  background: var(--tuwa-text-primary);
+  color: var(--shop-bg);
+  font-family: var(--tuwa-font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+.shop-code {
+  padding: 3px 8px;
+  border: 1px solid var(--tuwa-border-primary);
+  background: var(--shop-muted);
+  font-family: var(--tuwa-font-mono);
+  font-size: 12.5px;
+  color: var(--tuwa-text-secondary);
+  overflow-wrap: anywhere;
+}
 
-  :focus-visible {
-    outline: 2px solid var(--tuwa-text-accent);
-    outline-offset: 2px;
+/* ---------- Header ---------- */
+.shop-header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  border-bottom: 1px solid var(--tuwa-border-primary);
+  background: color-mix(in srgb, var(--shop-bg) 86%, transparent);
+  backdrop-filter: blur(12px);
+}
+.shop-head {
+  display: flex;
+  align-items: stretch;
+  min-height: 60px;
+  padding: 0 24px;
+}
+.shop-head > * {
+  display: flex;
+  align-items: center;
+}
+.shop-brand {
+  gap: 10px;
+  padding-right: 24px;
+  border-right: 1px solid var(--tuwa-border-primary);
+}
+.shop-brand svg {
+  width: 32px;
+  height: 32px;
+}
+.shop-brand-name {
+  font-family: var(--tuwa-font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.shop-nav {
+  gap: 2px;
+  padding: 0 16px;
+}
+.shop-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 0 14px;
+  font-family: var(--tuwa-font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--tuwa-text-secondary);
+}
+.shop-tab:hover {
+  color: var(--tuwa-text-primary);
+}
+.shop-tab[aria-current='page'] {
+  background: var(--tuwa-text-primary);
+  color: var(--shop-bg);
+}
+.shop-actions {
+  gap: 10px;
+  margin-left: auto;
+}
+.shop-cart {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 12px;
+  border: 1px solid var(--tuwa-border-strong);
+  background: transparent;
+  font-family: var(--tuwa-font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.shop-cart:hover {
+  background: var(--tuwa-standart-button-hover);
+}
+.shop-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  background: var(--tuwa-text-primary);
+  color: var(--shop-bg);
+  font-size: 11px;
+  letter-spacing: 0;
+}
+.shop-theme {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  flex: none;
+  border: 1px solid var(--tuwa-border-primary);
+  background: var(--shop-raised);
+  color: var(--tuwa-text-secondary);
+  cursor: pointer;
+}
+.shop-theme:hover {
+  color: var(--tuwa-text-primary);
+}
+.shop-strip {
+  border-bottom: 1px solid var(--tuwa-border-primary);
+  background: var(--shop-muted);
+}
+.shop-strip-in {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  min-height: 40px;
+  padding: 8px 24px;
+  font-size: 13px;
+  color: var(--tuwa-text-secondary);
+}
+
+/* ---------- The framed column, section bars with cross marks ---------- */
+.shop-page {
+  padding: 0 24px;
+}
+.shop-col {
+  max-width: 1200px;
+  margin: 0 auto;
+  border-right: 1px solid var(--tuwa-border-primary);
+  border-left: 1px solid var(--tuwa-border-primary);
+}
+.shop-bar {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 24px;
+  min-height: 44px;
+  padding: 8px 32px;
+  border-top: 1px solid var(--tuwa-border-primary);
+  border-bottom: 1px solid var(--tuwa-border-primary);
+  font-family: var(--tuwa-font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--shop-label);
+}
+.shop-bar.is-first {
+  border-top: 0;
+}
+.shop-bar b {
+  font-weight: 600;
+  color: var(--tuwa-text-primary);
+}
+.shop-bar::before,
+.shop-bar::after {
+  content: '';
+  position: absolute;
+  top: -7px;
+  width: 13px;
+  height: 13px;
+  background:
+    linear-gradient(var(--tuwa-border-strong), var(--tuwa-border-strong)) center / 13px 1px no-repeat,
+    linear-gradient(var(--tuwa-border-strong), var(--tuwa-border-strong)) center / 1px 13px no-repeat;
+}
+.shop-bar::before {
+  left: -7px;
+}
+.shop-bar::after {
+  right: -7px;
+}
+.shop-bar.is-plain::before,
+.shop-bar.is-plain::after {
+  display: none;
+}
+.shop-in {
+  padding: 48px 32px;
+}
+.shop-pad {
+  padding: 28px 32px;
+}
+.shop-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+.shop-stack {
+  display: flex;
+  flex-direction: column;
+}
+.shop-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 48px;
+  align-items: start;
+}
+.shop-split.is-art {
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+}
+.shop-split.is-flush {
+  gap: 0;
+  align-items: stretch;
+}
+.shop-pane {
+  border-right: 1px solid var(--tuwa-border-primary);
+}
+/* Cells on shared lines of 1 px: the outer lines belong to the frame and the bars */
+.shop-grid {
+  display: grid;
+  overflow: hidden;
+}
+.shop-grid > * {
+  min-width: 0;
+  margin: 0 -1px -1px 0;
+  border-right: 1px solid var(--tuwa-border-primary);
+  border-bottom: 1px solid var(--tuwa-border-primary);
+}
+.shop-grid.is-boxed {
+  border-top: 1px solid var(--tuwa-border-primary);
+  border-left: 1px solid var(--tuwa-border-primary);
+}
+.shop-grid.is-boxed > * {
+  margin: 0;
+}
+.shop-grid.is-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.shop-grid.is-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.shop-cellhead {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* ---------- Art plate with corner marks ---------- */
+.shop-frame {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    linear-gradient(var(--tuwa-border-strong), var(--tuwa-border-strong)) 10px 10px / 10px 1px no-repeat,
+    linear-gradient(var(--tuwa-border-strong), var(--tuwa-border-strong)) 10px 10px / 1px 10px no-repeat,
+    linear-gradient(var(--tuwa-border-strong), var(--tuwa-border-strong)) calc(100% - 10px) 10px / 10px 1px no-repeat,
+    linear-gradient(var(--tuwa-border-strong), var(--tuwa-border-strong)) calc(100% - 10px) 10px / 1px 10px no-repeat,
+    linear-gradient(var(--tuwa-border-strong), var(--tuwa-border-strong)) 10px calc(100% - 10px) / 10px 1px no-repeat,
+    linear-gradient(var(--tuwa-border-strong), var(--tuwa-border-strong)) 10px calc(100% - 10px) / 1px 10px no-repeat,
+    linear-gradient(var(--tuwa-border-strong), var(--tuwa-border-strong)) calc(100% - 10px) calc(100% - 10px) / 10px 1px
+      no-repeat,
+    linear-gradient(var(--tuwa-border-strong), var(--tuwa-border-strong)) calc(100% - 10px) calc(100% - 10px) / 1px 10px
+      no-repeat,
+    var(--shop-muted);
+}
+.shop-art {
+  display: block;
+  flex: none;
+  width: 192px;
+  height: auto;
+}
+/* The plate of the product page: its drawing at 10 px a pixel */
+.shop-hero {
+  aspect-ratio: 5 / 4;
+  min-height: 280px;
+}
+.shop-hero .shop-art {
+  width: 320px;
+}
+
+/* ---------- Product cell, payment methods ---------- */
+.shop-prod {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px 24px 24px;
+}
+.shop-prod-art {
+  aspect-ratio: 16 / 10;
+}
+.shop-prod-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+.shop-prod-acts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+.shop-prod-acts .shop-btn {
+  padding: 0 8px;
+}
+.shop-method {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 62px;
+  padding: 12px 14px;
+  background: var(--shop-bg);
+}
+.shop-method.is-wide {
+  padding: 14px 24px;
+}
+.shop-method-icon {
+  width: 32px;
+  height: 32px;
+  flex: none;
+}
+.shop-method-name {
+  flex: 1;
+  min-width: 0;
+}
+.shop-method-name b {
+  display: block;
+  font-family: var(--tuwa-font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.shop-board-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--tuwa-text-primary);
+  color: var(--shop-bg);
+  font-family: var(--tuwa-font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.shop-board-head strong {
+  margin-right: 10px;
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+/* ---------- Rows: a name and a value, order rows, cart lines, quantity ---------- */
+.shop-kv {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--tuwa-border-secondary);
+  font-size: 14px;
+}
+.shop-kv:last-child {
+  border-bottom: 0;
+}
+.shop-kv dt {
+  color: var(--tuwa-text-secondary);
+}
+.shop-kv dd {
+  min-width: 0;
+  margin: 0;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+.shop-order {
+  display: grid;
+  grid-template-columns: minmax(0, 2.4fr) minmax(0, 1.2fr) minmax(0, 0.9fr) minmax(0, 1.3fr) 112px;
+  align-items: center;
+  gap: 8px 20px;
+  padding: 16px 32px;
+  border-bottom: 1px solid var(--tuwa-border-primary);
+}
+.shop-order:last-child {
+  border-bottom: 0;
+}
+.shop-order.is-head {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.shop-line {
+  display: grid;
+  grid-template-columns: 80px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--tuwa-border-primary);
+}
+.shop-line:last-child {
+  border-bottom: 0;
+}
+.shop-line.is-wide {
+  padding-right: 32px;
+  padding-left: 32px;
+}
+.shop-line .shop-frame {
+  width: 80px;
+  height: 80px;
+}
+.shop-line .shop-art {
+  width: 64px;
+}
+.shop-timeline-time {
+  flex: none;
+  width: 104px;
+}
+.shop-qty {
+  display: inline-flex;
+  align-items: stretch;
+  height: 44px;
+  border: 1px solid var(--tuwa-border-strong);
+}
+.shop-qty.is-sm {
+  height: 36px;
+}
+.shop-qty button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  cursor: pointer;
+}
+.shop-qty.is-sm button {
+  width: 36px;
+}
+.shop-qty button:hover:not(:disabled) {
+  background: var(--tuwa-standart-button-hover);
+}
+.shop-qty button:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+.shop-qty output {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  border-right: 1px solid var(--tuwa-border-strong);
+  border-left: 1px solid var(--tuwa-border-strong);
+  font-family: var(--tuwa-font-mono);
+  font-size: 14px;
+}
+.shop-qty.is-sm output {
+  min-width: 36px;
+}
+.shop-notice {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 20px 32px;
+  border-bottom: 1px solid var(--tuwa-border-primary);
+}
+
+/* ---------- The cart: a panel from the right, a sheet from the bottom on a phone ---------- */
+.shop-shade {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: var(--shop-shade);
+}
+.shop-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 41;
+  display: flex;
+  flex-direction: column;
+  width: 460px;
+  max-width: 100%;
+  border-left: 1px solid var(--tuwa-border-strong);
+  background-color: var(--shop-bg);
+  background-image: repeating-linear-gradient(0deg, var(--tuwa-scanline) 0 1px, transparent 1px 4px);
+  outline: none;
+}
+.shop-drawer-foot {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px;
+  border-top: 1px solid var(--tuwa-border-primary);
+  background: var(--shop-raised);
+}
+
+/* ---------- The membership card ---------- */
+.shop-card {
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  aspect-ratio: 1.586;
+  padding: 28px;
+  border: 1px solid var(--tuwa-border-primary);
+}
+.shop-card.is-member {
+  border-color: var(--tuwa-text-primary);
+}
+.shop-card-number {
+  margin: 0;
+  font-family: var(--tuwa-font-mono);
+  font-size: 38px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+/* ---------- Footer ---------- */
+.shop-foot-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding: 16px 32px;
+  border-top: 1px solid var(--tuwa-border-primary);
+}
+.shop-command {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid var(--tuwa-border-strong);
+  background: var(--shop-bg);
+}
+.shop-command code {
+  flex: 1;
+  min-width: 0;
+  padding: 12px;
+  font-family: var(--tuwa-font-mono);
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+/* ---------- Tablet ---------- */
+@media (max-width: 1000px) {
+  .shop-nav {
+    padding: 0 8px;
+  }
+  .shop-tab {
+    padding: 0 10px;
+  }
+  .shop-brand {
+    padding-right: 16px;
+  }
+  .shop-split,
+  .shop-split.is-art {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+  .shop-split.is-flush {
+    gap: 0;
+  }
+  .shop-pane {
+    border-right: 0;
+    border-bottom: 1px solid var(--tuwa-border-primary);
+  }
+  .shop-grid.is-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .shop-grid.is-3.is-steps > :last-child {
+    grid-column: span 2;
+  }
+  .shop-h1 {
+    font-size: 48px;
+  }
+  .shop-order {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1.3fr) minmax(0, 0.9fr) 112px;
+    padding: 16px 24px;
+  }
+  .shop-order > .is-date {
+    display: none;
+  }
+  .shop-in {
+    padding: 40px 24px;
+  }
+  .shop-bar,
+  .shop-pad,
+  .shop-foot-bottom,
+  .shop-notice {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+  .shop-line.is-wide {
+    padding-right: 24px;
+    padding-left: 24px;
   }
 }
 
-/* The status dot of the live events: a soft pulse while connected, none where motion is reduced */
-@keyframes shop-pulse {
-  0%,
-  100% {
-    opacity: 1;
+/* ---------- Phone: no frame, the tabs under the header ---------- */
+@media (max-width: 600px) {
+  .shop-page {
+    padding: 0;
   }
-  50% {
-    opacity: 0.35;
+  .shop-col {
+    border-right: 0;
+    border-left: 0;
   }
-}
-
-.shop-pulse {
-  animation: shop-pulse 2s ease-in-out infinite;
+  .shop-bar::before,
+  .shop-bar::after {
+    display: none;
+  }
+  .shop-in {
+    padding: 32px 16px;
+  }
+  .shop-bar,
+  .shop-foot-bottom,
+  .shop-notice {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+  .shop-pad {
+    padding: 20px 16px;
+  }
+  .shop-h1 {
+    font-size: 38px;
+  }
+  .shop-h1.is-page {
+    font-size: 34px;
+  }
+  .shop-h2 {
+    font-size: 26px;
+  }
+  .shop-grid.is-3,
+  .shop-grid.is-2 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .shop-grid.is-3.is-steps > :last-child {
+    grid-column: auto;
+  }
+  .shop-head {
+    flex-wrap: wrap;
+    min-height: 0;
+    padding: 0 16px;
+  }
+  .shop-head > * {
+    min-height: 56px;
+  }
+  .shop-brand {
+    padding-right: 0;
+    border-right: 0;
+  }
+  .shop-brand-name,
+  .shop-hide-phone {
+    display: none;
+  }
+  .shop-actions {
+    gap: 8px;
+  }
+  .shop-nav {
+    order: 3;
+    flex: 0 0 calc(100% + 32px);
+    gap: 0;
+    min-height: 44px;
+    margin: 0 -16px;
+    padding: 0 16px;
+    border-top: 1px solid var(--tuwa-border-primary);
+  }
+  .shop-nav .shop-tab {
+    flex: 1;
+    min-height: 44px;
+  }
+  .shop-cart {
+    padding: 0 10px;
+  }
+  .shop-strip-in {
+    padding: 8px 16px;
+  }
+  .shop-prod {
+    padding: 16px 16px 20px;
+  }
+  .shop-order {
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding: 16px;
+  }
+  .shop-order > .is-date {
+    display: block;
+  }
+  .shop-order > .is-act {
+    grid-column: 1 / -1;
+  }
+  .shop-line,
+  .shop-line.is-wide {
+    padding: 16px;
+  }
+  .shop-hero .shop-art {
+    width: 256px;
+  }
+  .shop-drawer {
+    top: 96px;
+    left: 0;
+    width: auto;
+    border-top: 1px solid var(--tuwa-border-strong);
+    border-left: 0;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .shop-pulse {
-    animation: none;
-  }
-}
-
-/* Drawers: a sheet from the bottom on phones, a panel from the right from 768px; no motion where it is reduced */
-@keyframes shop-fade-in {
-  from {
-    opacity: 0;
-  }
-}
-
-@keyframes shop-slide-up {
-  from {
-    transform: translateY(100%);
-  }
-}
-
-@keyframes shop-slide-left {
-  from {
-    transform: translateX(100%);
-  }
-}
-
-.shop-overlay[data-state='open'] {
-  animation: shop-fade-in 160ms ease-out;
-}
-
-.shop-drawer[data-state='open'] {
-  animation: shop-slide-up 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-@media (min-width: 768px) {
-  .shop-drawer[data-state='open'] {
-    animation-name: shop-slide-left;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .shop-overlay[data-state='open'],
-  .shop-drawer[data-state='open'] {
-    animation: none;
+  .shop-btn {
+    transition: none;
   }
 }

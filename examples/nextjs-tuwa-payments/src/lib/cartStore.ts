@@ -63,15 +63,17 @@ export const cartStore = {
   },
   getSnapshot: (): CartLine[] => (cache ??= read()),
   getServerSnapshot: (): CartLine[] => EMPTY,
-  add(productId: string) {
+  add(productId: string, quantity = 1) {
     const lines = cartStore.getSnapshot();
     const found = lines.find((line) => line.productId === productId);
     write(
       found
         ? lines.map((line) =>
-            line.productId === productId ? { ...line, quantity: Math.min(MAX_QUANTITY, line.quantity + 1) } : line,
+            line.productId === productId
+              ? { ...line, quantity: Math.min(MAX_QUANTITY, line.quantity + quantity) }
+              : line,
           )
-        : [...lines, { productId, quantity: 1 }],
+        : [...lines, { productId, quantity: Math.min(MAX_QUANTITY, quantity) }],
     );
   },
   setQuantity(productId: string, quantity: number) {

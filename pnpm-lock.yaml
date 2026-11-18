@@ -688,9 +688,6 @@ importers:
 
   examples/nextjs-tuwa-payments:
     dependencies:
-      '@heroicons/react':
-        specifier: ^2.2.0
-        version: 2.2.0(react@19.3.1)
       '@radix-ui/react-dialog':
         specifier: ^1.3.1
         version: 1.3.1(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
@@ -718,9 +715,12 @@ importers:
       '@tuwaio/nova-core':
         specifier: ^0.16.0
         version: 0.16.0(@heroicons/react@2.2.0(react@19.3.1))(@radix-ui/react-dialog@1.3.1(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@tuwaio/orbit-core@0.6.2)(@web3icons/common@0.11.54)(@web3icons/react@4.1.25(react@19.3.1))(clsx@2.1.1)(framer-motion@14.14.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)(tailwind-merge@3.7.0)
+      '@tuwaio/nova-icons':
+        specifier: ^0.1.3
+        version: 0.1.3(react@19.3.1)
       '@tuwaio/nova-payments':
-        specifier: ^0.0.1
-        version: 0.0.1(6d5a07bbe9eb60297fe793f2109ec0f2)
+        specifier: ^0.6.1
+        version: 0.6.1(1967736b5648aab97629ff580441135c)
       '@tuwaio/nova-transactions':
         specifier: ^0.16.0
         version: 0.16.0(@tuwaio/nova-core@0.16.0(@heroicons/react@2.2.0(react@19.3.1))(@radix-ui/react-dialog@1.3.1(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@tuwaio/orbit-core@0.6.2)(@web3icons/common@0.11.54)(@web3icons/react@4.1.25(react@19.3.1))(clsx@2.1.1)(framer-motion@14.14.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)(tailwind-merge@3.7.0))(@tuwaio/orbit-core@0.6.2)(@tuwaio/pulsar-core@0.12.5(@tuwaio/orbit-core@0.6.2)(dayjs@1.11.23)(immer@11.2.10)(zustand@5.1.0(@types/react@19.3.0)(immer@11.2.10)(react@19.3.1)))(dayjs@1.11.23)(framer-motion@14.14.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-toastify@11.2.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)
@@ -746,8 +746,8 @@ importers:
         specifier: ^0.11.3
         version: 0.11.3(@solana/kit@8.6.0(typescript@6.0.3))(@tuwaio/orbit-core@0.6.2)(@tuwaio/orbit-solana@0.7.4(@solana/kit@8.6.0(typescript@6.0.3))(@tuwaio/orbit-core@0.6.2)(@wallet-standard/app@1.1.1)(@wallet-standard/ui-core@1.0.1)(@wallet-standard/ui-registry@1.1.1))(@tuwaio/pulsar-core@0.12.5(@tuwaio/orbit-core@0.6.2)(dayjs@1.11.23)(immer@11.2.10)(zustand@5.1.0(@types/react@19.3.0)(immer@11.2.10)(react@19.3.1)))(dayjs@1.11.23)
       '@tuwaio/quasar-sdk':
-        specifier: ^0.8.0
-        version: 0.8.0(@tuwaio/pulsar-core@0.12.5(@tuwaio/orbit-core@0.6.2)(dayjs@1.11.23)(immer@11.2.10)(zustand@5.1.0(@types/react@19.3.0)(immer@11.2.10)(react@19.3.1)))(@tuwaio/siwx-react@0.6.7(@tuwaio/orbit-core@0.6.2)(@tuwaio/siwx-core@0.7.3(@tuwaio/orbit-core@0.6.2))(immer@11.2.10)(react@19.3.1)(zustand@5.1.0(@types/react@19.3.0)(immer@11.2.10)(react@19.3.1)))(zustand@5.1.0(@types/react@19.3.0)(immer@11.2.10)(react@19.3.1))
+        specifier: ^0.14.1
+        version: 0.14.1(@tuwaio/pulsar-core@0.12.5(@tuwaio/orbit-core@0.6.2)(dayjs@1.11.23)(immer@11.2.10)(zustand@5.1.0(@types/react@19.3.0)(immer@11.2.10)(react@19.3.1)))(@tuwaio/siwx-react@0.6.7(@tuwaio/orbit-core@0.6.2)(@tuwaio/siwx-core@0.7.3(@tuwaio/orbit-core@0.6.2))(immer@11.2.10)(react@19.3.1)(zustand@5.1.0(@types/react@19.3.0)(immer@11.2.10)(react@19.3.1)))(zustand@5.1.0(@types/react@19.3.0)(immer@11.2.10)(react@19.3.1))
       '@tuwaio/satellite-core':
         specifier: ^0.12.1
         version: 0.12.1(@tuwaio/orbit-core@0.6.2)(immer@11.2.10)(zustand@5.1.0(@types/react@19.3.0)(immer@11.2.10)(react@19.3.1))
@@ -882,8 +882,8 @@ importers:
         specifier: 6.0.3
         version: 6.0.3
       typescript-eslint:
-        specifier: ^8.72.2
-        version: 8.72.2(eslint@10.15.0(jiti@2.7.0))(typescript@6.0.3)
+        specifier: ^8.73.0
+        version: 8.73.0(eslint@10.15.0(jiti@2.7.0))(typescript@6.0.3)
 
   examples/nextjs-tuwa-quasar:
     dependencies:
@@ -3066,20 +3066,19 @@ packages:
     peerDependencies:
       react: '>=19.2.3'
 
-  '@tuwaio/nova-payments@0.0.1':
-    resolution: {integrity: sha512-NcZOQEc3qrBycnA7HRVY9tBDhie3MLEsh/XG/R9PM2A71CLVkZ/+gFgeDBODVVolhMSb/MIDfCzZO+l7cI1wyg==}
+  '@tuwaio/nova-payments@0.6.1':
+    resolution: {integrity: sha512-li3MxeJIfSlmEFYEFNhqmPGIAbnK5qRyPJ1FVTnxBtArK7eCulHjclDHQnCIrGnGvO0V1W2U62deU570caZYHg==}
     peerDependencies:
-      '@heroicons/react': 2.x.x
       '@solana-program/system': '>=0.15'
       '@solana-program/token': '>=0.17'
       '@solana/kit': '>=8.2'
-      '@tuwaio/nova-connect': '>=0.13'
-      '@tuwaio/nova-core': '>=0.13'
-      '@tuwaio/nova-transactions': '>=0.13'
+      '@tuwaio/nova-connect': '>=0.15'
+      '@tuwaio/nova-core': '>=0.15'
+      '@tuwaio/nova-transactions': '>=0.15'
       '@tuwaio/orbit-core': '>=0.6.2'
       '@tuwaio/orbit-solana': '>=0.5'
       '@tuwaio/pulsar-core': '>=0.12'
-      '@tuwaio/quasar-sdk': '>=0.8.0'
+      '@tuwaio/quasar-sdk': '>=0.13.0'
       '@tuwaio/satellite-core': '>=0.12'
       '@tuwaio/satellite-react': '>=0.10'
       '@wagmi/core': 3.x.x
@@ -3176,21 +3175,6 @@ packages:
 
   '@tuwaio/quasar-sdk@0.14.1':
     resolution: {integrity: sha512-ig3GQ73F1maQrn5Jz9mmNwQJOcBhYVMKWV+6w1dz/FWTgSPaK8YmTAQQvUSMpVkTb3JgWTyrrWl14sT/ZBrMTQ==}
-    hasBin: true
-    peerDependencies:
-      '@tuwaio/pulsar-core': '>=0.10'
-      '@tuwaio/siwx-react': '>=0.5'
-      zustand: 5.x.x
-    peerDependenciesMeta:
-      '@tuwaio/pulsar-core':
-        optional: true
-      '@tuwaio/siwx-react':
-        optional: true
-      zustand:
-        optional: true
-
-  '@tuwaio/quasar-sdk@0.8.0':
-    resolution: {integrity: sha512-SKOq/s2udE+02qsJGl6A1z+4E0ZT6DJ+p/sYL67pErzFZjRMTXHcUHsdYE3xZhxUWxhcSgBGciNeaadqlKI5XA==}
     hasBin: true
     peerDependencies:
       '@tuwaio/pulsar-core': '>=0.10'
@@ -3390,8 +3374,23 @@ packages:
       eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
       typescript: '>=4.8.4 <6.1.0'
 
+  '@typescript-eslint/eslint-plugin@8.73.0':
+    resolution: {integrity: sha512-UkygMFer53Yzn29MCYFTHf34hGXf5KJhiDWfIm1tXtXRrym1CS6l5H9Y3yCtPWChpC0/f93H88gdj8tN0dd4kw==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      '@typescript-eslint/parser': ^8.73.0
+      eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
+      typescript: '>=4.8.4 <6.1.0'
+
   '@typescript-eslint/parser@8.72.2':
     resolution: {integrity: sha512-llP+T1YuJOLlxEciP6OyQGtz5SMxyn+9LA2BvZw5RmToGVa1y4beEDVQL6Gje7T5WFYh19WREjDCN9Ev4gm5AA==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
+      typescript: '>=4.8.4 <6.1.0'
+
+  '@typescript-eslint/parser@8.73.0':
+    resolution: {integrity: sha512-AuL45bVcmssHfZ3Di3cs9Q0l4gBm4ZFVrJOQEE7VpqW+PVgQaEwSwazz4TVIiFabXkk6U51EprYDwqw+HR8ePw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
@@ -3403,12 +3402,28 @@ packages:
     peerDependencies:
       typescript: '>=4.8.4 <6.1.0'
 
+  '@typescript-eslint/project-service@8.73.0':
+    resolution: {integrity: sha512-/pEf8Rc4Mjk+qJnY0uO1+Gadeal8uv50xpuic+srG2vIVatA0XxvWMUeMtFvs6OCHqftiQ7/+qH4aehG5stzIA==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      typescript: '>=4.8.4 <6.1.0'
+
   '@typescript-eslint/scope-manager@8.72.2':
     resolution: {integrity: sha512-iIoMJ6/8c1/QpFNyFjU0d1YzPco4MsZjQw0k3V+vfzNWAFmUmvhlyMoYEoYYDQZXc+J6Gi1X5XcxlzW2taIIGQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
+  '@typescript-eslint/scope-manager@8.73.0':
+    resolution: {integrity: sha512-/TjD738Iq2rzj5z0ixVOi+TsvgjAzZPLPaH1yWdDBytR/HTR5gMpyYWZeCe5WTQZLwk3ho8AV7U3muoQCRtXBQ==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
   '@typescript-eslint/tsconfig-utils@8.72.2':
     resolution: {integrity: sha512-+h3iCgZXuTNtoLXcnnjP12ZUHLMqoUcIHPfQrFEXTUqvb9dF8QK9b5nv5VtSo5fLkdHuks8ehbTzZj3rImAm9w==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      typescript: '>=4.8.4 <6.1.0'
+
+  '@typescript-eslint/tsconfig-utils@8.73.0':
+    resolution: {integrity: sha512-lmtCFOfYaJfpqZywGuXi4FpNtE+NQ+YLe3T0K9rtEDcW8ZuGWvfI++pj8r05sYMI8vWT2CYK4rWyedmD6Rp4og==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       typescript: '>=4.8.4 <6.1.0'
@@ -3420,8 +3435,19 @@ packages:
       eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
       typescript: '>=4.8.4 <6.1.0'
 
+  '@typescript-eslint/type-utils@8.73.0':
+    resolution: {integrity: sha512-MOC9i4xy1F7KcDde7Ip8jf1SrRiALb2Km4UWxGNjUE2YlhjIEo1ayE27GHIwIQyfWuHTmEonQT14uyurlyC6aA==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
+      typescript: '>=4.8.4 <6.1.0'
+
   '@typescript-eslint/types@8.72.2':
     resolution: {integrity: sha512-Xfn37OLZx03+PCU7qWx9DTv2FCRh1E6fk2+wONeNY15HXIwtcwuveaSwVpGAUptkNmPQegRxW5JyRel9T7wrog==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@typescript-eslint/types@8.73.0':
+    resolution: {integrity: sha512-O/1ytYzflF16QDKXx4/qOXg1IuZp+n7hr9t+S0nv7N/2Tl8rJiNCshztV1gcSUvHbPtoX3+zmNbtSAyVbzxVfw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@typescript-eslint/typescript-estree@8.72.2':
@@ -3430,6 +3456,16 @@ packages:
     peerDependencies:
       typescript: '>=4.8.4 <6.1.0'
 
+  '@typescript-eslint/typescript-estree@8.73.0':
+    resolution: {integrity: sha512-InjlBkSdWceIwIBWSwS3ENUp+i0O02PGX3Zv2wnihWJC1WDVGvG7mTHuf8b57uAaITj94d6tRPDH+sUEtXdRQQ==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      '@typescript/native': npm:typescript@>=7.1.0-dev.20261009.1 || >=7.1.0-beta <7.1.0-dev
+      typescript: '>=4.8.4 <6.1.0'
+    peerDependenciesMeta:
+      '@typescript/native':
+        optional: true
+
   '@typescript-eslint/utils@8.72.2':
     resolution: {integrity: sha512-hv3eRYbpPbbpezuax1EfGrzpa3C4ySgNZkPUkLOWOAjU8HsOKowEDAr8C7nsNl1C+SBSKDpvno6VKHnlhvp9iA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -3437,8 +3473,19 @@ packages:
       eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
       typescript: '>=4.8.4 <6.1.0'
 
+  '@typescript-eslint/utils@8.73.0':
+    resolution: {integrity: sha512-j2SVJJvVkXdUL0WcEzo4vEH1mO1vIi8KlVukcYA2MgMZvYN2LlZR4PmsW+GTSxSW24j6Q/EP7+MOifLtg5hmsA==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
+      typescript: '>=4.8.4 <6.1.0'
+
   '@typescript-eslint/visitor-keys@8.72.2':
     resolution: {integrity: sha512-NAGrjn0Pitjqzq/GkgMC4kBYm233PQ8GffyQ9+kTA3AlNQYEzOf25EIM02BAHZv5FRJSpHpJk+OGUxVkOB93GQ==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@typescript-eslint/visitor-keys@8.73.0':
+    resolution: {integrity: sha512-k4lsFVpRZICbltkIEEH4hZRkwXkqDF1GHBpClKQOHQY+RkoZAAuyc1ci3I6p+CB6v3U4jaHIUshc4RzzQXZWLg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@vitejs/plugin-react@6.3.0':
@@ -4906,6 +4953,13 @@ packages:
       eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
       typescript: '>=4.8.4 <6.1.0'
 
+  typescript-eslint@8.73.0:
+    resolution: {integrity: sha512-+EnKy9rkYPun4l+kG2bDuYWQ6y1tGVgdR/tY1U9AC6h21CjEwOoc7gsjwe0FXB8uWFzk4QiCFbuRWgX758PiAg==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
+      typescript: '>=4.8.4 <6.1.0'
+
   typescript@6.0.3:
     resolution: {integrity: sha512-y2TvuxSZPDyQakkFRPZHKFm+KKVqIisdg9/CZwm9ftvKXLP8NRWj38/ODjNbr43SsoXqNuAisEf1GdCxqWcdBw==}
     engines: {node: '>=14.17'}
@@ -5569,6 +5623,7 @@ snapshots:
   '@heroicons/react@2.2.0(react@19.3.1)':
     dependencies:
       react: 19.3.1
+    optional: true
 
   '@humanfs/core@0.19.2':
     dependencies:
@@ -5785,7 +5840,6 @@ snapshots:
   '@noble/curves@1.9.7':
     dependencies:
       '@noble/hashes': 1.8.0
-    optional: true
 
   '@noble/ed25519@3.2.0': {}
 
@@ -7584,15 +7638,16 @@ snapshots:
     dependencies:
       react: 19.3.1
 
-  '@tuwaio/nova-payments@0.0.1(6d5a07bbe9eb60297fe793f2109ec0f2)':
+  '@tuwaio/nova-payments@0.6.1(1967736b5648aab97629ff580441135c)':
     dependencies:
-      '@heroicons/react': 2.2.0(react@19.3.1)
+      '@noble/curves': 1.9.7
       '@tuwaio/nova-connect': 0.16.0(102197a1bb7ac1f5a658c99c6d5222d3)
       '@tuwaio/nova-core': 0.16.0(@heroicons/react@2.2.0(react@19.3.1))(@radix-ui/react-dialog@1.3.1(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@tuwaio/orbit-core@0.6.2)(@web3icons/common@0.11.54)(@web3icons/react@4.1.25(react@19.3.1))(clsx@2.1.1)(framer-motion@14.14.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)(tailwind-merge@3.7.0)
+      '@tuwaio/nova-icons': 0.1.3(react@19.3.1)
       '@tuwaio/nova-transactions': 0.16.0(@tuwaio/nova-core@0.16.0(@heroicons/react@2.2.0(react@19.3.1))(@radix-ui/react-dialog@1.3.1(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@tuwaio/orbit-core@0.6.2)(@web3icons/common@0.11.54)(@web3icons/react@4.1.25(react@19.3.1))(clsx@2.1.1)(framer-motion@14.14.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)(tailwind-merge@3.7.0))(@tuwaio/orbit-core@0.6.2)(@tuwaio/pulsar-core@0.12.5(@tuwaio/orbit-core@0.6.2)(dayjs@1.11.23)(immer@11.2.10)(zustand@5.1.0(@types/react@19.3.0)(immer@11.2.10)(react@19.3.1)))(dayjs@1.11.23)(framer-motion@14.14.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-toastify@11.2.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)
       '@tuwaio/orbit-core': 0.6.2
       '@tuwaio/pulsar-core': 0.12.5(@tuwaio/orbit-core@0.6.2)(dayjs@1.11.23)(immer@11.2.10)(zustand@5.1.0(@types/react@19.3.0)(immer@11.2.10)(react@19.3.1))
-      '@tuwaio/quasar-sdk': 0.8.0(@tuwaio/pulsar-core@0.12.5(@tuwaio/orbit-core@0.6.2)(dayjs@1.11.23)(immer@11.2.10)(zustand@5.1.0(@types/react@19.3.0)(immer@11.2.10)(react@19.3.1)))(@tuwaio/siwx-react@0.6.7(@tuwaio/orbit-core@0.6.2)(@tuwaio/siwx-core@0.7.3(@tuwaio/orbit-core@0.6.2))(immer@11.2.10)(react@19.3.1)(zustand@5.1.0(@types/react@19.3.0)(immer@11.2.10)(react@19.3.1)))(zustand@5.1.0(@types/react@19.3.0)(immer@11.2.10)(react@19.3.1))
+      '@tuwaio/quasar-sdk': 0.14.1(@tuwaio/pulsar-core@0.12.5(@tuwaio/orbit-core@0.6.2)(dayjs@1.11.23)(immer@11.2.10)(zustand@5.1.0(@types/react@19.3.0)(immer@11.2.10)(react@19.3.1)))(@tuwaio/siwx-react@0.6.7(@tuwaio/orbit-core@0.6.2)(@tuwaio/siwx-core@0.7.3(@tuwaio/orbit-core@0.6.2))(immer@11.2.10)(react@19.3.1)(zustand@5.1.0(@types/react@19.3.0)(immer@11.2.10)(react@19.3.1)))(zustand@5.1.0(@types/react@19.3.0)(immer@11.2.10)(react@19.3.1))
       '@tuwaio/satellite-core': 0.12.1(@tuwaio/orbit-core@0.6.2)(immer@11.2.10)(zustand@5.1.0(@types/react@19.3.0)(immer@11.2.10)(react@19.3.1))
       '@tuwaio/satellite-react': 0.10.5(bcede0260c0d408d4f792d9b1cbf2c04)
       framer-motion: 14.14.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
@@ -7663,14 +7718,6 @@ snapshots:
       dayjs: 1.11.23
 
   '@tuwaio/quasar-sdk@0.14.1(@tuwaio/pulsar-core@0.12.5(@tuwaio/orbit-core@0.6.2)(dayjs@1.11.23)(immer@11.2.10)(zustand@5.1.0(@types/react@19.3.0)(immer@11.2.10)(react@19.3.1)))(@tuwaio/siwx-react@0.6.7(@tuwaio/orbit-core@0.6.2)(@tuwaio/siwx-core@0.7.3(@tuwaio/orbit-core@0.6.2))(immer@11.2.10)(react@19.3.1)(zustand@5.1.0(@types/react@19.3.0)(immer@11.2.10)(react@19.3.1)))(zustand@5.1.0(@types/react@19.3.0)(immer@11.2.10)(react@19.3.1))':
-    dependencies:
-      ofetch: 1.5.1
-    optionalDependencies:
-      '@tuwaio/pulsar-core': 0.12.5(@tuwaio/orbit-core@0.6.2)(dayjs@1.11.23)(immer@11.2.10)(zustand@5.1.0(@types/react@19.3.0)(immer@11.2.10)(react@19.3.1))
-      '@tuwaio/siwx-react': 0.6.7(@tuwaio/orbit-core@0.6.2)(@tuwaio/siwx-core@0.7.3(@tuwaio/orbit-core@0.6.2))(immer@11.2.10)(react@19.3.1)(zustand@5.1.0(@types/react@19.3.0)(immer@11.2.10)(react@19.3.1))
-      zustand: 5.1.0(@types/react@19.3.0)(immer@11.2.10)(react@19.3.1)
-
-  '@tuwaio/quasar-sdk@0.8.0(@tuwaio/pulsar-core@0.12.5(@tuwaio/orbit-core@0.6.2)(dayjs@1.11.23)(immer@11.2.10)(zustand@5.1.0(@types/react@19.3.0)(immer@11.2.10)(react@19.3.1)))(@tuwaio/siwx-react@0.6.7(@tuwaio/orbit-core@0.6.2)(@tuwaio/siwx-core@0.7.3(@tuwaio/orbit-core@0.6.2))(immer@11.2.10)(react@19.3.1)(zustand@5.1.0(@types/react@19.3.0)(immer@11.2.10)(react@19.3.1)))(zustand@5.1.0(@types/react@19.3.0)(immer@11.2.10)(react@19.3.1))':
     dependencies:
       ofetch: 1.5.1
     optionalDependencies:
@@ -7875,6 +7922,23 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@typescript-eslint/eslint-plugin@8.73.0(@typescript-eslint/parser@8.73.0(eslint@10.15.0(jiti@2.7.0))(typescript@6.0.3))(eslint@10.15.0(jiti@2.7.0))(typescript@6.0.3)':
+    dependencies:
+      '@eslint-community/regexpp': 4.12.2
+      '@typescript-eslint/parser': 8.73.0(eslint@10.15.0(jiti@2.7.0))(typescript@6.0.3)
+      '@typescript-eslint/scope-manager': 8.73.0
+      '@typescript-eslint/type-utils': 8.73.0(eslint@10.15.0(jiti@2.7.0))(typescript@6.0.3)
+      '@typescript-eslint/utils': 8.73.0(eslint@10.15.0(jiti@2.7.0))(typescript@6.0.3)
+      '@typescript-eslint/visitor-keys': 8.73.0
+      eslint: 10.15.0(jiti@2.7.0)
+      ignore: 7.0.12
+      natural-compare: 1.4.0
+      ts-api-utils: 2.5.0(typescript@6.0.3)
+      typescript: 6.0.3
+    transitivePeerDependencies:
+      - '@typescript/native'
+      - supports-color
+
   '@typescript-eslint/parser@8.72.2(eslint@10.15.0(jiti@2.7.0))(typescript@6.0.3)':
     dependencies:
       '@typescript-eslint/scope-manager': 8.72.2
@@ -7887,10 +7951,32 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@typescript-eslint/parser@8.73.0(eslint@10.15.0(jiti@2.7.0))(typescript@6.0.3)':
+    dependencies:
+      '@typescript-eslint/scope-manager': 8.73.0
+      '@typescript-eslint/types': 8.73.0
+      '@typescript-eslint/typescript-estree': 8.73.0(typescript@6.0.3)
+      '@typescript-eslint/visitor-keys': 8.73.0
+      debug: 4.4.3
+      eslint: 10.15.0(jiti@2.7.0)
+      typescript: 6.0.3
+    transitivePeerDependencies:
+      - '@typescript/native'
+      - supports-color
+
   '@typescript-eslint/project-service@8.72.2(typescript@6.0.3)':
     dependencies:
       '@typescript-eslint/tsconfig-utils': 8.72.2(typescript@6.0.3)
       '@typescript-eslint/types': 8.72.2
+      debug: 4.4.3
+      typescript: 6.0.3
+    transitivePeerDependencies:
+      - supports-color
+
+  '@typescript-eslint/project-service@8.73.0(typescript@6.0.3)':
+    dependencies:
+      '@typescript-eslint/tsconfig-utils': 8.73.0(typescript@6.0.3)
+      '@typescript-eslint/types': 8.73.0
       debug: 4.4.3
       typescript: 6.0.3
     transitivePeerDependencies:
@@ -7901,7 +7987,16 @@ snapshots:
       '@typescript-eslint/types': 8.72.2
       '@typescript-eslint/visitor-keys': 8.72.2
 
+  '@typescript-eslint/scope-manager@8.73.0':
+    dependencies:
+      '@typescript-eslint/types': 8.73.0
+      '@typescript-eslint/visitor-keys': 8.73.0
+
   '@typescript-eslint/tsconfig-utils@8.72.2(typescript@6.0.3)':
+    dependencies:
+      typescript: 6.0.3
+
+  '@typescript-eslint/tsconfig-utils@8.73.0(typescript@6.0.3)':
     dependencies:
       typescript: 6.0.3
 
@@ -7917,7 +8012,22 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@typescript-eslint/type-utils@8.73.0(eslint@10.15.0(jiti@2.7.0))(typescript@6.0.3)':
+    dependencies:
+      '@typescript-eslint/types': 8.73.0
+      '@typescript-eslint/typescript-estree': 8.73.0(typescript@6.0.3)
+      '@typescript-eslint/utils': 8.73.0(eslint@10.15.0(jiti@2.7.0))(typescript@6.0.3)
+      debug: 4.4.3
+      eslint: 10.15.0(jiti@2.7.0)
+      ts-api-utils: 2.5.0(typescript@6.0.3)
+      typescript: 6.0.3
+    transitivePeerDependencies:
+      - '@typescript/native'
+      - supports-color
+
   '@typescript-eslint/types@8.72.2': {}
+
+  '@typescript-eslint/types@8.73.0': {}
 
   '@typescript-eslint/typescript-estree@8.72.2(typescript@6.0.3)':
     dependencies:
@@ -7927,6 +8037,21 @@ snapshots:
       '@typescript-eslint/visitor-keys': 8.72.2
       debug: 4.4.3
       minimatch: 10.2.6
+      semver: 7.8.5
+      tinyglobby: 0.2.17
+      ts-api-utils: 2.5.0(typescript@6.0.3)
+      typescript: 6.0.3
+    transitivePeerDependencies:
+      - supports-color
+
+  '@typescript-eslint/typescript-estree@8.73.0(typescript@6.0.3)':
+    dependencies:
+      '@typescript-eslint/project-service': 8.73.0(typescript@6.0.3)
+      '@typescript-eslint/tsconfig-utils': 8.73.0(typescript@6.0.3)
+      '@typescript-eslint/types': 8.73.0
+      '@typescript-eslint/visitor-keys': 8.73.0
+      debug: 4.4.3
+      minimatch: 11.0.8
       semver: 7.8.5
       tinyglobby: 0.2.17
       ts-api-utils: 2.5.0(typescript@6.0.3)
@@ -7945,9 +8070,26 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@typescript-eslint/utils@8.73.0(eslint@10.15.0(jiti@2.7.0))(typescript@6.0.3)':
+    dependencies:
+      '@eslint-community/eslint-utils': 4.10.1(eslint@10.15.0(jiti@2.7.0))
+      '@typescript-eslint/scope-manager': 8.73.0
+      '@typescript-eslint/types': 8.73.0
+      '@typescript-eslint/typescript-estree': 8.73.0(typescript@6.0.3)
+      eslint: 10.15.0(jiti@2.7.0)
+      typescript: 6.0.3
+    transitivePeerDependencies:
+      - '@typescript/native'
+      - supports-color
+
   '@typescript-eslint/visitor-keys@8.72.2':
     dependencies:
       '@typescript-eslint/types': 8.72.2
+      eslint-visitor-keys: 5.0.1
+
+  '@typescript-eslint/visitor-keys@8.73.0':
+    dependencies:
+      '@typescript-eslint/types': 8.73.0
       eslint-visitor-keys: 5.0.1
 
   '@vitejs/plugin-react@6.3.0(vite@8.3.8(@types/node@26.6.6)(jiti@2.7.0))':
@@ -9944,6 +10086,18 @@ snapshots:
       eslint: 10.15.0(jiti@2.7.0)
       typescript: 6.0.3
     transitivePeerDependencies:
+      - supports-color
+
+  typescript-eslint@8.73.0(eslint@10.15.0(jiti@2.7.0))(typescript@6.0.3):
+    dependencies:
+      '@typescript-eslint/eslint-plugin': 8.73.0(@typescript-eslint/parser@8.73.0(eslint@10.15.0(jiti@2.7.0))(typescript@6.0.3))(eslint@10.15.0(jiti@2.7.0))(typescript@6.0.3)
+      '@typescript-eslint/parser': 8.73.0(eslint@10.15.0(jiti@2.7.0))(typescript@6.0.3)
+      '@typescript-eslint/typescript-estree': 8.73.0(typescript@6.0.3)
+      '@typescript-eslint/utils': 8.73.0(eslint@10.15.0(jiti@2.7.0))(typescript@6.0.3)
+      eslint: 10.15.0(jiti@2.7.0)
+      typescript: 6.0.3
+    transitivePeerDependencies:
+      - '@typescript/native'
       - supports-color
 
   typescript@6.0.3: {}

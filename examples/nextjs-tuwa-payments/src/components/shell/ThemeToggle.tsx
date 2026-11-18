@@ -1,6 +1,6 @@
 'use client';
 
-import { MoonIcon, SunIcon } from '@heroicons/react/24/outline';
+import { MoonIcon, SunIcon } from '@tuwaio/nova-icons/24/outline';
 import { useSyncExternalStore } from 'react';
 
 import { THEME_STORAGE_KEY } from '@/configs/theme';
@@ -32,7 +32,7 @@ export function ThemeToggle() {
       type="button"
       onClick={toggleTheme}
       aria-label={isDark ? 'Switch to the light theme' : 'Switch to the dark theme'}
-      className="inline-flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-shop border border-[var(--tuwa-border-primary)] bg-[var(--tuwa-bg-primary)] text-[var(--tuwa-text-secondary)] transition-colors hover:bg-[var(--tuwa-bg-muted)] hover:text-[var(--tuwa-text-primary)]"
+      className="shop-theme"
     >
       {isDark ? <SunIcon className="h-5 w-5" aria-hidden /> : <MoonIcon className="h-5 w-5" aria-hidden />}
     </button>

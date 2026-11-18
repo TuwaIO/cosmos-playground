@@ -3,18 +3,23 @@ import '@/styles/app.css';
 import type { Metadata } from 'next';
 import { ReactNode } from 'react';
 
-import { readAcceptedMethods } from '@/app/actions';
-import { AppShell } from '@/components/shell/AppShell';
+import { CartDrawer } from '@/components/shell/CartDrawer';
+import { Footer } from '@/components/shell/Footer';
+import { Header } from '@/components/shell/Header';
+import { ShopError } from '@/components/shell/ShopError';
 import { ShopProvider } from '@/components/shell/ShopProvider';
+import { TestStrip } from '@/components/shell/TestStrip';
 import { themeScript } from '@/configs/theme';
-import { prepareDemo, shopMode } from '@/lib/mode';
-import { getOrderBook } from '@/lib/orders';
+import { networkName } from '@/lib/methods';
+import { isMerchantMode } from '@/lib/mode';
+import { isTestKey } from '@/lib/quasar';
+import { readMethods } from '@/lib/shop';
 import { Providers } from '@/providers';
 
 export const metadata: Metadata = {
-  title: 'Cosmos Store · Quasar Payments',
+  title: { default: 'Cosmos Store', template: '%s · Cosmos Store' },
   description:
-    'A Next.js shop that sells with Quasar Payments: invoices and subscriptions issued on the server, the Nova Payments checkout for EVM and Solana wallets, and webhooks that fulfil the orders.',
+    'A demo shop on Quasar Payments: every order is an invoice issued on the server and paid in test tokens from an EVM or Solana wallet, in the Nova Payments checkout.',
   manifest: '/manifest.json',
   appleWebApp: {
     title: 'Cosmos Store',
@@ -24,7 +29,7 @@ export const metadata: Metadata = {
   },
 };
 
-// Every page reads the methods and the in-memory order book of this server: nothing is prerendered at build time
+// Every page reads the payment methods of the Quasar app and the visitor's cookie: nothing is prerendered at build time
 export const dynamic = 'force-dynamic';
 
 export default async function RootLayout({
@@ -32,9 +37,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: ReactNode;
 }>) {
-  prepareDemo();
-  const methods = await readAcceptedMethods();
-  const chains = methods.ok ? methods.methods.map((method) => method.chainId) : [];
+  const methods = await readMethods();
+  const networks = methods.ok ? [...new Set(methods.methods.map((method) => networkName(method.chainId)))] : [];
 
   return (
     // suppressHydrationWarning: themeScript adds the `dark` class before React hydrates
@@ -44,8 +48,15 @@ export default async function RootLayout({
       </head>
       <body className="min-h-dvh antialiased">
         <Providers>
-          <ShopProvider mode={shopMode()} chains={chains} initialBook={getOrderBook()}>
-            <AppShell>{children}</AppShell>
+          <ShopProvider sellable={methods.ok && methods.methods.length > 0}>
+            <Header />
+            <TestStrip testMode={isTestKey()} networks={networks} merchant={isMerchantMode()} />
+            <ShopError />
+            <main id="main" className="shop-page">
+              <div className="shop-col">{children}</div>
+            </main>
+            <Footer networks={networks} />
+            <CartDrawer />
           </ShopProvider>
         </Providers>
       </body>
