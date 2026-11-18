@@ -47,6 +47,7 @@ async function main() {
     'nextjs-evm',
     'vite-tuwa',
     'nextjs-tuwa-not-sdk',
+    'nextjs-tuwa-payments',
   ];
 
   const templateResponse = await prompts({
