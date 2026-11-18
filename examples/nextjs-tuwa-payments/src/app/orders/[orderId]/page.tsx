@@ -14,7 +14,7 @@ import { PRODUCTS } from '@/lib/catalog';
 import { shorten } from '@/lib/format';
 import { explorerTxUrl, networkName } from '@/lib/methods';
 import { isMerchantMode } from '@/lib/mode';
-import { findOrder, orderTimeline, type TimelineEntry } from '@/lib/orders';
+import { findOrder, orderTimeline, type TimelineEntry, type WaitingRefund, waitingRefunds } from '@/lib/orders';
 import { readMethods } from '@/lib/shop';
 import { IN_FLIGHT, PAYABLE, SETTLED } from '@/lib/status';
 import { readVisitor } from '@/lib/visitor';
@@ -47,6 +47,15 @@ export default async function OrderPage({ params }: { params: Promise<{ orderId:
   const settled = SETTLED.includes(order.status);
   const payable = order.checkoutToken && PAYABLE.includes(order.status);
   const txUrl = payment ? explorerTxUrl(payment.chainId, payment.txHash) : null;
+  const merchant = isMerchantMode() && settled;
+  let waiting: WaitingRefund[] = [];
+  if (merchant) {
+    try {
+      waiting = await waitingRefunds(order.invoiceId);
+    } catch {
+      // The controls work without the list: a new refund takes the place of one that waits anyway
+    }
+  }
 
   return (
     <>
@@ -92,7 +101,7 @@ export default async function OrderPage({ params }: { params: Promise<{ orderId:
         </div>
       </section>
 
-      {isMerchantMode() && settled && (
+      {merchant && (
         <section>
           <SectionBar index="//" title="Merchant controls" meta="Merchant mode: on your own machine only" />
           <div
@@ -101,9 +110,15 @@ export default async function OrderPage({ params }: { params: Promise<{ orderId:
           >
             <p className="shop-small" style={{ flex: '1 1 320px', maxWidth: 620 }}>
               A refund goes from the merchant&apos;s connected wallet back to the wallet that paid. Quasar follows the
-              transaction and issues the credit note.
+              transaction and issues the credit note. A refund asked for and not sent keeps its amount: withdraw it, or
+              start a new one, which takes its place.
             </p>
-            <RefundControls invoiceId={order.invoiceId} number={order.number} currency={order.currency} />
+            <RefundControls
+              invoiceId={order.invoiceId}
+              number={order.number}
+              currency={order.currency}
+              waiting={waiting}
+            />
           </div>
         </section>
       )}

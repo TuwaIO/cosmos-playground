@@ -24,10 +24,29 @@ function merchantPayments() {
   return getQuasar().payments;
 }
 
-/** Asks Quasar for the refund of a paid invoice (the `request` of the refund store). */
-export const requestRefund = refundAction(async (invoiceId: string, params: RefundParams) =>
-  merchantPayments().refund(invoiceId, params),
-);
+/**
+ * Asks Quasar for the refund of a paid invoice (the `request` of the refund store). A refund asked for keeps its amount
+ * until its transaction is sent or the refund is withdrawn, and the refund window asks for one each time it reaches the
+ * confirmation. So the new refund takes the place of those that still wait: an invoice of this shop never has two of
+ * them, and a window closed before sending leaves at most the last one, which the order page shows with "Withdraw".
+ */
+export const requestRefund = refundAction(async (invoiceId: string, params: RefundParams) => {
+  const payments = merchantPayments();
+  const { data } = await payments.listInvoiceRefunds(invoiceId, { limit: 100 });
+  for (const refund of data) {
+    if (refund.status !== 'requested') continue;
+    try {
+      await payments.withdrawRefund(refund.id);
+    } catch (error) {
+      // Sent or ended in the meantime: nothing waits any more, and what was sent stays as it is
+      if (!(error instanceof QuasarSDKError && error.code === 'refund_not_waiting')) throw error;
+    }
+  }
+  return payments.refund(invoiceId, params);
+});
+
+/** Takes back a refund that waits for its transaction (the "Withdraw" of the order page). */
+export const withdrawRefund = refundAction(async (refundId: string) => merchantPayments().withdrawRefund(refundId));
 
 /** Shows what a refund would send (the `preview` of the refund store). */
 export const previewRefund = refundAction(async (invoiceId: string, params: RefundParams) =>

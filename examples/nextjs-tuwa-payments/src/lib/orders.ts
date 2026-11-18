@@ -135,6 +135,27 @@ export async function findOrder(
   return (await listOrders(visitorId, methods)).find((order) => order.id === orderId) ?? null;
 }
 
+/** A refund that was asked for and whose transaction no wallet has sent yet. */
+export interface WaitingRefund {
+  /** The refund in Quasar. */
+  id: string;
+  /** Its amount in the invoice currency. */
+  amount: string;
+  /** The invoice currency. */
+  currency: string;
+}
+
+/**
+ * The refunds of an invoice that wait for their transaction, newest first. Such a refund keeps its amount until it is
+ * sent or withdrawn, so the merchant controls of the order page show it. Call it in merchant mode only.
+ */
+export async function waitingRefunds(invoiceId: string): Promise<WaitingRefund[]> {
+  const { data } = await getQuasar().payments.listInvoiceRefunds(invoiceId, { limit: 100 });
+  return data
+    .filter(({ status }) => status === 'requested')
+    .map(({ id, amount, currency }) => ({ id, amount, currency }));
+}
+
 /**
  * The timeline of an order: the invoice and refund events of its ledger in Quasar, oldest first. They are the events
  * the webhooks of the app carry.

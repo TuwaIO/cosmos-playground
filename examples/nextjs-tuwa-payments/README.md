@@ -31,7 +31,7 @@ Open [http://localhost:3012](http://localhost:3012). The shop runs on port 3012 
 - **Your orders, and nobody else's:** a visitor sees the orders of their own browser only (see below). The order page shows the lines, the payment, the events of the invoice and its documents (the invoice and the receipt as PDF).
 - **Cosmos Club:** a membership sold as one payment. It has no period and no next invoice; the browser whose order of it is paid is a member.
 - **Webhooks:** `src/app/api/webhooks/quasar/route.ts` verifies the signature with `verifyWebhook` and acts on each event once. This is where a shop fulfils an order.
-- **Refunds in merchant mode:** with `SHOP_MERCHANT_MODE=true` a paid order gets the `RefundButton` of Nova Payments, which refunds from the merchant's connected wallet.
+- **Refunds in merchant mode:** with `SHOP_MERCHANT_MODE=true` a paid order gets the `RefundDialog` of Nova Payments, which refunds from the merchant's connected wallet. A refund asked for and not sent keeps its amount in Quasar, so the order page lists it with **Withdraw**, and a new refund takes its place.
 - **The look of Nova UI Kit:** paper and ink in neutral colours, the pixel icons of `@tuwaio/nova-icons`, and the shop's own pixel drawings made with `createPixelIcon` (`src/components/shop/art.tsx`).
 
 ---
@@ -136,16 +136,16 @@ The template takes test payments unless told otherwise.
 
 ## 📦 TUWA Packages
 
-| Package                                                                                      | Used for                                                                                                                        |
-| -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `@tuwaio/quasar-sdk` (with `/checkout`)                                                      | `Quasar` (`payments.createInvoice`, `listInvoices`, `getEvents`, `getDocument`, `refund`), `verifyWebhook`, `createRefundStore` |
-| `@tuwaio/nova-payments` (with `/evm`, `/solana`)                                             | `NovaPaymentsProvider`, `PaymentCheckout`, `RefundButton`, `paymentsEVMAdapter`, `paymentsSolanaAdapter`                        |
-| `@tuwaio/nova-connect` (with `/components`, `/satellite`, `/evm`, `/solana`)                 | `NovaConnectProvider`, `ConnectButton`, the Satellite Connect store, the network watchers                                       |
-| `@tuwaio/nova-transactions`, `@tuwaio/nova-core`                                             | `NovaTransactionsProvider` (the toast of a handed-over payment), the theme, `TokenIcon`                                         |
-| `@tuwaio/nova-icons`                                                                         | The pixel icons, and `createPixelIcon` for the shop's own drawings                                                              |
-| `@tuwaio/satellite-evm`, `@tuwaio/satellite-solana`                                          | The Satellite adapters, `createDefaultTransports`                                                                               |
-| `@tuwaio/pulsar-core`, `@tuwaio/pulsar-evm`, `@tuwaio/pulsar-solana`, `@tuwaio/pulsar-react` | The Pulsar store that tracks handed-over payments, its adapters and `useInitializeTransactionsPool`                             |
-| `@tuwaio/orbit-core`                                                                         | `formatBaseUnits` for the amount of a payment                                                                                   |
+| Package                                                                                      | Used for                                                                                                                                                                |
+| -------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `@tuwaio/quasar-sdk` (with `/checkout`)                                                      | `Quasar` (`payments.createInvoice`, `listInvoices`, `getEvents`, `getDocument`, `refund`, `listInvoiceRefunds`, `withdrawRefund`), `verifyWebhook`, `createRefundStore` |
+| `@tuwaio/nova-payments` (with `/evm`, `/solana`)                                             | `NovaPaymentsProvider`, `PaymentCheckout`, `RefundDialog`, `paymentsEVMAdapter`, `paymentsSolanaAdapter`                                                                |
+| `@tuwaio/nova-connect` (with `/components`, `/satellite`, `/evm`, `/solana`)                 | `NovaConnectProvider`, `ConnectButton`, the Satellite Connect store, the network watchers                                                                               |
+| `@tuwaio/nova-transactions`, `@tuwaio/nova-core`                                             | `NovaTransactionsProvider` (the toast of a handed-over payment), the theme, `TokenIcon`                                                                                 |
+| `@tuwaio/nova-icons`                                                                         | The pixel icons, and `createPixelIcon` for the shop's own drawings                                                                                                      |
+| `@tuwaio/satellite-evm`, `@tuwaio/satellite-solana`                                          | The Satellite adapters, `createDefaultTransports`                                                                                                                       |
+| `@tuwaio/pulsar-core`, `@tuwaio/pulsar-evm`, `@tuwaio/pulsar-solana`, `@tuwaio/pulsar-react` | The Pulsar store that tracks handed-over payments, its adapters and `useInitializeTransactionsPool`                                                                     |
+| `@tuwaio/orbit-core`                                                                         | `formatBaseUnits` for the amount of a payment                                                                                                                           |
 
 `@tuwaio/orbit-evm`, `@tuwaio/orbit-solana`, `@tuwaio/satellite-core`, `@tuwaio/satellite-react`, `@tuwaio/siwx-core` and `@tuwaio/siwx-react` are installed as peer dependencies.
 
